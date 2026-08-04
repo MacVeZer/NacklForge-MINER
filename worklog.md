@@ -27,3 +27,38 @@ Stage Summary:
 - Final lint: 0 errors, 0 warnings
 - Dev server: 200 OK on `/`, compiles in <500ms
 - All screenshots saved to /home/z/my-project/download/
+
+---
+Task ID: 2
+Agent: Main agent (Super Z)
+Task: User requested APK app + minimalism matching the original MinerGo (not the gamified web app).
+
+Work Log:
+- Installed Android SDK cmdline-tools, platform-tools, platforms;android-34, build-tools;35.0.0
+- Downloaded Temurin JDK 21 (system Java was JRE only, no javac)
+- Built hand-crafted APK without Gradle (mirrors how minimal Android apps used to be built):
+  1. aapt2 compile res/ -> resources.zip
+  2. aapt2 link with manifest -> compiled-resources.apk + R.java
+  3. javac R.java + MainActivity.java -> .class files
+  4. jar cf -> app.jar
+  5. d8 (build-tools 35) -> classes.dex (build-tools 34 d8 had a Java 21 NPE bug)
+  6. zipalign + apksigner sign with self-signed keystore -> NacklForge.apk
+- Wrote minimal MainActivity.java — just a WebView that loads file:///android_asset/index.html with JS, DOM storage, file/universal access enabled (so WASM works from file://).
+- Wrote AndroidManifest.xml with INTERNET permission, portrait orientation, dark theme.
+- Wrote minimal styles.xml (Theme.DeviceDefault.NoActionBar with #0a0a0a background).
+- Wrote vector drawable launcher icon (amber forge hammer on black).
+- Wrote assets/index.html — minimalist single-file UI inspired by MinerGo's restraint:
+  * Pure dark (#0a0a0a) background, no gradients, no glassmorphism, no animations beyond a slow rotating dashed ring
+  * Single-screen layout: brand header + status pill, big balance number, centered forge core (220px circle with ⚒ emoji), 2 progress bars (session + epoch), Start/Stop + Auto buttons, compact log
+  * Onboarding overlay: name input + optional Acki Nacki account JSON textarea
+  * Inline <style> + <script type="module"> — no external CSS/JS framework
+- Reused exact bee_sdk.js + bee_sdk.wasm from MinerGo.apk (real on-chain mining SDK).
+- Mining logic in index.html mirrors bee_runner.html constants exactly: 15s sessions, 7 taps/session, 70 taps/5-min epoch, 10 sessions/epoch, deficit recovery, 3-epoch reward requests.
+- Verified: APK 3.37 MB (vs original 25 MB — original ships 19 MB libminergo_bee.so native binary, mine uses pure WebView + WASM), valid v2+v3 signature, package com.nackl.forge, versionCode 1, versionName 1.0.0, minSdk 24, targetSdk 34.
+- Verified HTML via Agent Browser in mobile viewport (390x844): onboarding works, simulation mining starts, manual tap on forge core produces +0.0072 NACKL per tap (with 8% crit chance for 5x), session/epoch progress bars update, log shows tap/session/epoch/reward events.
+
+Stage Summary:
+- Final deliverable: /home/z/my-project/download/NacklForge.apk (3.37 MB)
+- Build script: /home/z/my-project/scripts/build-apk.sh (re-runnable, idempotent)
+- Source: /home/z/my-project/apk_src/ (MainActivity.java, AndroidManifest.xml, res/, assets/index.html)
+- Design philosophy: maximal minimalism — black background, one accent color (amber #f59e0b), single screen, no nav, no cards, no icons beyond the forge hammer. Matches MinerGo's restraint while being a fresh, distinct app.

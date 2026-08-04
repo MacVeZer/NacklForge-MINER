@@ -1,0 +1,1014 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>NacklForge</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body {
+            background: #0a0a0a;
+            color: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            overscroll-behavior: none;
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+        }
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-mark {
+            width: 24px; height: 24px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; color: #000; font-size: 13px;
+        }
+        .brand-name { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+        .status-pill {
+            display: flex; align-items: center; gap: 6px;
+            padding: 5px 10px;
+            background: #161616;
+            border: 1px solid #262626;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #737373;
+        }
+        .status-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #525252;
+        }
+        .status-dot.active {
+            background: #84cc16;
+            box-shadow: 0 0 8px #84cc16;
+        }
+        .status-pill.active { color: #a3e635; border-color: #36531440; }
+        /* Balance hero */
+        .balance-card {
+            text-align: center;
+            padding: 24px 0 12px;
+        }
+        .balance-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #525252;
+            margin-bottom: 6px;
+        }
+        .balance-value {
+            font-size: 44px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+        .balance-unit {
+            font-size: 13px;
+            color: #a3a3a3;
+            font-weight: 500;
+            margin-left: 4px;
+        }
+        .balance-sub {
+            font-size: 12px;
+            color: #525252;
+            margin-top: 8px;
+        }
+        .balance-sub .pending {
+            color: #84cc16;
+            font-weight: 600;
+        }
+        /* Forge core */
+        .forge-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 16px 0;
+        }
+        .forge-core {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 40%, #1a1a1a 0%, #0a0a0a 70%);
+            border: 1px solid #262626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.1s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .forge-core.active {
+            border-color: #f59e0b40;
+            box-shadow: 0 0 40px #f59e0b20, inset 0 0 30px #f59e0b15;
+        }
+        .forge-core:active { transform: scale(0.96); }
+        .forge-core.disabled { cursor: default; }
+        .forge-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1px dashed #404040;
+            opacity: 0.5;
+            animation: spin 24s linear infinite;
+        }
+        .forge-core.active .forge-ring {
+            border-color: #f59e0b30;
+            animation: spin 8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .forge-icon {
+            font-size: 56px;
+            filter: drop-shadow(0 0 12px #f59e0b40);
+            transition: filter 0.3s;
+        }
+        .forge-core.active .forge-icon {
+            filter: drop-shadow(0 0 16px #f59e0b80);
+        }
+        .forge-tap-hint {
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #525252;
+            white-space: nowrap;
+        }
+        .forge-core.active .forge-tap-hint { color: #a3a3a3; }
+        /* Progress */
+        .progress-section {
+            padding: 8px 0 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .progress-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+        }
+        .progress-label { color: #737373; font-weight: 500; }
+        .progress-value { color: #d4d4d4; font-variant-numeric: tabular-nums; font-weight: 500; }
+        .progress-bar {
+            height: 4px;
+            background: #1a1a1a;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f59e0b, #ea580c);
+            border-radius: 999px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        .progress-fill.cyan {
+            background: linear-gradient(90deg, #06b6d4, #0891b2);
+        }
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 8px;
+            padding: 8px 0 16px;
+        }
+        .btn {
+            flex: 1;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: #f59e0b;
+            color: #000;
+        }
+        .btn-primary:active { transform: scale(0.97); background: #d97706; }
+        .btn-danger {
+            background: #dc2626;
+            color: #fff;
+        }
+        .btn-danger:active { transform: scale(0.97); background: #b91c1c; }
+        .btn-ghost {
+            background: #161616;
+            color: #d4d4d4;
+            border: 1px solid #262626;
+            flex: 0 0 auto;
+            padding: 14px 18px;
+        }
+        .btn-ghost:active { transform: scale(0.97); }
+        .btn-ghost.active {
+            background: #f59e0b15;
+            color: #f59e0b;
+            border-color: #f59e0b40;
+        }
+        /* Log */
+        .log {
+            background: #0f0f0f;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 8px 10px;
+            max-height: 80px;
+            overflow-y: auto;
+            font-family: "SF Mono", Menlo, monospace;
+            font-size: 10px;
+            line-height: 1.5;
+            color: #525252;
+            margin-bottom: 8px;
+        }
+        .log-entry { display: flex; gap: 6px; }
+        .log-time { color: #404040; flex-shrink: 0; }
+        .log-msg { color: #737373; }
+        .log-msg.tap { color: #fbbf24; }
+        .log-msg.session { color: #34d399; }
+        .log-msg.epoch { color: #f472b6; }
+        .log-msg.reward { color: #a3e635; }
+        .log-msg.error { color: #f87171; }
+        /* Float tap */
+        .float-tap {
+            position: absolute;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fbbf24;
+            pointer-events: none;
+            text-shadow: 0 0 8px #f59e0b80;
+            animation: floatUp 1s ease-out forwards;
+        }
+        .float-tap.crit { color: #f472b6; font-size: 24px; }
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(0) scale(0.6); }
+            20% { opacity: 1; transform: translateY(-20px) scale(1.1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+        }
+        /* Account setup overlay */
+        .setup-overlay {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 100;
+        }
+        .setup-overlay.hidden { display: none; }
+        .setup-card {
+            width: 100%;
+            max-width: 360px;
+        }
+        .setup-title {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+        .setup-desc {
+            font-size: 13px;
+            color: #737373;
+            text-align: center;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        .setup-input {
+            width: 100%;
+            background: #161616;
+            border: 1px solid #262626;
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: #fafafa;
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 10px;
+        }
+        .setup-input:focus {
+            outline: none;
+            border-color: #f59e0b40;
+        }
+        .setup-input::placeholder { color: #525252; }
+        .setup-textarea {
+            min-height: 80px;
+            resize: none;
+            font-family: "SF Mono", Menlo, monospace;
+            font-size: 11px;
+        }
+        .setup-btn {
+            width: 100%;
+            padding: 14px;
+            background: #f59e0b;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .setup-btn:active { background: #d97706; }
+        .setup-btn.secondary {
+            background: transparent;
+            color: #737373;
+            border: 1px solid #262626;
+            margin-top: 8px;
+        }
+        .setup-btn.secondary:active { background: #161616; }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!-- Header -->
+    <div class="header">
+        <div class="brand">
+            <div class="brand-mark">N</div>
+            <div class="brand-name">NacklForge</div>
+        </div>
+        <div class="status-pill" id="statusPill">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">IDLE</span>
+        </div>
+    </div>
+
+    <!-- Balance -->
+    <div class="balance-card">
+        <div class="balance-label">Balance</div>
+        <div>
+            <span class="balance-value" id="balanceValue">0.00</span>
+            <span class="balance-unit">NACKL</span>
+        </div>
+        <div class="balance-sub">
+            Pending: <span class="pending" id="pendingValue">0.0000</span>
+        </div>
+    </div>
+
+    <!-- Forge core -->
+    <div class="forge-wrap">
+        <div class="forge-core disabled" id="forgeCore">
+            <div class="forge-ring"></div>
+            <div class="forge-icon">⚒</div>
+            <div class="forge-tap-hint" id="forgeHint">Forge idle</div>
+        </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-section">
+        <div class="progress-row">
+            <div class="progress-header">
+                <span class="progress-label">Session</span>
+                <span class="progress-value" id="sessionText">0 / 7 taps</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="sessionBar"></div></div>
+        </div>
+        <div class="progress-row">
+            <div class="progress-header">
+                <span class="progress-label">Epoch (5 min)</span>
+                <span class="progress-value" id="epochText">0 / 70 taps</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill cyan" id="epochBar"></div></div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="btn btn-primary" id="startBtn">Start Forge</button>
+        <button class="btn btn-ghost" id="autoBtn">Auto</button>
+    </div>
+
+    <!-- Log -->
+    <div class="log" id="log"></div>
+</div>
+
+<!-- Setup overlay -->
+<div class="setup-overlay" id="setupOverlay">
+    <div class="setup-card">
+        <div class="setup-title">NacklForge</div>
+        <div class="setup-desc">Mine Nackl on-chain. Enter a name to begin, or connect your Acki Nacki account for live mining.</div>
+        <input type="text" class="setup-input" id="nameInput" placeholder="Forge name" maxlength="20">
+        <textarea class="setup-input setup-textarea" id="accountInput" placeholder='Optional: paste Acki Nacki account JSON here for live mining'></textarea>
+        <button class="setup-btn" id="startSimBtn">Start Mining</button>
+        <button class="setup-btn secondary" id="connectLiveBtn">Connect Acki Nacki Account</button>
+    </div>
+</div>
+
+<script type="module">
+import init, { Miner } from './bee_sdk.js';
+
+// ===== Constants (mirror bee_runner.html) =====
+const MINING_APP_ID = '0x0000000000000000000000000000000000000000000000000000000000000010';
+const MINING_SESSION_MS = 15000;
+const SESSION_RESTART_DELAY_MS = 18000;
+const TAPS_PER_SESSION = 7;
+const TAP_INTERVAL_MS = 2000;
+const SESSIONS_PER_EPOCH = 10;
+const MAX_TAPS_FIVEMIN = 70;
+const EPOCH_END_COOLDOWN_MS = 60000;
+const CHAIN_POLL_INTERVAL_MS = 5000;
+const EPOCH_WAIT_POLL_MS = 5000;
+const CAN_START_POLL_MS = 1000;
+const STUCK_TAPS_REWARD_MS = 90000;
+const REWARD_RECOVERY_COOLDOWN_MS = 120000;
+const MAX_DEFICIT_COMPENSATION = 10;
+const CATCHUP_SPACING_MS = 100;
+const SIM_TAP_REWARD = 0.0072;
+
+// ===== State =====
+let wasmReady = false;
+let mode = 'simulation'; // or 'live'
+let miner = null;
+let desired = false;
+let running = false;
+let starting = false;
+let autopilot = false;
+let accountName = null;
+
+let balance = 0;
+let pendingReward = 0;
+let sessionTaps = 0;
+let sessionTarget = TAPS_PER_SESSION;
+let sessionStartedAt = null;
+let epoch5mStart = '';
+let sessionsThisEpoch = 0;
+let tapsThisEpoch = 0;
+let deficit = 0;
+let lastChainAt = 0;
+let lastTapProgressAt = 0;
+let lastRewardRecoveryAt = 0;
+let rewardInFlight = false;
+let rewardEpochs = [];
+
+let tapTimer = null;
+let startTimer = null;
+let restartTimer = null;
+let canStartTimer = null;
+let chainPollTimer = null;
+let epochPollTimer = null;
+let sessionEndTimer = null;
+let timers = [];
+
+// ===== DOM =====
+const $ = (id) => document.getElementById(id);
+const setupOverlay = $('setupOverlay');
+const nameInput = $('nameInput');
+const accountInput = $('accountInput');
+const startSimBtn = $('startSimBtn');
+const connectLiveBtn = $('connectLiveBtn');
+const forgeCore = $('forgeCore');
+const forgeHint = $('forgeHint');
+const startBtn = $('startBtn');
+const autoBtn = $('autoBtn');
+const statusPill = $('statusPill');
+const statusDot = $('statusDot');
+const statusText = $('statusText');
+const balanceValue = $('balanceValue');
+const pendingValue = $('pendingValue');
+const sessionText = $('sessionText');
+const sessionBar = $('sessionBar');
+const epochText = $('epochText');
+const epochBar = $('epochBar');
+const logEl = $('log');
+
+// ===== Logging =====
+function log(type, msg) {
+    const now = new Date();
+    const t = now.toTimeString().slice(0, 8);
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+    entry.innerHTML = `<span class="log-time">${t}</span><span class="log-msg ${type}">${msg}</span>`;
+    logEl.insertBefore(entry, logEl.firstChild);
+    while (logEl.children.length > 50) logEl.removeChild(logEl.lastChild);
+    // Also forward to Android bridge if present
+    try {
+        if (window.AndroidBridge) window.AndroidBridge.onLog(type, msg);
+    } catch (_) {}
+}
+
+// ===== WASM init =====
+async function ensureWasm() {
+    if (wasmReady) return true;
+    try {
+        await init('./bee_sdk.wasm');
+        wasmReady = true;
+        log('session', 'WASM bee_sdk loaded');
+        return true;
+    } catch (err) {
+        log('error', `WASM load failed: ${err.message || err}`);
+        return false;
+    }
+}
+
+// ===== Status UI =====
+function setStatus(state) {
+    statusDot.className = 'status-dot' + (state === 'active' ? ' active' : '');
+    statusPill.className = 'status-pill' + (state === 'active' ? ' active' : '');
+    if (state === 'active') {
+        statusText.textContent = 'MINING';
+        forgeCore.classList.add('active');
+        forgeCore.classList.remove('disabled');
+        forgeHint.textContent = 'Tap the forge';
+        startBtn.textContent = 'Stop Forge';
+        startBtn.className = 'btn btn-danger';
+    } else if (state === 'starting') {
+        statusText.textContent = 'STARTING';
+        forgeCore.classList.remove('active');
+        forgeCore.classList.add('disabled');
+        forgeHint.textContent = 'Starting...';
+        startBtn.textContent = 'Starting...';
+        startBtn.className = 'btn btn-ghost';
+    } else {
+        statusText.textContent = 'IDLE';
+        forgeCore.classList.remove('active');
+        forgeCore.classList.add('disabled');
+        forgeHint.textContent = 'Forge idle';
+        startBtn.textContent = 'Start Forge';
+        startBtn.className = 'btn btn-primary';
+    }
+}
+
+function updateBalance() {
+    balanceValue.textContent = balance.toFixed(2);
+    pendingValue.textContent = pendingReward.toFixed(4);
+}
+
+function updateProgress() {
+    sessionText.textContent = `${sessionTaps} / ${sessionTarget} taps`;
+    sessionBar.style.width = `${Math.min(100, (sessionTaps / sessionTarget) * 100)}%`;
+    epochText.textContent = `${tapsThisEpoch} / ${MAX_TAPS_FIVEMIN} taps`;
+    epochBar.style.width = `${Math.min(100, (tapsThisEpoch / MAX_TAPS_FIVEMIN) * 100)}%`;
+}
+
+// ===== Floating tap number =====
+function showFloatTap(amount, isCrit) {
+    const rect = forgeCore.getBoundingClientRect();
+    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 60;
+    const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 40;
+    const el = document.createElement('div');
+    el.className = 'float-tap' + (isCrit ? ' crit' : '');
+    el.textContent = (isCrit ? '+' : '+') + amount.toFixed(4) + (isCrit ? ' ✦' : '');
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1000);
+}
+
+// ===== Mining logic (mirrors bee_runner.html) =====
+function normalizeEndpoints(endpoints) {
+    if (Array.isArray(endpoints) && endpoints.length > 0) return endpoints;
+    return ['https://mainnet-cf.ackinacki.org/', 'https://mainnet.ackinacki.org/'];
+}
+
+function userMessage(err) {
+    const text = err && err.message ? err.message : String(err);
+    if (/pool timed out|open connection/i.test(text)) return 'BEE network timeout';
+    if (/memory access out of bounds|RuntimeError/i.test(text)) return 'BEE engine memory error';
+    return text.slice(0, 180);
+}
+
+function stopTapLoop() {
+    if (tapTimer) clearInterval(tapTimer);
+    tapTimer = null;
+    if (canStartTimer) clearTimeout(canStartTimer);
+    canStartTimer = null;
+    if (restartTimer) clearTimeout(restartTimer);
+    restartTimer = null;
+    if (chainPollTimer) clearTimeout(chainPollTimer);
+    chainPollTimer = null;
+    if (epochPollTimer) clearTimeout(epochPollTimer);
+    epochPollTimer = null;
+    if (sessionEndTimer) clearTimeout(sessionEndTimer);
+    sessionEndTimer = null;
+    if (Array.isArray(timers)) timers.forEach((t) => clearTimeout(t));
+    timers = [];
+    running = false;
+    starting = false;
+}
+
+function pumpTap() {
+    if (!running) return false;
+    try {
+        if (mode === 'live' && miner) {
+            miner.add_tap(1, 1);
+        }
+        sessionTaps += 1;
+        tapsThisEpoch = Math.min(MAX_TAPS_FIVEMIN, tapsThisEpoch + 1);
+        lastTapProgressAt = Date.now();
+        pendingReward += SIM_TAP_REWARD;
+        log('tap', `+${SIM_TAP_REWARD.toFixed(4)} NACKL — tap ${sessionTaps}/${sessionTarget}`);
+        updateProgress();
+        updateBalance();
+        return true;
+    } catch (err) {
+        log('error', userMessage(err));
+        return false;
+    }
+}
+
+function scheduleTimer(delay, fn) {
+    const t = setTimeout(fn, Math.max(0, delay));
+    timers.push(t);
+    return t;
+}
+
+function scheduleTapPlan() {
+    if (!running) return;
+    const regular = TAPS_PER_SESSION;
+    for (let i = 0; i < regular; i += 1) {
+        scheduleTimer(i * TAP_INTERVAL_MS, () => pumpTap());
+    }
+}
+
+function resetEpoch(epochStr) {
+    epoch5mStart = epochStr || epoch5mStart;
+    sessionsThisEpoch = 0;
+    tapsThisEpoch = 0;
+    deficit = 0;
+    lastTapProgressAt = Date.now();
+    updateProgress();
+}
+
+async function fetchChainData() {
+    if (mode === 'live' && miner) {
+        try {
+            const data = await miner.get_miner_data();
+            const newEpoch = data && data.epoch_5m_start !== undefined ? data.epoch_5m_start.toString() : '';
+            const chainTapSum5m = data && data.tap_sum_5m !== undefined ? Number(data.tap_sum_5m.toString()) : 0;
+            if (epoch5mStart && newEpoch && newEpoch !== epoch5mStart) {
+                resetEpoch(newEpoch);
+                log('epoch', `Epoch reset — ${newEpoch}`);
+            } else if (newEpoch && !epoch5mStart) {
+                epoch5mStart = newEpoch;
+            }
+            if (Number.isFinite(chainTapSum5m)) {
+                tapsThisEpoch = Math.min(MAX_TAPS_FIVEMIN, Math.max(0, chainTapSum5m));
+            }
+            lastChainAt = Date.now();
+            if (!lastTapProgressAt) lastTapProgressAt = lastChainAt;
+            if (newEpoch) {
+                rewardEpochs = rewardEpochs || [];
+                if (!rewardEpochs.includes(newEpoch)) rewardEpochs.push(newEpoch);
+                if (rewardEpochs.length >= 3 && !rewardInFlight) {
+                    requestReward('three_epochs');
+                }
+            }
+            updateProgress();
+            return data;
+        } catch (err) {
+            log('error', userMessage(err));
+            return null;
+        }
+    } else {
+        // Simulation — derive epoch from wall clock
+        const now = Date.now();
+        const epochStr = String(Math.floor(now / (5 * 60000)) * (5 * 60000));
+        if (epoch5mStart && epochStr !== epoch5mStart) {
+            resetEpoch(epochStr);
+            log('epoch', `Epoch reset — sim`);
+        } else if (!epoch5mStart) {
+            epoch5mStart = epochStr;
+        }
+        lastChainAt = now;
+        if (!lastTapProgressAt) lastTapProgressAt = now;
+        rewardEpochs = rewardEpochs || [];
+        if (!rewardEpochs.includes(epoch5mStart)) rewardEpochs.push(epoch5mStart);
+        if (rewardEpochs.length >= 3 && !rewardInFlight) {
+            requestReward('three_epochs');
+        }
+        updateProgress();
+        return { epoch5mStart: epochStr };
+    }
+}
+
+function requestReward(reason) {
+    if (rewardInFlight) return false;
+    const now = Date.now();
+    if (lastRewardRecoveryAt && now - lastRewardRecoveryAt < REWARD_RECOVERY_COOLDOWN_MS) return false;
+    rewardInFlight = true;
+    lastRewardRecoveryAt = now;
+    const amount = pendingReward;
+    log('reward', `Reward claimed: ${amount.toFixed(4)} NACKL (${reason})`);
+    if (mode === 'live' && miner) {
+        miner.get_reward().then(() => {
+            balance += amount;
+            pendingReward = 0;
+            updateBalance();
+            rewardEpochs = [];
+            rewardInFlight = false;
+            fetchChainData().finally(() => {
+                if (desired && !running && !starting) scheduleStart(0);
+            });
+        }).catch((err) => {
+            log('error', userMessage(err));
+            rewardInFlight = false;
+        });
+    } else {
+        setTimeout(() => {
+            balance += amount;
+            pendingReward = 0;
+            updateBalance();
+            rewardEpochs = [];
+            rewardInFlight = false;
+            fetchChainData().finally(() => {
+                if (desired && !running && !starting) scheduleStart(0);
+            });
+        }, 300);
+    }
+    return true;
+}
+
+function maybeRecoverStuckTaps() {
+    if (!desired || running) return;
+    if (tapsThisEpoch <= 0) return;
+    const lastProgressAt = lastTapProgressAt || lastChainAt || Date.now();
+    if (Date.now() - lastProgressAt < STUCK_TAPS_REWARD_MS) return;
+    requestReward(tapsThisEpoch >= MAX_TAPS_FIVEMIN ? 'stuck_full_epoch' : 'stuck_taps');
+}
+
+function scheduleChainPoll() {
+    if (!desired || running || epochPollTimer) return;
+    if (chainPollTimer) clearTimeout(chainPollTimer);
+    chainPollTimer = setTimeout(async () => {
+        chainPollTimer = null;
+        await fetchChainData();
+        scheduleChainPoll();
+    }, CHAIN_POLL_INTERVAL_MS);
+}
+
+function scheduleStart(delay) {
+    if (!desired) return;
+    if (running || starting || startTimer || canStartTimer || restartTimer) return;
+    startTimer = setTimeout(() => {
+        startTimer = null;
+        startMining(0).catch((err) => log('error', userMessage(err)));
+    }, Math.max(0, delay));
+}
+
+function scheduleEpochStartPoll(reason) {
+    if (!desired || running || epochPollTimer) return;
+    if (restartTimer) clearTimeout(restartTimer);
+    restartTimer = null;
+    epochPollTimer = setTimeout(async () => {
+        epochPollTimer = null;
+        const prev = epoch5mStart;
+        const data = await fetchChainData();
+        if (!desired) return;
+        const next = data?.epoch_5m_start || epoch5mStart || '';
+        if (prev && next && prev !== next) {
+            resetEpoch(next || prev);
+            startMining(0).catch((err) => log('error', userMessage(err)));
+            return;
+        }
+        scheduleEpochStartPoll(reason);
+    }, EPOCH_WAIT_POLL_MS);
+}
+
+function scheduleNextSession(delay) {
+    if (!desired) return;
+    if (sessionsThisEpoch >= SESSIONS_PER_EPOCH || tapsThisEpoch >= MAX_TAPS_FIVEMIN) {
+        scheduleEpochStartPoll('epoch_full');
+        return;
+    }
+    if (restartTimer) clearTimeout(restartTimer);
+    restartTimer = setTimeout(() => {
+        restartTimer = null;
+        startMining(0).catch((err) => log('error', userMessage(err)));
+    }, delay);
+}
+
+function completeSession(status, actualTaps) {
+    const target = sessionTarget;
+    sessionsThisEpoch += 1;
+    deficit = Math.max(0, Math.min(MAX_TAPS_FIVEMIN, deficit + Math.max(0, target - actualTaps)));
+    stopTapLoop();
+    log('session', `Session ${status} — ${actualTaps}/${target} taps (epoch ${sessionsThisEpoch}/${SESSIONS_PER_EPOCH})`);
+    fetchChainData().finally(() => {
+        if (!desired) return;
+        if (sessionsThisEpoch >= SESSIONS_PER_EPOCH || tapsThisEpoch >= MAX_TAPS_FIVEMIN) {
+            scheduleNextSession(EPOCH_END_COOLDOWN_MS);
+        } else {
+            scheduleNextSession(SESSION_RESTART_DELAY_MS);
+        }
+    });
+}
+
+async function startMining(startDelayMs) {
+    if (!desired) return;
+    if (running || starting) return;
+    if (startDelayMs && startDelayMs > 0) {
+        startTimer = setTimeout(() => {
+            startTimer = null;
+            startMining(0).catch((err) => log('error', userMessage(err)));
+        }, startDelayMs);
+        return;
+    }
+    if (epochPollTimer) return;
+
+    if (!lastChainAt || Date.now() - lastChainAt > EPOCH_WAIT_POLL_MS - 500) {
+        await fetchChainData();
+    }
+
+    if (sessionsThisEpoch >= SESSIONS_PER_EPOCH || tapsThisEpoch >= MAX_TAPS_FIVEMIN) {
+        scheduleEpochStartPoll('epoch_full');
+        return;
+    }
+
+    sessionTaps = 0;
+    sessionTarget = TAPS_PER_SESSION;
+    stopTapLoop();
+    starting = true;
+    setStatus('starting');
+    timers = [];
+
+    try {
+        if (mode === 'live' && miner) {
+            miner.start(MINING_SESSION_MS, (raw) => {
+                let event = raw;
+                try { event = JSON.parse(raw); } catch (_) {}
+                if (event && (event.ok === false || event.error)) {
+                    log('error', userMessage(event.error || event));
+                    completeSession('error', sessionTaps);
+                    return;
+                }
+                const kind = event && event.action ? event.action : (event && event.event ? event.event : 'callback');
+                const status = event && event.data ? event.data.status : null;
+                if (kind === 'status_updated' && (status === 'finished' || status === 'removed')) {
+                    completeSession(status, sessionTaps);
+                } else if (kind === 'session_accepted') {
+                    completeSession('accepted', sessionTaps);
+                } else if (kind === 'tap_computed') {
+                    // Live tap from chain
+                }
+            });
+        }
+        running = true;
+        starting = false;
+        sessionStartedAt = Date.now();
+        setStatus('active');
+        scheduleTapPlan();
+        log('session', `Session started — target ${sessionTarget} taps`);
+
+        // End session after MINING_SESSION_MS (simulation mode)
+        if (mode === 'simulation') {
+            sessionEndTimer = setTimeout(() => {
+                completeSession('finished', sessionTaps);
+            }, MINING_SESSION_MS);
+        }
+    } catch (err) {
+        starting = false;
+        log('error', userMessage(err));
+        throw err;
+    }
+}
+
+function stopMining() {
+    desired = false;
+    stopTapLoop();
+    if (mode === 'live' && miner) {
+        try { miner.stop(); } catch (_) {}
+    }
+    setStatus('idle');
+    log('session', 'Mining stopped');
+}
+
+// Manual tap (player-initiated bonus tap on the forge core)
+function manualTap(e) {
+    if (!running) return;
+    if (tapsThisEpoch >= MAX_TAPS_FIVEMIN) return;
+    const isCrit = Math.random() < 0.08;
+    const amount = SIM_TAP_REWARD * (isCrit ? 5 : 1);
+    if (mode === 'live' && miner) {
+        try { miner.add_tap(1, 1); } catch (err) { log('error', userMessage(err)); return; }
+    }
+    sessionTaps += 1;
+    tapsThisEpoch = Math.min(MAX_TAPS_FIVEMIN, tapsThisEpoch + 1);
+    pendingReward += amount;
+    lastTapProgressAt = Date.now();
+    showFloatTap(amount, isCrit);
+    updateProgress();
+    updateBalance();
+}
+
+// ===== Setup =====
+async function handleStartSim() {
+    const name = nameInput.value.trim();
+    if (!name) { nameInput.focus(); return; }
+    accountName = name;
+    mode = 'simulation';
+    setupOverlay.classList.add('hidden');
+    log('session', `Welcome, ${name}! Simulation mode.`);
+    desired = true;
+    scheduleChainPoll();
+    scheduleStart(0);
+}
+
+async function handleConnectLive() {
+    const name = nameInput.value.trim();
+    const accJson = accountInput.value.trim();
+    if (!name) { nameInput.focus(); return; }
+    if (!accJson) { accountInput.focus(); return; }
+    let account;
+    try { account = JSON.parse(accJson); } catch (err) { log('error', 'Invalid account JSON'); return; }
+    accountName = name;
+    mode = 'live';
+    const ok = await ensureWasm();
+    if (!ok) { log('error', 'WASM init failed — falling back to simulation'); mode = 'simulation'; }
+    if (mode === 'live') {
+        try {
+            const endpoints = normalizeEndpoints(account.endpoints);
+            miner = await Miner.new(
+                endpoints,
+                account.appId || MINING_APP_ID,
+                account.minerAddress,
+                account.publicKey,
+                account.secretKey,
+            );
+            log('session', `Live miner ready for ${name}`);
+        } catch (err) {
+            log('error', `Miner init failed: ${userMessage(err)} — using simulation`);
+            mode = 'simulation';
+            miner = null;
+        }
+    }
+    setupOverlay.classList.add('hidden');
+    desired = true;
+    scheduleChainPoll();
+    scheduleStart(0);
+}
+
+// ===== Wire up UI =====
+startBtn.addEventListener('click', () => {
+    if (running || starting) {
+        stopMining();
+    } else {
+        desired = true;
+        scheduleChainPoll();
+        startMining(0).catch((err) => log('error', userMessage(err)));
+    }
+});
+
+autoBtn.addEventListener('click', () => {
+    autopilot = !autopilot;
+    autoBtn.classList.toggle('active', autopilot);
+    if (autopilot) {
+        log('session', 'Autopilot ON');
+        if (!running && !starting && desired) startMining(0).catch((err) => log('error', userMessage(err)));
+    } else {
+        log('session', 'Autopilot OFF');
+    }
+});
+
+forgeCore.addEventListener('click', manualTap);
+forgeCore.addEventListener('touchstart', (e) => { e.preventDefault(); manualTap(e); }, { passive: false });
+
+startSimBtn.addEventListener('click', handleStartSim);
+connectLiveBtn.addEventListener('click', handleConnectLive);
+nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleStartSim(); });
+
+// Auto-restore session from Android bridge
+try {
+    if (window.AndroidBridge && window.AndroidBridge.getAccount) {
+        const acc = window.AndroidBridge.getAccount();
+        if (acc) {
+            const parsed = JSON.parse(acc);
+            nameInput.value = parsed.name || '';
+            accountInput.value = acc;
+        }
+    }
+} catch (_) {}
+
+setStatus('idle');
+updateBalance();
+updateProgress();
+log('session', 'NacklForge ready');
+</script>
+</body>
+</html>
