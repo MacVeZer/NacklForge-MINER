@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<script type="module">
+import init, { Miner } from './bee_sdk.js';
+
+let ready = false;
+let initError = null;
+const miners = new Map();
+const preparing = new Map();
+const MINING_APP_ID = '0x0000000000000000000000000000000000000000000000000000000000000010';
+const MINING_SESSION_MS = 15000;
+const SESSION_RESTART_DELAY_MS = 18000;
+const TAPS_PER_SESSION = 7;
+const TAP_INTERVAL_MS = 2000;
+const SESSIONS_PER_EPOCH = 10;
+const MAX_TAPS_FIVEMIN = 70;
+const EPOCH_END_COOLDOWN_MS = 60000;
+const CHAIN_POLL_INTERVAL_MS = 5000;
+const EPOCH_WAIT_POLL_MS = 5000;
+const CAN_START_POLL_MS = 1000;
+const STUCK_TAPS_REWARD_MS = 90000;
+const REWARD_RECOVERY_COOLDOWN_MS = 120000;
+const MAX_DEFICIT_COMPENSATION = 10;
+const CATCHUP_SPACING_MS = 100;
+
+window.addEventListener('error', (event) => {
+    const message = event && event.message ? event.message : 'runtime error';
+    emit('error', { message: userMessage(message) });
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+    const reason = event && event.reason ? event.reason : 'runtime error';
+    emit('error', { message: userMessage(reason) });
+});
+
+function emit(type, payload) {
+    try {
+        if (window.AndroidBee) {
+            window.AndroidBee.onBeeEvent(JSON.stringify({ type, payload }));
+        }
+    } catch (_) {}
+}
+
+async function ensureReady() {
+    if (ready) return true;
+    if (initError) throw new Error(initError);
+    try {
+        await init('./bee_sdk.wasm');
+        ready = true;
+        emit('ready', { ok: true });
+        return true;
+    } catch (err) {
+        initError = err && err.message ? err.message : String(err);
+        emit('error', { message: initError });
+        throw err;
+    }
+}
+
+function normalizeEndpoints(endpoints) {
+    if (Array.isArray(endpoints) && endpoints.length > 0) return endpoints;
+    return [
+        'https://mainnet-cf.ackinacki.org/',
+        'https://mainnet.ackinacki.org/'
+    ];
+}
+
+function userMessage(err) {
+    const text = err && err.message ? err.message : String(err);
+    if (/pool timed out|open connection|Graphql server returned error/i.test(text)) {
+        return 'BEE network timeout';
+    }
+    if (/memory access out of bounds|RuntimeError/i.test(text)) {
+        return 'BEE engine memory error';
+    }
+    if (/FnOnce called more than once/i.test(text)) {
+        return 'BEE engine callback error';
+    }
+    if (/Query miner events/i.test(text)) {
+        return 'BEE event query failed';
+    }
+    if (/Invalid ABI JSON|Decode message body/i.test(text)) {
+        return 'BEE SDK ABI decode error';
+    }
+    if (/account name is required|keys are missing|miner address is missing/i.test(text)) {
+        return text;
+    }
+    return text.slice(0, 180);
+}
+
+function stopTapLoop(entry) {
+    if (entry.tapTimer) clearInterval(entry.tapTimer);
+    entry.tapTimer = null;
+    if (entry.canStartTimer) clearTimeout(entry.canStartTimer);
+    entry.canStartTimer = null;
+    if (entry.restartTimer) clearTimeout(entry.restartTimer);
+    entry.restartTimer = null;
+    if (entry.chainPollTimer) clearTimeout(entry.chainPollTimer);
+    entry.chainPollTimer = null;
+    if (entry.epochPollTimer) clearTimeout(entry.epochPollTimer);
+    entry.epochPollTimer = null;
+    if (Array.isArray(entry.timers)) {
+        entry.timers.forEach((timer) => clearTimeout(timer));
+    }
+    entry.timers = [];
+    entry.running = false;
+    entry.starting = false;
+}
+
+function pumpTap(name, entry) {
+    if (!entry || !entry.running) return false;
+    try {
+        entry.miner.add_tap(1, 1);
+        entry.sentTaps = (entry.sentTaps || 0) + 1;
+        return true;
+    } catch (err) {
+        const message = userMessage(err);
+        if (/No running workers/i.test(message)) {
+            stopTapLoop(entry);
+            return false;
+        }
+        emit('error', { name, message });
+        return false;
+    }
+}
+
+function scheduleTimer(entry, delay, fn) {
+    const timer = setTimeout(fn, Math.max(0, delay));
+    entry.timers.push(timer);
+    return timer;
+}
+
+function scheduleTapPlan(name, entry) {
+    if (!entry || !entry.running) return;
+    const remainingEpoch = Math.max(0, MAX_TAPS_FIVEMIN - (entry.tapsThisEpoch || 0));
+    const compensation = Math.min(entry.deficit || 0, MAX_DEFICIT_COMPENSATION);
+    const target = Math.min(TAPS_PER_SESSION + compensation, remainingEpoch);
+    entry.sessionTarget = target;
+
+    const regular = Math.min(TAPS_PER_SESSION, target);
+    for (let i = 0; i < regular; i += 1) {
+        scheduleTimer(entry, i * TAP_INTERVAL_MS, () => pumpTap(name, entry));
+    }
+
+    const extra = target - regular;
+    const catchupAt = Math.max(0, MINING_SESSION_MS - 2000);
+    for (let i = 0; i < extra; i += 1) {
+        scheduleTimer(entry, catchupAt + i * CATCHUP_SPACING_MS, () => pumpTap(name, entry));
+    }
+}
+
+function resetEpoch(entry, epoch5mStart) {
+    entry.epoch5mStart = epoch5mStart || entry.epoch5mStart;
+    entry.sessionsThisEpoch = 0;
+    entry.tapsThisEpoch = 0;
+    entry.deficit = 0;
+    entry.epochAligned = true;
+    entry.lastTapProgressAt = Date.now();
+}
+
+function requestReward(name, entry, reason) {
+    if (!entry || !entry.miner || entry.rewardInFlight) return false;
+    const now = Date.now();
+    if (entry.lastRewardRecoveryAt && now - entry.lastRewardRecoveryAt < REWARD_RECOVERY_COOLDOWN_MS) return false;
+    entry.rewardInFlight = true;
+    entry.lastRewardRecoveryAt = now;
+    entry.miner.get_reward()
+        .then(() => {
+            emit('reward_requested', { name, reason: reason || 'scheduled' });
+            return fetchChainData(name, entry);
+        })
+        .then(() => {
+            if (entry.desired && !entry.running && !entry.starting && (entry.tapsThisEpoch || 0) < MAX_TAPS_FIVEMIN) {
+                scheduleStart(name, entry, 0);
+            }
+        })
+        .catch((err) => emit('error', { name, message: userMessage(err) }))
+        .finally(() => {
+            entry.rewardEpochs = [];
+            entry.rewardInFlight = false;
+        });
+    return true;
+}
+
+function maybeRecoverStuckTaps(name, entry) {
+    if (!entry || !entry.desired || entry.running) return;
+    const taps = entry.tapsThisEpoch || 0;
+    if (taps <= 0) return;
+    const lastProgressAt = entry.lastTapProgressAt || entry.lastChainAt || Date.now();
+    if (Date.now() - lastProgressAt < STUCK_TAPS_REWARD_MS) return;
+    requestReward(name, entry, taps >= MAX_TAPS_FIVEMIN ? 'stuck_full_epoch' : 'stuck_taps');
+}
+
+async function fetchChainData(name, entry) {
+    if (!entry || !entry.miner) return null;
+    try {
+        const data = await entry.miner.get_miner_data();
+        const epoch5mStart = data && data.epoch_5m_start !== undefined ? data.epoch_5m_start.toString() : '';
+        const tapSum = data && data.tap_sum !== undefined ? data.tap_sum.toString() : '';
+        const tapSum5m = data && data.tap_sum_5m !== undefined ? data.tap_sum_5m.toString() : '';
+        const chainTapSum5m = Number(tapSum5m || 0);
+        const prevEpoch5mStart = entry.epoch5mStart || '';
+        const prevTapsThisEpoch = entry.tapsThisEpoch || 0;
+        if (epoch5mStart && entry.epoch5mStart && epoch5mStart !== entry.epoch5mStart) {
+            resetEpoch(entry, epoch5mStart);
+            emit('epoch_reset', { name, epoch5mStart, tapSum, tapSum5m });
+        } else if (epoch5mStart && !entry.epoch5mStart) {
+            entry.epoch5mStart = epoch5mStart;
+        }
+        if (Number.isFinite(chainTapSum5m)) {
+            entry.tapsThisEpoch = Math.min(MAX_TAPS_FIVEMIN, Math.max(0, chainTapSum5m));
+            entry.sessionsThisEpoch = Math.max(
+                entry.sessionsThisEpoch || 0,
+                Math.min(SESSIONS_PER_EPOCH, Math.floor(entry.tapsThisEpoch / TAPS_PER_SESSION))
+            );
+        }
+        entry.lastChainAt = Date.now();
+        if (!entry.lastTapProgressAt ||
+            (epoch5mStart && prevEpoch5mStart && epoch5mStart !== prevEpoch5mStart) ||
+            (Number.isFinite(chainTapSum5m) && chainTapSum5m !== prevTapsThisEpoch)
+        ) {
+            entry.lastTapProgressAt = entry.lastChainAt;
+        }
+
+        if (epoch5mStart) {
+            entry.rewardEpochs = entry.rewardEpochs || [];
+            if (!entry.rewardEpochs.includes(epoch5mStart)) entry.rewardEpochs.push(epoch5mStart);
+            if (entry.rewardEpochs.length >= 3 && !entry.rewardInFlight) {
+                requestReward(name, entry, 'three_epochs');
+            }
+        }
+        emit('chain_data', { name, epoch5mStart, tapSum, tapSum5m });
+        maybeRecoverStuckTaps(name, entry);
+        return data;
+    } catch (err) {
+        emit('error', { name, message: userMessage(err) });
+        return null;
+    }
+}
+
+function scheduleChainPoll(name, entry) {
+    if (!entry || !entry.desired || entry.running || entry.epochPollTimer) return;
+    if (entry.chainPollTimer) clearTimeout(entry.chainPollTimer);
+    entry.chainPollTimer = setTimeout(async () => {
+        entry.chainPollTimer = null;
+        await fetchChainData(name, entry);
+        scheduleChainPoll(name, entry);
+    }, CHAIN_POLL_INTERVAL_MS);
+}
+
+function scheduleStart(name, entry, delay) {
+    if (!entry || !entry.desired) return;
+    if (entry.running || entry.starting || entry.startTimer || entry.canStartTimer || entry.restartTimer) return;
+    entry.startTimer = setTimeout(() => {
+        entry.startTimer = null;
+        window.MinerGoBee.start(name, 0).catch((err) => emit('error', { name, message: userMessage(err) }));
+    }, Math.max(0, delay));
+    emit(delay > 0 ? 'scheduled' : 'ready_to_start', { name, delayMs: Math.max(0, delay) });
+}
+
+function scheduleCanStartPoll(name, entry) {
+    if (!entry || !entry.desired || entry.running || entry.canStartTimer) return;
+    entry.canStartTimer = setTimeout(() => {
+        entry.canStartTimer = null;
+        window.MinerGoBee.start(name, 0).catch((err) => emit('error', { name, message: userMessage(err) }));
+    }, CAN_START_POLL_MS);
+}
+
+function scheduleEpochStartPoll(name, entry, reason) {
+    if (!entry || !entry.desired || entry.running || entry.epochPollTimer) return;
+    if (entry.restartTimer) clearTimeout(entry.restartTimer);
+    entry.restartTimer = null;
+    emit('scheduled', {
+        name,
+        delayMs: EPOCH_WAIT_POLL_MS,
+        reason: reason || 'epoch_wait',
+        sessionsThisEpoch: entry.sessionsThisEpoch || 0,
+        tapsThisEpoch: entry.tapsThisEpoch || 0
+    });
+    entry.epochPollTimer = setTimeout(async () => {
+        entry.epochPollTimer = null;
+        const previousEpoch = entry.epoch5mStart || '';
+        const data = await fetchChainData(name, entry);
+        if (!entry.desired) return;
+        const nextEpoch = data && data.epoch_5m_start !== undefined ? data.epoch_5m_start.toString() : entry.epoch5mStart || '';
+        const chainTapSum5m = data && data.tap_sum_5m !== undefined ? Number(data.tap_sum_5m.toString()) : entry.tapsThisEpoch || 0;
+        const epochChanged = previousEpoch && nextEpoch && previousEpoch !== nextEpoch;
+        if (epochChanged || chainTapSum5m <= 0) {
+            resetEpoch(entry, nextEpoch || previousEpoch);
+            window.MinerGoBee.start(name, 0).catch((err) => emit('error', { name, message: userMessage(err) }));
+            return;
+        }
+        scheduleEpochStartPoll(name, entry, reason);
+    }, EPOCH_WAIT_POLL_MS);
+}
+
+function scheduleNextSession(name, entry, delay) {
+    if (!entry || !entry.desired) return;
+    if (entry.sessionsThisEpoch >= SESSIONS_PER_EPOCH || entry.tapsThisEpoch >= MAX_TAPS_FIVEMIN) {
+        scheduleEpochStartPoll(name, entry, 'epoch_full');
+        return;
+    }
+    if (entry.restartTimer) clearTimeout(entry.restartTimer);
+    entry.restartTimer = setTimeout(() => {
+        entry.restartTimer = null;
+        window.MinerGoBee.start(name, 0).catch((err) => emit('error', { name, message: userMessage(err) }));
+    }, delay);
+    emit('scheduled', { name, delayMs: delay, sessionsThisEpoch: entry.sessionsThisEpoch || 0 });
+}
+
+function completeSession(name, entry, status, data) {
+    if (!entry || entry.sessionCompleted) return;
+    entry.sessionCompleted = true;
+    const actualTaps = Number(data && data.taps !== undefined ? data.taps : entry.taps || 0);
+    const target = entry.sessionTarget || TAPS_PER_SESSION;
+    entry.sessionsThisEpoch = (entry.sessionsThisEpoch || 0) + 1;
+    entry.tapsThisEpoch = Math.min(MAX_TAPS_FIVEMIN, (entry.tapsThisEpoch || 0) + Math.max(0, actualTaps));
+    entry.deficit = Math.max(0, Math.min(MAX_TAPS_FIVEMIN, (entry.deficit || 0) + Math.max(0, target - actualTaps)));
+    stopTapLoop(entry);
+    emit('session_done', {
+        name,
+        sessionId: entry.sessionId || '',
+        status,
+        actualTaps,
+        target,
+        sessionsThisEpoch: entry.sessionsThisEpoch,
+        tapsThisEpoch: entry.tapsThisEpoch,
+        deficit: entry.deficit
+    });
+    fetchChainData(name, entry).finally(() => {
+        if (!entry.desired) return;
+        if (entry.sessionsThisEpoch >= SESSIONS_PER_EPOCH || entry.tapsThisEpoch >= MAX_TAPS_FIVEMIN) {
+            scheduleNextSession(name, entry, EPOCH_END_COOLDOWN_MS);
+        } else {
+            scheduleNextSession(name, entry, SESSION_RESTART_DELAY_MS);
+        }
+    });
+}
+
+window.MinerGoBee = {
+    async probe() {
+        await ensureReady();
+        return JSON.stringify({
+            ready,
+            minerExported: typeof Miner === 'function',
+            miners: miners.size
+        });
+    },
+
+    async prepare(accountJson) {
+        await ensureReady();
+        const account = JSON.parse(accountJson);
+        const name = account.name;
+        if (!name) throw new Error('account name is required');
+        if (!account.publicKey || !account.secretKey) throw new Error('mining keys are missing');
+        if (!account.minerAddress) throw new Error('miner address is missing');
+
+        if (!miners.has(name)) {
+            if (!preparing.has(name)) {
+                preparing.set(name, (async () => {
+                const endpoints = normalizeEndpoints(account.endpoints);
+                const miner = await Miner.new(
+                    endpoints,
+                    account.appId || MINING_APP_ID,
+                    account.minerAddress,
+                    account.publicKey,
+                    account.secretKey
+                );
+                miners.set(name, {
+                    miner,
+                    desired: false,
+                    running: false,
+                    tapTimer: null,
+                    timers: [],
+                    startTimer: null,
+                    restartTimer: null,
+                    canStartTimer: null,
+                    chainPollTimer: null,
+                    epochPollTimer: null,
+                    starting: false,
+                    epochAligned: false,
+                    lastChainAt: 0,
+                    lastTapProgressAt: 0,
+                    lastRewardRecoveryAt: 0,
+                    sessionsThisEpoch: 0,
+                    tapsThisEpoch: 0,
+                    deficit: 0,
+                    rewardEpochs: []
+                });
+                })().catch((err) => {
+                    emit('error', { name, message: userMessage(err) });
+                    throw err;
+                }).finally(() => preparing.delete(name)));
+            }
+            await preparing.get(name);
+        }
+        const entry = miners.get(name);
+        entry.desired = true;
+        emit('prepared', { name });
+        scheduleChainPoll(name, entry);
+        scheduleStart(name, entry, account.startDelayMs || 0);
+        return JSON.stringify({ name, ready: true, running: entry.running });
+    },
+
+    async start(name, startDelayMs) {
+        await ensureReady();
+        const entry = miners.get(name);
+        if (!entry) throw new Error('miner is not prepared: ' + name);
+        entry.desired = true;
+        if (entry.running || entry.starting) {
+            emit('running', { name });
+            return JSON.stringify({ name, running: entry.running, starting: entry.starting });
+        }
+        if (entry.startTimer) {
+            emit('scheduled', { name, delayMs: startDelayMs || 0, sessionsThisEpoch: entry.sessionsThisEpoch || 0 });
+            return JSON.stringify({ name, running: false, scheduled: true });
+        }
+        if (startDelayMs && startDelayMs > 0) {
+            entry.startTimer = setTimeout(() => {
+                entry.startTimer = null;
+                window.MinerGoBee.start(name, 0).catch((err) => {
+                    emit('error', { name, message: userMessage(err) });
+                });
+            }, startDelayMs);
+            emit('scheduled', { name, delayMs: startDelayMs, sessionsThisEpoch: entry.sessionsThisEpoch || 0 });
+            return JSON.stringify({ name, running: false, scheduled: true });
+        }
+        if (entry.epochPollTimer) {
+            emit('scheduled', { name, delayMs: EPOCH_WAIT_POLL_MS, sessionsThisEpoch: entry.sessionsThisEpoch || 0 });
+            return JSON.stringify({ name, running: false, waitingEpoch: true });
+        }
+        if (!entry.lastChainAt || Date.now() - entry.lastChainAt > EPOCH_WAIT_POLL_MS - 500) {
+            await fetchChainData(name, entry);
+        }
+        if (!entry.epochAligned && (entry.tapsThisEpoch || 0) > 0) {
+            scheduleEpochStartPoll(name, entry, 'initial_epoch_align');
+            return JSON.stringify({ name, running: false, waitingEpoch: true });
+        }
+        entry.epochAligned = true;
+        if (!entry.miner.can_start()) {
+            emit('waiting_seed', { name });
+            scheduleCanStartPoll(name, entry);
+            return JSON.stringify({ name, running: false, waitingSeed: true });
+        }
+        if (entry.sessionsThisEpoch >= SESSIONS_PER_EPOCH || entry.tapsThisEpoch >= MAX_TAPS_FIVEMIN) {
+            scheduleEpochStartPoll(name, entry, 'epoch_full');
+            return JSON.stringify({ name, running: false, cooldown: true });
+        }
+        entry.taps = 0;
+        entry.sentTaps = 0;
+        entry.sessionTarget = TAPS_PER_SESSION;
+        entry.sessionCompleted = false;
+        stopTapLoop(entry);
+        entry.starting = true;
+        entry.running = false;
+        entry.timers = [];
+        try {
+            entry.sessionSeq = (entry.sessionSeq || 0) + 1;
+            entry.sessionId = `${name}:${Date.now()}:${entry.sessionSeq}`;
+            entry.miner.start(MINING_SESSION_MS, (raw) => {
+            let event = raw;
+            try { event = JSON.parse(raw); } catch (_) {}
+            if (event && (event.ok === false || event.error)) {
+                emit('worker_error', { name, message: userMessage(event.error || event), event });
+                completeSession(name, entry, 'error', event && event.data);
+                return;
+            }
+            const kind = event && event.action ? event.action : (event && event.event ? event.event : 'callback');
+            const status = event && event.data ? event.data.status : null;
+            if (kind === 'status_updated' && status === 'computing') emit('worker_status', { name, status: 'mining' });
+            else if (kind === 'status_updated' && status === 'submitting') emit('worker_status', { name, status: 'submitting' });
+            else if (kind === 'status_updated' && (status === 'finished' || status === 'removed')) {
+                emit('worker_status', { name, status });
+                completeSession(name, entry, status, event && event.data);
+            } else if (kind === 'session_accepted') {
+                emit('worker_status', { name, status: 'accepted' });
+                completeSession(name, entry, 'accepted', event && event.data);
+            } else if (kind === 'computation_completed') emit('worker_status', { name, status: 'computed' });
+            else if (kind === 'tap_computed') {
+                entry.taps += 1;
+                emit('tap_computed', { name, taps: entry.taps });
+            }
+            else emit('worker_event', { name, event });
+            });
+        } catch (err) {
+            entry.starting = false;
+            emit('error', { name, message: userMessage(err) });
+            throw err;
+        }
+        entry.running = true;
+        entry.starting = false;
+        scheduleTapPlan(name, entry);
+        emit('started', { name, sessionsThisEpoch: entry.sessionsThisEpoch || 0 });
+        return JSON.stringify({ name, running: true });
+    },
+
+    async stop(name) {
+        const entry = miners.get(name);
+        if (!entry) return JSON.stringify({ name, running: false });
+        entry.desired = false;
+        if (entry.startTimer) clearTimeout(entry.startTimer);
+        entry.startTimer = null;
+        stopTapLoop(entry);
+        entry.miner.stop();
+        emit('stopped', { name });
+        return JSON.stringify({ name, running: false });
+    }
+};
+
+ensureReady();
+</script>
+</body>
+</html>
