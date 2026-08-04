@@ -1,2 +1,6213 @@
-class B{static __wrap(e){const t=Object.create(B.prototype);return t.__wbg_ptr=e,Ee.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ee.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_activeconnectsession_free(e,0)}get app_id(){const e=r.activeconnectsession_app_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get deployed_at(){const e=r.activeconnectsession_deployed_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get deployed_event_id(){let e,t;try{const _=r.activeconnectsession_deployed_event_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get description(){let e,t;try{const _=r.activeconnectsession_description(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get profile_address(){let e,t;try{const _=r.activeconnectsession_profile_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get session_id(){const e=r.activeconnectsession_session_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}}Symbol.dispose&&(B.prototype[Symbol.dispose]=B.prototype.free);class xe{__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,qe.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_beeconnect_free(e,0)}create_shared_key_session(e,t,_){const i=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),a=o;var c=g(_)?0:l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),d=o;const u=r.beeconnect_create_shared_key_session(this.__wbg_ptr,i,a,g(t)?Number.MAX_SAFE_INTEGER:t>>>0,c,d);if(u[2])throw F(u[1]);return Z.__wrap(u[0])}decode_connect_payload_b64url(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o,i=r.beeconnect_decode_connect_payload_b64url(this.__wbg_ptr,t,_);if(i[2])throw F(i[1]);return X.__wrap(i[0])}disconnect_session(e,t,_,i,a,c,d){const u=z(e,r.__wbindgen_malloc),w=o,p=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),y=o,h=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),m=o,k=l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),v=o;var R=g(a)?0:l(a,r.__wbindgen_malloc,r.__wbindgen_realloc),S=o;return r.beeconnect_disconnect_session(this.__wbg_ptr,u,w,p,y,h,m,k,v,R,S,g(c)?Number.MAX_SAFE_INTEGER:c>>>0,g(d)?Number.MAX_SAFE_INTEGER:d>>>0)}is_session_profile_deployed(e,t){const _=z(e,r.__wbindgen_malloc),i=o,a=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),c=o;return r.beeconnect_is_session_profile_deployed(this.__wbg_ptr,_,i,a,c)}constructor(e){const t=r.beeconnect_new(g(e)?Number.MAX_SAFE_INTEGER:e>>>0);return this.__wbg_ptr=t,qe.register(this,this.__wbg_ptr,this),this}ping(){let e,t;try{const _=r.beeconnect_ping(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}query_active_sessions_by_multifactor(e,t,_,i,a){const c=z(e,r.__wbindgen_malloc),d=o,u=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),w=o;var p=g(_)?0:l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),y=o,h=g(a)?0:l(a,r.__wbindgen_malloc,r.__wbindgen_realloc),m=o;return r.beeconnect_query_active_sessions_by_multifactor(this.__wbg_ptr,c,d,u,w,p,y,!g(i),g(i)?BigInt(0):i,h,m)}request_set_mining_keys(e,t,_,i,a,c,d,u){const w=z(e,r.__wbindgen_malloc),p=o,y=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),h=o,m=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),k=o,v=l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),R=o,S=l(a,r.__wbindgen_malloc,r.__wbindgen_realloc),Re=o,Rt=l(c,r.__wbindgen_malloc,r.__wbindgen_realloc),jt=o;return r.beeconnect_request_set_mining_keys(this.__wbg_ptr,w,p,y,h,m,k,v,R,S,Re,Rt,jt,g(d)?Number.MAX_SAFE_INTEGER:d>>>0,g(u)?Number.MAX_SAFE_INTEGER:u>>>0)}request_sign_challenge(e,t,_,i,a,c,d){const u=z(e,r.__wbindgen_malloc),w=o,p=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),y=o,h=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),m=o,k=l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),v=o,R=l(a,r.__wbindgen_malloc,r.__wbindgen_realloc),S=o;return r.beeconnect_request_sign_challenge(this.__wbg_ptr,u,w,p,y,h,m,k,v,R,S,g(c)?Number.MAX_SAFE_INTEGER:c>>>0,g(d)?Number.MAX_SAFE_INTEGER:d>>>0)}resolve_profile_address(e,t){const _=z(e,r.__wbindgen_malloc),i=o,a=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),c=o;return r.beeconnect_resolve_profile_address(this.__wbg_ptr,_,i,a,c)}wait_challenge_response(e,t,_,i,a,c,d){const u=z(e,r.__wbindgen_malloc),w=o,p=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),y=o,h=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),m=o;var k=g(i)?0:l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),v=o;return r.beeconnect_wait_challenge_response(this.__wbg_ptr,u,w,p,y,h,m,k,v,!g(a),g(a)?BigInt(0):a,g(c)?Number.MAX_SAFE_INTEGER:c>>>0,g(d)?Number.MAX_SAFE_INTEGER:d>>>0)}wait_set_mining_keys_request(e,t,_,i,a,c,d){const u=z(e,r.__wbindgen_malloc),w=o,p=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),y=o,h=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),m=o;var k=g(d)?0:l(d,r.__wbindgen_malloc,r.__wbindgen_realloc),v=o;return r.beeconnect_wait_set_mining_keys_request(this.__wbg_ptr,u,w,p,y,h,m,!g(i),g(i)?BigInt(0):i,g(a)?Number.MAX_SAFE_INTEGER:a>>>0,g(c)?Number.MAX_SAFE_INTEGER:c>>>0,k,v)}wait_wallet_hello(e,t,_,i,a,c,d){const u=z(e,r.__wbindgen_malloc),w=o,p=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),y=o,h=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),m=o,k=l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),v=o;return r.beeconnect_wait_wallet_hello(this.__wbg_ptr,u,w,p,y,h,m,k,v,!g(a),g(a)?BigInt(0):a,g(c)?Number.MAX_SAFE_INTEGER:c>>>0,g(d)?Number.MAX_SAFE_INTEGER:d>>>0)}}Symbol.dispose&&(xe.prototype[Symbol.dispose]=xe.prototype.free);class T{static __wrap(e){const t=Object.create(T.prototype);return t.__wbg_ptr=e,Ae.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ae.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_connectsessionmessage_free(e,0)}get body_json(){let e,t;try{const _=r.connectsessionmessage_body_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get challenge_epk_public(){const e=r.connectsessionmessage_challenge_epk_public(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get challenge_nonce(){const e=r.connectsessionmessage_challenge_nonce(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get challenge_signature(){const e=r.connectsessionmessage_challenge_signature(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get dir(){let e,t;try{const _=r.connectsessionmessage_dir(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get disconnect_reason(){const e=r.connectsessionmessage_disconnect_reason(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get event_created_at(){const e=r.connectsessionmessage_event_created_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get event_id(){let e,t;try{const _=r.connectsessionmessage_event_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get mining_app_id(){const e=r.connectsessionmessage_mining_app_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get mining_owner_public(){const e=r.connectsessionmessage_mining_owner_public(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get msg_type(){let e,t;try{const _=r.connectsessionmessage_msg_type(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get raw_message_json(){let e,t;try{const _=r.connectsessionmessage_raw_message_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get seq(){const e=r.connectsessionmessage_seq(this.__wbg_ptr);return BigInt.asUintN(64,e)}get session_state_after_json(){const e=r.connectsessionmessage_session_state_after_json(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get ts(){const e=r.connectsessionmessage_ts(this.__wbg_ptr);return e[0]===0?void 0:BigInt.asUintN(64,e[1])}get wallet_address(){const e=r.connectsessionmessage_wallet_address(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get wallet_name(){const e=r.connectsessionmessage_wallet_name(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}}Symbol.dispose&&(T.prototype[Symbol.dispose]=T.prototype.free);class Oe{__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ne.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_crypto_free(e,0)}decrypt(e,t){const _=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),i=o,a=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),c=o;return r.crypto_decrypt(this.__wbg_ptr,_,i,a,c)}encrypt(e,t){const _=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),i=o,a=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),c=o;return r.crypto_encrypt(this.__wbg_ptr,_,i,a,c)}gen_mining_keys(){return r.crypto_gen_mining_keys(this.__wbg_ptr)}gen_mnemonic_and_derive_keys(){return r.crypto_gen_mnemonic_and_derive_keys(this.__wbg_ptr)}get_keys_from_mnemonic(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o;return r.crypto_get_keys_from_mnemonic(this.__wbg_ptr,t,_)}get_keys_from_mnemonic_with_path(e,t){const _=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),i=o,a=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),c=o;return r.crypto_get_keys_from_mnemonic_with_path(this.__wbg_ptr,_,i,a,c)}hash_password(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o;return r.crypto_hash_password(this.__wbg_ptr,t,_)}constructor(e){const t=z(e,r.__wbindgen_malloc),_=o,i=r.crypto_new(t,_);if(i[2])throw F(i[1]);return this.__wbg_ptr=i[0],Ne.register(this,this.__wbg_ptr,this),this}sign(e){return r.crypto_sign(this.__wbg_ptr,e)}verify_mnemonic(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o;return r.crypto_verify_mnemonic(this.__wbg_ptr,t,_)}verify_password_hash(e,t){const _=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),i=o,a=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),c=o;return r.crypto_verify_password_hash(this.__wbg_ptr,_,i,a,c)}}Symbol.dispose&&(Oe.prototype[Symbol.dispose]=Oe.prototype.free);class M{static __wrap(e){const t=Object.create(M.prototype);return t.__wbg_ptr=e,Be.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Be.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_cryptoresultofencrypt_free(e,0)}get encrypted(){let e,t;try{const _=r.cryptoresultofencrypt_encrypted(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(M.prototype[Symbol.dispose]=M.prototype.free);class U{static __wrap(e){const t=Object.create(U.prototype);return t.__wbg_ptr=e,Te.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Te.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_cryptoresultofgenseedandkeys_free(e,0)}get keys(){const e=r.cryptoresultofgenseedandkeys_keys(this.__wbg_ptr);return I.__wrap(e)}get phrase(){let e,t;try{const _=r.cryptoresultofgenseedandkeys_phrase(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(U.prototype[Symbol.dispose]=U.prototype.free);class I{static __wrap(e){const t=Object.create(I.prototype);return t.__wbg_ptr=e,Me.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Me.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_cryptoresultofgetkeys_free(e,0)}get public(){let e,t;try{const _=r.cryptoresultofgetkeys_public(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get secret(){let e,t;try{const _=r.cryptoresultofgetkeys_secret(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(I.prototype[Symbol.dispose]=I.prototype.free);class C{static __wrap(e){const t=Object.create(C.prototype);return t.__wbg_ptr=e,Ue.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ue.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_cryptoresultofsign_free(e,0)}get signature(){let e,t;try{const _=r.cryptoresultofsign_signature(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get signed(){let e,t;try{const _=r.cryptoresultofsign_signed(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(C.prototype[Symbol.dispose]=C.prototype.free);class W{static __wrap(e){const t=Object.create(W.prototype);return t.__wbg_ptr=e,Ce.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ce.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_graphqlblockdata_free(e,0)}get seq_no(){const e=r.__wbg_get_graphqlblockdata_seq_no(this.__wbg_ptr);return BigInt.asUintN(64,e)}set seq_no(e){r.__wbg_set_graphqlblockdata_seq_no(this.__wbg_ptr,e)}}Symbol.dispose&&(W.prototype[Symbol.dispose]=W.prototype.free);class G{static __wrap(e){const t=Object.create(G.prototype);return t.__wbg_ptr=e,We.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,We.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_issbase64details_free(e,0)}get index_mod4(){return r.issbase64details_index_mod4(this.__wbg_ptr)}get value(){let e,t;try{const _=r.issbase64details_value(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(G.prototype[Symbol.dispose]=G.prototype.free);class D{static __wrap(e){const t=Object.create(D.prototype);return t.__wbg_ptr=e,Ge.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ge.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_miner_free(e,0)}add_tap(e,t){const _=r.miner_add_tap(this.__wbg_ptr,e,t);if(_[1])throw F(_[0])}can_start(){return r.miner_can_start(this.__wbg_ptr)!==0}get_current_block(){return r.miner_get_current_block(this.__wbg_ptr)}get_miner_data(){return r.miner_get_miner_data(this.__wbg_ptr)}get_reward(){return r.miner_get_reward(this.__wbg_ptr)}static new(e,t,_,i,a){const c=z(e,r.__wbindgen_malloc),d=o,u=l(t,r.__wbindgen_malloc,r.__wbindgen_realloc),w=o,p=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),y=o,h=l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),m=o,k=l(a,r.__wbindgen_malloc,r.__wbindgen_realloc),v=o;return r.miner_new(c,d,u,w,p,y,h,m,k,v)}remove_seed(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o;r.miner_remove_seed(this.__wbg_ptr,t,_)}start(e,t){const _=r.miner_start(this.__wbg_ptr,e,t);if(_[1])throw F(_[0])}stop(){r.miner_stop(this.__wbg_ptr)}}Symbol.dispose&&(D.prototype[Symbol.dispose]=D.prototype.free);class V{static __wrap(e){const t=Object.create(V.prototype);return t.__wbg_ptr=e,De.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,De.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_mineraccountdata_free(e,0)}get epoch_5m_start(){const e=r.__wbg_get_mineraccountdata_epoch_5m_start(this.__wbg_ptr);return BigInt.asUintN(64,e)}get epoch_start(){const e=r.__wbg_get_mineraccountdata_epoch_start(this.__wbg_ptr);return BigInt.asUintN(64,e)}get tap_sum_5m(){const e=r.__wbg_get_mineraccountdata_tap_sum_5m(this.__wbg_ptr);return BigInt.asUintN(64,e[0])|BigInt.asUintN(64,e[1])<<BigInt(64)}get tap_sum(){const e=r.__wbg_get_mineraccountdata_tap_sum(this.__wbg_ptr);return BigInt.asUintN(64,e[0])|BigInt.asUintN(64,e[1])<<BigInt(64)}set epoch_5m_start(e){r.__wbg_set_mineraccountdata_epoch_5m_start(this.__wbg_ptr,e)}set epoch_start(e){r.__wbg_set_mineraccountdata_epoch_start(this.__wbg_ptr,e)}set tap_sum_5m(e){r.__wbg_set_mineraccountdata_tap_sum_5m(this.__wbg_ptr,e,e>>BigInt(64))}set tap_sum(e){r.__wbg_set_mineraccountdata_tap_sum(this.__wbg_ptr,e,e>>BigInt(64))}}Symbol.dispose&&(V.prototype[Symbol.dispose]=V.prototype.free);class J{static __wrap(e){const t=Object.create(J.prototype);return t.__wbg_ptr=e,Ve.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ve.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_multifactoraccountdata_free(e,0)}get candidate_new_owner_pubkey_and_expiration(){return r.multifactoraccountdata_candidate_new_owner_pubkey_and_expiration(this.__wbg_ptr)}get factors_len(){let e,t;try{const _=r.multifactoraccountdata_factors_len(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get factors_ordered_by_timestamp(){return r.multifactoraccountdata_factors_ordered_by_timestamp(this.__wbg_ptr)}get force_remove_oldest(){return r.multifactoraccountdata_force_remove_oldest(this.__wbg_ptr)!==0}get index_mod_4(){let e,t;try{const _=r.multifactoraccountdata_index_mod_4(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get iss_base_64(){let e,t;try{const _=r.multifactoraccountdata_iss_base_64(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get jwk_modulus_data(){return r.multifactoraccountdata_jwk_modulus_data(this.__wbg_ptr)}get jwk_modulus_data_len(){let e,t;try{const _=r.multifactoraccountdata_jwk_modulus_data_len(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get jwk_update_key(){let e,t;try{const _=r.multifactoraccountdata_jwk_update_key(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get m_security_cards_len(){let e,t;try{const _=r.multifactoraccountdata_m_security_cards_len(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get m_transactions_len(){let e,t;try{const _=r.multifactoraccountdata_m_transactions_len(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get max_cleanup_txns(){let e,t;try{const _=r.multifactoraccountdata_max_cleanup_txns(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get min_value(){let e,t;try{const _=r.multifactoraccountdata_min_value(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get name(){let e,t;try{const _=r.multifactoraccountdata_name(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get owner_pubkey(){let e,t;try{const _=r.multifactoraccountdata_owner_pubkey(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get pub_recovery_key(){let e,t;try{const _=r.multifactoraccountdata_pub_recovery_key(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get root(){let e,t;try{const _=r.multifactoraccountdata_root(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get use_security_card(){return r.multifactoraccountdata_use_security_card(this.__wbg_ptr)!==0}get wasm_hash(){let e,t;try{const _=r.multifactoraccountdata_wasm_hash(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get white_list_of_address(){return r.multifactoraccountdata_white_list_of_address(this.__wbg_ptr)}get zkid(){let e,t;try{const _=r.multifactoraccountdata_zkid(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(J.prototype[Symbol.dispose]=J.prototype.free);class X{static __wrap(e){const t=Object.create(X.prototype);return t.__wbg_ptr=e,Je.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Je.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_parsedconnectpayload_free(e,0)}get app_id(){let e,t;try{const _=r.parsedconnectpayload_app_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get description(){let e,t;try{const _=r.parsedconnectpayload_description(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get expires_at(){const e=r.parsedconnectpayload_expires_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get nonce(){const e=r.parsedconnectpayload_nonce(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get session_id(){let e,t;try{const _=r.parsedconnectpayload_session_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get v(){let e,t;try{const _=r.parsedconnectpayload_v(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(X.prototype[Symbol.dispose]=X.prototype.free);class L{static __wrap(e){const t=Object.create(L.prototype);return t.__wbg_ptr=e,Xe.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Xe.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_prepareddeployparams_free(e,0)}get epk(){let e,t;try{const _=r.prepareddeployparams_epk(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get epk_expire_at(){const e=r.prepareddeployparams_epk_expire_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get epk_sig(){let e,t;try{const _=r.prepareddeployparams_epk_sig(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get header_base_64(){let e,t;try{const _=r.prepareddeployparams_header_base_64(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get index_mod_4(){return r.prepareddeployparams_index_mod_4(this.__wbg_ptr)}get iss_base_64(){let e,t;try{const _=r.prepareddeployparams_iss_base_64(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get jwk_modulus(){let e,t;try{const _=r.prepareddeployparams_jwk_modulus(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get jwk_modulus_expire_at(){const e=r.prepareddeployparams_jwk_modulus_expire_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get jwk_update_key(){let e,t;try{const _=r.prepareddeployparams_jwk_update_key(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get jwk_update_key_sig(){let e,t;try{const _=r.prepareddeployparams_jwk_update_key_sig(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get kid(){let e,t;try{const _=r.prepareddeployparams_kid(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get name(){let e,t;try{const _=r.prepareddeployparams_name(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get proof(){let e,t;try{const _=r.prepareddeployparams_proof(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get provider(){let e,t;try{const _=r.prepareddeployparams_provider(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get pub_recovery_key(){let e,t;try{const _=r.prepareddeployparams_pub_recovery_key(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get pub_recovery_key_sig(){let e,t;try{const _=r.prepareddeployparams_pub_recovery_key_sig(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get root_provider_certificates(){return r.prepareddeployparams_root_provider_certificates(this.__wbg_ptr)}get zkid(){let e,t;try{const _=r.prepareddeployparams_zkid(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(L.prototype[Symbol.dispose]=L.prototype.free);class P{static __wrap(e){const t=Object.create(P.prototype);return t.__wbg_ptr=e,Le.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Le.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultgetmirroraddress_free(e,0)}get address(){let e,t;try{const _=r.resultgetmirroraddress_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(P.prototype[Symbol.dispose]=P.prototype.free);class K{static __wrap(e){const t=Object.create(K.prototype);return t.__wbg_ptr=e,Pe.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Pe.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofaddzkpfactor_free(e,0)}get address(){let e,t;try{const _=r.resultofaddzkpfactor_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get message_id(){const e=r.resultofaddzkpfactor_message_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get message_ids(){const e=r.resultofaddzkpfactor_message_ids(this.__wbg_ptr);var t=ke(e[0],e[1]).slice();return r.__wbindgen_free(e[0],e[1]*4,4),t}get name(){let e,t;try{const _=r.resultofaddzkpfactor_name(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get password_hash(){let e,t;try{const _=r.resultofaddzkpfactor_password_hash(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get pubkey(){let e,t;try{const _=r.resultofaddzkpfactor_pubkey(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get signing_keys(){const e=r.resultofaddzkpfactor_signing_keys(this.__wbg_ptr);return E.__wrap(e)}}Symbol.dispose&&(K.prototype[Symbol.dispose]=K.prototype.free);class ${static __wrap(e){const t=Object.create($.prototype);return t.__wbg_ptr=e,Ke.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ke.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofblockchainwrite_free(e,0)}get message_ids(){const e=r.resultofblockchainwrite_message_ids(this.__wbg_ptr);var t=ke(e[0],e[1]).slice();return r.__wbindgen_free(e[0],e[1]*4,4),t}get pending_reason(){const e=r.resultofblockchainwrite_pending_reason(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get pending_stage(){const e=r.resultofblockchainwrite_pending_stage(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}}Symbol.dispose&&($.prototype[Symbol.dispose]=$.prototype.free);class H{static __wrap(e){const t=Object.create(H.prototype);return t.__wbg_ptr=e,$e.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,$e.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofchecknameavailability_free(e,0)}get is_available(){return r.resultofchecknameavailability_is_available(this.__wbg_ptr)!==0}get multifactor_address(){const e=r.resultofchecknameavailability_multifactor_address(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}}Symbol.dispose&&(H.prototype[Symbol.dispose]=H.prototype.free);class Z{static __wrap(e){const t=Object.create(Z.prototype);return t.__wbg_ptr=e,He.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,He.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofcreatesharedkeysession_free(e,0)}get app_id(){let e,t;try{const _=r.resultofcreatesharedkeysession_app_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get client_dh_public(){let e,t;try{const _=r.resultofcreatesharedkeysession_client_dh_public(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get client_dh_secret(){let e,t;try{const _=r.resultofcreatesharedkeysession_client_dh_secret(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get created_at(){const e=r.resultofcreatesharedkeysession_created_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get deep_link(){let e,t;try{const _=r.resultofcreatesharedkeysession_deep_link(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get description(){let e,t;try{const _=r.resultofcreatesharedkeysession_description(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get expires_at(){const e=r.resultofcreatesharedkeysession_expires_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get payload_b64url(){let e,t;try{const _=r.resultofcreatesharedkeysession_payload_b64url(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get payload_json(){let e,t;try{const _=r.resultofcreatesharedkeysession_payload_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get session_id(){let e,t;try{const _=r.resultofcreatesharedkeysession_session_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(Z.prototype[Symbol.dispose]=Z.prototype.free);class Q{static __wrap(e){const t=Object.create(Q.prototype);return t.__wbg_ptr=e,Ze.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ze.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofdeploymultifactor_free(e,0)}get address(){let e,t;try{const _=r.resultofdeploymultifactor_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get message_id(){const e=r.resultofdeploymultifactor_message_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get message_ids(){const e=r.resultofdeploymultifactor_message_ids(this.__wbg_ptr);var t=ke(e[0],e[1]).slice();return r.__wbindgen_free(e[0],e[1]*4,4),t}get name(){let e,t;try{const _=r.resultofdeploymultifactor_name(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get password_hash(){let e,t;try{const _=r.resultofdeploymultifactor_password_hash(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get pending_reason(){const e=r.resultofdeploymultifactor_pending_reason(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get pending_stage(){const e=r.resultofdeploymultifactor_pending_stage(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get phrase(){let e,t;try{const _=r.resultofdeploymultifactor_phrase(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get pubkey(){let e,t;try{const _=r.resultofdeploymultifactor_pubkey(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get signing_keys(){const e=r.resultofdeploymultifactor_signing_keys(this.__wbg_ptr);return E.__wrap(e)}}Symbol.dispose&&(Q.prototype[Symbol.dispose]=Q.prototype.free);class Y{static __wrap(e){const t=Object.create(Y.prototype);return t.__wbg_ptr=e,Qe.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Qe.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofdisconnectsession_free(e,0)}get message_id(){const e=r.resultofdisconnectsession_message_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get profile_address(){let e,t;try{const _=r.resultofdisconnectsession_profile_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get raw_message_json(){let e,t;try{const _=r.resultofdisconnectsession_raw_message_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get updated_session_state_json(){let e,t;try{const _=r.resultofdisconnectsession_updated_session_state_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(Y.prototype[Symbol.dispose]=Y.prototype.free);class ee{static __wrap(e){const t=Object.create(ee.prototype);return t.__wbg_ptr=e,Ye.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,Ye.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgenminingkeys_free(e,0)}get deep_link(){let e,t;try{const _=r.resultofgenminingkeys_deep_link(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get public(){let e,t;try{const _=r.resultofgenminingkeys_public(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get secret(){let e,t;try{const _=r.resultofgenminingkeys_secret(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(ee.prototype[Symbol.dispose]=ee.prototype.free);class te{static __wrap(e){const t=Object.create(te.prototype);return t.__wbg_ptr=e,et.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,et.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgetepkexpireat_free(e,0)}get epk_expire_at(){const e=r.resultofgetepkexpireat_epk_expire_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}}Symbol.dispose&&(te.prototype[Symbol.dispose]=te.prototype.free);class _e{static __wrap(e){const t=Object.create(_e.prototype);return t.__wbg_ptr=e,tt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,tt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgethistory_free(e,0)}get data(){const e=r.resultofgethistory_data(this.__wbg_ptr);var t=ke(e[0],e[1]).slice();return r.__wbindgen_free(e[0],e[1]*4,4),t}get has_next_page(){return r.resultofgethistory_has_next_page(this.__wbg_ptr)!==0}get next_cursor(){const e=r.resultofgethistory_next_cursor(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get next_mining_cursor(){const e=r.resultofgethistory_next_mining_cursor(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}}Symbol.dispose&&(_e.prototype[Symbol.dispose]=_e.prototype.free);class E{static __wrap(e){const t=Object.create(E.prototype);return t.__wbg_ptr=e,_t.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,_t.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgetkeys_free(e,0)}get public(){let e,t;try{const _=r.resultofgetkeys_public(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get secret(){let e,t;try{const _=r.resultofgetkeys_secret(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(E.prototype[Symbol.dispose]=E.prototype.free);class re{static __wrap(e){const t=Object.create(re.prototype);return t.__wbg_ptr=e,rt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,rt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgetminerdetails_free(e,0)}get address(){let e,t;try{const _=r.resultofgetminerdetails_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get owner_address(){let e,t;try{const _=r.resultofgetminerdetails_owner_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get owner_public(){return r.resultofgetminerdetails_owner_public(this.__wbg_ptr)}}Symbol.dispose&&(re.prototype[Symbol.dispose]=re.prototype.free);class ne{static __wrap(e){const t=Object.create(ne.prototype);return t.__wbg_ptr=e,nt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,nt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgetmultifactordetails_free(e,0)}get address(){let e,t;try{const _=r.resultofgetmultifactordetails_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get candidate_new_owner_pubkey_and_expiration(){return r.resultofgetmultifactordetails_candidate_new_owner_pubkey_and_expiration(this.__wbg_ptr)}get factors_len(){let e,t;try{const _=r.resultofgetmultifactordetails_factors_len(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get factors_ordered_by_timestamp(){return r.resultofgetmultifactordetails_factors_ordered_by_timestamp(this.__wbg_ptr)}get force_remove_oldest(){return r.resultofgetmultifactordetails_force_remove_oldest(this.__wbg_ptr)!==0}get index_mod_4(){let e,t;try{const _=r.resultofgetmultifactordetails_index_mod_4(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get iss_base_64(){let e,t;try{const _=r.resultofgetmultifactordetails_iss_base_64(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get jwk_modulus_data(){return r.resultofgetmultifactordetails_jwk_modulus_data(this.__wbg_ptr)}get jwk_modulus_data_len(){let e,t;try{const _=r.resultofgetmultifactordetails_jwk_modulus_data_len(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get jwk_update_key(){let e,t;try{const _=r.resultofgetmultifactordetails_jwk_update_key(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get m_security_cards_len(){let e,t;try{const _=r.resultofgetmultifactordetails_m_security_cards_len(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get m_transactions_len(){let e,t;try{const _=r.resultofgetmultifactordetails_m_transactions_len(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get max_cleanup_txns(){let e,t;try{const _=r.resultofgetmultifactordetails_max_cleanup_txns(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get min_value(){let e,t;try{const _=r.resultofgetmultifactordetails_min_value(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get name(){let e,t;try{const _=r.resultofgetmultifactordetails_name(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get owner_pubkey(){let e,t;try{const _=r.resultofgetmultifactordetails_owner_pubkey(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get pub_recovery_key(){let e,t;try{const _=r.resultofgetmultifactordetails_pub_recovery_key(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get root(){let e,t;try{const _=r.resultofgetmultifactordetails_root(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get use_security_card(){return r.resultofgetmultifactordetails_use_security_card(this.__wbg_ptr)!==0}get wasm_hash(){let e,t;try{const _=r.resultofgetmultifactordetails_wasm_hash(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get white_list_of_address(){return r.resultofgetmultifactordetails_white_list_of_address(this.__wbg_ptr)}get zkid(){let e,t;try{const _=r.resultofgetmultifactordetails_zkid(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(ne.prototype[Symbol.dispose]=ne.prototype.free);class se{static __wrap(e){const t=Object.create(se.prototype);return t.__wbg_ptr=e,st.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,st.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgetmultifactorinfo_free(e,0)}get data(){const e=r.resultofgetmultifactorinfo_data(this.__wbg_ptr);return e===0?void 0:J.__wrap(e)}}Symbol.dispose&&(se.prototype[Symbol.dispose]=se.prototype.free);class ie{static __wrap(e){const t=Object.create(ie.prototype);return t.__wbg_ptr=e,it.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,it.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgetmvmultifactoraddress_free(e,0)}get address(){let e,t;try{const _=r.resultofgetmvmultifactoraddress_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(ie.prototype[Symbol.dispose]=ie.prototype.free);class oe{static __wrap(e){const t=Object.create(oe.prototype);return t.__wbg_ptr=e,ot.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,ot.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgetnativebalances_free(e,0)}get ecc(){return r.resultofgetnativebalances_ecc(this.__wbg_ptr)}get popitgame(){return r.resultofgetnativebalances_popitgame(this.__wbg_ptr)}}Symbol.dispose&&(oe.prototype[Symbol.dispose]=oe.prototype.free);class ae{static __wrap(e){const t=Object.create(ae.prototype);return t.__wbg_ptr=e,at.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,at.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofgettokensbalances_free(e,0)}get tokens(){return r.resultofgettokensbalances_tokens(this.__wbg_ptr)}}Symbol.dispose&&(ae.prototype[Symbol.dispose]=ae.prototype.free);class ce{static __wrap(e){const t=Object.create(ce.prototype);return t.__wbg_ptr=e,ct.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,ct.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofqueryactivesessionsbymultifactor_free(e,0)}get exhausted_active(){return r.resultofqueryactivesessionsbymultifactor_exhausted_active(this.__wbg_ptr)!==0}get next_before(){const e=r.resultofqueryactivesessionsbymultifactor_next_before(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get sessions(){return r.resultofqueryactivesessionsbymultifactor_sessions(this.__wbg_ptr)}}Symbol.dispose&&(ce.prototype[Symbol.dispose]=ce.prototype.free);class le{static __wrap(e){const t=Object.create(le.prototype);return t.__wbg_ptr=e,lt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,lt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofquerysessionmessages_free(e,0)}get messages(){return r.resultofquerysessionmessages_messages(this.__wbg_ptr)}get next_before(){const e=r.resultofquerysessionmessages_next_before(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get profile_address(){let e,t;try{const _=r.resultofquerysessionmessages_profile_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get updated_session_state_json(){const e=r.resultofquerysessionmessages_updated_session_state_json(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}}Symbol.dispose&&(le.prototype[Symbol.dispose]=le.prototype.free);class ge{static __wrap(e){const t=Object.create(ge.prototype);return t.__wbg_ptr=e,gt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,gt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofrequestsetminingkeys_free(e,0)}get app_id(){let e,t;try{const _=r.resultofrequestsetminingkeys_app_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get message_id(){const e=r.resultofrequestsetminingkeys_message_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get owner_public(){let e,t;try{const _=r.resultofrequestsetminingkeys_owner_public(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get profile_address(){let e,t;try{const _=r.resultofrequestsetminingkeys_profile_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get raw_message_json(){let e,t;try{const _=r.resultofrequestsetminingkeys_raw_message_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get updated_session_state_json(){let e,t;try{const _=r.resultofrequestsetminingkeys_updated_session_state_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(ge.prototype[Symbol.dispose]=ge.prototype.free);class de{static __wrap(e){const t=Object.create(de.prototype);return t.__wbg_ptr=e,dt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,dt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofrequestsignchallenge_free(e,0)}get message_id(){const e=r.resultofrequestsignchallenge_message_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get nonce(){let e,t;try{const _=r.resultofrequestsignchallenge_nonce(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get profile_address(){let e,t;try{const _=r.resultofrequestsignchallenge_profile_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get raw_message_json(){let e,t;try{const _=r.resultofrequestsignchallenge_raw_message_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get sent_at(){const e=r.resultofrequestsignchallenge_sent_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get updated_session_state_json(){let e,t;try{const _=r.resultofrequestsignchallenge_updated_session_state_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(de.prototype[Symbol.dispose]=de.prototype.free);class fe{static __wrap(e){const t=Object.create(fe.prototype);return t.__wbg_ptr=e,ft.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,ft.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofsendmessage_free(e,0)}get aborted(){const e=r.resultofsendmessage_aborted(this.__wbg_ptr);return e===16777215?void 0:e!==0}get block_hash(){const e=r.resultofsendmessage_block_hash(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get current_time(){const e=r.resultofsendmessage_current_time(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get exit_code(){const e=r.resultofsendmessage_exit_code(this.__wbg_ptr);return e===Number.MAX_SAFE_INTEGER?void 0:e}get message_hash(){const e=r.resultofsendmessage_message_hash(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get producers(){const e=r.resultofsendmessage_producers(this.__wbg_ptr);var t=ke(e[0],e[1]).slice();return r.__wbindgen_free(e[0],e[1]*4,4),t}get thread_id(){const e=r.resultofsendmessage_thread_id(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get tx_hash(){const e=r.resultofsendmessage_tx_hash(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}}Symbol.dispose&&(fe.prototype[Symbol.dispose]=fe.prototype.free);class ue{static __wrap(e){const t=Object.create(ue.prototype);return t.__wbg_ptr=e,ut.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,ut.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofvalidatewalletname_free(e,0)}get error_code(){const e=r.resultofvalidatewalletname_error_code(this.__wbg_ptr);return e===0?void 0:e}get is_valid(){return r.resultofvalidatewalletname_is_valid(this.__wbg_ptr)!==0}}Symbol.dispose&&(ue.prototype[Symbol.dispose]=ue.prototype.free);class be{static __wrap(e){const t=Object.create(be.prototype);return t.__wbg_ptr=e,bt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,bt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofwaitchallengeresponse_free(e,0)}get epk_public(){const e=r.resultofwaitchallengeresponse_epk_public(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get event_created_at(){const e=r.resultofwaitchallengeresponse_event_created_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get event_id(){let e,t;try{const _=r.resultofwaitchallengeresponse_event_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get nonce(){let e,t;try{const _=r.resultofwaitchallengeresponse_nonce(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get profile_address(){let e,t;try{const _=r.resultofwaitchallengeresponse_profile_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get raw_message_json(){let e,t;try{const _=r.resultofwaitchallengeresponse_raw_message_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get signature(){let e,t;try{const _=r.resultofwaitchallengeresponse_signature(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get updated_session_state_json(){const e=r.resultofwaitchallengeresponse_updated_session_state_json(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get wallet_address(){let e,t;try{const _=r.resultofwaitchallengeresponse_wallet_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(be.prototype[Symbol.dispose]=be.prototype.free);class we{static __wrap(e){const t=Object.create(we.prototype);return t.__wbg_ptr=e,wt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,wt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofwaitsetminingkeysrequest_free(e,0)}get app_id(){let e,t;try{const _=r.resultofwaitsetminingkeysrequest_app_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get event_created_at(){const e=r.resultofwaitsetminingkeysrequest_event_created_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get event_id(){let e,t;try{const _=r.resultofwaitsetminingkeysrequest_event_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get owner_public(){let e,t;try{const _=r.resultofwaitsetminingkeysrequest_owner_public(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get profile_address(){let e,t;try{const _=r.resultofwaitsetminingkeysrequest_profile_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get raw_message_json(){let e,t;try{const _=r.resultofwaitsetminingkeysrequest_raw_message_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get updated_session_state_json(){const e=r.resultofwaitsetminingkeysrequest_updated_session_state_json(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}}Symbol.dispose&&(we.prototype[Symbol.dispose]=we.prototype.free);class pe{static __wrap(e){const t=Object.create(pe.prototype);return t.__wbg_ptr=e,pt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,pt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_resultofwaitwallethello_free(e,0)}get epk_public(){const e=r.resultofwaitwallethello_epk_public(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get event_created_at(){const e=r.resultofwaitwallethello_event_created_at(this.__wbg_ptr);return BigInt.asUintN(64,e)}get event_id(){let e,t;try{const _=r.resultofwaitwallethello_event_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get nonce(){const e=r.resultofwaitwallethello_nonce(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get profile_address(){let e,t;try{const _=r.resultofwaitwallethello_profile_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get raw_message_json(){let e,t;try{const _=r.resultofwaitwallethello_raw_message_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get session_state_json(){let e,t;try{const _=r.resultofwaitwallethello_session_state_json(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get signature(){const e=r.resultofwaitwallethello_signature(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get wallet_address(){let e,t;try{const _=r.resultofwaitwallethello_wallet_address(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get wallet_name(){let e,t;try{const _=r.resultofwaitwallethello_wallet_name(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(pe.prototype[Symbol.dispose]=pe.prototype.free);class ye{static __wrap(e){const t=Object.create(ye.prototype);return t.__wbg_ptr=e,yt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,yt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_txdata_free(e,0)}get created_at(){let e,t;try{const _=r.txdata_created_at(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get id(){let e,t;try{const _=r.txdata_id(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get src_name(){const e=r.txdata_src_name(this.__wbg_ptr);let t;return e[0]!==0&&(t=s(e[0],e[1]).slice(),r.__wbindgen_free(e[0],e[1]*1,1)),t}get tx_type(){let e,t;try{const _=r.txdata_tx_type(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get value(){let e,t;try{const _=r.txdata_value(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(ye.prototype[Symbol.dispose]=ye.prototype.free);class Ie{__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,ht.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_wallet_free(e,0)}add_zkp_factor(e){return r.wallet_add_zkp_factor(this.__wbg_ptr,e)}buy_shells(e){return r.wallet_buy_shells(this.__wbg_ptr,e)}change_seed_phrase(e){return r.wallet_change_seed_phrase(this.__wbg_ptr,e)}check_name_availability(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o;return r.wallet_check_name_availability(this.__wbg_ptr,t,_)}claim_usdc(e){return r.wallet_claim_usdc(this.__wbg_ptr,e)}complete_zk_login_with_prover_v1(e){return r.wallet_complete_zk_login_with_prover_v1(this.__wbg_ptr,e)}decode_connect_payload_b64url(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o,i=r.wallet_decode_connect_payload_b64url(this.__wbg_ptr,t,_);if(i[2])throw F(i[1]);return F(i[0])}del_mining_key(e){return r.wallet_del_mining_key(this.__wbg_ptr,e)}delete_zkp_factor_by_itself(e){return r.wallet_delete_zkp_factor_by_itself(this.__wbg_ptr,e)}deploy_miner(e){return r.wallet_deploy_miner(this.__wbg_ptr,e)}deploy_wallet(e){return r.wallet_deploy_wallet(this.__wbg_ptr,e)}get_epk_expire_at(e){return r.wallet_get_epk_expire_at(this.__wbg_ptr,e)}get_history(e){return r.wallet_get_history(this.__wbg_ptr,e)}get_miner_address(e){return r.wallet_get_miner_address(this.__wbg_ptr,e)}get_miner_details_by_multifactor_address(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o;return r.wallet_get_miner_details_by_multifactor_address(this.__wbg_ptr,t,_)}get_mirror_address(e){const t=r.wallet_get_mirror_address(this.__wbg_ptr,e);if(t[2])throw F(t[1]);return P.__wrap(t[0])}get_multifactor_address(e){return r.wallet_get_multifactor_address(this.__wbg_ptr,e)}get_multifactor_balances(e){return r.wallet_get_multifactor_balances(this.__wbg_ptr,e)}get_multifactor_data_by_name(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o;return r.wallet_get_multifactor_data_by_name(this.__wbg_ptr,t,_)}get_multifactor_info(e){return r.wallet_get_multifactor_info(this.__wbg_ptr,e)}get_my_sell_orders(e){return r.wallet_get_my_sell_orders(this.__wbg_ptr,e)}get_nackl_redeem_rate(){return r.wallet_get_nackl_redeem_rate(this.__wbg_ptr)}get_tokens_balances(e){return r.wallet_get_tokens_balances(this.__wbg_ptr,e)}migrate_tip3_usdc(e){return r.wallet_migrate_tip3_usdc(this.__wbg_ptr,e)}constructor(e,t,_,i,a,c){const d=z(e,r.__wbindgen_malloc),u=o;var w=g(t)?0:z(t,r.__wbindgen_malloc),p=o;const y=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),h=o,m=l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),k=o;var v=g(a)?0:l(a,r.__wbindgen_malloc,r.__wbindgen_realloc),R=o;const S=r.wallet_new(d,u,w,p,y,h,m,k,v,R,g(c)?Number.MAX_SAFE_INTEGER:c>>>0);if(S[2])throw F(S[1]);return this.__wbg_ptr=S[0],ht.register(this,this.__wbg_ptr,this),this}prepare_multifactor_deploy_params(e){return r.wallet_prepare_multifactor_deploy_params(this.__wbg_ptr,e)}prepare_zk_login_v1(){const e=r.wallet_prepare_zk_login_v1(this.__wbg_ptr);if(e[2])throw F(e[1]);return me.__wrap(e[0])}query_connect_session_messages(e){return r.wallet_query_connect_session_messages(this.__wbg_ptr,e)}redeem_nackl(e){return r.wallet_redeem_nackl(this.__wbg_ptr,e)}sell_shells(e){return r.wallet_sell_shells(this.__wbg_ptr,e)}send_tokens_direct(e){return r.wallet_send_tokens_direct(this.__wbg_ptr,e)}set_mining_keys(e){return r.wallet_set_mining_keys(this.__wbg_ptr,e)}update_zk_id(e){return r.wallet_update_zk_id(this.__wbg_ptr,e)}validate_name(e){const t=l(e,r.__wbindgen_malloc,r.__wbindgen_realloc),_=o,i=r.wallet_validate_name(this.__wbg_ptr,t,_);if(i[2])throw F(i[1]);return ue.__wrap(i[0])}}Symbol.dispose&&(Ie.prototype[Symbol.dispose]=Ie.prototype.free);const Pt=Object.freeze({InvalidCharacters:1,1:"InvalidCharacters",ConsecutiveHyphens:2,2:"ConsecutiveHyphens",ConsecutiveUnderscores:3,3:"ConsecutiveUnderscores",StartsWithSymbol:4,4:"StartsWithSymbol",TooLong:5,5:"TooLong",TooShort:6,6:"TooShort"});class he{static __wrap(e){const t=Object.create(he.prototype);return t.__wbg_ptr=e,mt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,mt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_zklogincompletewithproverresult_free(e,0)}get ephemeral_private_key(){let e,t;try{const _=r.zklogincompletewithproverresult_ephemeral_private_key(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get ephemeral_public_key_in_hex(){let e,t;try{const _=r.zklogincompletewithproverresult_ephemeral_public_key_in_hex(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get ephemeral_secret_key_in_hex(){let e,t;try{const _=r.zklogincompletewithproverresult_ephemeral_secret_key_in_hex(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get header_base64(){let e,t;try{const _=r.zklogincompletewithproverresult_header_base64(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get iss_base64_details(){const e=r.zklogincompletewithproverresult_iss_base64_details(this.__wbg_ptr);return G.__wrap(e)}get max_epoch(){const e=r.zklogincompletewithproverresult_max_epoch(this.__wbg_ptr);return BigInt.asUintN(64,e)}get zk_proof_compressed(){let e,t;try{const _=r.zklogincompletewithproverresult_zk_proof_compressed(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get zkid(){let e,t;try{const _=r.zklogincompletewithproverresult_zkid(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(he.prototype[Symbol.dispose]=he.prototype.free);class me{static __wrap(e){const t=Object.create(me.prototype);return t.__wbg_ptr=e,kt.register(t,t.__wbg_ptr,t),t}__destroy_into_raw(){const e=this.__wbg_ptr;return this.__wbg_ptr=0,kt.unregister(this),e}free(){const e=this.__destroy_into_raw();r.__wbg_zkloginprepareresult_free(e,0)}get ephemeral_private_key(){let e,t;try{const _=r.zkloginprepareresult_ephemeral_private_key(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get max_epoch(){const e=r.zkloginprepareresult_max_epoch(this.__wbg_ptr);return BigInt.asUintN(64,e)}get nonce(){let e,t;try{const _=r.zkloginprepareresult_nonce(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}get randomness(){let e,t;try{const _=r.zkloginprepareresult_randomness(this.__wbg_ptr);return e=_[0],t=_[1],s(_[0],_[1])}finally{r.__wbindgen_free(e,t,1)}}}Symbol.dispose&&(me.prototype[Symbol.dispose]=me.prototype.free);function Kt(n){return r.ensure_mining_keys_propagated(n)}function $t(n){const e=l(n,r.__wbindgen_malloc,r.__wbindgen_realloc),t=o;return r.gen_mining_keys(e,t)}function Ht(n){return r.get_miner_address_by_wallet_name(n)}function zt(){return{__proto__:null,"./bee_sdk_bg.js":{__proto__:null,__wbg_Error_ef53bc310eb298a0:function(e,t){return Error(s(e,t))},__wbg_Number_6b506e6536831eaa:function(e){return Number(e)},__wbg_String_8564e559799eccda:function(e,t){const _=String(t),i=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),a=o;b().setInt32(e+4,a,!0),b().setInt32(e+0,i,!0)},__wbg_Window_6b1e5e30561398b0:function(e){return e.Window},__wbg_WorkerGlobalScope_c2be21ef9cc5eb0e:function(e){return e.WorkerGlobalScope},__wbg___wbindgen_bigint_get_as_i64_38130e98eecd467d:function(e,t){const _=t,i=typeof _=="bigint"?_:void 0;b().setBigInt64(e+8,g(i)?BigInt(0):i,!0),b().setInt32(e+0,!g(i),!0)},__wbg___wbindgen_boolean_get_1a45e2c38d4d41b9:function(e){const t=e,_=typeof t=="boolean"?t:void 0;return g(_)?16777215:_?1:0},__wbg___wbindgen_debug_string_0accd80f45e5faa2:function(e,t){const _=Se(t),i=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),a=o;b().setInt32(e+4,a,!0),b().setInt32(e+0,i,!0)},__wbg___wbindgen_in_70a403a56e771704:function(e,t){return e in t},__wbg___wbindgen_is_bigint_6ffd6468a9bc44b9:function(e){return typeof e=="bigint"},__wbg___wbindgen_is_function_754e9f305ff6029e:function(e){return typeof e=="function"},__wbg___wbindgen_is_object_56732c2bc353f41d:function(e){const t=e;return typeof t=="object"&&t!==null},__wbg___wbindgen_is_string_c236cabd84a4d769:function(e){return typeof e=="string"},__wbg___wbindgen_is_undefined_67b456be8673d3d7:function(e){return e===void 0},__wbg___wbindgen_jsval_eq_1068e624fa87f6ab:function(e,t){return e===t},__wbg___wbindgen_jsval_loose_eq_2c56564c75129511:function(e,t){return e==t},__wbg___wbindgen_number_get_9bb1761122181af2:function(e,t){const _=t,i=typeof _=="number"?_:void 0;b().setFloat64(e+8,g(i)?0:i,!0),b().setInt32(e+0,!g(i),!0)},__wbg___wbindgen_shr_b5893fce8492f5d9:function(e,t){return e>>t},__wbg___wbindgen_string_get_72bdf95d3ae505b1:function(e,t){const _=t,i=typeof _=="string"?_:void 0;var a=g(i)?0:l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),c=o;b().setInt32(e+4,c,!0),b().setInt32(e+0,a,!0)},__wbg___wbindgen_throw_1506f2235d1bdba0:function(e,t){throw new Error(s(e,t))},__wbg__wbg_cb_unref_61db23ac97f16c31:function(e){e._wbg_cb_unref()},__wbg_abort_2ec46222bf378517:function(e){e.abort()},__wbg_abort_b29d719932441c95:function(e,t){e.abort(t)},__wbg_activeconnectsession_new:function(e){return B.__wrap(e)},__wbg_append_e1746995edcb0170:function(){return f(function(e,t,_,i,a){e.append(s(t,_),s(i,a))},arguments)},__wbg_arrayBuffer_05927079aabe6d46:function(){return f(function(e){return e.arrayBuffer()},arguments)},__wbg_buffer_d370c8cae5692933:function(e){return e.buffer},__wbg_call_8a89609d89f6608a:function(){return f(function(e,t){return e.call(t)},arguments)},__wbg_call_9c758de292015997:function(){return f(function(e,t,_){return e.call(t,_)},arguments)},__wbg_clearTimeout_113b1cde814ec762:function(e){return clearTimeout(e)},__wbg_clearTimeout_4f7dad1647aa1690:function(e,t){e.clearTimeout(t)},__wbg_clearTimeout_6b8d9a38b9263d65:function(e){return clearTimeout(e)},__wbg_close_9acc00cbca310439:function(){return f(function(e){e.close()},arguments)},__wbg_connectsessionmessage_new:function(e){return T.__wrap(e)},__wbg_createObjectStore_b0026c277d41acee:function(){return f(function(e,t,_){return e.createObjectStore(s(t,_))},arguments)},__wbg_crypto_38df2bab126b63dc:function(e){return e.crypto},__wbg_cryptoresultofencrypt_new:function(e){return M.__wrap(e)},__wbg_cryptoresultofgenseedandkeys_new:function(e){return U.__wrap(e)},__wbg_cryptoresultofgetkeys_new:function(e){return I.__wrap(e)},__wbg_cryptoresultofsign_new:function(e){return C.__wrap(e)},__wbg_data_bd354b70c783c66e:function(e){return e.data},__wbg_debug_78b457f1effb3792:function(e){console.debug(e)},__wbg_deriveBits_d2a87495748c9c76:function(){return f(function(e,t,_,i){return e.deriveBits(t,_,i>>>0)},arguments)},__wbg_done_60cf307fcc680536:function(e){return e.done},__wbg_entries_04b37a02507f1713:function(e){return Object.entries(e)},__wbg_error_78ff5b3a29b770e0:function(e){console.error(e)},__wbg_error_a6fa202b58aa1cd3:function(e,t){let _,i;try{_=e,i=t,console.error(s(e,t))}finally{r.__wbindgen_free(_,i,1)}},__wbg_error_c6b70769322af78e:function(){return f(function(e){const t=e.error;return g(t)?0:j(t)},arguments)},__wbg_fetch_344c8d3849002659:function(e,t){return e.fetch(t)},__wbg_fetch_9dad4fe911207b37:function(e){return fetch(e)},__wbg_fetch_ce1af4d1b59a60be:function(e,t){return e.fetch(t)},__wbg_getRandomValues_3f44b700395062e5:function(){return f(function(e,t){globalThis.crypto.getRandomValues(ve(e,t))},arguments)},__wbg_getRandomValues_c44a50d8cfdaebeb:function(){return f(function(e,t){e.getRandomValues(t)},arguments)},__wbg_getTime_00b3f7db575e4ef5:function(e){return e.getTime()},__wbg_getTimezoneOffset_08e2892156231088:function(e){return e.getTimezoneOffset()},__wbg_get_1f8f054ddbaa7db2:function(){return f(function(e,t){return Reflect.get(e,t)},arguments)},__wbg_get_2b48c7d0d006a781:function(e,t){return e[t>>>0]},__wbg_get_da604e1ff21c0a31:function(){return f(function(e,t){return e.get(t)},arguments)},__wbg_get_de6a0f7d4d18a304:function(){return f(function(e,t){return Reflect.get(e,t)},arguments)},__wbg_get_unchecked_33f6e5c9e2f2d6b2:function(e,t){return e[t>>>0]},__wbg_get_with_ref_key_6412cf3094599694:function(e,t){return e[t]},__wbg_global_deb18d05f75c643d:function(e){return e.global},__wbg_graphqlblockdata_new:function(e){return W.__wrap(e)},__wbg_has_73740b27f436fed3:function(){return f(function(e,t){return Reflect.has(e,t)},arguments)},__wbg_headers_0feb63d2d374b44a:function(e){return e.headers},__wbg_headers_d94793faa2079ffa:function(e){return e.headers},__wbg_importKey_d441b46232f58a5d:function(){return f(function(e,t,_,i,a,c,d,u){return e.importKey(s(t,_),i,s(a,c),d!==0,u)},arguments)},__wbg_indexedDB_66709c81db8a4d72:function(){return f(function(e){const t=e.indexedDB;return g(t)?0:j(t)},arguments)},__wbg_indexedDB_de4665b213a42f5c:function(){return f(function(e){const t=e.indexedDB;return g(t)?0:j(t)},arguments)},__wbg_indexedDB_efc6b2d2da4c0a64:function(){return f(function(e){const t=e.indexedDB;return g(t)?0:j(t)},arguments)},__wbg_instanceof_ArrayBuffer_8f49811467741499:function(e){let t;try{t=e instanceof ArrayBuffer}catch{t=!1}return t},__wbg_instanceof_Error_94c8c9d9e410014a:function(e){let t;try{t=e instanceof Error}catch{t=!1}return t},__wbg_instanceof_Map_9fc06d9a951bcee6:function(e){let t;try{t=e instanceof Map}catch{t=!1}return t},__wbg_instanceof_Response_cb984bd66d7bd408:function(e){let t;try{t=e instanceof Response}catch{t=!1}return t},__wbg_instanceof_Uint8Array_86f30649f63ef9c2:function(e){let t;try{t=e instanceof Uint8Array}catch{t=!1}return t},__wbg_instanceof_Window_e093be59ee9a8e14:function(e){let t;try{t=e instanceof Window}catch{t=!1}return t},__wbg_isArray_67c2c9c4313f4448:function(e){return Array.isArray(e)},__wbg_isSafeInteger_66acec27e09e99a7:function(e){return Number.isSafeInteger(e)},__wbg_item_96a9ab2c4701a942:function(e,t,_){const i=t.item(_>>>0);var a=g(i)?0:l(i,r.__wbindgen_malloc,r.__wbindgen_realloc),c=o;b().setInt32(e+4,c,!0),b().setInt32(e+0,a,!0)},__wbg_iterator_8732428d309e270e:function(){return Symbol.iterator},__wbg_length_4a591ecaa01354d9:function(e){return e.length},__wbg_length_66f1a4b2e9026940:function(e){return e.length},__wbg_message_40300ed2d1f8bdc6:function(e){return e.message},__wbg_message_60b50f96f056eb26:function(e,t){const _=t.message,i=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),a=o;b().setInt32(e+4,a,!0),b().setInt32(e+0,i,!0)},__wbg_miner_new:function(e){return D.__wrap(e)},__wbg_mineraccountdata_new:function(e){return V.__wrap(e)},__wbg_msCrypto_bd5a034af96bcba6:function(e){return e.msCrypto},__wbg_new_0_445c13a750296eb6:function(){return new Date},__wbg_new_0d09705104e164af:function(){return f(function(){return new AbortController},arguments)},__wbg_new_227d7c05414eb861:function(){return new Error},__wbg_new_578aeef4b6b94378:function(e){return new Uint8Array(e)},__wbg_new_622fc80556be2e26:function(){return new Map},__wbg_new_6d75fd236f920a62:function(e){return new Date(e)},__wbg_new_ce1ab61c1c2b300d:function(){return new Object},__wbg_new_d7e476b433a26bea:function(){return f(function(e,t){return new WebSocket(s(e,t))},arguments)},__wbg_new_d90091b82fdf5b91:function(){return new Array},__wbg_new_e436d06bc8e77460:function(){return f(function(){return new Headers},arguments)},__wbg_new_from_slice_18fa1f71286d66b8:function(e,t){return new Uint8Array(ve(e,t))},__wbg_new_typed_bf31d18f92484486:function(e,t){try{var _={a:e,b:t},i=(c,d)=>{const u=_.a;_.a=0;try{return Mt(u,_.b,c,d)}finally{_.a=u}};return new Promise(i)}finally{_.a=0}},__wbg_new_with_length_36a4998e27b014c5:function(e){return new Uint8Array(e>>>0)},__wbg_new_with_str_008af93d6d4c05a6:function(){return f(function(e,t,_,i){return new WebSocket(s(e,t),s(_,i))},arguments)},__wbg_new_with_str_and_init_bcd02b79a793d27f:function(){return f(function(e,t,_){return new Request(s(e,t),_)},arguments)},__wbg_next_9e03acdf51c4960d:function(e){return e.next},__wbg_next_eb8ca7351fa27906:function(){return f(function(e){return e.next()},arguments)},__wbg_node_84ea875411254db1:function(e){return e.node},__wbg_now_190933fa139cc119:function(){return Date.now()},__wbg_objectStoreNames_8f29869b2382e5ba:function(e){return e.objectStoreNames},__wbg_objectStore_3543800bbd45bd10:function(){return f(function(e,t,_){return e.objectStore(s(t,_))},arguments)},__wbg_of_57145fdec12d159f:function(e){return Array.of(e)},__wbg_open_f25ef42e0095ae9d:function(){return f(function(e,t,_){return e.open(s(t,_))},arguments)},__wbg_prepareddeployparams_new:function(e){return L.__wrap(e)},__wbg_process_44c7a14e11e9f69e:function(e){return e.process},__wbg_prototypesetcall_3249fc62a0fafa30:function(e,t,_){Uint8Array.prototype.set.call(ve(e,t),_)},__wbg_push_a6822215aa43e71c:function(e,t){return e.push(t)},__wbg_put_7c62b73aaa690835:function(){return f(function(e,t,_){return e.put(t,_)},arguments)},__wbg_queueMicrotask_35c611f4a14830b2:function(e){queueMicrotask(e)},__wbg_queueMicrotask_404ed0a58e0b63cc:function(e){return e.queueMicrotask},__wbg_randomFillSync_6c25eac9869eb53c:function(){return f(function(e,t){e.randomFillSync(t)},arguments)},__wbg_random_33cfffca5c784d5e:function(){return Math.random()},__wbg_readyState_a5952975675bdce3:function(e){const t=e.readyState;return(Ut.indexOf(t)+1||3)-1},__wbg_require_b4edbdcf3e2a1ef0:function(){return f(function(){return module.require},arguments)},__wbg_resolve_25a7e548d5881dca:function(e){return Promise.resolve(e)},__wbg_result_ff12cdde488eeeb6:function(){return f(function(e){return e.result},arguments)},__wbg_resultofaddzkpfactor_new:function(e){return K.__wrap(e)},__wbg_resultofblockchainwrite_new:function(e){return $.__wrap(e)},__wbg_resultofchecknameavailability_new:function(e){return H.__wrap(e)},__wbg_resultofdeploymultifactor_new:function(e){return Q.__wrap(e)},__wbg_resultofdisconnectsession_new:function(e){return Y.__wrap(e)},__wbg_resultofgenminingkeys_new:function(e){return ee.__wrap(e)},__wbg_resultofgetepkexpireat_new:function(e){return te.__wrap(e)},__wbg_resultofgethistory_new:function(e){return _e.__wrap(e)},__wbg_resultofgetminerdetails_new:function(e){return re.__wrap(e)},__wbg_resultofgetmultifactordetails_new:function(e){return ne.__wrap(e)},__wbg_resultofgetmultifactorinfo_new:function(e){return se.__wrap(e)},__wbg_resultofgetmvmultifactoraddress_new:function(e){return ie.__wrap(e)},__wbg_resultofgetnativebalances_new:function(e){return oe.__wrap(e)},__wbg_resultofgettokensbalances_new:function(e){return ae.__wrap(e)},__wbg_resultofqueryactivesessionsbymultifactor_new:function(e){return ce.__wrap(e)},__wbg_resultofquerysessionmessages_new:function(e){return le.__wrap(e)},__wbg_resultofrequestsetminingkeys_new:function(e){return ge.__wrap(e)},__wbg_resultofrequestsignchallenge_new:function(e){return de.__wrap(e)},__wbg_resultofsendmessage_new:function(e){return fe.__wrap(e)},__wbg_resultofwaitchallengeresponse_new:function(e){return be.__wrap(e)},__wbg_resultofwaitsetminingkeysrequest_new:function(e){return we.__wrap(e)},__wbg_resultofwaitwallethello_new:function(e){return pe.__wrap(e)},__wbg_send_35647f35f8bdac5d:function(){return f(function(e,t,_){e.send(s(t,_))},arguments)},__wbg_setTimeout_b5f25e402b6e8ff9:function(){return f(function(e,t,_){return e.setTimeout(t,_)},arguments)},__wbg_setTimeout_ef24d2fc3ad97385:function(){return f(function(e,t){return setTimeout(e,t)},arguments)},__wbg_setTimeout_f757f00851f76c42:function(e,t){return setTimeout(e,t)},__wbg_set_25ef40a9aeff260d:function(){return f(function(e,t,_,i,a){e.set(s(t,_),s(i,a))},arguments)},__wbg_set_52b1e1eb5bed906a:function(e,t,_){return e.set(t,_)},__wbg_set_6be42768c690e380:function(e,t,_){e[t]=_},__wbg_set_6e30c9374c26414c:function(){return f(function(e,t,_){return Reflect.set(e,t,_)},arguments)},__wbg_set_body_36614c7e61546809:function(e,t){e.body=t},__wbg_set_cache_488ea16c11cbf20d:function(e,t){e.cache=Wt[t]},__wbg_set_credentials_fa9c491a27c4bdf0:function(e,t){e.credentials=Gt[t]},__wbg_set_dca99999bba88a9a:function(e,t,_){e[t>>>0]=_},__wbg_set_headers_7c1e39ece7826bec:function(e,t){e.headers=t},__wbg_set_method_7a6811dec7a4feff:function(e,t,_){e.method=s(t,_)},__wbg_set_mode_c90e3667002857d4:function(e,t){e.mode=Dt[t]},__wbg_set_onabort_3bfc2eace4993a6e:function(e,t){e.onabort=t},__wbg_set_onblocked_7848f43742ba38d0:function(e,t){e.onblocked=t},__wbg_set_oncomplete_a28cb2a97304f6ba:function(e,t){e.oncomplete=t},__wbg_set_onerror_0fb7d5efdde2428a:function(e,t){e.onerror=t},__wbg_set_onerror_5a45265839edf1b1:function(e,t){e.onerror=t},__wbg_set_onerror_9780b297cb208011:function(e,t){e.onerror=t},__wbg_set_onmessage_9c6b4cb14e244b7f:function(e,t){e.onmessage=t},__wbg_set_onopen_db452f4233e99d7d:function(e,t){e.onopen=t},__wbg_set_onsuccess_5c1cbca6937b8511:function(e,t){e.onsuccess=t},__wbg_set_onupgradeneeded_32b6863375e792da:function(e,t){e.onupgradeneeded=t},__wbg_set_onversionchange_9a11eff94cf391b8:function(e,t){e.onversionchange=t},__wbg_set_signal_d9da62b3f215c821:function(e,t){e.signal=t},__wbg_signal_e03304a84df9ed09:function(e){return e.signal},__wbg_stack_3b0d974bbf31e44f:function(e,t){const _=t.stack,i=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),a=o;b().setInt32(e+4,a,!0),b().setInt32(e+0,i,!0)},__wbg_static_accessor_GLOBAL_9d53f2689e622ca1:function(){const e=typeof global>"u"?null:global;return g(e)?0:j(e)},__wbg_static_accessor_GLOBAL_THIS_a1a35cec07001a8a:function(){const e=typeof globalThis>"u"?null:globalThis;return g(e)?0:j(e)},__wbg_static_accessor_SELF_4c59f6c7ea29a144:function(){const e=typeof self>"u"?null:self;return g(e)?0:j(e)},__wbg_static_accessor_WINDOW_e70ae9f2eb052253:function(){const e=typeof window>"u"?null:window;return g(e)?0:j(e)},__wbg_status_00549d55b78d949e:function(e){return e.status},__wbg_stringify_8286df6dcc591521:function(){return f(function(e){return JSON.stringify(e)},arguments)},__wbg_subarray_4aa221f6a4f5ab22:function(e,t,_){return e.subarray(t>>>0,_>>>0)},__wbg_subtle_99cc9e2c28f0a5f8:function(e){return e.subtle},__wbg_target_baf3e983dceee053:function(e){const t=e.target;return g(t)?0:j(t)},__wbg_text_a17febec76d36501:function(){return f(function(e){return e.text()},arguments)},__wbg_then_18f476d590e58992:function(e,t,_){return e.then(t,_)},__wbg_then_ac7b025999b52837:function(e,t){return e.then(t)},__wbg_transaction_125ff13a29042dba:function(){return f(function(e,t,_,i){return e.transaction(s(t,_),Ct[i])},arguments)},__wbg_txdata_new:function(e){return ye.__wrap(e)},__wbg_url_6808f1c468f2d0cd:function(e,t){const _=t.url,i=l(_,r.__wbindgen_malloc,r.__wbindgen_realloc),a=o;b().setInt32(e+4,a,!0),b().setInt32(e+0,i,!0)},__wbg_value_f3625092ee4b37f4:function(e){return e.value},__wbg_versions_276b2795b1c6a219:function(e){return e.versions},__wbg_zklogincompletewithproverresult_new:function(e){return he.__wrap(e)},__wbindgen_cast_0000000000000001:function(e,t){return x(e,t,Bt)},__wbindgen_cast_0000000000000002:function(e,t){return x(e,t,Et)},__wbindgen_cast_0000000000000003:function(e,t){return x(e,t,qt)},__wbindgen_cast_0000000000000004:function(e,t){return vt(e,t,At)},__wbindgen_cast_0000000000000005:function(e,t){return x(e,t,Tt)},__wbindgen_cast_0000000000000006:function(e,t){return x(e,t,Nt)},__wbindgen_cast_0000000000000007:function(e,t){return x(e,t,St)},__wbindgen_cast_0000000000000008:function(e,t){return vt(e,t,xt)},__wbindgen_cast_0000000000000009:function(e,t){return x(e,t,Ot)},__wbindgen_cast_000000000000000a:function(e,t){return x(e,t,It)},__wbindgen_cast_000000000000000b:function(e){return e},__wbindgen_cast_000000000000000c:function(e){return e},__wbindgen_cast_000000000000000d:function(e,t){return ve(e,t)},__wbindgen_cast_000000000000000e:function(e,t){return s(e,t)},__wbindgen_cast_000000000000000f:function(e,t){return BigInt.asUintN(64,e)|BigInt.asUintN(64,t)<<BigInt(64)},__wbindgen_cast_0000000000000010:function(e){return BigInt.asUintN(64,e)},__wbindgen_init_externref_table:function(){const e=r.__wbindgen_externrefs,t=e.grow(4);e.set(0,void 0),e.set(t+0,void 0),e.set(t+1,null),e.set(t+2,!0),e.set(t+3,!1)}}}}function St(n,e){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke_______true__1_(n,e)}function xt(n,e){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke_______true_(n,e)}function Ot(n,e){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke_______true__2_(n,e)}function It(n,e){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke_______true__3_(n,e)}function Et(n,e,t){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke___wasm_bindgen_8a83763e64b8cc8f___JsValue______true_(n,e,t)}function qt(n,e,t){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke___wasm_bindgen_8a83763e64b8cc8f___JsValue______true__2(n,e,t)}function At(n,e,t){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke___web_sys_5002b10d94061ab4___features__gen_Event__Event______true_(n,e,t)}function Nt(n,e,t){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke___wasm_bindgen_8a83763e64b8cc8f___JsValue______true__5(n,e,t)}function Bt(n,e,t){const _=r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke___wasm_bindgen_8a83763e64b8cc8f___JsValue__core_936d0f95abf73897___result__Result_____wasm_bindgen_8a83763e64b8cc8f___JsError___true_(n,e,t);if(_[1])throw F(_[0])}function Tt(n,e,t){const _=r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke___web_sys_5002b10d94061ab4___features__gen_IdbVersionChangeEvent__IdbVersionChangeEvent__core_936d0f95abf73897___result__Result_____wasm_bindgen_8a83763e64b8cc8f___JsValue___true_(n,e,t);if(_[1])throw F(_[0])}function Mt(n,e,t,_){r.wasm_bindgen_8a83763e64b8cc8f___convert__closures_____invoke___js_sys_922833f196024a86___Function_fn_wasm_bindgen_8a83763e64b8cc8f___JsValue_____wasm_bindgen_8a83763e64b8cc8f___sys__Undefined___js_sys_922833f196024a86___Function_fn_wasm_bindgen_8a83763e64b8cc8f___JsValue_____wasm_bindgen_8a83763e64b8cc8f___sys__Undefined_______true_(n,e,t,_)}const Ut=["pending","done"],Ct=["readonly","readwrite","versionchange","readwriteflush","cleanup"],Wt=["default","no-store","reload","no-cache","force-cache","only-if-cached"],Gt=["omit","same-origin","include"],Dt=["same-origin","no-cors","cors","navigate"],Ee=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_activeconnectsession_free(n,1)),qe=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_beeconnect_free(n,1)),Ae=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_connectsessionmessage_free(n,1)),Ne=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_crypto_free(n,1)),Be=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_cryptoresultofencrypt_free(n,1)),Te=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_cryptoresultofgenseedandkeys_free(n,1)),Me=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_cryptoresultofgetkeys_free(n,1)),Ue=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_cryptoresultofsign_free(n,1)),Ce=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_graphqlblockdata_free(n,1)),We=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_issbase64details_free(n,1)),Ge=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_miner_free(n,1)),De=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_mineraccountdata_free(n,1)),Ve=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_multifactoraccountdata_free(n,1)),Je=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_parsedconnectpayload_free(n,1)),Xe=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_prepareddeployparams_free(n,1)),Le=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultgetmirroraddress_free(n,1)),Pe=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofaddzkpfactor_free(n,1)),Ke=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofblockchainwrite_free(n,1)),$e=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofchecknameavailability_free(n,1)),He=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofcreatesharedkeysession_free(n,1)),Ze=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofdeploymultifactor_free(n,1)),Qe=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofdisconnectsession_free(n,1)),Ye=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgenminingkeys_free(n,1)),et=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgetepkexpireat_free(n,1)),tt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgethistory_free(n,1)),_t=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgetkeys_free(n,1)),rt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgetminerdetails_free(n,1)),nt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgetmultifactordetails_free(n,1)),st=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgetmultifactorinfo_free(n,1)),it=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgetmvmultifactoraddress_free(n,1)),ot=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgetnativebalances_free(n,1)),at=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofgettokensbalances_free(n,1)),ct=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofqueryactivesessionsbymultifactor_free(n,1)),lt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofquerysessionmessages_free(n,1)),gt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofrequestsetminingkeys_free(n,1)),dt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofrequestsignchallenge_free(n,1)),ft=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofsendmessage_free(n,1)),ut=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofvalidatewalletname_free(n,1)),bt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofwaitchallengeresponse_free(n,1)),wt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofwaitsetminingkeysrequest_free(n,1)),pt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_resultofwaitwallethello_free(n,1)),yt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_txdata_free(n,1)),ht=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_wallet_free(n,1)),mt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_zklogincompletewithproverresult_free(n,1)),kt=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbg_zkloginprepareresult_free(n,1));function j(n){const e=r.__externref_table_alloc();return r.__wbindgen_externrefs.set(e,n),e}const Fe=typeof FinalizationRegistry>"u"?{register:()=>{},unregister:()=>{}}:new FinalizationRegistry(n=>r.__wbindgen_destroy_closure(n.a,n.b));function Se(n){const e=typeof n;if(e=="number"||e=="boolean"||n==null)return`${n}`;if(e=="string")return`"${n}"`;if(e=="symbol"){const i=n.description;return i==null?"Symbol":`Symbol(${i})`}if(e=="function"){const i=n.name;return typeof i=="string"&&i.length>0?`Function(${i})`:"Function"}if(Array.isArray(n)){const i=n.length;let a="[";i>0&&(a+=Se(n[0]));for(let c=1;c<i;c++)a+=", "+Se(n[c]);return a+="]",a}const t=/\[object ([^\]]+)\]/.exec(toString.call(n));let _;if(t&&t.length>1)_=t[1];else return toString.call(n);if(_=="Object")try{return"Object("+JSON.stringify(n)+")"}catch{return"Object"}return n instanceof Error?`${n.name}: ${n.message}
-${n.stack}`:_}function ke(n,e){n=n>>>0;const t=b(),_=[];for(let i=n;i<n+4*e;i+=4)_.push(r.__wbindgen_externrefs.get(t.getUint32(i,!0)));return r.__externref_drop_slice(n,e),_}function ve(n,e){return n=n>>>0,A().subarray(n/1,n/1+e)}let O=null;function b(){return(O===null||O.buffer.detached===!0||O.buffer.detached===void 0&&O.buffer!==r.memory.buffer)&&(O=new DataView(r.memory.buffer)),O}function s(n,e){return Jt(n>>>0,e)}let q=null;function A(){return(q===null||q.byteLength===0)&&(q=new Uint8Array(r.memory.buffer)),q}function f(n,e){try{return n.apply(this,e)}catch(t){const _=j(t);r.__wbindgen_exn_store(_)}}function g(n){return n==null}function vt(n,e,t){const _={a:n,b:e,cnt:1},i=(...a)=>{_.cnt++;try{return t(_.a,_.b,...a)}finally{i._wbg_cb_unref()}};return i._wbg_cb_unref=()=>{--_.cnt===0&&(r.__wbindgen_destroy_closure(_.a,_.b),_.a=0,Fe.unregister(_))},Fe.register(i,_,_),i}function x(n,e,t){const _={a:n,b:e,cnt:1},i=(...a)=>{_.cnt++;const c=_.a;_.a=0;try{return t(c,_.b,...a)}finally{_.a=c,i._wbg_cb_unref()}};return i._wbg_cb_unref=()=>{--_.cnt===0&&(r.__wbindgen_destroy_closure(_.a,_.b),_.a=0,Fe.unregister(_))},Fe.register(i,_,_),i}function z(n,e){const t=e(n.length*4,4)>>>0;for(let _=0;_<n.length;_++){const i=j(n[_]);b().setUint32(t+4*_,i,!0)}return o=n.length,t}function l(n,e,t){if(t===void 0){const d=N.encode(n),u=e(d.length,1)>>>0;return A().subarray(u,u+d.length).set(d),o=d.length,u}let _=n.length,i=e(_,1)>>>0;const a=A();let c=0;for(;c<_;c++){const d=n.charCodeAt(c);if(d>127)break;a[i+c]=d}if(c!==_){c!==0&&(n=n.slice(c)),i=t(i,_,_=c+n.length*3,1)>>>0;const d=A().subarray(i+c,i+_),u=N.encodeInto(n,d);c+=u.written,i=t(i,_,c,1)>>>0}return o=c,i}function F(n){const e=r.__wbindgen_externrefs.get(n);return r.__externref_table_dealloc(n),e}let ze=new TextDecoder("utf-8",{ignoreBOM:!0,fatal:!0});ze.decode();const Vt=2146435072;let je=0;function Jt(n,e){return je+=e,je>=Vt&&(ze=new TextDecoder("utf-8",{ignoreBOM:!0,fatal:!0}),ze.decode(),je=e),ze.decode(A().subarray(n,n+e))}const N=new TextEncoder;"encodeInto"in N||(N.encodeInto=function(n,e){const t=N.encode(n);return e.set(t),{read:n.length,written:t.length}});let o=0,r;function Ft(n,e){return r=n.exports,O=null,q=null,r.__wbindgen_start(),r}async function Xt(n,e){if(typeof Response=="function"&&n instanceof Response){if(typeof WebAssembly.instantiateStreaming=="function")try{return await WebAssembly.instantiateStreaming(n,e)}catch(i){if(n.ok&&t(n.type)&&n.headers.get("Content-Type")!=="application/wasm")console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve Wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n",i);else throw i}const _=await n.arrayBuffer();return await WebAssembly.instantiate(_,e)}else{const _=await WebAssembly.instantiate(n,e);return _ instanceof WebAssembly.Instance?{instance:_,module:n}:_}function t(_){switch(_){case"basic":case"cors":case"default":return!0}return!1}}function Zt(n){if(r!==void 0)return r;n!==void 0&&(Object.getPrototypeOf(n)===Object.prototype?{module:n}=n:console.warn("using deprecated parameters for `initSync()`; pass a single object instead"));const e=zt();n instanceof WebAssembly.Module||(n=new WebAssembly.Module(n));const t=new WebAssembly.Instance(n,e);return Ft(t)}async function Qt(n){if(r!==void 0)return r;n!==void 0&&(Object.getPrototypeOf(n)===Object.prototype?{module_or_path:n}=n:console.warn("using deprecated parameters for the initialization function; pass a single object instead")),n===void 0&&(n=new URL("/assets/bee_sdk_bg-Cg5PEMhr.wasm",import.meta.url));const e=zt();(typeof n=="string"||typeof Request=="function"&&n instanceof Request||typeof URL=="function"&&n instanceof URL)&&(n=fetch(n));const{instance:t,module:_}=await Xt(await n,e);return Ft(t)}export{B as ActiveConnectSession,xe as BeeConnect,T as ConnectSessionMessage,Oe as Crypto,M as CryptoResultOfEncrypt,U as CryptoResultOfGenSeedAndKeys,I as CryptoResultOfGetKeys,C as CryptoResultOfSign,W as GraphqlBlockData,G as IssBase64Details,D as Miner,V as MinerAccountData,J as MultifactorAccountData,X as ParsedConnectPayload,L as PreparedDeployParams,P as ResultGetMirrorAddress,K as ResultOfAddZKPFactor,$ as ResultOfBlockchainWrite,H as ResultOfCheckNameAvailability,Z as ResultOfCreateSharedKeySession,Q as ResultOfDeployMultifactor,Y as ResultOfDisconnectSession,ee as ResultOfGenMiningKeys,te as ResultOfGetEPKExpireAt,_e as ResultOfGetHistory,E as ResultOfGetKeys,re as ResultOfGetMinerDetails,ne as ResultOfGetMultifactorDetails,se as ResultOfGetMultifactorInfo,ie as ResultOfGetMvMultifactorAddress,oe as ResultOfGetNativeBalances,ae as ResultOfGetTokensBalances,ce as ResultOfQueryActiveSessionsByMultifactor,le as ResultOfQuerySessionMessages,ge as ResultOfRequestSetMiningKeys,de as ResultOfRequestSignChallenge,fe as ResultOfSendMessage,ue as ResultOfValidateWalletName,be as ResultOfWaitChallengeResponse,we as ResultOfWaitSetMiningKeysRequest,pe as ResultOfWaitWalletHello,ye as TxData,Ie as Wallet,Pt as WalletNameErrorCode,he as ZkLoginCompleteWithProverResult,me as ZkLoginPrepareResult,Qt as default,Kt as ensure_mining_keys_propagated,$t as gen_mining_keys,Ht as get_miner_address_by_wallet_name,Zt as initSync};
+/* @ts-self-types="./bee_sdk.d.ts" */
+
+export class ActiveConnectSession {
+    static __wrap(ptr) {
+        const obj = Object.create(ActiveConnectSession.prototype);
+        obj.__wbg_ptr = ptr;
+        ActiveConnectSessionFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ActiveConnectSessionFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_activeconnectsession_free(ptr, 0);
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get app_id() {
+        const ret = wasm.activeconnectsession_app_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {bigint}
+     */
+    get deployed_at() {
+        const ret = wasm.activeconnectsession_deployed_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get deployed_event_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.activeconnectsession_deployed_event_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get description() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.activeconnectsession_description(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get profile_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.activeconnectsession_profile_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get session_id() {
+        const ret = wasm.activeconnectsession_session_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+}
+if (Symbol.dispose) ActiveConnectSession.prototype[Symbol.dispose] = ActiveConnectSession.prototype.free;
+
+export class BeeConnect {
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        BeeConnectFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_beeconnect_free(ptr, 0);
+    }
+    /**
+     * Creates a `shared_key` session and returns payload + temporary owner
+     * keys.
+     * @param {string} app_id
+     * @param {number | null} [ttl_secs]
+     * @param {string | null} [nonce]
+     * @returns {ResultOfCreateSharedKeySession}
+     */
+    create_shared_key_session(app_id, ttl_secs, nonce) {
+        const ptr0 = passStringToWasm0(app_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        var ptr1 = isLikeNone(nonce) ? 0 : passStringToWasm0(nonce, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len1 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_create_shared_key_session(this.__wbg_ptr, ptr0, len0, isLikeNone(ttl_secs) ? Number.MAX_SAFE_INTEGER : (ttl_secs) >>> 0, ptr1, len1);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        return ResultOfCreateSharedKeySession.__wrap(ret[0]);
+    }
+    /**
+     * Decodes and validates base64url connect payload (`payload` query
+     * value).
+     * @param {string} payload_b64url
+     * @returns {ParsedConnectPayload}
+     */
+    decode_connect_payload_b64url(payload_b64url) {
+        const ptr0 = passStringToWasm0(payload_b64url, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_decode_connect_payload_b64url(this.__wbg_ptr, ptr0, len0);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        return ParsedConnectPayload.__wrap(ret[0]);
+    }
+    /**
+     * Sends a `client_disconnect` message (`dir = c2w`) to the connected
+     * profile. Performs DH re-key for forward secrecy.
+     * @param {string[]} endpoints
+     * @param {string} session_id
+     * @param {string} description
+     * @param {string} session_state_json
+     * @param {string | null} [reason]
+     * @param {number | null} [max_attempts]
+     * @param {number | null} [interval_ms]
+     * @returns {Promise<ResultOfDisconnectSession>}
+     */
+    disconnect_session(endpoints, session_id, description, session_state_json, reason, max_attempts, interval_ms) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(session_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(description, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len2 = WASM_VECTOR_LEN;
+        const ptr3 = passStringToWasm0(session_state_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len3 = WASM_VECTOR_LEN;
+        var ptr4 = isLikeNone(reason) ? 0 : passStringToWasm0(reason, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len4 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_disconnect_session(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, ptr4, len4, isLikeNone(max_attempts) ? Number.MAX_SAFE_INTEGER : (max_attempts) >>> 0, isLikeNone(interval_ms) ? Number.MAX_SAFE_INTEGER : (interval_ms) >>> 0);
+        return ret;
+    }
+    /**
+     * Returns `true` if session profile is currently deployed.
+     * @param {string[]} endpoints
+     * @param {string} description
+     * @returns {Promise<boolean>}
+     */
+    is_session_profile_deployed(endpoints, description) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(description, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_is_session_profile_deployed(this.__wbg_ptr, ptr0, len0, ptr1, len1);
+        return ret;
+    }
+    /**
+     * Creates a new wasm-facing `bee_connect` client wrapper.
+     * @param {number | null} [max_rps]
+     */
+    constructor(max_rps) {
+        const ret = wasm.beeconnect_new(isLikeNone(max_rps) ? Number.MAX_SAFE_INTEGER : (max_rps) >>> 0);
+        this.__wbg_ptr = ret;
+        BeeConnectFinalization.register(this, this.__wbg_ptr, this);
+        return this;
+    }
+    /**
+     * Small health-check helper for smoke tests.
+     * @returns {string}
+     */
+    ping() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.beeconnect_ping(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * Queries one chunk of active connect sessions by multifactor.
+     *
+     * Returns at most 10 deployed `bee_connect` sessions and a cursor for the
+     * next chunk. Optional `app_id` filters to one application.
+     * @param {string[]} endpoints
+     * @param {string} multifactor_address
+     * @param {string | null} [app_id]
+     * @param {bigint | null} [created_at_from]
+     * @param {string | null} [before]
+     * @returns {Promise<ResultOfQueryActiveSessionsByMultifactor>}
+     */
+    query_active_sessions_by_multifactor(endpoints, multifactor_address, app_id, created_at_from, before) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(multifactor_address, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        var ptr2 = isLikeNone(app_id) ? 0 : passStringToWasm0(app_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len2 = WASM_VECTOR_LEN;
+        var ptr3 = isLikeNone(before) ? 0 : passStringToWasm0(before, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len3 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_query_active_sessions_by_multifactor(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, !isLikeNone(created_at_from), isLikeNone(created_at_from) ? BigInt(0) : created_at_from, ptr3, len3);
+        return ret;
+    }
+    /**
+     * Sends `set_mining_keys` request (`dir = c2w`) to wallet over connect
+     * profile. Performs DH re-key for forward secrecy.
+     * @param {string[]} endpoints
+     * @param {string} session_id
+     * @param {string} description
+     * @param {string} session_state_json
+     * @param {string} app_id
+     * @param {string} owner_public
+     * @param {number | null} [max_attempts]
+     * @param {number | null} [interval_ms]
+     * @returns {Promise<ResultOfRequestSetMiningKeys>}
+     */
+    request_set_mining_keys(endpoints, session_id, description, session_state_json, app_id, owner_public, max_attempts, interval_ms) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(session_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(description, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len2 = WASM_VECTOR_LEN;
+        const ptr3 = passStringToWasm0(session_state_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len3 = WASM_VECTOR_LEN;
+        const ptr4 = passStringToWasm0(app_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len4 = WASM_VECTOR_LEN;
+        const ptr5 = passStringToWasm0(owner_public, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len5 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_request_set_mining_keys(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, ptr4, len4, ptr5, len5, isLikeNone(max_attempts) ? Number.MAX_SAFE_INTEGER : (max_attempts) >>> 0, isLikeNone(interval_ms) ? Number.MAX_SAFE_INTEGER : (interval_ms) >>> 0);
+        return ret;
+    }
+    /**
+     * Sends `sign_challenge` (`dir = c2w`) to the wallet. The wallet should
+     * sign the nonce and respond with `challenge_response`.
+     * @param {string[]} endpoints
+     * @param {string} session_id
+     * @param {string} description
+     * @param {string} session_state_json
+     * @param {string} nonce
+     * @param {number | null} [max_attempts]
+     * @param {number | null} [interval_ms]
+     * @returns {Promise<ResultOfRequestSignChallenge>}
+     */
+    request_sign_challenge(endpoints, session_id, description, session_state_json, nonce, max_attempts, interval_ms) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(session_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(description, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len2 = WASM_VECTOR_LEN;
+        const ptr3 = passStringToWasm0(session_state_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len3 = WASM_VECTOR_LEN;
+        const ptr4 = passStringToWasm0(nonce, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len4 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_request_sign_challenge(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, ptr4, len4, isLikeNone(max_attempts) ? Number.MAX_SAFE_INTEGER : (max_attempts) >>> 0, isLikeNone(interval_ms) ? Number.MAX_SAFE_INTEGER : (interval_ms) >>> 0);
+        return ret;
+    }
+    /**
+     * Resolves deterministic `AuthProfile` address by `description`.
+     * @param {string[]} endpoints
+     * @param {string} description
+     * @returns {Promise<string>}
+     */
+    resolve_profile_address(endpoints, description) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(description, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_resolve_profile_address(this.__wbg_ptr, ptr0, len0, ptr1, len1);
+        return ret;
+    }
+    /**
+     * Waits for `challenge_response` (`dir = w2c`) from the wallet.
+     * @param {string[]} endpoints
+     * @param {string} session_id
+     * @param {string} description
+     * @param {string | null} [session_state_json]
+     * @param {bigint | null} [created_at_from]
+     * @param {number | null} [max_attempts]
+     * @param {number | null} [interval_ms]
+     * @returns {Promise<ResultOfWaitChallengeResponse>}
+     */
+    wait_challenge_response(endpoints, session_id, description, session_state_json, created_at_from, max_attempts, interval_ms) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(session_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(description, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len2 = WASM_VECTOR_LEN;
+        var ptr3 = isLikeNone(session_state_json) ? 0 : passStringToWasm0(session_state_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len3 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_wait_challenge_response(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, !isLikeNone(created_at_from), isLikeNone(created_at_from) ? BigInt(0) : created_at_from, isLikeNone(max_attempts) ? Number.MAX_SAFE_INTEGER : (max_attempts) >>> 0, isLikeNone(interval_ms) ? Number.MAX_SAFE_INTEGER : (interval_ms) >>> 0);
+        return ret;
+    }
+    /**
+     * Waits for `set_mining_keys` request (`dir = c2w`) in session profile.
+     * @param {string[]} endpoints
+     * @param {string} session_id
+     * @param {string} description
+     * @param {bigint | null} [created_at_from]
+     * @param {number | null} [max_attempts]
+     * @param {number | null} [interval_ms]
+     * @param {string | null} [session_state_json]
+     * @returns {Promise<ResultOfWaitSetMiningKeysRequest>}
+     */
+    wait_set_mining_keys_request(endpoints, session_id, description, created_at_from, max_attempts, interval_ms, session_state_json) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(session_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(description, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len2 = WASM_VECTOR_LEN;
+        var ptr3 = isLikeNone(session_state_json) ? 0 : passStringToWasm0(session_state_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len3 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_wait_set_mining_keys_request(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, !isLikeNone(created_at_from), isLikeNone(created_at_from) ? BigInt(0) : created_at_from, isLikeNone(max_attempts) ? Number.MAX_SAFE_INTEGER : (max_attempts) >>> 0, isLikeNone(interval_ms) ? Number.MAX_SAFE_INTEGER : (interval_ms) >>> 0, ptr3, len3);
+        return ret;
+    }
+    /**
+     * Waits for the wallet's first `wallet_hello` message on the profile.
+     * @param {string[]} endpoints
+     * @param {string} session_id
+     * @param {string} description
+     * @param {string} client_dh_secret
+     * @param {bigint | null} [created_at_from]
+     * @param {number | null} [max_attempts]
+     * @param {number | null} [interval_ms]
+     * @returns {Promise<ResultOfWaitWalletHello>}
+     */
+    wait_wallet_hello(endpoints, session_id, description, client_dh_secret, created_at_from, max_attempts, interval_ms) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(session_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(description, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len2 = WASM_VECTOR_LEN;
+        const ptr3 = passStringToWasm0(client_dh_secret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len3 = WASM_VECTOR_LEN;
+        const ret = wasm.beeconnect_wait_wallet_hello(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, !isLikeNone(created_at_from), isLikeNone(created_at_from) ? BigInt(0) : created_at_from, isLikeNone(max_attempts) ? Number.MAX_SAFE_INTEGER : (max_attempts) >>> 0, isLikeNone(interval_ms) ? Number.MAX_SAFE_INTEGER : (interval_ms) >>> 0);
+        return ret;
+    }
+}
+if (Symbol.dispose) BeeConnect.prototype[Symbol.dispose] = BeeConnect.prototype.free;
+
+export class ConnectSessionMessage {
+    static __wrap(ptr) {
+        const obj = Object.create(ConnectSessionMessage.prototype);
+        obj.__wbg_ptr = ptr;
+        ConnectSessionMessageFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ConnectSessionMessageFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_connectsessionmessage_free(ptr, 0);
+    }
+    /**
+     * `true` when the encrypted body was actually decrypted for this message.
+     * `body_json` is not a substitute: it falls back to the raw envelope body
+     * when decryption fails, so it is always non-empty.
+     * @returns {boolean}
+     */
+    get body_decrypted() {
+        const ret = wasm.connectsessionmessage_body_decrypted(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {string}
+     */
+    get body_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.connectsessionmessage_body_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get challenge_epk_public() {
+        const ret = wasm.connectsessionmessage_challenge_epk_public(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get challenge_nonce() {
+        const ret = wasm.connectsessionmessage_challenge_nonce(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get challenge_signature() {
+        const ret = wasm.connectsessionmessage_challenge_signature(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get dir() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.connectsessionmessage_dir(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get disconnect_reason() {
+        const ret = wasm.connectsessionmessage_disconnect_reason(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {bigint}
+     */
+    get event_created_at() {
+        const ret = wasm.connectsessionmessage_event_created_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get event_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.connectsessionmessage_event_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get mining_app_id() {
+        const ret = wasm.connectsessionmessage_mining_app_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get mining_owner_public() {
+        const ret = wasm.connectsessionmessage_mining_owner_public(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get msg_type() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.connectsessionmessage_msg_type(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get raw_message_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.connectsessionmessage_raw_message_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get seq() {
+        const ret = wasm.connectsessionmessage_seq(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * Session state snapshot taken immediately after `rekey_inbound` for this
+     * message. Present only for c2w messages that triggered a successful DH
+     * re-key. Use this when responding to the message (e.g. sending
+     * `challenge_response` after receiving `sign_challenge`).
+     * @returns {string | undefined}
+     */
+    get session_state_after_json() {
+        const ret = wasm.connectsessionmessage_session_state_after_json(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {bigint | undefined}
+     */
+    get ts() {
+        const ret = wasm.connectsessionmessage_ts(this.__wbg_ptr);
+        return ret[0] === 0 ? undefined : BigInt.asUintN(64, ret[1]);
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get wallet_address() {
+        const ret = wasm.connectsessionmessage_wallet_address(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get wallet_name() {
+        const ret = wasm.connectsessionmessage_wallet_name(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+}
+if (Symbol.dispose) ConnectSessionMessage.prototype[Symbol.dispose] = ConnectSessionMessage.prototype.free;
+
+/**
+ * High-level wasm API for crypto operations.
+ */
+export class Crypto {
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        CryptoFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_crypto_free(ptr, 0);
+    }
+    /**
+     * Decrypts data previously encrypted with `encrypt`.
+     * @param {string} encrypted
+     * @param {string} password
+     * @returns {Promise<string>}
+     */
+    decrypt(encrypted, password) {
+        const ptr0 = passStringToWasm0(encrypted, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(password, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.crypto_decrypt(this.__wbg_ptr, ptr0, len0, ptr1, len1);
+        return ret;
+    }
+    /**
+     * Encrypts plaintext with a password.
+     * @param {string} plaintext
+     * @param {string} password
+     * @returns {Promise<CryptoResultOfEncrypt>}
+     */
+    encrypt(plaintext, password) {
+        const ptr0 = passStringToWasm0(plaintext, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(password, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.crypto_encrypt(this.__wbg_ptr, ptr0, len0, ptr1, len1);
+        return ret;
+    }
+    /**
+     * Generates a short-lived mining keypair.
+     * @returns {Promise<CryptoResultOfGetKeys>}
+     */
+    gen_mining_keys() {
+        const ret = wasm.crypto_gen_mining_keys(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * Generates 24-word mnemonic and derives keys from it.
+     * @returns {Promise<CryptoResultOfGenSeedAndKeys>}
+     */
+    gen_mnemonic_and_derive_keys() {
+        const ret = wasm.crypto_gen_mnemonic_and_derive_keys(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * Derives keys from a mnemonic phrase.
+     * @param {string} phrase
+     * @returns {Promise<CryptoResultOfGetKeys>}
+     */
+    get_keys_from_mnemonic(phrase) {
+        const ptr0 = passStringToWasm0(phrase, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.crypto_get_keys_from_mnemonic(this.__wbg_ptr, ptr0, len0);
+        return ret;
+    }
+    /**
+     * Derives keys from a mnemonic phrase using a specific HD derivation path.
+     * @param {string} phrase
+     * @param {string} path
+     * @returns {Promise<CryptoResultOfGetKeys>}
+     */
+    get_keys_from_mnemonic_with_path(phrase, path) {
+        const ptr0 = passStringToWasm0(phrase, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(path, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.crypto_get_keys_from_mnemonic_with_path(this.__wbg_ptr, ptr0, len0, ptr1, len1);
+        return ret;
+    }
+    /**
+     * Computes a salted password hash in `v3:<salt_hex>:<dk_hex>` format.
+     * @param {string} data
+     * @returns {Promise<string>}
+     */
+    hash_password(data) {
+        const ptr0 = passStringToWasm0(data, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.crypto_hash_password(this.__wbg_ptr, ptr0, len0);
+        return ret;
+    }
+    /**
+     * Creates a crypto client bound to network endpoints.
+     * @param {string[]} endpoints
+     */
+    constructor(endpoints) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.crypto_new(ptr0, len0);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        this.__wbg_ptr = ret[0];
+        CryptoFinalization.register(this, this.__wbg_ptr, this);
+        return this;
+    }
+    /**
+     * Signs base64-encoded payload with an Ed25519 keypair.
+     * @param {TParamsOfSign} params_js
+     * @returns {Promise<CryptoResultOfSign>}
+     */
+    sign(params_js) {
+        const ret = wasm.crypto_sign(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Verifies mnemonic checksum and format.
+     * @param {string} phrase
+     * @returns {Promise<boolean>}
+     */
+    verify_mnemonic(phrase) {
+        const ptr0 = passStringToWasm0(phrase, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.crypto_verify_mnemonic(this.__wbg_ptr, ptr0, len0);
+        return ret;
+    }
+    /**
+     * Verifies a plain password against a `v2` or `v3` hash.
+     * @param {string} password
+     * @param {string} expected
+     * @returns {Promise<boolean>}
+     */
+    verify_password_hash(password, expected) {
+        const ptr0 = passStringToWasm0(password, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(expected, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.crypto_verify_password_hash(this.__wbg_ptr, ptr0, len0, ptr1, len1);
+        return ret;
+    }
+}
+if (Symbol.dispose) Crypto.prototype[Symbol.dispose] = Crypto.prototype.free;
+
+export class CryptoResultOfEncrypt {
+    static __wrap(ptr) {
+        const obj = Object.create(CryptoResultOfEncrypt.prototype);
+        obj.__wbg_ptr = ptr;
+        CryptoResultOfEncryptFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        CryptoResultOfEncryptFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_cryptoresultofencrypt_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get encrypted() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.cryptoresultofencrypt_encrypted(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) CryptoResultOfEncrypt.prototype[Symbol.dispose] = CryptoResultOfEncrypt.prototype.free;
+
+export class CryptoResultOfGenSeedAndKeys {
+    static __wrap(ptr) {
+        const obj = Object.create(CryptoResultOfGenSeedAndKeys.prototype);
+        obj.__wbg_ptr = ptr;
+        CryptoResultOfGenSeedAndKeysFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        CryptoResultOfGenSeedAndKeysFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_cryptoresultofgenseedandkeys_free(ptr, 0);
+    }
+    /**
+     * @returns {CryptoResultOfGetKeys}
+     */
+    get keys() {
+        const ret = wasm.cryptoresultofgenseedandkeys_keys(this.__wbg_ptr);
+        return CryptoResultOfGetKeys.__wrap(ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get phrase() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.cryptoresultofgenseedandkeys_phrase(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) CryptoResultOfGenSeedAndKeys.prototype[Symbol.dispose] = CryptoResultOfGenSeedAndKeys.prototype.free;
+
+export class CryptoResultOfGetKeys {
+    static __wrap(ptr) {
+        const obj = Object.create(CryptoResultOfGetKeys.prototype);
+        obj.__wbg_ptr = ptr;
+        CryptoResultOfGetKeysFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        CryptoResultOfGetKeysFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_cryptoresultofgetkeys_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get public() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.cryptoresultofgetkeys_public(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get secret() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.cryptoresultofgetkeys_secret(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) CryptoResultOfGetKeys.prototype[Symbol.dispose] = CryptoResultOfGetKeys.prototype.free;
+
+export class CryptoResultOfSign {
+    static __wrap(ptr) {
+        const obj = Object.create(CryptoResultOfSign.prototype);
+        obj.__wbg_ptr = ptr;
+        CryptoResultOfSignFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        CryptoResultOfSignFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_cryptoresultofsign_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get signature() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.cryptoresultofsign_signature(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get signed() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.cryptoresultofsign_signed(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) CryptoResultOfSign.prototype[Symbol.dispose] = CryptoResultOfSign.prototype.free;
+
+export class GraphqlBlockData {
+    static __wrap(ptr) {
+        const obj = Object.create(GraphqlBlockData.prototype);
+        obj.__wbg_ptr = ptr;
+        GraphqlBlockDataFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        GraphqlBlockDataFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_graphqlblockdata_free(ptr, 0);
+    }
+    /**
+     * @returns {bigint}
+     */
+    get seq_no() {
+        const ret = wasm.__wbg_get_graphqlblockdata_seq_no(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @param {bigint} arg0
+     */
+    set seq_no(arg0) {
+        wasm.__wbg_set_graphqlblockdata_seq_no(this.__wbg_ptr, arg0);
+    }
+}
+if (Symbol.dispose) GraphqlBlockData.prototype[Symbol.dispose] = GraphqlBlockData.prototype.free;
+
+export class IssBase64Details {
+    static __wrap(ptr) {
+        const obj = Object.create(IssBase64Details.prototype);
+        obj.__wbg_ptr = ptr;
+        IssBase64DetailsFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        IssBase64DetailsFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_issbase64details_free(ptr, 0);
+    }
+    /**
+     * @returns {number}
+     */
+    get index_mod4() {
+        const ret = wasm.issbase64details_index_mod4(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get value() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.issbase64details_value(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) IssBase64Details.prototype[Symbol.dispose] = IssBase64Details.prototype.free;
+
+export class Miner {
+    static __wrap(ptr) {
+        const obj = Object.create(Miner.prototype);
+        obj.__wbg_ptr = ptr;
+        MinerFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        MinerFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_miner_free(ptr, 0);
+    }
+    /**
+     * @param {number} x
+     * @param {number} y
+     */
+    add_tap(x, y) {
+        const ret = wasm.miner_add_tap(this.__wbg_ptr, x, y);
+        if (ret[1]) {
+            throw takeFromExternrefTable0(ret[0]);
+        }
+    }
+    /**
+     * @returns {boolean}
+     */
+    can_start() {
+        const ret = wasm.miner_can_start(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {Promise<GraphqlBlockData>}
+     */
+    get_current_block() {
+        const ret = wasm.miner_get_current_block(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {Promise<MinerAccountData>}
+     */
+    get_miner_data() {
+        const ret = wasm.miner_get_miner_data(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {Promise<void>}
+     */
+    get_reward() {
+        const ret = wasm.miner_get_reward(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @param {string[]} endpoints
+     * @param {string} app_id
+     * @param {string} address
+     * @param {string} public_key
+     * @param {string} secret_key
+     * @returns {Promise<Miner>}
+     */
+    static new(endpoints, app_id, address, public_key, secret_key) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(app_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(address, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len2 = WASM_VECTOR_LEN;
+        const ptr3 = passStringToWasm0(public_key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len3 = WASM_VECTOR_LEN;
+        const ptr4 = passStringToWasm0(secret_key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len4 = WASM_VECTOR_LEN;
+        const ret = wasm.miner_new(ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, ptr4, len4);
+        return ret;
+    }
+    /**
+     * @param {string} seed
+     */
+    remove_seed(seed) {
+        const ptr0 = passStringToWasm0(seed, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        wasm.miner_remove_seed(this.__wbg_ptr, ptr0, len0);
+    }
+    /**
+     * @param {number} duration_ms
+     * @param {Function} callback
+     */
+    start(duration_ms, callback) {
+        const ret = wasm.miner_start(this.__wbg_ptr, duration_ms, callback);
+        if (ret[1]) {
+            throw takeFromExternrefTable0(ret[0]);
+        }
+    }
+    stop() {
+        wasm.miner_stop(this.__wbg_ptr);
+    }
+}
+if (Symbol.dispose) Miner.prototype[Symbol.dispose] = Miner.prototype.free;
+
+export class MinerAccountData {
+    static __wrap(ptr) {
+        const obj = Object.create(MinerAccountData.prototype);
+        obj.__wbg_ptr = ptr;
+        MinerAccountDataFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        MinerAccountDataFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_mineraccountdata_free(ptr, 0);
+    }
+    /**
+     * @returns {bigint}
+     */
+    get epoch_5m_start() {
+        const ret = wasm.__wbg_get_mineraccountdata_epoch_5m_start(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {bigint}
+     */
+    get epoch_start() {
+        const ret = wasm.__wbg_get_mineraccountdata_epoch_start(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {bigint}
+     */
+    get tap_sum_5m() {
+        const ret = wasm.__wbg_get_mineraccountdata_tap_sum_5m(this.__wbg_ptr);
+        return (BigInt.asUintN(64, ret[0]) | (BigInt.asUintN(64, ret[1]) << BigInt(64)));
+    }
+    /**
+     * @returns {bigint}
+     */
+    get tap_sum() {
+        const ret = wasm.__wbg_get_mineraccountdata_tap_sum(this.__wbg_ptr);
+        return (BigInt.asUintN(64, ret[0]) | (BigInt.asUintN(64, ret[1]) << BigInt(64)));
+    }
+    /**
+     * @param {bigint} arg0
+     */
+    set epoch_5m_start(arg0) {
+        wasm.__wbg_set_mineraccountdata_epoch_5m_start(this.__wbg_ptr, arg0);
+    }
+    /**
+     * @param {bigint} arg0
+     */
+    set epoch_start(arg0) {
+        wasm.__wbg_set_mineraccountdata_epoch_start(this.__wbg_ptr, arg0);
+    }
+    /**
+     * @param {bigint} arg0
+     */
+    set tap_sum_5m(arg0) {
+        wasm.__wbg_set_mineraccountdata_tap_sum_5m(this.__wbg_ptr, arg0, arg0 >> BigInt(64));
+    }
+    /**
+     * @param {bigint} arg0
+     */
+    set tap_sum(arg0) {
+        wasm.__wbg_set_mineraccountdata_tap_sum(this.__wbg_ptr, arg0, arg0 >> BigInt(64));
+    }
+}
+if (Symbol.dispose) MinerAccountData.prototype[Symbol.dispose] = MinerAccountData.prototype.free;
+
+/**
+ * Decoded `Multifactor` contract account state. Mirrors
+ * `ackinacki_kit::contracts::mvsystem::multifactor::AccountData`.
+ */
+export class MultifactorAccountData {
+    static __wrap(ptr) {
+        const obj = Object.create(MultifactorAccountData.prototype);
+        obj.__wbg_ptr = ptr;
+        MultifactorAccountDataFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        MultifactorAccountDataFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_multifactoraccountdata_free(ptr, 0);
+    }
+    /**
+     * @returns {TCandidateOwnerPubkeyExpirationMap}
+     */
+    get candidate_new_owner_pubkey_and_expiration() {
+        const ret = wasm.multifactoraccountdata_candidate_new_owner_pubkey_and_expiration(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get factors_len() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_factors_len(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TFactorsOrderedByTimestampMap}
+     */
+    get factors_ordered_by_timestamp() {
+        const ret = wasm.multifactoraccountdata_factors_ordered_by_timestamp(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {boolean}
+     */
+    get force_remove_oldest() {
+        const ret = wasm.multifactoraccountdata_force_remove_oldest(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {string}
+     */
+    get index_mod_4() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_index_mod_4(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get iss_base_64() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_iss_base_64(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TJwkModulusDataMap}
+     */
+    get jwk_modulus_data() {
+        const ret = wasm.multifactoraccountdata_jwk_modulus_data(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get jwk_modulus_data_len() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_jwk_modulus_data_len(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get jwk_update_key() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_jwk_update_key(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get m_security_cards_len() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_m_security_cards_len(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get m_transactions_len() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_m_transactions_len(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get max_cleanup_txns() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_max_cleanup_txns(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get min_value() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_min_value(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get name() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_name(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get owner_pubkey() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_owner_pubkey(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get pub_recovery_key() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_pub_recovery_key(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get root() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_root(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {boolean}
+     */
+    get use_security_card() {
+        const ret = wasm.multifactoraccountdata_use_security_card(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {string}
+     */
+    get wasm_hash() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_wasm_hash(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TWhiteListOfAddressMap}
+     */
+    get white_list_of_address() {
+        const ret = wasm.multifactoraccountdata_white_list_of_address(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get zkid() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.multifactoraccountdata_zkid(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) MultifactorAccountData.prototype[Symbol.dispose] = MultifactorAccountData.prototype.free;
+
+export class ParsedConnectPayload {
+    static __wrap(ptr) {
+        const obj = Object.create(ParsedConnectPayload.prototype);
+        obj.__wbg_ptr = ptr;
+        ParsedConnectPayloadFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ParsedConnectPayloadFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_parsedconnectpayload_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get app_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.parsedconnectpayload_app_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get description() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.parsedconnectpayload_description(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get expires_at() {
+        const ret = wasm.parsedconnectpayload_expires_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get nonce() {
+        const ret = wasm.parsedconnectpayload_nonce(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get session_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.parsedconnectpayload_session_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get v() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.parsedconnectpayload_v(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ParsedConnectPayload.prototype[Symbol.dispose] = ParsedConnectPayload.prototype.free;
+
+/**
+ * Signed deploy params produced by `prepare_multifactor_deploy_params`.
+ * Mirrors `ackinacki_kit::contracts::mvsystem::mirror::ParamsOfDeployMultifactor`.
+ */
+export class PreparedDeployParams {
+    static __wrap(ptr) {
+        const obj = Object.create(PreparedDeployParams.prototype);
+        obj.__wbg_ptr = ptr;
+        PreparedDeployParamsFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        PreparedDeployParamsFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_prepareddeployparams_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get epk() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_epk(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get epk_expire_at() {
+        const ret = wasm.prepareddeployparams_epk_expire_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get epk_sig() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_epk_sig(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get header_base_64() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_header_base_64(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {number}
+     */
+    get index_mod_4() {
+        const ret = wasm.prepareddeployparams_index_mod_4(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get iss_base_64() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_iss_base_64(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get jwk_modulus() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_jwk_modulus(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get jwk_modulus_expire_at() {
+        const ret = wasm.prepareddeployparams_jwk_modulus_expire_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get jwk_update_key() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_jwk_update_key(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get jwk_update_key_sig() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_jwk_update_key_sig(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get kid() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_kid(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get name() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_name(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get proof() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_proof(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get provider() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_provider(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get pub_recovery_key() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_pub_recovery_key(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get pub_recovery_key_sig() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_pub_recovery_key_sig(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TRootProviderCertificatesMap}
+     */
+    get root_provider_certificates() {
+        const ret = wasm.prepareddeployparams_root_provider_certificates(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get zkid() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.prepareddeployparams_zkid(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) PreparedDeployParams.prototype[Symbol.dispose] = PreparedDeployParams.prototype.free;
+
+export class ResultGetMirrorAddress {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultGetMirrorAddress.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultGetMirrorAddressFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultGetMirrorAddressFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultgetmirroraddress_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultgetmirroraddress_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultGetMirrorAddress.prototype[Symbol.dispose] = ResultGetMirrorAddress.prototype.free;
+
+export class ResultOfAddZKPFactor {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfAddZKPFactor.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfAddZKPFactorFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfAddZKPFactorFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofaddzkpfactor_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofaddzkpfactor_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get message_id() {
+        const ret = wasm.resultofaddzkpfactor_message_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string[]}
+     */
+    get message_ids() {
+        const ret = wasm.resultofaddzkpfactor_message_ids(this.__wbg_ptr);
+        var v1 = getArrayJsValueFromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get name() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofaddzkpfactor_name(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get password_hash() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofaddzkpfactor_password_hash(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get pubkey() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofaddzkpfactor_pubkey(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {ResultOfGetKeys}
+     */
+    get signing_keys() {
+        const ret = wasm.resultofaddzkpfactor_signing_keys(this.__wbg_ptr);
+        return ResultOfGetKeys.__wrap(ret);
+    }
+}
+if (Symbol.dispose) ResultOfAddZKPFactor.prototype[Symbol.dispose] = ResultOfAddZKPFactor.prototype.free;
+
+export class ResultOfBlockchainWrite {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfBlockchainWrite.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfBlockchainWriteFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfBlockchainWriteFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofblockchainwrite_free(ptr, 0);
+    }
+    /**
+     * @returns {string[]}
+     */
+    get message_ids() {
+        const ret = wasm.resultofblockchainwrite_message_ids(this.__wbg_ptr);
+        var v1 = getArrayJsValueFromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get pending_reason() {
+        const ret = wasm.resultofblockchainwrite_pending_reason(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get pending_stage() {
+        const ret = wasm.resultofblockchainwrite_pending_stage(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+}
+if (Symbol.dispose) ResultOfBlockchainWrite.prototype[Symbol.dispose] = ResultOfBlockchainWrite.prototype.free;
+
+export class ResultOfCheckNameAvailability {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfCheckNameAvailability.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfCheckNameAvailabilityFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfCheckNameAvailabilityFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofchecknameavailability_free(ptr, 0);
+    }
+    /**
+     * @returns {boolean}
+     */
+    get is_available() {
+        const ret = wasm.resultofchecknameavailability_is_available(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get multifactor_address() {
+        const ret = wasm.resultofchecknameavailability_multifactor_address(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+}
+if (Symbol.dispose) ResultOfCheckNameAvailability.prototype[Symbol.dispose] = ResultOfCheckNameAvailability.prototype.free;
+
+export class ResultOfCreateSharedKeySession {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfCreateSharedKeySession.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfCreateSharedKeySessionFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfCreateSharedKeySessionFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofcreatesharedkeysession_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get app_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofcreatesharedkeysession_app_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get client_dh_public() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofcreatesharedkeysession_client_dh_public(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get client_dh_secret() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofcreatesharedkeysession_client_dh_secret(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get created_at() {
+        const ret = wasm.resultofcreatesharedkeysession_created_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get deep_link() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofcreatesharedkeysession_deep_link(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get description() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofcreatesharedkeysession_description(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get expires_at() {
+        const ret = wasm.resultofcreatesharedkeysession_expires_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get payload_b64url() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofcreatesharedkeysession_payload_b64url(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get payload_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofcreatesharedkeysession_payload_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get session_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofcreatesharedkeysession_session_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfCreateSharedKeySession.prototype[Symbol.dispose] = ResultOfCreateSharedKeySession.prototype.free;
+
+export class ResultOfDeployMultifactor {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfDeployMultifactor.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfDeployMultifactorFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfDeployMultifactorFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofdeploymultifactor_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofdeploymultifactor_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get message_id() {
+        const ret = wasm.resultofdeploymultifactor_message_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string[]}
+     */
+    get message_ids() {
+        const ret = wasm.resultofdeploymultifactor_message_ids(this.__wbg_ptr);
+        var v1 = getArrayJsValueFromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get name() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofdeploymultifactor_name(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get password_hash() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofdeploymultifactor_password_hash(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get pending_reason() {
+        const ret = wasm.resultofdeploymultifactor_pending_reason(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get pending_stage() {
+        const ret = wasm.resultofdeploymultifactor_pending_stage(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get phrase() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofdeploymultifactor_phrase(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get pubkey() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofdeploymultifactor_pubkey(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {ResultOfGetKeys}
+     */
+    get signing_keys() {
+        const ret = wasm.resultofdeploymultifactor_signing_keys(this.__wbg_ptr);
+        return ResultOfGetKeys.__wrap(ret);
+    }
+}
+if (Symbol.dispose) ResultOfDeployMultifactor.prototype[Symbol.dispose] = ResultOfDeployMultifactor.prototype.free;
+
+export class ResultOfDisconnectSession {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfDisconnectSession.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfDisconnectSessionFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfDisconnectSessionFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofdisconnectsession_free(ptr, 0);
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get message_id() {
+        const ret = wasm.resultofdisconnectsession_message_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get profile_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofdisconnectsession_profile_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get raw_message_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofdisconnectsession_raw_message_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get updated_session_state_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofdisconnectsession_updated_session_state_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfDisconnectSession.prototype[Symbol.dispose] = ResultOfDisconnectSession.prototype.free;
+
+export class ResultOfGenMiningKeys {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGenMiningKeys.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGenMiningKeysFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGenMiningKeysFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgenminingkeys_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get deep_link() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgenminingkeys_deep_link(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get public() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgenminingkeys_public(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get secret() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgenminingkeys_secret(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfGenMiningKeys.prototype[Symbol.dispose] = ResultOfGenMiningKeys.prototype.free;
+
+export class ResultOfGetEPKExpireAt {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetEPKExpireAt.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetEPKExpireAtFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetEPKExpireAtFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgetepkexpireat_free(ptr, 0);
+    }
+    /**
+     * @returns {bigint}
+     */
+    get epk_expire_at() {
+        const ret = wasm.resultofgetepkexpireat_epk_expire_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+}
+if (Symbol.dispose) ResultOfGetEPKExpireAt.prototype[Symbol.dispose] = ResultOfGetEPKExpireAt.prototype.free;
+
+export class ResultOfGetHistory {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetHistory.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetHistoryFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetHistoryFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgethistory_free(ptr, 0);
+    }
+    /**
+     * @returns {TxData[]}
+     */
+    get data() {
+        const ret = wasm.resultofgethistory_data(this.__wbg_ptr);
+        var v1 = getArrayJsValueFromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+        return v1;
+    }
+    /**
+     * @returns {boolean}
+     */
+    get has_next_page() {
+        const ret = wasm.resultofgethistory_has_next_page(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get next_cursor() {
+        const ret = wasm.resultofgethistory_next_cursor(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get next_mining_cursor() {
+        const ret = wasm.resultofgethistory_next_mining_cursor(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+}
+if (Symbol.dispose) ResultOfGetHistory.prototype[Symbol.dispose] = ResultOfGetHistory.prototype.free;
+
+export class ResultOfGetKeys {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetKeys.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetKeysFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetKeysFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgetkeys_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get public() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetkeys_public(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get secret() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetkeys_secret(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfGetKeys.prototype[Symbol.dispose] = ResultOfGetKeys.prototype.free;
+
+export class ResultOfGetMinerDetails {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetMinerDetails.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetMinerDetailsFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetMinerDetailsFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgetminerdetails_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetminerdetails_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get owner_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetminerdetails_owner_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TMinerOwnerPublicMap}
+     */
+    get owner_public() {
+        const ret = wasm.resultofgetminerdetails_owner_public(this.__wbg_ptr);
+        return ret;
+    }
+}
+if (Symbol.dispose) ResultOfGetMinerDetails.prototype[Symbol.dispose] = ResultOfGetMinerDetails.prototype.free;
+
+export class ResultOfGetMultifactorDetails {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetMultifactorDetails.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetMultifactorDetailsFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetMultifactorDetailsFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgetmultifactordetails_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TCandidateOwnerPubkeyExpirationMap}
+     */
+    get candidate_new_owner_pubkey_and_expiration() {
+        const ret = wasm.resultofgetmultifactordetails_candidate_new_owner_pubkey_and_expiration(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get factors_len() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_factors_len(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TFactorsOrderedByTimestampMap}
+     */
+    get factors_ordered_by_timestamp() {
+        const ret = wasm.resultofgetmultifactordetails_factors_ordered_by_timestamp(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {boolean}
+     */
+    get force_remove_oldest() {
+        const ret = wasm.resultofgetmultifactordetails_force_remove_oldest(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {string}
+     */
+    get index_mod_4() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_index_mod_4(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get iss_base_64() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_iss_base_64(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TJwkModulusDataMap}
+     */
+    get jwk_modulus_data() {
+        const ret = wasm.resultofgetmultifactordetails_jwk_modulus_data(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get jwk_modulus_data_len() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_jwk_modulus_data_len(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get jwk_update_key() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_jwk_update_key(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get m_security_cards_len() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_m_security_cards_len(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get m_transactions_len() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_m_transactions_len(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get max_cleanup_txns() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_max_cleanup_txns(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get min_value() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_min_value(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get name() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_name(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get owner_pubkey() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_owner_pubkey(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get pub_recovery_key() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_pub_recovery_key(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get root() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_root(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {boolean}
+     */
+    get use_security_card() {
+        const ret = wasm.resultofgetmultifactordetails_use_security_card(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {string}
+     */
+    get wasm_hash() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_wasm_hash(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {TWhiteListOfAddressMap}
+     */
+    get white_list_of_address() {
+        const ret = wasm.resultofgetmultifactordetails_white_list_of_address(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string}
+     */
+    get zkid() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmultifactordetails_zkid(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfGetMultifactorDetails.prototype[Symbol.dispose] = ResultOfGetMultifactorDetails.prototype.free;
+
+export class ResultOfGetMultifactorInfo {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetMultifactorInfo.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetMultifactorInfoFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetMultifactorInfoFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgetmultifactorinfo_free(ptr, 0);
+    }
+    /**
+     * @returns {MultifactorAccountData | undefined}
+     */
+    get data() {
+        const ret = wasm.resultofgetmultifactorinfo_data(this.__wbg_ptr);
+        return ret === 0 ? undefined : MultifactorAccountData.__wrap(ret);
+    }
+}
+if (Symbol.dispose) ResultOfGetMultifactorInfo.prototype[Symbol.dispose] = ResultOfGetMultifactorInfo.prototype.free;
+
+export class ResultOfGetMvMultifactorAddress {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetMvMultifactorAddress.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetMvMultifactorAddressFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetMvMultifactorAddressFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgetmvmultifactoraddress_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofgetmvmultifactoraddress_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfGetMvMultifactorAddress.prototype[Symbol.dispose] = ResultOfGetMvMultifactorAddress.prototype.free;
+
+export class ResultOfGetNativeBalances {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetNativeBalances.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetNativeBalancesFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetNativeBalancesFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgetnativebalances_free(ptr, 0);
+    }
+    /**
+     * @returns {TNativeBalancesMap}
+     */
+    get ecc() {
+        const ret = wasm.resultofgetnativebalances_ecc(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {TNativeBalancesMap}
+     */
+    get popitgame() {
+        const ret = wasm.resultofgetnativebalances_popitgame(this.__wbg_ptr);
+        return ret;
+    }
+}
+if (Symbol.dispose) ResultOfGetNativeBalances.prototype[Symbol.dispose] = ResultOfGetNativeBalances.prototype.free;
+
+export class ResultOfGetTokensBalances {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfGetTokensBalances.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfGetTokensBalancesFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfGetTokensBalancesFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofgettokensbalances_free(ptr, 0);
+    }
+    /**
+     * @returns {TTokenBalancesMap}
+     */
+    get tokens() {
+        const ret = wasm.resultofgettokensbalances_tokens(this.__wbg_ptr);
+        return ret;
+    }
+}
+if (Symbol.dispose) ResultOfGetTokensBalances.prototype[Symbol.dispose] = ResultOfGetTokensBalances.prototype.free;
+
+export class ResultOfQueryActiveSessionsByMultifactor {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfQueryActiveSessionsByMultifactor.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfQueryActiveSessionsByMultifactorFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfQueryActiveSessionsByMultifactorFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofqueryactivesessionsbymultifactor_free(ptr, 0);
+    }
+    /**
+     * @returns {boolean}
+     */
+    get exhausted_active() {
+        const ret = wasm.resultofqueryactivesessionsbymultifactor_exhausted_active(this.__wbg_ptr);
+        return ret !== 0;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get next_before() {
+        const ret = wasm.resultofqueryactivesessionsbymultifactor_next_before(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {Array<any>}
+     */
+    get sessions() {
+        const ret = wasm.resultofqueryactivesessionsbymultifactor_sessions(this.__wbg_ptr);
+        return ret;
+    }
+}
+if (Symbol.dispose) ResultOfQueryActiveSessionsByMultifactor.prototype[Symbol.dispose] = ResultOfQueryActiveSessionsByMultifactor.prototype.free;
+
+export class ResultOfQuerySessionMessages {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfQuerySessionMessages.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfQuerySessionMessagesFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfQuerySessionMessagesFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofquerysessionmessages_free(ptr, 0);
+    }
+    /**
+     * @returns {Array<any>}
+     */
+    get messages() {
+        const ret = wasm.resultofquerysessionmessages_messages(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get next_before() {
+        const ret = wasm.resultofquerysessionmessages_next_before(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get profile_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofquerysessionmessages_profile_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get updated_session_state_json() {
+        const ret = wasm.resultofquerysessionmessages_updated_session_state_json(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+}
+if (Symbol.dispose) ResultOfQuerySessionMessages.prototype[Symbol.dispose] = ResultOfQuerySessionMessages.prototype.free;
+
+export class ResultOfRequestSetMiningKeys {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfRequestSetMiningKeys.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfRequestSetMiningKeysFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfRequestSetMiningKeysFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofrequestsetminingkeys_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get app_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsetminingkeys_app_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get message_id() {
+        const ret = wasm.resultofrequestsetminingkeys_message_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get owner_public() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsetminingkeys_owner_public(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get profile_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsetminingkeys_profile_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get raw_message_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsetminingkeys_raw_message_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get updated_session_state_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsetminingkeys_updated_session_state_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfRequestSetMiningKeys.prototype[Symbol.dispose] = ResultOfRequestSetMiningKeys.prototype.free;
+
+export class ResultOfRequestSignChallenge {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfRequestSignChallenge.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfRequestSignChallengeFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfRequestSignChallengeFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofrequestsignchallenge_free(ptr, 0);
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get message_id() {
+        const ret = wasm.resultofrequestsignchallenge_message_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get nonce() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsignchallenge_nonce(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get profile_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsignchallenge_profile_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get raw_message_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsignchallenge_raw_message_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get sent_at() {
+        const ret = wasm.resultofrequestsignchallenge_sent_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get updated_session_state_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofrequestsignchallenge_updated_session_state_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfRequestSignChallenge.prototype[Symbol.dispose] = ResultOfRequestSignChallenge.prototype.free;
+
+/**
+ * Wraps `ackinacki_kit::tvm_client::processing::ResultOfSendMessage`.
+ * Numeric `exit_code` is signed (i32) and survives the boundary as-is.
+ */
+export class ResultOfSendMessage {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfSendMessage.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfSendMessageFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfSendMessageFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofsendmessage_free(ptr, 0);
+    }
+    /**
+     * @returns {boolean | undefined}
+     */
+    get aborted() {
+        const ret = wasm.resultofsendmessage_aborted(this.__wbg_ptr);
+        return ret === 0xFFFFFF ? undefined : ret !== 0;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get block_hash() {
+        const ret = wasm.resultofsendmessage_block_hash(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get current_time() {
+        const ret = wasm.resultofsendmessage_current_time(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {number | undefined}
+     */
+    get exit_code() {
+        const ret = wasm.resultofsendmessage_exit_code(this.__wbg_ptr);
+        return ret === Number.MAX_SAFE_INTEGER ? undefined : ret;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get message_hash() {
+        const ret = wasm.resultofsendmessage_message_hash(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string[]}
+     */
+    get producers() {
+        const ret = wasm.resultofsendmessage_producers(this.__wbg_ptr);
+        var v1 = getArrayJsValueFromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get thread_id() {
+        const ret = wasm.resultofsendmessage_thread_id(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get tx_hash() {
+        const ret = wasm.resultofsendmessage_tx_hash(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+}
+if (Symbol.dispose) ResultOfSendMessage.prototype[Symbol.dispose] = ResultOfSendMessage.prototype.free;
+
+export class ResultOfValidateWalletName {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfValidateWalletName.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfValidateWalletNameFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfValidateWalletNameFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofvalidatewalletname_free(ptr, 0);
+    }
+    /**
+     * @returns {WalletNameErrorCode | undefined}
+     */
+    get error_code() {
+        const ret = wasm.resultofvalidatewalletname_error_code(this.__wbg_ptr);
+        return ret === 0 ? undefined : ret;
+    }
+    /**
+     * @returns {boolean}
+     */
+    get is_valid() {
+        const ret = wasm.resultofvalidatewalletname_is_valid(this.__wbg_ptr);
+        return ret !== 0;
+    }
+}
+if (Symbol.dispose) ResultOfValidateWalletName.prototype[Symbol.dispose] = ResultOfValidateWalletName.prototype.free;
+
+export class ResultOfWaitChallengeResponse {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfWaitChallengeResponse.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfWaitChallengeResponseFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfWaitChallengeResponseFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofwaitchallengeresponse_free(ptr, 0);
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get epk_public() {
+        const ret = wasm.resultofwaitchallengeresponse_epk_public(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {bigint}
+     */
+    get event_created_at() {
+        const ret = wasm.resultofwaitchallengeresponse_event_created_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get event_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitchallengeresponse_event_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get nonce() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitchallengeresponse_nonce(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get profile_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitchallengeresponse_profile_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get raw_message_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitchallengeresponse_raw_message_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get signature() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitchallengeresponse_signature(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get updated_session_state_json() {
+        const ret = wasm.resultofwaitchallengeresponse_updated_session_state_json(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get wallet_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitchallengeresponse_wallet_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfWaitChallengeResponse.prototype[Symbol.dispose] = ResultOfWaitChallengeResponse.prototype.free;
+
+export class ResultOfWaitSetMiningKeysRequest {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfWaitSetMiningKeysRequest.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfWaitSetMiningKeysRequestFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfWaitSetMiningKeysRequestFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofwaitsetminingkeysrequest_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get app_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitsetminingkeysrequest_app_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get event_created_at() {
+        const ret = wasm.resultofwaitsetminingkeysrequest_event_created_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get event_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitsetminingkeysrequest_event_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get owner_public() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitsetminingkeysrequest_owner_public(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get profile_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitsetminingkeysrequest_profile_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get raw_message_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitsetminingkeysrequest_raw_message_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get updated_session_state_json() {
+        const ret = wasm.resultofwaitsetminingkeysrequest_updated_session_state_json(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+}
+if (Symbol.dispose) ResultOfWaitSetMiningKeysRequest.prototype[Symbol.dispose] = ResultOfWaitSetMiningKeysRequest.prototype.free;
+
+export class ResultOfWaitWalletHello {
+    static __wrap(ptr) {
+        const obj = Object.create(ResultOfWaitWalletHello.prototype);
+        obj.__wbg_ptr = ptr;
+        ResultOfWaitWalletHelloFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ResultOfWaitWalletHelloFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_resultofwaitwallethello_free(ptr, 0);
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get epk_public() {
+        const ret = wasm.resultofwaitwallethello_epk_public(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {bigint}
+     */
+    get event_created_at() {
+        const ret = wasm.resultofwaitwallethello_event_created_at(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get event_id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitwallethello_event_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get nonce() {
+        const ret = wasm.resultofwaitwallethello_nonce(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get profile_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitwallethello_profile_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get raw_message_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitwallethello_raw_message_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get session_state_json() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitwallethello_session_state_json(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get signature() {
+        const ret = wasm.resultofwaitwallethello_signature(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get wallet_address() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitwallethello_wallet_address(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get wallet_name() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.resultofwaitwallethello_wallet_name(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ResultOfWaitWalletHello.prototype[Symbol.dispose] = ResultOfWaitWalletHello.prototype.free;
+
+export class TxData {
+    static __wrap(ptr) {
+        const obj = Object.create(TxData.prototype);
+        obj.__wbg_ptr = ptr;
+        TxDataFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        TxDataFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_txdata_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get created_at() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.txdata_created_at(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get id() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.txdata_id(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string | undefined}
+     */
+    get src_name() {
+        const ret = wasm.txdata_src_name(this.__wbg_ptr);
+        let v1;
+        if (ret[0] !== 0) {
+            v1 = getStringFromWasm0(ret[0], ret[1]).slice();
+            wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        }
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get tx_type() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.txdata_tx_type(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get value() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.txdata_value(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) TxData.prototype[Symbol.dispose] = TxData.prototype.free;
+
+export class Wallet {
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        WalletFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_wallet_free(ptr, 0);
+    }
+    /**
+     * @param {TParamsOfAddZKPFactor} params_js
+     * @returns {Promise<ResultOfAddZKPFactor>}
+     */
+    add_zkp_factor(params_js) {
+        const ret = wasm.wallet_add_zkp_factor(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Like [`add_zkp_factor`], but invokes `on_progress(event)` for each
+     * `add_factor` milestone (`jwk?` → `submitted` → `confirming`… →
+     * `confirmed`), where `event` is a plain object `{ op, stage, detail?,
+     * pct? }`. On confirmation timeout the call rejects with a terminal error.
+     * @param {TParamsOfAddZKPFactor} params_js
+     * @param {Function} on_progress
+     * @returns {Promise<ResultOfAddZKPFactor>}
+     */
+    add_zkp_factor_with_progress(params_js, on_progress) {
+        const ret = wasm.wallet_add_zkp_factor_with_progress(this.__wbg_ptr, params_js, on_progress);
+        return ret;
+    }
+    /**
+     * @param {TBuyShellsReq} params_js
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    buy_shells(params_js) {
+        const ret = wasm.wallet_buy_shells(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TParamsOfChangeSeedPhrase} params_js
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    change_seed_phrase(params_js) {
+        const ret = wasm.wallet_change_seed_phrase(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {string} wallet_name
+     * @returns {Promise<ResultOfCheckNameAvailability>}
+     */
+    check_name_availability(wallet_name) {
+        const ptr0 = passStringToWasm0(wallet_name, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.wallet_check_name_availability(this.__wbg_ptr, ptr0, len0);
+        return ret;
+    }
+    /**
+     * @param {TClaimUsdcReq} params_js
+     * @returns {Promise<any>}
+     */
+    claim_usdc(params_js) {
+        const ret = wasm.wallet_claim_usdc(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Completes zk-login by preparing local payload, fetching prover proofs
+     * and finalizing proof compression.
+     * @param {TZkLoginCompleteWithProverParams} params_js
+     * @returns {Promise<ZkLoginCompleteWithProverResult>}
+     */
+    complete_zk_login_with_prover_v1(params_js) {
+        const ret = wasm.wallet_complete_zk_login_with_prover_v1(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Like [`complete_zk_login_with_prover_v1`], but invokes
+     * `on_progress(event)` for each `prove` milestone (`started` →
+     * `finished`), where `event` is `{ op, stage, detail?, pct? }`.
+     * @param {TZkLoginCompleteWithProverParams} params_js
+     * @param {Function} on_progress
+     * @returns {Promise<ZkLoginCompleteWithProverResult>}
+     */
+    complete_zk_login_with_prover_v1_with_progress(params_js, on_progress) {
+        const ret = wasm.wallet_complete_zk_login_with_prover_v1_with_progress(this.__wbg_ptr, params_js, on_progress);
+        return ret;
+    }
+    /**
+     * @param {string} payload_b64
+     * @returns {any}
+     */
+    decode_connect_payload_b64url(payload_b64) {
+        const ptr0 = passStringToWasm0(payload_b64, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.wallet_decode_connect_payload_b64url(this.__wbg_ptr, ptr0, len0);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        return takeFromExternrefTable0(ret[0]);
+    }
+    /**
+     * @param {TParamsOfDelMiningKey} params_js
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    del_mining_key(params_js) {
+        const ret = wasm.wallet_del_mining_key(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Deletes currently used ZKP factor by its own signer key.
+     * @param {TDeleteZkpFactorByItselfReq} params_js
+     * @returns {Promise<ResultOfSendMessage>}
+     */
+    delete_zkp_factor_by_itself(params_js) {
+        const ret = wasm.wallet_delete_zkp_factor_by_itself(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Deploy miner as a separate use case.
+     * Skips deploy if miner is already deployed.
+     * @param {TParamsOfDeployMiner} params_js
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    deploy_miner(params_js) {
+        const ret = wasm.wallet_deploy_miner(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Like [`deploy_miner`], but invokes `on_progress(event)` for each
+     * `deploy_miner` milestone (`resolving` → `deploying` → `confirmed`/
+     * `pending`/`failed`), where `event` is `{ op, stage, detail?, pct? }`.
+     * @param {TParamsOfDeployMiner} params_js
+     * @param {Function} on_progress
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    deploy_miner_with_progress(params_js, on_progress) {
+        const ret = wasm.wallet_deploy_miner_with_progress(this.__wbg_ptr, params_js, on_progress);
+        return ret;
+    }
+    /**
+     * Deploy multifactor wallet only (does not deploy miner).
+     * @param {TParamsOfDeployMultifactor} params_js
+     * @returns {Promise<ResultOfDeployMultifactor>}
+     */
+    deploy_wallet(params_js) {
+        const ret = wasm.wallet_deploy_wallet(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Like [`deploy_wallet`], but invokes `on_progress(event)` for each
+     * `deploy` milestone (`preparing` → `deploying` → `submitted` →
+     * `activating` → `active` → `configuring` → `confirmed`/`pending`/
+     * `failed`), where `event` is `{ op, stage, detail?, pct? }`.
+     * @param {TParamsOfDeployMultifactor} params_js
+     * @param {Function} on_progress
+     * @returns {Promise<ResultOfDeployMultifactor>}
+     */
+    deploy_wallet_with_progress(params_js, on_progress) {
+        const ret = wasm.wallet_deploy_wallet_with_progress(this.__wbg_ptr, params_js, on_progress);
+        return ret;
+    }
+    /**
+     * Returns expiration timestamp for a factor identified by EPK.
+     * @param {TGetEPKExpireReq} params_js
+     * @returns {Promise<ResultOfGetEPKExpireAt>}
+     */
+    get_epk_expire_at(params_js) {
+        const ret = wasm.wallet_get_epk_expire_at(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TParamsOfGetHistory} params_js
+     * @returns {Promise<ResultOfGetHistory>}
+     */
+    get_history(params_js) {
+        const ret = wasm.wallet_get_history(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TParamsOfGetMinerAddress} params_js
+     * @returns {Promise<string>}
+     */
+    get_miner_address(params_js) {
+        const ret = wasm.wallet_get_miner_address(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {string} multifactor_address
+     * @returns {Promise<ResultOfGetMinerDetails>}
+     */
+    get_miner_details_by_multifactor_address(multifactor_address) {
+        const ptr0 = passStringToWasm0(multifactor_address, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.wallet_get_miner_details_by_multifactor_address(this.__wbg_ptr, ptr0, len0);
+        return ret;
+    }
+    /**
+     * Resolves mirror address for an owner pubkey.
+     * @param {TParamsGetMirrorAddress} params_js
+     * @returns {ResultGetMirrorAddress}
+     */
+    get_mirror_address(params_js) {
+        const ret = wasm.wallet_get_mirror_address(this.__wbg_ptr, params_js);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        return ResultGetMirrorAddress.__wrap(ret[0]);
+    }
+    /**
+     * Resolves multifactor address by owner pubkey.
+     * @param {TParamsOfGetMultifactorAddress} params_js
+     * @returns {Promise<ResultOfGetMvMultifactorAddress>}
+     */
+    get_multifactor_address(params_js) {
+        const ret = wasm.wallet_get_multifactor_address(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TParamsOfGetMultifactorBalances} params_js
+     * @returns {Promise<ResultOfGetNativeBalances>}
+     */
+    get_multifactor_balances(params_js) {
+        const ret = wasm.wallet_get_multifactor_balances(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {string} wallet_name
+     * @returns {Promise<ResultOfGetMultifactorDetails | undefined>}
+     */
+    get_multifactor_data_by_name(wallet_name) {
+        const ptr0 = passStringToWasm0(wallet_name, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.wallet_get_multifactor_data_by_name(this.__wbg_ptr, ptr0, len0);
+        return ret;
+    }
+    /**
+     * Returns decoded multifactor contract state by address. `data` is `null`
+     * when the contract is not deployed or has no decodable account data.
+     * @param {TParamsOfGetMultifactorInfo} params_js
+     * @returns {Promise<ResultOfGetMultifactorInfo>}
+     */
+    get_multifactor_info(params_js) {
+        const ret = wasm.wallet_get_multifactor_info(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TGetMySellOrdersReq} params_js
+     * @returns {Promise<any>}
+     */
+    get_my_sell_orders(params_js) {
+        const ret = wasm.wallet_get_my_sell_orders(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @returns {Promise<any>}
+     */
+    get_nackl_redeem_rate() {
+        const ret = wasm.wallet_get_nackl_redeem_rate(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @param {TParamsOfGetTokensBalances} params_js
+     * @returns {Promise<ResultOfGetTokensBalances>}
+     */
+    get_tokens_balances(params_js) {
+        const ret = wasm.wallet_get_tokens_balances(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TMigrateTip3UsdcReq} params_js
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    migrate_tip3_usdc(params_js) {
+        const ret = wasm.wallet_migrate_tip3_usdc(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {string[]} endpoints
+     * @param {string[] | null | undefined} archive_endpoints
+     * @param {string} api_url
+     * @param {string} app_id
+     * @param {string | null} [api_token]
+     * @param {number | null} [max_rps]
+     */
+    constructor(endpoints, archive_endpoints, api_url, app_id, api_token, max_rps) {
+        const ptr0 = passArrayJsValueToWasm0(endpoints, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        var ptr1 = isLikeNone(archive_endpoints) ? 0 : passArrayJsValueToWasm0(archive_endpoints, wasm.__wbindgen_malloc);
+        var len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(api_url, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len2 = WASM_VECTOR_LEN;
+        const ptr3 = passStringToWasm0(app_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len3 = WASM_VECTOR_LEN;
+        var ptr4 = isLikeNone(api_token) ? 0 : passStringToWasm0(api_token, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len4 = WASM_VECTOR_LEN;
+        const ret = wasm.wallet_new(ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, ptr4, len4, isLikeNone(max_rps) ? Number.MAX_SAFE_INTEGER : (max_rps) >>> 0);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        this.__wbg_ptr = ret[0];
+        WalletFinalization.register(this, this.__wbg_ptr, this);
+        return this;
+    }
+    /**
+     * Stage 5b — builds signed `ParamsOfDeployMultifactor` (epk_sig,
+     * recovery key + sig, jwk-update key + sig, provider certificates).
+     * Does not send anything on-chain.
+     * @param {TParamsOfPrepareDeploy} params_js
+     * @returns {Promise<PreparedDeployParams>}
+     */
+    prepare_multifactor_deploy_params(params_js) {
+        const ret = wasm.wallet_prepare_multifactor_deploy_params(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Stage 1 of zk-login: generates ephemeral ed25519 keypair and the
+     * Poseidon-based `nonce` to bind to the OAuth `nonce=` parameter.
+     * Uses `Date.now()` (via js_sys) as the time source.
+     * @returns {ZkLoginPrepareResult}
+     */
+    prepare_zk_login_v1() {
+        const ret = wasm.wallet_prepare_zk_login_v1(this.__wbg_ptr);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        return ZkLoginPrepareResult.__wrap(ret[0]);
+    }
+    /**
+     * @param {TParamsOfQueryConnectSessionMessages} params_js
+     * @returns {Promise<ResultOfQuerySessionMessages>}
+     */
+    query_connect_session_messages(params_js) {
+        const ret = wasm.wallet_query_connect_session_messages(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TRedeemNacklReq} params_js
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    redeem_nackl(params_js) {
+        const ret = wasm.wallet_redeem_nackl(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TSellShellsReq} params_js
+     * @returns {Promise<any>}
+     */
+    sell_shells(params_js) {
+        const ret = wasm.wallet_sell_shells(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {TSendTokensDirectReq} params_js
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    send_tokens_direct(params_js) {
+        const ret = wasm.wallet_send_tokens_direct(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * set mining keys for the app_id specified in sdk init
+     * @param {TParamsOfSetMiningKeys} params_js
+     * @returns {Promise<ResultOfBlockchainWrite>}
+     */
+    set_mining_keys(params_js) {
+        const ret = wasm.wallet_set_mining_keys(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * Replaces wallet ZK identity payload (`zkid`, proof, factor, JWK data).
+     * @param {TUpdateMultifactorZkIdReq} params_js
+     * @returns {Promise<ResultOfSendMessage>}
+     */
+    update_zk_id(params_js) {
+        const ret = wasm.wallet_update_zk_id(this.__wbg_ptr, params_js);
+        return ret;
+    }
+    /**
+     * @param {string} wallet_name
+     * @returns {ResultOfValidateWalletName}
+     */
+    validate_name(wallet_name) {
+        const ptr0 = passStringToWasm0(wallet_name, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.wallet_validate_name(this.__wbg_ptr, ptr0, len0);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        return ResultOfValidateWalletName.__wrap(ret[0]);
+    }
+}
+if (Symbol.dispose) Wallet.prototype[Symbol.dispose] = Wallet.prototype.free;
+
+/**
+ * @enum {1 | 2 | 3 | 4 | 5 | 6}
+ */
+export const WalletNameErrorCode = Object.freeze({
+    InvalidCharacters: 1, "1": "InvalidCharacters",
+    ConsecutiveHyphens: 2, "2": "ConsecutiveHyphens",
+    ConsecutiveUnderscores: 3, "3": "ConsecutiveUnderscores",
+    StartsWithSymbol: 4, "4": "StartsWithSymbol",
+    TooLong: 5, "5": "TooLong",
+    TooShort: 6, "6": "TooShort",
+});
+
+export class ZkLoginCompleteWithProverResult {
+    static __wrap(ptr) {
+        const obj = Object.create(ZkLoginCompleteWithProverResult.prototype);
+        obj.__wbg_ptr = ptr;
+        ZkLoginCompleteWithProverResultFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ZkLoginCompleteWithProverResultFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_zklogincompletewithproverresult_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get ephemeral_private_key() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zklogincompletewithproverresult_ephemeral_private_key(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get ephemeral_public_key_in_hex() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zklogincompletewithproverresult_ephemeral_public_key_in_hex(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get ephemeral_secret_key_in_hex() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zklogincompletewithproverresult_ephemeral_secret_key_in_hex(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get header_base64() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zklogincompletewithproverresult_header_base64(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {IssBase64Details}
+     */
+    get iss_base64_details() {
+        const ret = wasm.zklogincompletewithproverresult_iss_base64_details(this.__wbg_ptr);
+        return IssBase64Details.__wrap(ret);
+    }
+    /**
+     * @returns {bigint}
+     */
+    get max_epoch() {
+        const ret = wasm.zklogincompletewithproverresult_max_epoch(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get zk_proof_compressed() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zklogincompletewithproverresult_zk_proof_compressed(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get zkid() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zklogincompletewithproverresult_zkid(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ZkLoginCompleteWithProverResult.prototype[Symbol.dispose] = ZkLoginCompleteWithProverResult.prototype.free;
+
+export class ZkLoginPrepareResult {
+    static __wrap(ptr) {
+        const obj = Object.create(ZkLoginPrepareResult.prototype);
+        obj.__wbg_ptr = ptr;
+        ZkLoginPrepareResultFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        ZkLoginPrepareResultFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_zkloginprepareresult_free(ptr, 0);
+    }
+    /**
+     * @returns {string}
+     */
+    get ephemeral_private_key() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zkloginprepareresult_ephemeral_private_key(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {bigint}
+     */
+    get max_epoch() {
+        const ret = wasm.zkloginprepareresult_max_epoch(this.__wbg_ptr);
+        return BigInt.asUintN(64, ret);
+    }
+    /**
+     * @returns {string}
+     */
+    get nonce() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zkloginprepareresult_nonce(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * @returns {string}
+     */
+    get randomness() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.zkloginprepareresult_randomness(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) ZkLoginPrepareResult.prototype[Symbol.dispose] = ZkLoginPrepareResult.prototype.free;
+
+/**
+ * Free function (no `Wallet` instance, no api_url/app_id): deploy a flat
+ * Multisig on shellnet, funding the future address from the default giver.
+ * Always returns the owner keypair — the frontend MUST persist `secret`.
+ * @param {TParamsOfDeployMultisigViaGiver} params
+ * @returns {Promise<TResultOfDeployMultisigViaGiver>}
+ */
+export function deploy_multisig_via_giver(params) {
+    const ret = wasm.deploy_multisig_via_giver(params);
+    return ret;
+}
+
+/**
+ * @param {TParamsOfEnsureMiningKeysPropagated} params
+ * @returns {Promise<void>}
+ */
+export function ensure_mining_keys_propagated(params) {
+    const ret = wasm.ensure_mining_keys_propagated(params);
+    return ret;
+}
+
+/**
+ * @param {string} app_id
+ * @returns {Promise<ResultOfGenMiningKeys>}
+ */
+export function gen_mining_keys(app_id) {
+    const ptr0 = passStringToWasm0(app_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.gen_mining_keys(ptr0, len0);
+    return ret;
+}
+
+/**
+ * @param {TParamsOfGetMinerAddressByWalletName} params
+ * @returns {Promise<string>}
+ */
+export function get_miner_address_by_wallet_name(params) {
+    const ret = wasm.get_miner_address_by_wallet_name(params);
+    return ret;
+}
+
+/**
+ * Free function: ECC balances of any account by address as
+ * `{ currency_id: raw_amount_string }`. Generic — works on a flat multisig,
+ * unlike the multifactor-specific balance reader.
+ * @param {TParamsOfMultisigBalances} params
+ * @returns {Promise<Record<number, string>>}
+ */
+export function multisig_balances(params) {
+    const ret = wasm.multisig_balances(params);
+    return ret;
+}
+function __wbg_get_imports() {
+    const import0 = {
+        __proto__: null,
+        __wbg_Error_92b29b0548f8b746: function(arg0, arg1) {
+            const ret = Error(getStringFromWasm0(arg0, arg1));
+            return ret;
+        },
+        __wbg_Number_9a4e0ecb0fa16705: function(arg0) {
+            const ret = Number(arg0);
+            return ret;
+        },
+        __wbg_String_8564e559799eccda: function(arg0, arg1) {
+            const ret = String(arg1);
+            const ptr1 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const len1 = WASM_VECTOR_LEN;
+            getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
+        },
+        __wbg_Window_6b1e5e30561398b0: function(arg0) {
+            const ret = arg0.Window;
+            return ret;
+        },
+        __wbg_WorkerGlobalScope_c2be21ef9cc5eb0e: function(arg0) {
+            const ret = arg0.WorkerGlobalScope;
+            return ret;
+        },
+        __wbg___wbindgen_bigint_get_as_i64_d968e41184ae354f: function(arg0, arg1) {
+            const v = arg1;
+            const ret = typeof(v) === 'bigint' ? v : undefined;
+            getDataViewMemory0().setBigInt64(arg0 + 8 * 1, isLikeNone(ret) ? BigInt(0) : ret, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, !isLikeNone(ret), true);
+        },
+        __wbg___wbindgen_boolean_get_fa956cfa2d1bd751: function(arg0) {
+            const v = arg0;
+            const ret = typeof(v) === 'boolean' ? v : undefined;
+            return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
+        },
+        __wbg___wbindgen_debug_string_c25d447a39f5578f: function(arg0, arg1) {
+            const ret = debugString(arg1);
+            const ptr1 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const len1 = WASM_VECTOR_LEN;
+            getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
+        },
+        __wbg___wbindgen_in_aca499c5de7ff5e5: function(arg0, arg1) {
+            const ret = arg0 in arg1;
+            return ret;
+        },
+        __wbg___wbindgen_is_bigint_2f76dc55065b4273: function(arg0) {
+            const ret = typeof(arg0) === 'bigint';
+            return ret;
+        },
+        __wbg___wbindgen_is_function_1ff95bcc5517c252: function(arg0) {
+            const ret = typeof(arg0) === 'function';
+            return ret;
+        },
+        __wbg___wbindgen_is_object_a27215656b807791: function(arg0) {
+            const val = arg0;
+            const ret = typeof(val) === 'object' && val !== null;
+            return ret;
+        },
+        __wbg___wbindgen_is_string_ea5e6cc2e4141dfe: function(arg0) {
+            const ret = typeof(arg0) === 'string';
+            return ret;
+        },
+        __wbg___wbindgen_is_undefined_c05833b95a3cf397: function(arg0) {
+            const ret = arg0 === undefined;
+            return ret;
+        },
+        __wbg___wbindgen_jsval_eq_e659fcf7b0e32763: function(arg0, arg1) {
+            const ret = arg0 === arg1;
+            return ret;
+        },
+        __wbg___wbindgen_jsval_loose_eq_db4c3b15f63fc170: function(arg0, arg1) {
+            const ret = arg0 == arg1;
+            return ret;
+        },
+        __wbg___wbindgen_number_get_394265ed1e1b84ee: function(arg0, arg1) {
+            const obj = arg1;
+            const ret = typeof(obj) === 'number' ? obj : undefined;
+            getDataViewMemory0().setFloat64(arg0 + 8 * 1, isLikeNone(ret) ? 0 : ret, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, !isLikeNone(ret), true);
+        },
+        __wbg___wbindgen_shr_ad10001a7b001d7f: function(arg0, arg1) {
+            const ret = arg0 >> arg1;
+            return ret;
+        },
+        __wbg___wbindgen_string_get_b0ca35b86a603356: function(arg0, arg1) {
+            const obj = arg1;
+            const ret = typeof(obj) === 'string' ? obj : undefined;
+            var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            var len1 = WASM_VECTOR_LEN;
+            getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
+        },
+        __wbg___wbindgen_throw_344f42d3211c4765: function(arg0, arg1) {
+            throw new Error(getStringFromWasm0(arg0, arg1));
+        },
+        __wbg__wbg_cb_unref_fffb441def202758: function(arg0) {
+            arg0._wbg_cb_unref();
+        },
+        __wbg_abort_8bae0f33e7833997: function(arg0) {
+            arg0.abort();
+        },
+        __wbg_abort_eee9248a6d680839: function(arg0, arg1) {
+            arg0.abort(arg1);
+        },
+        __wbg_activeconnectsession_new: function(arg0) {
+            const ret = ActiveConnectSession.__wrap(arg0);
+            return ret;
+        },
+        __wbg_append_01c74e5c6b58aa64: function() { return handleError(function (arg0, arg1, arg2, arg3, arg4) {
+            arg0.append(getStringFromWasm0(arg1, arg2), getStringFromWasm0(arg3, arg4));
+        }, arguments); },
+        __wbg_arrayBuffer_3b637f0fa65c5351: function() { return handleError(function (arg0) {
+            const ret = arg0.arrayBuffer();
+            return ret;
+        }, arguments); },
+        __wbg_buffer_54b87055582c8a81: function(arg0) {
+            const ret = arg0.buffer;
+            return ret;
+        },
+        __wbg_call_8a2dd23819f8a60a: function() { return handleError(function (arg0, arg1) {
+            const ret = arg0.call(arg1);
+            return ret;
+        }, arguments); },
+        __wbg_call_a6e5c5dce5018821: function() { return handleError(function (arg0, arg1, arg2) {
+            const ret = arg0.call(arg1, arg2);
+            return ret;
+        }, arguments); },
+        __wbg_clearTimeout_113b1cde814ec762: function(arg0) {
+            const ret = clearTimeout(arg0);
+            return ret;
+        },
+        __wbg_clearTimeout_6b8d9a38b9263d65: function(arg0) {
+            const ret = clearTimeout(arg0);
+            return ret;
+        },
+        __wbg_clearTimeout_8f80437be2324e09: function(arg0, arg1) {
+            arg0.clearTimeout(arg1);
+        },
+        __wbg_close_c65ca0257e895318: function() { return handleError(function (arg0) {
+            arg0.close();
+        }, arguments); },
+        __wbg_connectsessionmessage_new: function(arg0) {
+            const ret = ConnectSessionMessage.__wrap(arg0);
+            return ret;
+        },
+        __wbg_createObjectStore_ff668af6e79f0433: function() { return handleError(function (arg0, arg1, arg2) {
+            const ret = arg0.createObjectStore(getStringFromWasm0(arg1, arg2));
+            return ret;
+        }, arguments); },
+        __wbg_crypto_38df2bab126b63dc: function(arg0) {
+            const ret = arg0.crypto;
+            return ret;
+        },
+        __wbg_cryptoresultofencrypt_new: function(arg0) {
+            const ret = CryptoResultOfEncrypt.__wrap(arg0);
+            return ret;
+        },
+        __wbg_cryptoresultofgenseedandkeys_new: function(arg0) {
+            const ret = CryptoResultOfGenSeedAndKeys.__wrap(arg0);
+            return ret;
+        },
+        __wbg_cryptoresultofgetkeys_new: function(arg0) {
+            const ret = CryptoResultOfGetKeys.__wrap(arg0);
+            return ret;
+        },
+        __wbg_cryptoresultofsign_new: function(arg0) {
+            const ret = CryptoResultOfSign.__wrap(arg0);
+            return ret;
+        },
+        __wbg_data_328de4280640da92: function(arg0) {
+            const ret = arg0.data;
+            return ret;
+        },
+        __wbg_debug_87fd9b1a625b7efb: function(arg0) {
+            console.debug(arg0);
+        },
+        __wbg_deriveBits_e5bd401e3a409572: function() { return handleError(function (arg0, arg1, arg2, arg3) {
+            const ret = arg0.deriveBits(arg1, arg2, arg3 >>> 0);
+            return ret;
+        }, arguments); },
+        __wbg_done_89b2b13e91a60321: function(arg0) {
+            const ret = arg0.done;
+            return ret;
+        },
+        __wbg_entries_015dc610cd81ede0: function(arg0) {
+            const ret = Object.entries(arg0);
+            return ret;
+        },
+        __wbg_error_744744ff0c9861e6: function(arg0) {
+            console.error(arg0);
+        },
+        __wbg_error_a6fa202b58aa1cd3: function(arg0, arg1) {
+            let deferred0_0;
+            let deferred0_1;
+            try {
+                deferred0_0 = arg0;
+                deferred0_1 = arg1;
+                console.error(getStringFromWasm0(arg0, arg1));
+            } finally {
+                wasm.__wbindgen_free(deferred0_0, deferred0_1, 1);
+            }
+        },
+        __wbg_error_becd7e1fe6ce0623: function() { return handleError(function (arg0) {
+            const ret = arg0.error;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        }, arguments); },
+        __wbg_fetch_6ecc661950e58d49: function(arg0, arg1) {
+            const ret = arg0.fetch(arg1);
+            return ret;
+        },
+        __wbg_fetch_9dad4fe911207b37: function(arg0) {
+            const ret = fetch(arg0);
+            return ret;
+        },
+        __wbg_fetch_b5951fc96f52f786: function(arg0, arg1) {
+            const ret = arg0.fetch(arg1);
+            return ret;
+        },
+        __wbg_getRandomValues_3f44b700395062e5: function() { return handleError(function (arg0, arg1) {
+            globalThis.crypto.getRandomValues(getArrayU8FromWasm0(arg0, arg1));
+        }, arguments); },
+        __wbg_getRandomValues_c44a50d8cfdaebeb: function() { return handleError(function (arg0, arg1) {
+            arg0.getRandomValues(arg1);
+        }, arguments); },
+        __wbg_getTime_d6f070c088c9b5ed: function(arg0) {
+            const ret = arg0.getTime();
+            return ret;
+        },
+        __wbg_getTimezoneOffset_dc9862c79e5a81a3: function(arg0) {
+            const ret = arg0.getTimezoneOffset();
+            return ret;
+        },
+        __wbg_get_507a50627bffa49b: function(arg0, arg1) {
+            const ret = arg0[arg1 >>> 0];
+            return ret;
+        },
+        __wbg_get_78f252d074a84d0b: function() { return handleError(function (arg0, arg1) {
+            const ret = Reflect.get(arg0, arg1);
+            return ret;
+        }, arguments); },
+        __wbg_get_c7eb1f358a7654df: function() { return handleError(function (arg0, arg1) {
+            const ret = Reflect.get(arg0, arg1);
+            return ret;
+        }, arguments); },
+        __wbg_get_cefddcaffca4fbb7: function() { return handleError(function (arg0, arg1) {
+            const ret = arg0.get(arg1);
+            return ret;
+        }, arguments); },
+        __wbg_get_unchecked_6e0ad6d2a41b06f6: function(arg0, arg1) {
+            const ret = arg0[arg1 >>> 0];
+            return ret;
+        },
+        __wbg_get_with_ref_key_6412cf3094599694: function(arg0, arg1) {
+            const ret = arg0[arg1];
+            return ret;
+        },
+        __wbg_global_deb18d05f75c643d: function(arg0) {
+            const ret = arg0.global;
+            return ret;
+        },
+        __wbg_graphqlblockdata_new: function(arg0) {
+            const ret = GraphqlBlockData.__wrap(arg0);
+            return ret;
+        },
+        __wbg_has_8374cf06984d8bfc: function() { return handleError(function (arg0, arg1) {
+            const ret = Reflect.has(arg0, arg1);
+            return ret;
+        }, arguments); },
+        __wbg_headers_7b59c5203c8c475d: function(arg0) {
+            const ret = arg0.headers;
+            return ret;
+        },
+        __wbg_headers_cf9c80f30e2a4eff: function(arg0) {
+            const ret = arg0.headers;
+            return ret;
+        },
+        __wbg_importKey_10a137b5a53c66ba: function() { return handleError(function (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
+            const ret = arg0.importKey(getStringFromWasm0(arg1, arg2), arg3, getStringFromWasm0(arg4, arg5), arg6 !== 0, arg7);
+            return ret;
+        }, arguments); },
+        __wbg_indexedDB_594b9e6820e78c00: function() { return handleError(function (arg0) {
+            const ret = arg0.indexedDB;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        }, arguments); },
+        __wbg_indexedDB_66709c81db8a4d72: function() { return handleError(function (arg0) {
+            const ret = arg0.indexedDB;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        }, arguments); },
+        __wbg_indexedDB_c7dd741e3b661da5: function() { return handleError(function (arg0) {
+            const ret = arg0.indexedDB;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        }, arguments); },
+        __wbg_instanceof_ArrayBuffer_4480b9e0068a8adb: function(arg0) {
+            let result;
+            try {
+                result = arg0 instanceof ArrayBuffer;
+            } catch (_) {
+                result = false;
+            }
+            const ret = result;
+            return ret;
+        },
+        __wbg_instanceof_Error_1fdac9f13a8181ba: function(arg0) {
+            let result;
+            try {
+                result = arg0 instanceof Error;
+            } catch (_) {
+                result = false;
+            }
+            const ret = result;
+            return ret;
+        },
+        __wbg_instanceof_Map_e5b5e3db98422fcc: function(arg0) {
+            let result;
+            try {
+                result = arg0 instanceof Map;
+            } catch (_) {
+                result = false;
+            }
+            const ret = result;
+            return ret;
+        },
+        __wbg_instanceof_Response_c8b64b2256f01bec: function(arg0) {
+            let result;
+            try {
+                result = arg0 instanceof Response;
+            } catch (_) {
+                result = false;
+            }
+            const ret = result;
+            return ret;
+        },
+        __wbg_instanceof_Uint8Array_309b927aaf7a3fc7: function(arg0) {
+            let result;
+            try {
+                result = arg0 instanceof Uint8Array;
+            } catch (_) {
+                result = false;
+            }
+            const ret = result;
+            return ret;
+        },
+        __wbg_instanceof_Window_05ba1ee4f6781663: function(arg0) {
+            let result;
+            try {
+                result = arg0 instanceof Window;
+            } catch (_) {
+                result = false;
+            }
+            const ret = result;
+            return ret;
+        },
+        __wbg_isArray_0677c962b281d01a: function(arg0) {
+            const ret = Array.isArray(arg0);
+            return ret;
+        },
+        __wbg_isSafeInteger_04f36e4056f1b851: function(arg0) {
+            const ret = Number.isSafeInteger(arg0);
+            return ret;
+        },
+        __wbg_item_a630f38f5a12ba67: function(arg0, arg1, arg2) {
+            const ret = arg1.item(arg2 >>> 0);
+            var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            var len1 = WASM_VECTOR_LEN;
+            getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
+        },
+        __wbg_iterator_6f722e4a93058b71: function() {
+            const ret = Symbol.iterator;
+            return ret;
+        },
+        __wbg_length_1f0964f4a5e2c6d8: function(arg0) {
+            const ret = arg0.length;
+            return ret;
+        },
+        __wbg_length_370319915dc99107: function(arg0) {
+            const ret = arg0.length;
+            return ret;
+        },
+        __wbg_message_8326fb1d549bebc5: function(arg0) {
+            const ret = arg0.message;
+            return ret;
+        },
+        __wbg_message_fb0e6e7854e6ea7a: function(arg0, arg1) {
+            const ret = arg1.message;
+            const ptr1 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const len1 = WASM_VECTOR_LEN;
+            getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
+        },
+        __wbg_miner_new: function(arg0) {
+            const ret = Miner.__wrap(arg0);
+            return ret;
+        },
+        __wbg_mineraccountdata_new: function(arg0) {
+            const ret = MinerAccountData.__wrap(arg0);
+            return ret;
+        },
+        __wbg_msCrypto_bd5a034af96bcba6: function(arg0) {
+            const ret = arg0.msCrypto;
+            return ret;
+        },
+        __wbg_new_0_3da9e97f24fc69be: function() {
+            const ret = new Date();
+            return ret;
+        },
+        __wbg_new_0d809930cd1354c6: function() { return handleError(function () {
+            const ret = new Headers();
+            return ret;
+        }, arguments); },
+        __wbg_new_227d7c05414eb861: function() {
+            const ret = new Error();
+            return ret;
+        },
+        __wbg_new_32b398fb48b6d94a: function() {
+            const ret = new Array();
+            return ret;
+        },
+        __wbg_new_4339b2a2675a03e3: function() { return handleError(function () {
+            const ret = new AbortController();
+            return ret;
+        }, arguments); },
+        __wbg_new_7796ffc7ed656783: function() {
+            const ret = new Map();
+            return ret;
+        },
+        __wbg_new_bf8729ffe10e9ee7: function() { return handleError(function (arg0, arg1) {
+            const ret = new WebSocket(getStringFromWasm0(arg0, arg1));
+            return ret;
+        }, arguments); },
+        __wbg_new_cc984128914cfc6f: function(arg0) {
+            const ret = new Date(arg0);
+            return ret;
+        },
+        __wbg_new_cd45aabdf6073e84: function(arg0) {
+            const ret = new Uint8Array(arg0);
+            return ret;
+        },
+        __wbg_new_da52cf8fe3429cb2: function() {
+            const ret = new Object();
+            return ret;
+        },
+        __wbg_new_from_slice_77cdfb7977362f3c: function(arg0, arg1) {
+            const ret = new Uint8Array(getArrayU8FromWasm0(arg0, arg1));
+            return ret;
+        },
+        __wbg_new_typed_1824d93f294193e5: function(arg0, arg1) {
+            try {
+                var state0 = {a: arg0, b: arg1};
+                var cb0 = (arg0, arg1) => {
+                    const a = state0.a;
+                    state0.a = 0;
+                    try {
+                        return wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___js_sys_689861e79cd9462___Function_fn_wasm_bindgen_cbdd07343866f8c___JsValue_____wasm_bindgen_cbdd07343866f8c___sys__Undefined___js_sys_689861e79cd9462___Function_fn_wasm_bindgen_cbdd07343866f8c___JsValue_____wasm_bindgen_cbdd07343866f8c___sys__Undefined_______true_(a, state0.b, arg0, arg1);
+                    } finally {
+                        state0.a = a;
+                    }
+                };
+                const ret = new Promise(cb0);
+                return ret;
+            } finally {
+                state0.a = 0;
+            }
+        },
+        __wbg_new_with_length_e6785c33c8e4cce8: function(arg0) {
+            const ret = new Uint8Array(arg0 >>> 0);
+            return ret;
+        },
+        __wbg_new_with_str_3f0451631559a818: function() { return handleError(function (arg0, arg1, arg2, arg3) {
+            const ret = new WebSocket(getStringFromWasm0(arg0, arg1), getStringFromWasm0(arg2, arg3));
+            return ret;
+        }, arguments); },
+        __wbg_new_with_str_and_init_d95cbe11ce28e65e: function() { return handleError(function (arg0, arg1, arg2) {
+            const ret = new Request(getStringFromWasm0(arg0, arg1), arg2);
+            return ret;
+        }, arguments); },
+        __wbg_next_6dbf2c0ac8cde20f: function(arg0) {
+            const ret = arg0.next;
+            return ret;
+        },
+        __wbg_next_71f2aa1cb3d1e37e: function() { return handleError(function (arg0) {
+            const ret = arg0.next();
+            return ret;
+        }, arguments); },
+        __wbg_node_84ea875411254db1: function(arg0) {
+            const ret = arg0.node;
+            return ret;
+        },
+        __wbg_now_86c0d4ba3fa605b8: function() {
+            const ret = Date.now();
+            return ret;
+        },
+        __wbg_objectStoreNames_146ab25540bff6db: function(arg0) {
+            const ret = arg0.objectStoreNames;
+            return ret;
+        },
+        __wbg_objectStore_d5f47956b6c741e3: function() { return handleError(function (arg0, arg1, arg2) {
+            const ret = arg0.objectStore(getStringFromWasm0(arg1, arg2));
+            return ret;
+        }, arguments); },
+        __wbg_of_85f52f8b6491a7ca: function(arg0) {
+            const ret = Array.of(arg0);
+            return ret;
+        },
+        __wbg_open_8b445bd20535cb55: function() { return handleError(function (arg0, arg1, arg2) {
+            const ret = arg0.open(getStringFromWasm0(arg1, arg2));
+            return ret;
+        }, arguments); },
+        __wbg_prepareddeployparams_new: function(arg0) {
+            const ret = PreparedDeployParams.__wrap(arg0);
+            return ret;
+        },
+        __wbg_process_44c7a14e11e9f69e: function(arg0) {
+            const ret = arg0.process;
+            return ret;
+        },
+        __wbg_prototypesetcall_4770620bbe4688a0: function(arg0, arg1, arg2) {
+            Uint8Array.prototype.set.call(getArrayU8FromWasm0(arg0, arg1), arg2);
+        },
+        __wbg_push_d2ae3af0c1217ae6: function(arg0, arg1) {
+            const ret = arg0.push(arg1);
+            return ret;
+        },
+        __wbg_put_a368805e3dcab3a7: function() { return handleError(function (arg0, arg1, arg2) {
+            const ret = arg0.put(arg1, arg2);
+            return ret;
+        }, arguments); },
+        __wbg_queueMicrotask_0ab5b2d2393e99b9: function(arg0) {
+            const ret = arg0.queueMicrotask;
+            return ret;
+        },
+        __wbg_queueMicrotask_6a09b7bc46549209: function(arg0) {
+            queueMicrotask(arg0);
+        },
+        __wbg_randomFillSync_6c25eac9869eb53c: function() { return handleError(function (arg0, arg1) {
+            arg0.randomFillSync(arg1);
+        }, arguments); },
+        __wbg_random_039a7d5d06e0d333: function() {
+            const ret = Math.random();
+            return ret;
+        },
+        __wbg_readyState_9794af9795506c08: function(arg0) {
+            const ret = arg0.readyState;
+            return (__wbindgen_enum_IdbRequestReadyState.indexOf(ret) + 1 || 3) - 1;
+        },
+        __wbg_require_b4edbdcf3e2a1ef0: function() { return handleError(function () {
+            const ret = module.require;
+            return ret;
+        }, arguments); },
+        __wbg_resolve_2191a4dfe481c25b: function(arg0) {
+            const ret = Promise.resolve(arg0);
+            return ret;
+        },
+        __wbg_result_2b1294a2bf8dc773: function() { return handleError(function (arg0) {
+            const ret = arg0.result;
+            return ret;
+        }, arguments); },
+        __wbg_resultofaddzkpfactor_new: function(arg0) {
+            const ret = ResultOfAddZKPFactor.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofblockchainwrite_new: function(arg0) {
+            const ret = ResultOfBlockchainWrite.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofchecknameavailability_new: function(arg0) {
+            const ret = ResultOfCheckNameAvailability.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofdeploymultifactor_new: function(arg0) {
+            const ret = ResultOfDeployMultifactor.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofdisconnectsession_new: function(arg0) {
+            const ret = ResultOfDisconnectSession.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgenminingkeys_new: function(arg0) {
+            const ret = ResultOfGenMiningKeys.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgetepkexpireat_new: function(arg0) {
+            const ret = ResultOfGetEPKExpireAt.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgethistory_new: function(arg0) {
+            const ret = ResultOfGetHistory.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgetminerdetails_new: function(arg0) {
+            const ret = ResultOfGetMinerDetails.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgetmultifactordetails_new: function(arg0) {
+            const ret = ResultOfGetMultifactorDetails.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgetmultifactorinfo_new: function(arg0) {
+            const ret = ResultOfGetMultifactorInfo.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgetmvmultifactoraddress_new: function(arg0) {
+            const ret = ResultOfGetMvMultifactorAddress.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgetnativebalances_new: function(arg0) {
+            const ret = ResultOfGetNativeBalances.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofgettokensbalances_new: function(arg0) {
+            const ret = ResultOfGetTokensBalances.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofqueryactivesessionsbymultifactor_new: function(arg0) {
+            const ret = ResultOfQueryActiveSessionsByMultifactor.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofquerysessionmessages_new: function(arg0) {
+            const ret = ResultOfQuerySessionMessages.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofrequestsetminingkeys_new: function(arg0) {
+            const ret = ResultOfRequestSetMiningKeys.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofrequestsignchallenge_new: function(arg0) {
+            const ret = ResultOfRequestSignChallenge.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofsendmessage_new: function(arg0) {
+            const ret = ResultOfSendMessage.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofwaitchallengeresponse_new: function(arg0) {
+            const ret = ResultOfWaitChallengeResponse.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofwaitsetminingkeysrequest_new: function(arg0) {
+            const ret = ResultOfWaitSetMiningKeysRequest.__wrap(arg0);
+            return ret;
+        },
+        __wbg_resultofwaitwallethello_new: function(arg0) {
+            const ret = ResultOfWaitWalletHello.__wrap(arg0);
+            return ret;
+        },
+        __wbg_send_df98dd5ede9b3f4d: function() { return handleError(function (arg0, arg1, arg2) {
+            arg0.send(getStringFromWasm0(arg1, arg2));
+        }, arguments); },
+        __wbg_setTimeout_cfa2cf195c3738db: function() { return handleError(function (arg0, arg1, arg2) {
+            const ret = arg0.setTimeout(arg1, arg2);
+            return ret;
+        }, arguments); },
+        __wbg_setTimeout_ef24d2fc3ad97385: function() { return handleError(function (arg0, arg1) {
+            const ret = setTimeout(arg0, arg1);
+            return ret;
+        }, arguments); },
+        __wbg_setTimeout_f757f00851f76c42: function(arg0, arg1) {
+            const ret = setTimeout(arg0, arg1);
+            return ret;
+        },
+        __wbg_set_0de9c62c23d04ad5: function() { return handleError(function (arg0, arg1, arg2, arg3, arg4) {
+            arg0.set(getStringFromWasm0(arg1, arg2), getStringFromWasm0(arg3, arg4));
+        }, arguments); },
+        __wbg_set_575dd786d51585f8: function(arg0, arg1, arg2) {
+            const ret = arg0.set(arg1, arg2);
+            return ret;
+        },
+        __wbg_set_6be42768c690e380: function(arg0, arg1, arg2) {
+            arg0[arg1] = arg2;
+        },
+        __wbg_set_8535240470bf2500: function() { return handleError(function (arg0, arg1, arg2) {
+            const ret = Reflect.set(arg0, arg1, arg2);
+            return ret;
+        }, arguments); },
+        __wbg_set_8a16b38e4805b298: function(arg0, arg1, arg2) {
+            arg0[arg1 >>> 0] = arg2;
+        },
+        __wbg_set_body_029f2d171e0a005f: function(arg0, arg1) {
+            arg0.body = arg1;
+        },
+        __wbg_set_cache_b4a740b195c051f4: function(arg0, arg1) {
+            arg0.cache = __wbindgen_enum_RequestCache[arg1];
+        },
+        __wbg_set_credentials_bb34a40189e3b43b: function(arg0, arg1) {
+            arg0.credentials = __wbindgen_enum_RequestCredentials[arg1];
+        },
+        __wbg_set_headers_9c61d123c3ee1f10: function(arg0, arg1) {
+            arg0.headers = arg1;
+        },
+        __wbg_set_method_5532d59b92d76467: function(arg0, arg1, arg2) {
+            arg0.method = getStringFromWasm0(arg1, arg2);
+        },
+        __wbg_set_mode_66c79886ad78fc05: function(arg0, arg1) {
+            arg0.mode = __wbindgen_enum_RequestMode[arg1];
+        },
+        __wbg_set_onabort_e8ad31807de2db24: function(arg0, arg1) {
+            arg0.onabort = arg1;
+        },
+        __wbg_set_onblocked_8ad6aab7c2ff05f5: function(arg0, arg1) {
+            arg0.onblocked = arg1;
+        },
+        __wbg_set_oncomplete_e6abb66d0ad42731: function(arg0, arg1) {
+            arg0.oncomplete = arg1;
+        },
+        __wbg_set_onerror_3488a474171ed56d: function(arg0, arg1) {
+            arg0.onerror = arg1;
+        },
+        __wbg_set_onerror_9f5773fd31512333: function(arg0, arg1) {
+            arg0.onerror = arg1;
+        },
+        __wbg_set_onerror_f8d31be44335c633: function(arg0, arg1) {
+            arg0.onerror = arg1;
+        },
+        __wbg_set_onmessage_836d2f72130b4706: function(arg0, arg1) {
+            arg0.onmessage = arg1;
+        },
+        __wbg_set_onopen_4f65470ae522a61a: function(arg0, arg1) {
+            arg0.onopen = arg1;
+        },
+        __wbg_set_onsuccess_cd0c3642a2873e66: function(arg0, arg1) {
+            arg0.onsuccess = arg1;
+        },
+        __wbg_set_onupgradeneeded_7b2cf4ba1c57e655: function(arg0, arg1) {
+            arg0.onupgradeneeded = arg1;
+        },
+        __wbg_set_onversionchange_c4d25c90ac386854: function(arg0, arg1) {
+            arg0.onversionchange = arg1;
+        },
+        __wbg_set_signal_c4ef8faddb4c1446: function(arg0, arg1) {
+            arg0.signal = arg1;
+        },
+        __wbg_signal_dad7cb35193abd31: function(arg0) {
+            const ret = arg0.signal;
+            return ret;
+        },
+        __wbg_stack_3b0d974bbf31e44f: function(arg0, arg1) {
+            const ret = arg1.stack;
+            const ptr1 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const len1 = WASM_VECTOR_LEN;
+            getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
+        },
+        __wbg_static_accessor_GLOBAL_4ef717fb391d88b7: function() {
+            const ret = typeof global === 'undefined' ? null : global;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        },
+        __wbg_static_accessor_GLOBAL_THIS_8d1badc68b5a74f4: function() {
+            const ret = typeof globalThis === 'undefined' ? null : globalThis;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        },
+        __wbg_static_accessor_SELF_146583524fe1469b: function() {
+            const ret = typeof self === 'undefined' ? null : self;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        },
+        __wbg_static_accessor_WINDOW_f2829a2234d7819e: function() {
+            const ret = typeof window === 'undefined' ? null : window;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        },
+        __wbg_status_c45b3b9b3033184a: function(arg0) {
+            const ret = arg0.status;
+            return ret;
+        },
+        __wbg_stringify_b54333f60f1e4dad: function() { return handleError(function (arg0) {
+            const ret = JSON.stringify(arg0);
+            return ret;
+        }, arguments); },
+        __wbg_subarray_3ed232c8a6baee09: function(arg0, arg1, arg2) {
+            const ret = arg0.subarray(arg1 >>> 0, arg2 >>> 0);
+            return ret;
+        },
+        __wbg_subtle_ed1dfcaede24af07: function(arg0) {
+            const ret = arg0.subtle;
+            return ret;
+        },
+        __wbg_target_e759594a8d965ed7: function(arg0) {
+            const ret = arg0.target;
+            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
+        },
+        __wbg_text_d3a29f7525a132c3: function() { return handleError(function (arg0) {
+            const ret = arg0.text();
+            return ret;
+        }, arguments); },
+        __wbg_then_16d107c451e9905d: function(arg0, arg1, arg2) {
+            const ret = arg0.then(arg1, arg2);
+            return ret;
+        },
+        __wbg_then_6ec10ae38b3e92f7: function(arg0, arg1) {
+            const ret = arg0.then(arg1);
+            return ret;
+        },
+        __wbg_transaction_d911d96b4b0af154: function() { return handleError(function (arg0, arg1, arg2, arg3) {
+            const ret = arg0.transaction(getStringFromWasm0(arg1, arg2), __wbindgen_enum_IdbTransactionMode[arg3]);
+            return ret;
+        }, arguments); },
+        __wbg_txdata_new: function(arg0) {
+            const ret = TxData.__wrap(arg0);
+            return ret;
+        },
+        __wbg_url_abdb8fb08377f8c0: function(arg0, arg1) {
+            const ret = arg1.url;
+            const ptr1 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const len1 = WASM_VECTOR_LEN;
+            getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
+        },
+        __wbg_value_a5d5488a9589444a: function(arg0) {
+            const ret = arg0.value;
+            return ret;
+        },
+        __wbg_versions_276b2795b1c6a219: function(arg0) {
+            const ret = arg0.versions;
+            return ret;
+        },
+        __wbg_zklogincompletewithproverresult_new: function(arg0) {
+            const ret = ZkLoginCompleteWithProverResult.__wrap(arg0);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000001: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [Externref], shim_idx: 144, ret: Result(Unit), inner_ret: Some(Result(Unit)) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue__core_9b3796e30d99ddb7___result__Result_____wasm_bindgen_cbdd07343866f8c___JsError___true_);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000002: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [Externref], shim_idx: 3213, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true_);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000003: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [NamedExternref("Event")], shim_idx: 1502, ret: Unit, inner_ret: Some(Unit) }, mutable: false }) -> Externref`.
+            const ret = makeClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___web_sys_8d7f442193e45079___features__gen_Event__Event______true_);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000004: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [NamedExternref("Event")], shim_idx: 3213, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true__3);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000005: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [NamedExternref("IDBVersionChangeEvent")], shim_idx: 3214, ret: Result(Unit), inner_ret: Some(Result(Unit)) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___web_sys_8d7f442193e45079___features__gen_IdbVersionChangeEvent__IdbVersionChangeEvent__core_9b3796e30d99ddb7___result__Result_____wasm_bindgen_cbdd07343866f8c___JsValue___true_);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000006: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [NamedExternref("MessageEvent")], shim_idx: 3213, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true__5);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000007: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [], shim_idx: 1503, ret: Unit, inner_ret: Some(Unit) }, mutable: false }) -> Externref`.
+            const ret = makeClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true_);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000008: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [], shim_idx: 3212, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__1_);
+            return ret;
+        },
+        __wbindgen_cast_0000000000000009: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [], shim_idx: 4403, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__2_);
+            return ret;
+        },
+        __wbindgen_cast_000000000000000a: function(arg0, arg1) {
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [], shim_idx: 4506, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__3_);
+            return ret;
+        },
+        __wbindgen_cast_000000000000000b: function(arg0) {
+            // Cast intrinsic for `F64 -> Externref`.
+            const ret = arg0;
+            return ret;
+        },
+        __wbindgen_cast_000000000000000c: function(arg0) {
+            // Cast intrinsic for `I64 -> Externref`.
+            const ret = arg0;
+            return ret;
+        },
+        __wbindgen_cast_000000000000000d: function(arg0, arg1) {
+            // Cast intrinsic for `Ref(Slice(U8)) -> NamedExternref("Uint8Array")`.
+            const ret = getArrayU8FromWasm0(arg0, arg1);
+            return ret;
+        },
+        __wbindgen_cast_000000000000000e: function(arg0, arg1) {
+            // Cast intrinsic for `Ref(String) -> Externref`.
+            const ret = getStringFromWasm0(arg0, arg1);
+            return ret;
+        },
+        __wbindgen_cast_000000000000000f: function(arg0, arg1) {
+            // Cast intrinsic for `U128 -> Externref`.
+            const ret = (BigInt.asUintN(64, arg0) | (BigInt.asUintN(64, arg1) << BigInt(64)));
+            return ret;
+        },
+        __wbindgen_cast_0000000000000010: function(arg0) {
+            // Cast intrinsic for `U64 -> Externref`.
+            const ret = BigInt.asUintN(64, arg0);
+            return ret;
+        },
+        __wbindgen_init_externref_table: function() {
+            const table = wasm.__wbindgen_externrefs;
+            const offset = table.grow(4);
+            table.set(0, undefined);
+            table.set(offset + 0, undefined);
+            table.set(offset + 1, null);
+            table.set(offset + 2, true);
+            table.set(offset + 3, false);
+        },
+    };
+    return {
+        __proto__: null,
+        "./bee_sdk_bg.js": import0,
+    };
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true_(arg0, arg1) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true_(arg0, arg1);
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__1_(arg0, arg1) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__1_(arg0, arg1);
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__2_(arg0, arg1) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__2_(arg0, arg1);
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__3_(arg0, arg1) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke_______true__3_(arg0, arg1);
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true_(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true_(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___web_sys_8d7f442193e45079___features__gen_Event__Event______true_(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___web_sys_8d7f442193e45079___features__gen_Event__Event______true_(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true__3(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true__3(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true__5(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue______true__5(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue__core_9b3796e30d99ddb7___result__Result_____wasm_bindgen_cbdd07343866f8c___JsError___true_(arg0, arg1, arg2) {
+    const ret = wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___wasm_bindgen_cbdd07343866f8c___JsValue__core_9b3796e30d99ddb7___result__Result_____wasm_bindgen_cbdd07343866f8c___JsError___true_(arg0, arg1, arg2);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___web_sys_8d7f442193e45079___features__gen_IdbVersionChangeEvent__IdbVersionChangeEvent__core_9b3796e30d99ddb7___result__Result_____wasm_bindgen_cbdd07343866f8c___JsValue___true_(arg0, arg1, arg2) {
+    const ret = wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___web_sys_8d7f442193e45079___features__gen_IdbVersionChangeEvent__IdbVersionChangeEvent__core_9b3796e30d99ddb7___result__Result_____wasm_bindgen_cbdd07343866f8c___JsValue___true_(arg0, arg1, arg2);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+function wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___js_sys_689861e79cd9462___Function_fn_wasm_bindgen_cbdd07343866f8c___JsValue_____wasm_bindgen_cbdd07343866f8c___sys__Undefined___js_sys_689861e79cd9462___Function_fn_wasm_bindgen_cbdd07343866f8c___JsValue_____wasm_bindgen_cbdd07343866f8c___sys__Undefined_______true_(arg0, arg1, arg2, arg3) {
+    wasm.wasm_bindgen_cbdd07343866f8c___convert__closures_____invoke___js_sys_689861e79cd9462___Function_fn_wasm_bindgen_cbdd07343866f8c___JsValue_____wasm_bindgen_cbdd07343866f8c___sys__Undefined___js_sys_689861e79cd9462___Function_fn_wasm_bindgen_cbdd07343866f8c___JsValue_____wasm_bindgen_cbdd07343866f8c___sys__Undefined_______true_(arg0, arg1, arg2, arg3);
+}
+
+
+const __wbindgen_enum_IdbRequestReadyState = ["pending", "done"];
+
+
+const __wbindgen_enum_IdbTransactionMode = ["readonly", "readwrite", "versionchange", "readwriteflush", "cleanup"];
+
+
+const __wbindgen_enum_RequestCache = ["default", "no-store", "reload", "no-cache", "force-cache", "only-if-cached"];
+
+
+const __wbindgen_enum_RequestCredentials = ["omit", "same-origin", "include"];
+
+
+const __wbindgen_enum_RequestMode = ["same-origin", "no-cors", "cors", "navigate"];
+const ActiveConnectSessionFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_activeconnectsession_free(ptr, 1));
+const BeeConnectFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_beeconnect_free(ptr, 1));
+const ConnectSessionMessageFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_connectsessionmessage_free(ptr, 1));
+const CryptoFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_crypto_free(ptr, 1));
+const CryptoResultOfEncryptFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_cryptoresultofencrypt_free(ptr, 1));
+const CryptoResultOfGenSeedAndKeysFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_cryptoresultofgenseedandkeys_free(ptr, 1));
+const CryptoResultOfGetKeysFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_cryptoresultofgetkeys_free(ptr, 1));
+const CryptoResultOfSignFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_cryptoresultofsign_free(ptr, 1));
+const GraphqlBlockDataFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_graphqlblockdata_free(ptr, 1));
+const IssBase64DetailsFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_issbase64details_free(ptr, 1));
+const MinerFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_miner_free(ptr, 1));
+const MinerAccountDataFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_mineraccountdata_free(ptr, 1));
+const MultifactorAccountDataFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_multifactoraccountdata_free(ptr, 1));
+const ParsedConnectPayloadFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_parsedconnectpayload_free(ptr, 1));
+const PreparedDeployParamsFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_prepareddeployparams_free(ptr, 1));
+const ResultGetMirrorAddressFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultgetmirroraddress_free(ptr, 1));
+const ResultOfAddZKPFactorFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofaddzkpfactor_free(ptr, 1));
+const ResultOfBlockchainWriteFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofblockchainwrite_free(ptr, 1));
+const ResultOfCheckNameAvailabilityFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofchecknameavailability_free(ptr, 1));
+const ResultOfCreateSharedKeySessionFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofcreatesharedkeysession_free(ptr, 1));
+const ResultOfDeployMultifactorFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofdeploymultifactor_free(ptr, 1));
+const ResultOfDisconnectSessionFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofdisconnectsession_free(ptr, 1));
+const ResultOfGenMiningKeysFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgenminingkeys_free(ptr, 1));
+const ResultOfGetEPKExpireAtFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgetepkexpireat_free(ptr, 1));
+const ResultOfGetHistoryFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgethistory_free(ptr, 1));
+const ResultOfGetKeysFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgetkeys_free(ptr, 1));
+const ResultOfGetMinerDetailsFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgetminerdetails_free(ptr, 1));
+const ResultOfGetMultifactorDetailsFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgetmultifactordetails_free(ptr, 1));
+const ResultOfGetMultifactorInfoFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgetmultifactorinfo_free(ptr, 1));
+const ResultOfGetMvMultifactorAddressFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgetmvmultifactoraddress_free(ptr, 1));
+const ResultOfGetNativeBalancesFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgetnativebalances_free(ptr, 1));
+const ResultOfGetTokensBalancesFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofgettokensbalances_free(ptr, 1));
+const ResultOfQueryActiveSessionsByMultifactorFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofqueryactivesessionsbymultifactor_free(ptr, 1));
+const ResultOfQuerySessionMessagesFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofquerysessionmessages_free(ptr, 1));
+const ResultOfRequestSetMiningKeysFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofrequestsetminingkeys_free(ptr, 1));
+const ResultOfRequestSignChallengeFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofrequestsignchallenge_free(ptr, 1));
+const ResultOfSendMessageFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofsendmessage_free(ptr, 1));
+const ResultOfValidateWalletNameFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofvalidatewalletname_free(ptr, 1));
+const ResultOfWaitChallengeResponseFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofwaitchallengeresponse_free(ptr, 1));
+const ResultOfWaitSetMiningKeysRequestFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofwaitsetminingkeysrequest_free(ptr, 1));
+const ResultOfWaitWalletHelloFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_resultofwaitwallethello_free(ptr, 1));
+const TxDataFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_txdata_free(ptr, 1));
+const WalletFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_wallet_free(ptr, 1));
+const ZkLoginCompleteWithProverResultFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_zklogincompletewithproverresult_free(ptr, 1));
+const ZkLoginPrepareResultFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_zkloginprepareresult_free(ptr, 1));
+
+function addToExternrefTable0(obj) {
+    const idx = wasm.__externref_table_alloc();
+    wasm.__wbindgen_externrefs.set(idx, obj);
+    return idx;
+}
+
+const CLOSURE_DTORS = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(state => wasm.__wbindgen_destroy_closure(state.a, state.b));
+
+function debugString(val) {
+    // primitive types
+    const type = typeof val;
+    if (type == 'number' || type == 'boolean' || val == null) {
+        return  `${val}`;
+    }
+    if (type == 'string') {
+        return `"${val}"`;
+    }
+    if (type == 'symbol') {
+        const description = val.description;
+        if (description == null) {
+            return 'Symbol';
+        } else {
+            return `Symbol(${description})`;
+        }
+    }
+    if (type == 'function') {
+        const name = val.name;
+        if (typeof name == 'string' && name.length > 0) {
+            return `Function(${name})`;
+        } else {
+            return 'Function';
+        }
+    }
+    // objects
+    if (Array.isArray(val)) {
+        const length = val.length;
+        let debug = '[';
+        if (length > 0) {
+            debug += debugString(val[0]);
+        }
+        for(let i = 1; i < length; i++) {
+            debug += ', ' + debugString(val[i]);
+        }
+        debug += ']';
+        return debug;
+    }
+    // Test for built-in
+    const builtInMatches = /\[object ([^\]]+)\]/.exec(toString.call(val));
+    let className;
+    if (builtInMatches && builtInMatches.length > 1) {
+        className = builtInMatches[1];
+    } else {
+        // Failed to match the standard '[object ClassName]'
+        return toString.call(val);
+    }
+    if (className == 'Object') {
+        // we're a user defined class or Object
+        // JSON.stringify avoids problems with cycles, and is generally much
+        // easier than looping through ownProperties of `val`.
+        try {
+            return 'Object(' + JSON.stringify(val) + ')';
+        } catch (_) {
+            return 'Object';
+        }
+    }
+    // errors
+    if (val instanceof Error) {
+        return `${val.name}: ${val.message}\n${val.stack}`;
+    }
+    // TODO we could test for more things here, like `Set`s and `Map`s.
+    return className;
+}
+
+function getArrayJsValueFromWasm0(ptr, len) {
+    ptr = ptr >>> 0;
+    const mem = getDataViewMemory0();
+    const result = [];
+    for (let i = ptr; i < ptr + 4 * len; i += 4) {
+        result.push(wasm.__wbindgen_externrefs.get(mem.getUint32(i, true)));
+    }
+    wasm.__externref_drop_slice(ptr, len);
+    return result;
+}
+
+function getArrayU8FromWasm0(ptr, len) {
+    ptr = ptr >>> 0;
+    return getUint8ArrayMemory0().subarray(ptr / 1, ptr / 1 + len);
+}
+
+let cachedDataViewMemory0 = null;
+function getDataViewMemory0() {
+    if (cachedDataViewMemory0 === null || cachedDataViewMemory0.buffer.detached === true || (cachedDataViewMemory0.buffer.detached === undefined && cachedDataViewMemory0.buffer !== wasm.memory.buffer)) {
+        cachedDataViewMemory0 = new DataView(wasm.memory.buffer);
+    }
+    return cachedDataViewMemory0;
+}
+
+function getStringFromWasm0(ptr, len) {
+    return decodeText(ptr >>> 0, len);
+}
+
+let cachedUint8ArrayMemory0 = null;
+function getUint8ArrayMemory0() {
+    if (cachedUint8ArrayMemory0 === null || cachedUint8ArrayMemory0.byteLength === 0) {
+        cachedUint8ArrayMemory0 = new Uint8Array(wasm.memory.buffer);
+    }
+    return cachedUint8ArrayMemory0;
+}
+
+function handleError(f, args) {
+    try {
+        return f.apply(this, args);
+    } catch (e) {
+        const idx = addToExternrefTable0(e);
+        wasm.__wbindgen_exn_store(idx);
+    }
+}
+
+function isLikeNone(x) {
+    return x === undefined || x === null;
+}
+
+function makeClosure(arg0, arg1, f) {
+    const state = { a: arg0, b: arg1, cnt: 1 };
+    const real = (...args) => {
+
+        // First up with a closure we increment the internal reference
+        // count. This ensures that the Rust closure environment won't
+        // be deallocated while we're invoking it.
+        state.cnt++;
+        try {
+            return f(state.a, state.b, ...args);
+        } finally {
+            real._wbg_cb_unref();
+        }
+    };
+    real._wbg_cb_unref = () => {
+        if (--state.cnt === 0) {
+            wasm.__wbindgen_destroy_closure(state.a, state.b);
+            state.a = 0;
+            CLOSURE_DTORS.unregister(state);
+        }
+    };
+    CLOSURE_DTORS.register(real, state, state);
+    return real;
+}
+
+function makeMutClosure(arg0, arg1, f) {
+    const state = { a: arg0, b: arg1, cnt: 1 };
+    const real = (...args) => {
+
+        // First up with a closure we increment the internal reference
+        // count. This ensures that the Rust closure environment won't
+        // be deallocated while we're invoking it.
+        state.cnt++;
+        const a = state.a;
+        state.a = 0;
+        try {
+            return f(a, state.b, ...args);
+        } finally {
+            state.a = a;
+            real._wbg_cb_unref();
+        }
+    };
+    real._wbg_cb_unref = () => {
+        if (--state.cnt === 0) {
+            wasm.__wbindgen_destroy_closure(state.a, state.b);
+            state.a = 0;
+            CLOSURE_DTORS.unregister(state);
+        }
+    };
+    CLOSURE_DTORS.register(real, state, state);
+    return real;
+}
+
+function passArrayJsValueToWasm0(array, malloc) {
+    const ptr = malloc(array.length * 4, 4) >>> 0;
+    for (let i = 0; i < array.length; i++) {
+        const add = addToExternrefTable0(array[i]);
+        getDataViewMemory0().setUint32(ptr + 4 * i, add, true);
+    }
+    WASM_VECTOR_LEN = array.length;
+    return ptr;
+}
+
+function passStringToWasm0(arg, malloc, realloc) {
+    if (realloc === undefined) {
+        const buf = cachedTextEncoder.encode(arg);
+        const ptr = malloc(buf.length, 1) >>> 0;
+        getUint8ArrayMemory0().subarray(ptr, ptr + buf.length).set(buf);
+        WASM_VECTOR_LEN = buf.length;
+        return ptr;
+    }
+
+    let len = arg.length;
+    let ptr = malloc(len, 1) >>> 0;
+
+    const mem = getUint8ArrayMemory0();
+
+    let offset = 0;
+
+    for (; offset < len; offset++) {
+        const code = arg.charCodeAt(offset);
+        if (code > 0x7F) break;
+        mem[ptr + offset] = code;
+    }
+    if (offset !== len) {
+        if (offset !== 0) {
+            arg = arg.slice(offset);
+        }
+        ptr = realloc(ptr, len, len = offset + arg.length * 3, 1) >>> 0;
+        const view = getUint8ArrayMemory0().subarray(ptr + offset, ptr + len);
+        const ret = cachedTextEncoder.encodeInto(arg, view);
+
+        offset += ret.written;
+        ptr = realloc(ptr, len, offset, 1) >>> 0;
+    }
+
+    WASM_VECTOR_LEN = offset;
+    return ptr;
+}
+
+function takeFromExternrefTable0(idx) {
+    const value = wasm.__wbindgen_externrefs.get(idx);
+    wasm.__externref_table_dealloc(idx);
+    return value;
+}
+
+let cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: true });
+cachedTextDecoder.decode();
+const MAX_SAFARI_DECODE_BYTES = 2146435072;
+let numBytesDecoded = 0;
+function decodeText(ptr, len) {
+    numBytesDecoded += len;
+    if (numBytesDecoded >= MAX_SAFARI_DECODE_BYTES) {
+        cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: true });
+        cachedTextDecoder.decode();
+        numBytesDecoded = len;
+    }
+    return cachedTextDecoder.decode(getUint8ArrayMemory0().subarray(ptr, ptr + len));
+}
+
+const cachedTextEncoder = new TextEncoder();
+
+if (!('encodeInto' in cachedTextEncoder)) {
+    cachedTextEncoder.encodeInto = function (arg, view) {
+        const buf = cachedTextEncoder.encode(arg);
+        view.set(buf);
+        return {
+            read: arg.length,
+            written: buf.length
+        };
+    };
+}
+
+let WASM_VECTOR_LEN = 0;
+
+let wasmModule, wasmInstance, wasm;
+function __wbg_finalize_init(instance, module) {
+    wasmInstance = instance;
+    wasm = instance.exports;
+    wasmModule = module;
+    cachedDataViewMemory0 = null;
+    cachedUint8ArrayMemory0 = null;
+    wasm.__wbindgen_start();
+    return wasm;
+}
+
+async function __wbg_load(module, imports) {
+    if (typeof Response === 'function' && module instanceof Response) {
+        if (typeof WebAssembly.instantiateStreaming === 'function') {
+            try {
+                return await WebAssembly.instantiateStreaming(module, imports);
+            } catch (e) {
+                const validResponse = module.ok && expectedResponseType(module.type);
+
+                if (validResponse && module.headers.get('Content-Type') !== 'application/wasm') {
+                    console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve Wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", e);
+
+                } else { throw e; }
+            }
+        }
+
+        const bytes = await module.arrayBuffer();
+        return await WebAssembly.instantiate(bytes, imports);
+    } else {
+        const instance = await WebAssembly.instantiate(module, imports);
+
+        if (instance instanceof WebAssembly.Instance) {
+            return { instance, module };
+        } else {
+            return instance;
+        }
+    }
+
+    function expectedResponseType(type) {
+        switch (type) {
+            case 'basic': case 'cors': case 'default': return true;
+        }
+        return false;
+    }
+}
+
+function initSync(module) {
+    if (wasm !== undefined) return wasm;
+
+
+    if (module !== undefined) {
+        if (Object.getPrototypeOf(module) === Object.prototype) {
+            ({module} = module)
+        } else {
+            console.warn('using deprecated parameters for `initSync()`; pass a single object instead')
+        }
+    }
+
+    const imports = __wbg_get_imports();
+    if (!(module instanceof WebAssembly.Module)) {
+        module = new WebAssembly.Module(module);
+    }
+    const instance = new WebAssembly.Instance(module, imports);
+    return __wbg_finalize_init(instance, module);
+}
+
+async function __wbg_init(module_or_path) {
+    if (wasm !== undefined) return wasm;
+
+
+    if (module_or_path !== undefined) {
+        if (Object.getPrototypeOf(module_or_path) === Object.prototype) {
+            ({module_or_path} = module_or_path)
+        } else {
+            console.warn('using deprecated parameters for the initialization function; pass a single object instead')
+        }
+    }
+
+    if (module_or_path === undefined) {
+        module_or_path = new URL('bee_sdk_bg.wasm', import.meta.url);
+    }
+    const imports = __wbg_get_imports();
+
+    if (typeof module_or_path === 'string' || (typeof Request === 'function' && module_or_path instanceof Request) || (typeof URL === 'function' && module_or_path instanceof URL)) {
+        module_or_path = fetch(module_or_path);
+    }
+
+    const { instance, module } = await __wbg_load(await module_or_path, imports);
+
+    return __wbg_finalize_init(instance, module);
+}
+
+export { initSync, __wbg_init as default };

@@ -1,349 +1,612 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="theme-color" content="#0a0a0a">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0d0b1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>NacklForge</title>
     <style>
+        /* ===== NacklForge Design System — dark "forge" theme ===== */
+        :root {
+            --bg: #0d0b1a;
+            --bg-2: #13112a;
+            --card: rgba(28, 24, 56, 0.7);
+            --card-strong: rgba(38, 32, 72, 0.85);
+            --border: rgba(80, 65, 130, 0.35);
+            --border-strong: rgba(110, 90, 160, 0.45);
+            --fg: #f5f3ff;
+            --muted: #a8a3c7;
+            --dim: #6b6590;
+            --amber: #fbbf24;
+            --amber-glow: rgba(251, 191, 36, 0.4);
+            --cyan: #22d3ee;
+            --cyan-glow: rgba(34, 211, 238, 0.4);
+            --magenta: #e879f9;
+            --magenta-glow: rgba(232, 121, 249, 0.4);
+            --lime: #a3e635;
+            --lime-glow: rgba(163, 230, 53, 0.4);
+            --danger: #f87171;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
         html, body {
-            background: #0a0a0a;
-            color: #fafafa;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+            min-height: 100vh;
             height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
             user-select: none;
             -webkit-user-select: none;
             overscroll-behavior: none;
+            -webkit-font-smoothing: antialiased;
         }
+
+        body {
+            background:
+                radial-gradient(circle at 15% 20%, rgba(251, 191, 36, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(34, 211, 238, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(232, 121, 249, 0.06) 0%, transparent 60%),
+                var(--bg);
+        }
+
         #app {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+            padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
         }
-        /* Header */
+
+        /* ===== Header ===== */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 12px 16px 8px;
         }
         .brand {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         .brand-mark {
-            width: 24px; height: 24px;
-            border-radius: 6px;
+            width: 32px; height: 32px;
+            border-radius: 9px;
             background: linear-gradient(135deg, #f59e0b, #ea580c);
             display: flex; align-items: center; justify-content: center;
-            font-weight: 800; color: #000; font-size: 13px;
+            font-weight: 800; color: #000; font-size: 16px;
+            box-shadow: 0 0 16px var(--amber-glow);
         }
-        .brand-name { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+        .brand-name {
+            font-weight: 700; font-size: 16px; letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
         .status-pill {
             display: flex; align-items: center; gap: 6px;
-            padding: 5px 10px;
-            background: #161616;
-            border: 1px solid #262626;
+            padding: 6px 12px;
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
             border-radius: 999px;
             font-size: 11px;
-            font-weight: 500;
-            color: #737373;
+            font-weight: 600;
+            color: var(--dim);
+            letter-spacing: 0.04em;
         }
         .status-dot {
-            width: 6px; height: 6px; border-radius: 50%;
-            background: #525252;
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--dim);
+            transition: all 0.3s;
         }
         .status-dot.active {
-            background: #84cc16;
-            box-shadow: 0 0 8px #84cc16;
+            background: var(--lime);
+            box-shadow: 0 0 10px var(--lime-glow);
+            animation: dot-pulse 1.5s ease-in-out infinite;
         }
-        .status-pill.active { color: #a3e635; border-color: #36531440; }
-        /* Balance hero */
+        .status-dot.error {
+            background: var(--danger);
+            box-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
+        }
+        .status-pill.active { color: var(--lime); border-color: rgba(163, 230, 53, 0.3); }
+        .status-pill.error { color: var(--danger); border-color: rgba(248, 113, 113, 0.3); }
+        @keyframes dot-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ===== Balance hero ===== */
         .balance-card {
             text-align: center;
-            padding: 24px 0 12px;
+            padding: 20px 16px 8px;
         }
         .balance-label {
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #525252;
-            margin-bottom: 6px;
+            letter-spacing: 0.15em;
+            color: var(--dim);
+            margin-bottom: 8px;
+            font-weight: 600;
         }
         .balance-value {
-            font-size: 44px;
+            font-size: 48px;
             font-weight: 700;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
             font-variant-numeric: tabular-nums;
             line-height: 1;
+            background: linear-gradient(135deg, #fef3c7, #fbbf24, #f59e0b);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            filter: drop-shadow(0 0 24px var(--amber-glow));
         }
         .balance-unit {
-            font-size: 13px;
-            color: #a3a3a3;
-            font-weight: 500;
-            margin-left: 4px;
+            font-size: 14px;
+            color: var(--muted);
+            font-weight: 600;
+            margin-left: 6px;
         }
         .balance-sub {
             font-size: 12px;
-            color: #525252;
-            margin-top: 8px;
+            color: var(--dim);
+            margin-top: 10px;
+            font-variant-numeric: tabular-nums;
         }
         .balance-sub .pending {
-            color: #84cc16;
+            color: var(--lime);
             font-weight: 600;
         }
-        /* Forge core */
+        .balance-sub .pending::before {
+            content: '●';
+            margin-right: 4px;
+            animation: dot-pulse 1.5s ease-in-out infinite;
+        }
+
+        /* ===== Forge core ===== */
         .forge-wrap {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 16px 0;
+            padding: 12px 0;
+            min-height: 280px;
         }
         .forge-core {
             position: relative;
-            width: 220px;
-            height: 220px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
-            background: radial-gradient(circle at 50% 40%, #1a1a1a 0%, #0a0a0a 70%);
-            border: 1px solid #262626;
+            background: radial-gradient(circle at 50% 40%, rgba(40, 32, 80, 0.6) 0%, rgba(13, 11, 26, 0.9) 70%);
+            border: 1px solid var(--border-strong);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.1s, border-color 0.3s, box-shadow 0.3s;
+            transition: transform 0.1s ease, border-color 0.4s, box-shadow 0.4s;
         }
         .forge-core.active {
-            border-color: #f59e0b40;
-            box-shadow: 0 0 40px #f59e0b20, inset 0 0 30px #f59e0b15;
+            border-color: rgba(251, 191, 36, 0.4);
+            box-shadow:
+                0 0 48px rgba(251, 191, 36, 0.3),
+                0 0 96px rgba(251, 191, 36, 0.12),
+                inset 0 0 40px rgba(251, 191, 36, 0.15);
         }
-        .forge-core:active { transform: scale(0.96); }
-        .forge-core.disabled { cursor: default; }
-        .forge-ring {
+        .forge-core:active { transform: scale(0.95); }
+        .forge-core.disabled { cursor: default; opacity: 0.6; }
+
+        .forge-ring-outer, .forge-ring-inner {
             position: absolute;
-            inset: -8px;
+            inset: -12px;
             border-radius: 50%;
-            border: 1px dashed #404040;
-            opacity: 0.5;
-            animation: spin 24s linear infinite;
+            pointer-events: none;
         }
-        .forge-core.active .forge-ring {
-            border-color: #f59e0b30;
-            animation: spin 8s linear infinite;
+        .forge-ring-outer {
+            border: 1px dashed rgba(120, 100, 180, 0.3);
+            animation: spin 30s linear infinite;
+        }
+        .forge-ring-inner {
+            inset: 8px;
+            border: 1px solid rgba(120, 100, 180, 0.2);
+            animation: spin-reverse 24s linear infinite;
+        }
+        .forge-core.active .forge-ring-outer {
+            border-color: rgba(251, 191, 36, 0.25);
+            animation: spin 12s linear infinite;
+        }
+        .forge-core.active .forge-ring-inner {
+            border-color: rgba(34, 211, 238, 0.2);
+            animation: spin-reverse 16s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+
         .forge-icon {
-            font-size: 56px;
-            filter: drop-shadow(0 0 12px #f59e0b40);
-            transition: filter 0.3s;
+            font-size: 64px;
+            filter: drop-shadow(0 0 12px var(--amber-glow));
+            transition: filter 0.4s;
+            user-select: none;
         }
         .forge-core.active .forge-icon {
-            filter: drop-shadow(0 0 16px #f59e0b80);
+            filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.7));
+            animation: icon-pulse 2.4s ease-in-out infinite;
         }
-        .forge-tap-hint {
+        @keyframes icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .forge-hint {
             position: absolute;
             bottom: -28px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #525252;
+            letter-spacing: 0.2em;
+            color: var(--dim);
             white-space: nowrap;
+            font-weight: 600;
         }
-        .forge-core.active .forge-tap-hint { color: #a3a3a3; }
-        /* Progress */
+        .forge-core.active .forge-hint { color: var(--amber); }
+
+        /* ===== Progress ===== */
         .progress-section {
-            padding: 8px 0 12px;
+            padding: 8px 16px 12px;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        .progress-row {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+        .progress-row { display: flex; flex-direction: column; gap: 5px; }
         .progress-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 11px;
         }
-        .progress-label { color: #737373; font-weight: 500; }
-        .progress-value { color: #d4d4d4; font-variant-numeric: tabular-nums; font-weight: 500; }
+        .progress-label {
+            color: var(--muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 10px;
+        }
+        .progress-value {
+            color: var(--fg);
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
+            font-size: 11px;
+        }
         .progress-bar {
-            height: 4px;
-            background: #1a1a1a;
+            height: 5px;
+            background: rgba(20, 16, 40, 0.8);
             border-radius: 999px;
             overflow: hidden;
+            border: 1px solid rgba(80, 65, 130, 0.2);
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #f59e0b, #ea580c);
+            background: linear-gradient(90deg, #f59e0b, #fbbf24);
             border-radius: 999px;
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
             width: 0%;
+            box-shadow: 0 0 8px var(--amber-glow);
         }
         .progress-fill.cyan {
-            background: linear-gradient(90deg, #06b6d4, #0891b2);
+            background: linear-gradient(90deg, #06b6d4, #22d3ee);
+            box-shadow: 0 0 8px var(--cyan-glow);
         }
-        /* Controls */
+        .progress-fill.magenta {
+            background: linear-gradient(90deg, #c026d3, #e879f9);
+            box-shadow: 0 0 8px var(--magenta-glow);
+        }
+
+        /* ===== Controls ===== */
         .controls {
             display: flex;
             gap: 8px;
-            padding: 8px 0 16px;
+            padding: 8px 16px 12px;
         }
         .btn {
             flex: 1;
-            padding: 14px 16px;
-            border-radius: 12px;
+            padding: 15px 16px;
+            border-radius: 14px;
             border: none;
             font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
+            font-weight: 700;
+            letter-spacing: 0.04em;
             cursor: pointer;
             transition: all 0.15s;
             font-family: inherit;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
         }
         .btn-primary {
-            background: #f59e0b;
-            color: #000;
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            color: #1a0a00;
+            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
         }
-        .btn-primary:active { transform: scale(0.97); background: #d97706; }
+        .btn-primary:active { transform: scale(0.97); box-shadow: 0 2px 8px rgba(251, 191, 36, 0.4); }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 75%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.7s;
+        }
+        .btn-primary:hover::after { left: 150%; }
+
         .btn-danger {
-            background: #dc2626;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
             color: #fff;
+            box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
         }
-        .btn-danger:active { transform: scale(0.97); background: #b91c1c; }
+        .btn-danger:active { transform: scale(0.97); }
+
         .btn-ghost {
-            background: #161616;
-            color: #d4d4d4;
-            border: 1px solid #262626;
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--fg);
+            border: 1px solid var(--border);
             flex: 0 0 auto;
-            padding: 14px 18px;
+            padding: 15px 20px;
         }
         .btn-ghost:active { transform: scale(0.97); }
         .btn-ghost.active {
-            background: #f59e0b15;
-            color: #f59e0b;
-            border-color: #f59e0b40;
+            background: rgba(232, 121, 249, 0.15);
+            color: var(--magenta);
+            border-color: rgba(232, 121, 249, 0.4);
+            box-shadow: 0 0 18px var(--magenta-glow);
         }
-        /* Log */
+        .btn-claim {
+            background: linear-gradient(135deg, rgba(163, 230, 53, 0.2), rgba(34, 197, 94, 0.2));
+            color: var(--lime);
+            border: 1px solid rgba(163, 230, 53, 0.4);
+            box-shadow: 0 0 18px var(--lime-glow);
+        }
+        .btn-claim:active { transform: scale(0.97); }
+        .btn-claim:disabled {
+            background: rgba(20, 16, 40, 0.4);
+            color: var(--dim);
+            border-color: rgba(80, 65, 130, 0.3);
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        /* ===== Log ===== */
         .log {
-            background: #0f0f0f;
-            border: 1px solid #1a1a1a;
-            border-radius: 8px;
+            margin: 0 16px 12px;
+            background: rgba(15, 12, 30, 0.6);
+            border: 1px solid rgba(80, 65, 130, 0.2);
+            border-radius: 10px;
             padding: 8px 10px;
-            max-height: 80px;
+            max-height: 88px;
             overflow-y: auto;
-            font-family: "SF Mono", Menlo, monospace;
+            font-family: "SF Mono", "JetBrains Mono", Menlo, monospace;
             font-size: 10px;
-            line-height: 1.5;
-            color: #525252;
-            margin-bottom: 8px;
+            line-height: 1.6;
+            -webkit-overflow-scrolling: touch;
         }
+        .log::-webkit-scrollbar { width: 3px; }
+        .log::-webkit-scrollbar-thumb { background: rgba(120, 100, 180, 0.4); border-radius: 2px; }
         .log-entry { display: flex; gap: 6px; }
-        .log-time { color: #404040; flex-shrink: 0; }
-        .log-msg { color: #737373; }
-        .log-msg.tap { color: #fbbf24; }
-        .log-msg.session { color: #34d399; }
-        .log-msg.epoch { color: #f472b6; }
-        .log-msg.reward { color: #a3e635; }
-        .log-msg.error { color: #f87171; }
-        /* Float tap */
+        .log-time { color: rgba(120, 100, 180, 0.6); flex-shrink: 0; }
+        .log-msg { color: var(--muted); word-break: break-word; }
+        .log-msg.tap { color: var(--amber); }
+        .log-msg.session { color: var(--lime); }
+        .log-msg.epoch { color: var(--magenta); }
+        .log-msg.reward { color: var(--lime); font-weight: 600; }
+        .log-msg.error { color: var(--danger); }
+        .log-msg.info { color: var(--cyan); }
+        .log-msg.chain { color: var(--cyan); }
+
+        /* ===== Floating tap ===== */
         .float-tap {
-            position: absolute;
-            font-size: 18px;
-            font-weight: 700;
-            color: #fbbf24;
+            position: fixed;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--amber);
             pointer-events: none;
-            text-shadow: 0 0 8px #f59e0b80;
-            animation: floatUp 1s ease-out forwards;
+            text-shadow: 0 0 10px var(--amber-glow);
+            animation: floatUp 1.1s ease-out forwards;
+            z-index: 50;
+            font-variant-numeric: tabular-nums;
         }
-        .float-tap.crit { color: #f472b6; font-size: 24px; }
+        .float-tap.crit {
+            color: var(--magenta);
+            font-size: 26px;
+            text-shadow: 0 0 14px var(--magenta-glow);
+        }
         @keyframes floatUp {
-            0% { opacity: 0; transform: translateY(0) scale(0.6); }
-            20% { opacity: 1; transform: translateY(-20px) scale(1.1); }
-            100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+            0% { opacity: 0; transform: translateY(0) scale(0.5); }
+            20% { opacity: 1; transform: translateY(-24px) scale(1.15); }
+            100% { opacity: 0; transform: translateY(-100px) scale(0.8); }
         }
-        /* Account setup overlay */
-        .setup-overlay {
+
+        /* ===== Spark ===== */
+        .spark {
+            position: fixed;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 49;
+            animation: sparkFly 0.7s ease-out forwards;
+        }
+        @keyframes sparkFly {
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.2); }
+        }
+
+        /* ===== Onboarding overlay ===== */
+        .overlay {
             position: fixed;
             inset: 0;
-            background: #0a0a0a;
+            background: rgba(13, 11, 26, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 24px;
             z-index: 100;
+            overflow-y: auto;
         }
-        .setup-overlay.hidden { display: none; }
-        .setup-card {
+        .overlay.hidden { display: none; }
+        .overlay-card {
             width: 100%;
-            max-width: 360px;
+            max-width: 380px;
         }
-        .setup-title {
-            font-size: 22px;
+        .overlay-logo {
+            width: 72px; height: 72px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 36px;
+            box-shadow: 0 0 32px var(--amber-glow);
+            animation: logo-glow 2.4s ease-in-out infinite;
+        }
+        @keyframes logo-glow {
+            0%, 100% { box-shadow: 0 0 24px var(--amber-glow); }
+            50% { box-shadow: 0 0 48px rgba(251, 191, 36, 0.6); }
+        }
+        .overlay-title {
+            font-size: 26px;
             font-weight: 700;
             text-align: center;
             margin-bottom: 6px;
             letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
         }
-        .setup-desc {
+        .overlay-desc {
             font-size: 13px;
-            color: #737373;
+            color: var(--muted);
             text-align: center;
             margin-bottom: 24px;
             line-height: 1.5;
         }
-        .setup-input {
+        .input-group { margin-bottom: 12px; }
+        .input-label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--dim);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .input {
             width: 100%;
-            background: #161616;
-            border: 1px solid #262626;
-            border-radius: 10px;
-            padding: 12px 14px;
-            color: #fafafa;
+            background: rgba(20, 16, 40, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 13px 14px;
+            color: var(--fg);
             font-size: 14px;
             font-family: inherit;
-            margin-bottom: 10px;
+            transition: border-color 0.2s;
         }
-        .setup-input:focus {
+        .input:focus {
             outline: none;
-            border-color: #f59e0b40;
+            border-color: rgba(251, 191, 36, 0.4);
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
         }
-        .setup-input::placeholder { color: #525252; }
-        .setup-textarea {
-            min-height: 80px;
+        .input::placeholder { color: var(--dim); }
+        textarea.input {
+            min-height: 90px;
             resize: none;
             font-family: "SF Mono", Menlo, monospace;
             font-size: 11px;
+            line-height: 1.5;
         }
-        .setup-btn {
-            width: 100%;
-            padding: 14px;
-            background: #f59e0b;
-            color: #000;
+        .btn-row { display: flex; gap: 8px; margin-top: 8px; }
+        .btn-full { width: 100%; }
+        .network-toggle {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 16px;
+            padding: 4px;
+            background: rgba(20, 16, 40, 0.6);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .network-toggle button {
+            flex: 1;
+            padding: 10px;
             border: none;
-            border-radius: 10px;
-            font-size: 14px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 11px;
             font-weight: 600;
+            border-radius: 8px;
             cursor: pointer;
             font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            transition: all 0.2s;
         }
-        .setup-btn:active { background: #d97706; }
-        .setup-btn.secondary {
-            background: transparent;
-            color: #737373;
-            border: 1px solid #262626;
-            margin-top: 8px;
+        .network-toggle button.active {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--amber);
         }
-        .setup-btn.secondary:active { background: #161616; }
+        .helper-text {
+            font-size: 10px;
+            color: var(--dim);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+        .helper-text a { color: var(--cyan); text-decoration: none; }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-strong);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-strong);
+            color: var(--fg);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 200;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            animation: toast-in 0.3s ease-out, toast-out 0.3s ease-in 2.7s forwards;
+            max-width: 90vw;
+            text-align: center;
+        }
+        .toast.success { border-color: rgba(163, 230, 53, 0.4); color: var(--lime); }
+        .toast.error { border-color: rgba(248, 113, 113, 0.4); color: var(--danger); }
+        @keyframes toast-in {
+            from { opacity: 0; transform: translate(-50%, 20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        @keyframes toast-out {
+            to { opacity: 0; transform: translate(-50%, -20px); }
+        }
+
+        /* ===== Loading spinner ===== */
+        .spinner {
+            display: inline-block;
+            width: 14px; height: 14px;
+            border: 2px solid rgba(251, 191, 36, 0.2);
+            border-top-color: var(--amber);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
     </style>
 </head>
 <body>
@@ -362,22 +625,25 @@
 
     <!-- Balance -->
     <div class="balance-card">
-        <div class="balance-label">Balance</div>
+        <div class="balance-label">Nackl Balance</div>
         <div>
             <span class="balance-value" id="balanceValue">0.00</span>
             <span class="balance-unit">NACKL</span>
         </div>
         <div class="balance-sub">
             Pending: <span class="pending" id="pendingValue">0.0000</span>
+            <span style="margin: 0 8px; opacity: 0.4;">·</span>
+            <span id="chainInfo" style="color: var(--cyan);">—</span>
         </div>
     </div>
 
     <!-- Forge core -->
     <div class="forge-wrap">
         <div class="forge-core disabled" id="forgeCore">
-            <div class="forge-ring"></div>
-            <div class="forge-icon">⚒</div>
-            <div class="forge-tap-hint" id="forgeHint">Forge idle</div>
+            <div class="forge-ring-outer"></div>
+            <div class="forge-ring-inner"></div>
+            <div class="forge-icon" id="forgeIcon">⚒</div>
+            <div class="forge-hint" id="forgeHint">Forge idle — press Start</div>
         </div>
     </div>
 
@@ -404,28 +670,67 @@
         <button class="btn btn-primary" id="startBtn">Start Forge</button>
         <button class="btn btn-ghost" id="autoBtn">Auto</button>
     </div>
+    <div class="controls" style="padding-top: 0;">
+        <button class="btn btn-claim" id="claimBtn" disabled>Claim Reward</button>
+    </div>
 
     <!-- Log -->
     <div class="log" id="log"></div>
 </div>
 
-<!-- Setup overlay -->
-<div class="setup-overlay" id="setupOverlay">
-    <div class="setup-card">
-        <div class="setup-title">NacklForge</div>
-        <div class="setup-desc">Mine Nackl on-chain. Enter a name to begin, or connect your Acki Nacki account for live mining.</div>
-        <input type="text" class="setup-input" id="nameInput" placeholder="Forge name" maxlength="20">
-        <textarea class="setup-input setup-textarea" id="accountInput" placeholder='Optional: paste Acki Nacki account JSON here for live mining'></textarea>
-        <button class="setup-btn" id="startSimBtn">Start Mining</button>
-        <button class="setup-btn secondary" id="connectLiveBtn">Connect Acki Nacki Account</button>
+<!-- Onboarding overlay -->
+<div class="overlay" id="overlay">
+    <div class="overlay-card">
+        <div class="overlay-logo">⚒</div>
+        <div class="overlay-title">NacklForge</div>
+        <div class="overlay-desc">Real on-chain Nackl mining. Powered by bee_sdk WASM — same engine as the official MinerGo, with a premium forge UI.</div>
+
+        <div class="network-toggle">
+            <button data-net="shellnet" class="active">Shellnet (Test)</button>
+            <button data-net="mainnet">Mainnet</button>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Forge Name</label>
+            <input type="text" class="input" id="nameInput" placeholder="e.g. ForgeMaster" maxlength="24" autocomplete="off">
+        </div>
+
+        <div class="input-group" id="walletGroup">
+            <label class="input-label">Wallet Name (Acki Nacki)</label>
+            <input type="text" class="input" id="walletInput" placeholder="your-wallet-name" autocomplete="off">
+            <div class="helper-text">The wallet name you registered in AN Wallet. The SDK derives your miner address from it.</div>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Mining Keys (public + secret)</label>
+            <textarea class="input" id="keysInput" placeholder='{"public":"0x...","secret":"0x..."}' autocomplete="off"></textarea>
+            <div class="helper-text">From <code>gen_mining_keys</code> or your existing MinerGo keys. Your keys never leave this device.</div>
+        </div>
+
+        <button class="btn btn-primary btn-full" id="connectBtn">
+            <span id="connectBtnText">Connect &amp; Mine</span>
+        </button>
+        <button class="btn btn-ghost btn-full" id="simBtn" style="margin-top: 8px;">
+            Quick Demo (Simulation)
+        </button>
+        <div class="helper-text" style="text-align: center; margin-top: 12px;">
+            Don't have keys yet? Get them from the official AN Wallet app, then paste them above.
+        </div>
     </div>
 </div>
 
 <script type="module">
-import init, { Miner } from './bee_sdk.js';
+import init, { Miner, gen_mining_keys, get_miner_address_by_wallet_name, ensure_mining_keys_propagated } from './bee_sdk.js';
 
-// ===== Constants (mirror bee_runner.html) =====
-const MINING_APP_ID = '0x0000000000000000000000000000000000000000000000000000000000000010';
+// ===== Constants (mirror bee_runner.html / MinerGo) =====
+const APP_IDS = {
+    shellnet: '0x0000000000000000000000000000000000000000000000000000000000000000',
+    mainnet: '0x0000000000000000000000000000000000000000000000000000000000000010',
+};
+const ENDPOINTS = {
+    shellnet: ['https://shellnet.ackinacki.org'],
+    mainnet: ['https://mainnet-cf.ackinacki.org/', 'https://mainnet.ackinacki.org/'],
+};
 const MINING_SESSION_MS = 15000;
 const SESSION_RESTART_DELAY_MS = 18000;
 const TAPS_PER_SESSION = 7;
@@ -444,13 +749,18 @@ const SIM_TAP_REWARD = 0.0072;
 
 // ===== State =====
 let wasmReady = false;
-let mode = 'simulation'; // or 'live'
+let mode = 'simulation'; // 'simulation' | 'live'
+let network = 'shellnet';
 let miner = null;
 let desired = false;
 let running = false;
 let starting = false;
 let autopilot = false;
 let accountName = null;
+let walletName = null;
+let minerAddress = null;
+let miningKeys = null;
+let appId = APP_IDS.shellnet;
 
 let balance = 0;
 let pendingReward = 0;
@@ -466,6 +776,7 @@ let lastTapProgressAt = 0;
 let lastRewardRecoveryAt = 0;
 let rewardInFlight = false;
 let rewardEpochs = [];
+let lastError = null;
 
 let tapTimer = null;
 let startTimer = null;
@@ -478,25 +789,39 @@ let timers = [];
 
 // ===== DOM =====
 const $ = (id) => document.getElementById(id);
-const setupOverlay = $('setupOverlay');
+const overlay = $('overlay');
 const nameInput = $('nameInput');
-const accountInput = $('accountInput');
-const startSimBtn = $('startSimBtn');
-const connectLiveBtn = $('connectLiveBtn');
+const walletInput = $('walletInput');
+const keysInput = $('keysInput');
+const connectBtn = $('connectBtn');
+const connectBtnText = $('connectBtnText');
+const simBtn = $('simBtn');
 const forgeCore = $('forgeCore');
+const forgeIcon = $('forgeIcon');
 const forgeHint = $('forgeHint');
 const startBtn = $('startBtn');
 const autoBtn = $('autoBtn');
+const claimBtn = $('claimBtn');
 const statusPill = $('statusPill');
 const statusDot = $('statusDot');
 const statusText = $('statusText');
 const balanceValue = $('balanceValue');
 const pendingValue = $('pendingValue');
+const chainInfo = $('chainInfo');
 const sessionText = $('sessionText');
 const sessionBar = $('sessionBar');
 const epochText = $('epochText');
 const epochBar = $('epochBar');
 const logEl = $('log');
+
+// ===== Toast =====
+function toast(msg, type = '') {
+    const el = document.createElement('div');
+    el.className = 'toast ' + type;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+}
 
 // ===== Logging =====
 function log(type, msg) {
@@ -506,8 +831,7 @@ function log(type, msg) {
     entry.className = 'log-entry';
     entry.innerHTML = `<span class="log-time">${t}</span><span class="log-msg ${type}">${msg}</span>`;
     logEl.insertBefore(entry, logEl.firstChild);
-    while (logEl.children.length > 50) logEl.removeChild(logEl.lastChild);
-    // Also forward to Android bridge if present
+    while (logEl.children.length > 60) logEl.removeChild(logEl.lastChild);
     try {
         if (window.AndroidBridge) window.AndroidBridge.onLog(type, msg);
     } catch (_) {}
@@ -517,21 +841,26 @@ function log(type, msg) {
 async function ensureWasm() {
     if (wasmReady) return true;
     try {
-        await init('./bee_sdk.wasm');
+        log('info', 'Loading bee_sdk WASM…');
+        await init({ module_or_path: './bee_sdk_bg.wasm' });
         wasmReady = true;
-        log('session', 'WASM bee_sdk loaded');
+        log('info', 'WASM bee_sdk loaded — real mining enabled');
         return true;
     } catch (err) {
-        log('error', `WASM load failed: ${err.message || err}`);
+        const msg = err && err.message ? err.message : String(err);
+        log('error', `WASM load failed: ${msg}`);
+        lastError = msg;
         return false;
     }
 }
 
 // ===== Status UI =====
 function setStatus(state) {
-    statusDot.className = 'status-dot' + (state === 'active' ? ' active' : '');
-    statusPill.className = 'status-pill' + (state === 'active' ? ' active' : '');
+    statusDot.className = 'status-dot';
+    statusPill.className = 'status-pill';
     if (state === 'active') {
+        statusDot.classList.add('active');
+        statusPill.classList.add('active');
         statusText.textContent = 'MINING';
         forgeCore.classList.add('active');
         forgeCore.classList.remove('disabled');
@@ -542,22 +871,37 @@ function setStatus(state) {
         statusText.textContent = 'STARTING';
         forgeCore.classList.remove('active');
         forgeCore.classList.add('disabled');
-        forgeHint.textContent = 'Starting...';
-        startBtn.textContent = 'Starting...';
+        forgeHint.textContent = 'Starting…';
+        startBtn.textContent = 'Starting…';
         startBtn.className = 'btn btn-ghost';
+    } else if (state === 'error') {
+        statusDot.classList.add('error');
+        statusPill.classList.add('error');
+        statusText.textContent = 'ERROR';
+        forgeCore.classList.remove('active');
+        forgeCore.classList.add('disabled');
+        forgeHint.textContent = 'Forge error';
+        startBtn.textContent = 'Retry';
+        startBtn.className = 'btn btn-primary';
     } else {
         statusText.textContent = 'IDLE';
         forgeCore.classList.remove('active');
         forgeCore.classList.add('disabled');
-        forgeHint.textContent = 'Forge idle';
+        forgeHint.textContent = 'Forge idle — press Start';
         startBtn.textContent = 'Start Forge';
         startBtn.className = 'btn btn-primary';
     }
 }
 
 function updateBalance() {
-    balanceValue.textContent = balance.toFixed(2);
+    // Show total (claimed + pending) so the user sees live progress
+    const total = balance + pendingReward;
+    balanceValue.textContent = total.toFixed(4);
     pendingValue.textContent = pendingReward.toFixed(4);
+    claimBtn.disabled = pendingReward <= 0;
+    claimBtn.textContent = pendingReward > 0
+        ? `Claim ${pendingReward.toFixed(4)} NACKL`
+        : 'No reward yet';
 }
 
 function updateProgress() {
@@ -565,32 +909,48 @@ function updateProgress() {
     sessionBar.style.width = `${Math.min(100, (sessionTaps / sessionTarget) * 100)}%`;
     epochText.textContent = `${tapsThisEpoch} / ${MAX_TAPS_FIVEMIN} taps`;
     epochBar.style.width = `${Math.min(100, (tapsThisEpoch / MAX_TAPS_FIVEMIN) * 100)}%`;
+    chainInfo.textContent = mode === 'live'
+        ? `${network} · block live`
+        : `sim · ${sessionsThisEpoch}/${SESSIONS_PER_EPOCH} sess`;
 }
 
-// ===== Floating tap number =====
-function showFloatTap(amount, isCrit) {
-    const rect = forgeCore.getBoundingClientRect();
-    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 60;
-    const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 40;
+// ===== Floating tap + sparks =====
+function showFloatTap(amount, isCrit, x, y) {
     const el = document.createElement('div');
     el.className = 'float-tap' + (isCrit ? ' crit' : '');
-    el.textContent = (isCrit ? '+' : '+') + amount.toFixed(4) + (isCrit ? ' ✦' : '');
+    el.textContent = '+' + amount.toFixed(4) + (isCrit ? ' ✦' : '');
     el.style.left = x + 'px';
     el.style.top = y + 'px';
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1000);
+    setTimeout(() => el.remove(), 1100);
+
+    // Sparks
+    const count = isCrit ? 12 : 7;
+    const colors = isCrit
+        ? ['#e879f9', '#fbbf24', '#a3e635']
+        : ['#fbbf24', '#22d3ee'];
+    for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+        const dist = 50 + Math.random() * 60;
+        const spark = document.createElement('div');
+        spark.className = 'spark';
+        spark.style.left = x + 'px';
+        spark.style.top = y + 'px';
+        spark.style.background = colors[Math.floor(Math.random() * colors.length)];
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 700);
+    }
 }
 
-// ===== Mining logic (mirrors bee_runner.html) =====
-function normalizeEndpoints(endpoints) {
-    if (Array.isArray(endpoints) && endpoints.length > 0) return endpoints;
-    return ['https://mainnet-cf.ackinacki.org/', 'https://mainnet.ackinacki.org/'];
-}
-
+// ===== Mining logic (mirrors bee_runner.html exactly) =====
 function userMessage(err) {
     const text = err && err.message ? err.message : String(err);
-    if (/pool timed out|open connection/i.test(text)) return 'BEE network timeout';
-    if (/memory access out of bounds|RuntimeError/i.test(text)) return 'BEE engine memory error';
+    if (/pool timed out|open connection/i.test(text)) return 'Network timeout — retrying';
+    if (/memory access out of bounds|RuntimeError/i.test(text)) return 'WASM memory error';
+    if (/FnOnce called more than once/i.test(text)) return 'WASM callback error';
+    if (/Invalid ABI|Decode message body/i.test(text)) return 'ABI decode error';
     return text.slice(0, 180);
 }
 
@@ -615,6 +975,9 @@ function stopTapLoop() {
 
 function pumpTap() {
     if (!running) return false;
+    // Respect session and epoch caps
+    if (sessionTaps >= sessionTarget) return false;
+    if (tapsThisEpoch >= MAX_TAPS_FIVEMIN) return false;
     try {
         if (mode === 'live' && miner) {
             miner.add_tap(1, 1);
@@ -623,12 +986,17 @@ function pumpTap() {
         tapsThisEpoch = Math.min(MAX_TAPS_FIVEMIN, tapsThisEpoch + 1);
         lastTapProgressAt = Date.now();
         pendingReward += SIM_TAP_REWARD;
-        log('tap', `+${SIM_TAP_REWARD.toFixed(4)} NACKL — tap ${sessionTaps}/${sessionTarget}`);
+        log('tap', `+${SIM_TAP_REWARD.toFixed(4)} NACKL · tap ${sessionTaps}/${sessionTarget} (epoch ${tapsThisEpoch}/${MAX_TAPS_FIVEMIN})`);
         updateProgress();
         updateBalance();
         return true;
     } catch (err) {
-        log('error', userMessage(err));
+        const msg = userMessage(err);
+        if (/No running workers/i.test(msg)) {
+            stopTapLoop();
+            return false;
+        }
+        log('error', msg);
         return false;
     }
 }
@@ -641,10 +1009,20 @@ function scheduleTimer(delay, fn) {
 
 function scheduleTapPlan() {
     if (!running) return;
-    const regular = TAPS_PER_SESSION;
+    const remainingEpoch = Math.max(0, MAX_TAPS_FIVEMIN - tapsThisEpoch);
+    const compensation = Math.min(deficit, MAX_DEFICIT_COMPENSATION);
+    const target = Math.min(TAPS_PER_SESSION + compensation, remainingEpoch);
+    sessionTarget = target;
+    const regular = Math.min(TAPS_PER_SESSION, target);
     for (let i = 0; i < regular; i += 1) {
         scheduleTimer(i * TAP_INTERVAL_MS, () => pumpTap());
     }
+    const extra = target - regular;
+    const catchupAt = Math.max(0, MINING_SESSION_MS - 2000);
+    for (let i = 0; i < extra; i += 1) {
+        scheduleTimer(catchupAt + i * CATCHUP_SPACING_MS, () => pumpTap());
+    }
+    updateProgress();
 }
 
 function resetEpoch(epochStr) {
@@ -664,7 +1042,7 @@ async function fetchChainData() {
             const chainTapSum5m = data && data.tap_sum_5m !== undefined ? Number(data.tap_sum_5m.toString()) : 0;
             if (epoch5mStart && newEpoch && newEpoch !== epoch5mStart) {
                 resetEpoch(newEpoch);
-                log('epoch', `Epoch reset — ${newEpoch}`);
+                log('epoch', `Epoch reset — ${newEpoch.slice(-8)}`);
             } else if (newEpoch && !epoch5mStart) {
                 epoch5mStart = newEpoch;
             }
@@ -681,18 +1059,20 @@ async function fetchChainData() {
                 }
             }
             updateProgress();
+            log('chain', `Chain data: epoch=${newEpoch.slice(-8)} taps5m=${tapsThisEpoch}`);
+            maybeRecoverStuckTaps();
             return data;
         } catch (err) {
             log('error', userMessage(err));
             return null;
         }
     } else {
-        // Simulation — derive epoch from wall clock
+        // Simulation — derive epoch from wall clock (5-min boundaries)
         const now = Date.now();
         const epochStr = String(Math.floor(now / (5 * 60000)) * (5 * 60000));
         if (epoch5mStart && epochStr !== epoch5mStart) {
             resetEpoch(epochStr);
-            log('epoch', `Epoch reset — sim`);
+            log('epoch', `Epoch reset (sim) — ${epochStr.slice(-8)}`);
         } else if (!epoch5mStart) {
             epoch5mStart = epochStr;
         }
@@ -704,7 +1084,7 @@ async function fetchChainData() {
             requestReward('three_epochs');
         }
         updateProgress();
-        return { epoch5mStart: epochStr };
+        return { epoch_5m_start: epochStr };
     }
 }
 
@@ -715,32 +1095,30 @@ function requestReward(reason) {
     rewardInFlight = true;
     lastRewardRecoveryAt = now;
     const amount = pendingReward;
-    log('reward', `Reward claimed: ${amount.toFixed(4)} NACKL (${reason})`);
+    log('reward', `Claiming ${amount.toFixed(4)} NACKL (${reason})…`);
+
+    const finalize = () => {
+        balance += amount;
+        pendingReward = 0;
+        updateBalance();
+        rewardEpochs = [];
+        rewardInFlight = false;
+        log('reward', `✓ Claimed ${amount.toFixed(4)} NACKL`);
+        toast(`+${amount.toFixed(4)} NACKL claimed`, 'success');
+        fetchChainData().finally(() => {
+            if (desired && !running && !starting) scheduleStart(0);
+        });
+    };
+
     if (mode === 'live' && miner) {
         miner.get_reward().then(() => {
-            balance += amount;
-            pendingReward = 0;
-            updateBalance();
-            rewardEpochs = [];
-            rewardInFlight = false;
-            fetchChainData().finally(() => {
-                if (desired && !running && !starting) scheduleStart(0);
-            });
+            finalize();
         }).catch((err) => {
-            log('error', userMessage(err));
+            log('error', `Reward claim failed: ${userMessage(err)}`);
             rewardInFlight = false;
         });
     } else {
-        setTimeout(() => {
-            balance += amount;
-            pendingReward = 0;
-            updateBalance();
-            rewardEpochs = [];
-            rewardInFlight = false;
-            fetchChainData().finally(() => {
-                if (desired && !running && !starting) scheduleStart(0);
-            });
-        }, 300);
+        setTimeout(finalize, 400);
     }
     return true;
 }
@@ -776,6 +1154,7 @@ function scheduleEpochStartPoll(reason) {
     if (!desired || running || epochPollTimer) return;
     if (restartTimer) clearTimeout(restartTimer);
     restartTimer = null;
+    log('info', `Epoch full — waiting ${EPOCH_WAIT_POLL_MS}ms (${reason})`);
     epochPollTimer = setTimeout(async () => {
         epochPollTimer = null;
         const prev = epoch5mStart;
@@ -809,7 +1188,7 @@ function completeSession(status, actualTaps) {
     sessionsThisEpoch += 1;
     deficit = Math.max(0, Math.min(MAX_TAPS_FIVEMIN, deficit + Math.max(0, target - actualTaps)));
     stopTapLoop();
-    log('session', `Session ${status} — ${actualTaps}/${target} taps (epoch ${sessionsThisEpoch}/${SESSIONS_PER_EPOCH})`);
+    log('session', `Session ${status} — ${actualTaps}/${target} taps · epoch ${sessionsThisEpoch}/${SESSIONS_PER_EPOCH}`);
     fetchChainData().finally(() => {
         if (!desired) return;
         if (sessionsThisEpoch >= SESSIONS_PER_EPOCH || tapsThisEpoch >= MAX_TAPS_FIVEMIN) {
@@ -823,6 +1202,7 @@ function completeSession(status, actualTaps) {
 async function startMining(startDelayMs) {
     if (!desired) return;
     if (running || starting) return;
+
     if (startDelayMs && startDelayMs > 0) {
         startTimer = setTimeout(() => {
             startTimer = null;
@@ -850,9 +1230,19 @@ async function startMining(startDelayMs) {
 
     try {
         if (mode === 'live' && miner) {
+            if (!miner.can_start()) {
+                log('info', 'Waiting for seed…');
+                starting = false;
+                setStatus('idle');
+                canStartTimer = setTimeout(() => {
+                    canStartTimer = null;
+                    startMining(0).catch((err) => log('error', userMessage(err)));
+                }, CAN_START_POLL_MS);
+                return;
+            }
             miner.start(MINING_SESSION_MS, (raw) => {
                 let event = raw;
-                try { event = JSON.parse(raw); } catch (_) {}
+                try { event = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch (_) {}
                 if (event && (event.ok === false || event.error)) {
                     log('error', userMessage(event.error || event));
                     completeSession('error', sessionTaps);
@@ -860,12 +1250,18 @@ async function startMining(startDelayMs) {
                 }
                 const kind = event && event.action ? event.action : (event && event.event ? event.event : 'callback');
                 const status = event && event.data ? event.data.status : null;
-                if (kind === 'status_updated' && (status === 'finished' || status === 'removed')) {
+                if (kind === 'status_updated' && status === 'computing') {
+                    log('chain', 'Worker: computing');
+                } else if (kind === 'status_updated' && status === 'submitting') {
+                    log('chain', 'Worker: submitting');
+                } else if (kind === 'status_updated' && (status === 'finished' || status === 'removed')) {
                     completeSession(status, sessionTaps);
                 } else if (kind === 'session_accepted') {
                     completeSession('accepted', sessionTaps);
+                } else if (kind === 'computation_completed') {
+                    log('chain', 'Computation complete');
                 } else if (kind === 'tap_computed') {
-                    // Live tap from chain
+                    // Tap computed on-chain — already counted locally
                 }
             });
         }
@@ -876,7 +1272,6 @@ async function startMining(startDelayMs) {
         scheduleTapPlan();
         log('session', `Session started — target ${sessionTarget} taps`);
 
-        // End session after MINING_SESSION_MS (simulation mode)
         if (mode === 'simulation') {
             sessionEndTimer = setTimeout(() => {
                 completeSession('finished', sessionTaps);
@@ -885,6 +1280,7 @@ async function startMining(startDelayMs) {
     } catch (err) {
         starting = false;
         log('error', userMessage(err));
+        setStatus('error');
         throw err;
     }
 }
@@ -899,12 +1295,33 @@ function stopMining() {
     log('session', 'Mining stopped');
 }
 
-// Manual tap (player-initiated bonus tap on the forge core)
+// Manual tap — player taps the forge core for a bonus tap
 function manualTap(e) {
     if (!running) return;
-    if (tapsThisEpoch >= MAX_TAPS_FIVEMIN) return;
+    if (tapsThisEpoch >= MAX_TAPS_FIVEMIN) {
+        toast('Epoch tap cap reached (70)', 'error');
+        return;
+    }
+    if (sessionTaps >= sessionTarget) {
+        // Don't exceed session target — let the auto loop handle the rest
+        return;
+    }
     const isCrit = Math.random() < 0.08;
     const amount = SIM_TAP_REWARD * (isCrit ? 5 : 1);
+
+    let x, y;
+    if (e && e.touches && e.touches[0]) {
+        x = e.touches[0].clientX;
+        y = e.touches[0].clientY;
+    } else if (e && e.clientX !== undefined) {
+        x = e.clientX;
+        y = e.clientY;
+    } else {
+        const rect = forgeCore.getBoundingClientRect();
+        x = rect.left + rect.width / 2;
+        y = rect.top + rect.height / 2;
+    }
+
     if (mode === 'live' && miner) {
         try { miner.add_tap(1, 1); } catch (err) { log('error', userMessage(err)); return; }
     }
@@ -912,53 +1329,93 @@ function manualTap(e) {
     tapsThisEpoch = Math.min(MAX_TAPS_FIVEMIN, tapsThisEpoch + 1);
     pendingReward += amount;
     lastTapProgressAt = Date.now();
-    showFloatTap(amount, isCrit);
+    showFloatTap(amount, isCrit, x, y);
     updateProgress();
     updateBalance();
+    if (isCrit) log('tap', `✦ CRIT! +${amount.toFixed(4)} NACKL`);
 }
 
-// ===== Setup =====
-async function handleStartSim() {
+// ===== Onboarding =====
+async function handleConnect() {
     const name = nameInput.value.trim();
-    if (!name) { nameInput.focus(); return; }
-    accountName = name;
-    mode = 'simulation';
-    setupOverlay.classList.add('hidden');
-    log('session', `Welcome, ${name}! Simulation mode.`);
-    desired = true;
-    scheduleChainPoll();
-    scheduleStart(0);
-}
+    const wallet = walletInput.value.trim();
+    const keysRaw = keysInput.value.trim();
 
-async function handleConnectLive() {
-    const name = nameInput.value.trim();
-    const accJson = accountInput.value.trim();
-    if (!name) { nameInput.focus(); return; }
-    if (!accJson) { accountInput.focus(); return; }
-    let account;
-    try { account = JSON.parse(accJson); } catch (err) { log('error', 'Invalid account JSON'); return; }
-    accountName = name;
-    mode = 'live';
+    if (!name) { nameInput.focus(); toast('Enter a forge name', 'error'); return; }
+    if (!wallet) { walletInput.focus(); toast('Enter your wallet name', 'error'); return; }
+    if (!keysRaw) { keysInput.focus(); toast('Paste your mining keys', 'error'); return; }
+
+    let keys;
+    try { keys = JSON.parse(keysRaw); } catch (err) { toast('Invalid keys JSON', 'error'); return; }
+    if (!keys.public || !keys.secret) { toast('Keys must have public + secret', 'error'); return; }
+
+    connectBtnText.innerHTML = '<span class="spinner"></span>Loading WASM…';
     const ok = await ensureWasm();
-    if (!ok) { log('error', 'WASM init failed — falling back to simulation'); mode = 'simulation'; }
-    if (mode === 'live') {
-        try {
-            const endpoints = normalizeEndpoints(account.endpoints);
-            miner = await Miner.new(
-                endpoints,
-                account.appId || MINING_APP_ID,
-                account.minerAddress,
-                account.publicKey,
-                account.secretKey,
-            );
-            log('session', `Live miner ready for ${name}`);
-        } catch (err) {
-            log('error', `Miner init failed: ${userMessage(err)} — using simulation`);
-            mode = 'simulation';
-            miner = null;
-        }
+    if (!ok) {
+        toast('WASM failed — using simulation', 'error');
+        mode = 'simulation';
+        finishOnboarding(name, null, null, null);
+        return;
     }
-    setupOverlay.classList.add('hidden');
+
+    connectBtnText.innerHTML = '<span class="spinner"></span>Resolving miner address…';
+    try {
+        const clientConfig = { network: { endpoints: ENDPOINTS[network] } };
+        minerAddress = await get_miner_address_by_wallet_name({
+            client_config: clientConfig,
+            wallet_name: wallet,
+        });
+        log('info', `Miner address: ${minerAddress.slice(0, 10)}…${minerAddress.slice(-6)}`);
+    } catch (err) {
+        const full = userMessage(err);
+        // Shorten blockchain errors for the toast; full detail in the log
+        const short = full.length > 80 ? full.slice(0, 80) + '…' : full;
+        toast(`Wallet not found: ${short}`, 'error');
+        log('error', `Address resolve failed: ${full}`);
+        connectBtnText.textContent = 'Connect & Mine';
+        return;
+    }
+
+    connectBtnText.innerHTML = '<span class="spinner"></span>Creating miner…';
+    try {
+        appId = APP_IDS[network];
+        miner = await Miner.new(
+            ENDPOINTS[network],
+            appId,
+            minerAddress,
+            keys.public,
+            keys.secret,
+        );
+        log('info', `Miner created on ${network}`);
+        mode = 'live';
+        miningKeys = keys;
+        walletName = wallet;
+        finishOnboarding(name, wallet, minerAddress, keys);
+    } catch (err) {
+        const msg = userMessage(err);
+        toast(`Miner init failed: ${msg}`, 'error');
+        log('error', `Miner.new failed: ${msg}`);
+        connectBtnText.textContent = 'Connect & Mine';
+        // Fall back to simulation so user can still see the UI
+        mode = 'simulation';
+        finishOnboarding(name, null, null, null);
+    }
+}
+
+function handleSim() {
+    const name = nameInput.value.trim() || 'ForgeGuest';
+    mode = 'simulation';
+    finishOnboarding(name, null, null, null);
+}
+
+async function finishOnboarding(name, wallet, address, keys) {
+    accountName = name;
+    walletName = wallet;
+    minerAddress = address;
+    miningKeys = keys;
+    overlay.classList.add('hidden');
+    log('info', `Welcome, ${name}! Mode: ${mode.toUpperCase()} · Network: ${network}`);
+    toast(`Welcome, ${name}!`, 'success');
     desired = true;
     scheduleChainPoll();
     scheduleStart(0);
@@ -971,7 +1428,10 @@ startBtn.addEventListener('click', () => {
     } else {
         desired = true;
         scheduleChainPoll();
-        startMining(0).catch((err) => log('error', userMessage(err)));
+        startMining(0).catch((err) => {
+            log('error', userMessage(err));
+            setStatus('error');
+        });
     }
 });
 
@@ -979,36 +1439,85 @@ autoBtn.addEventListener('click', () => {
     autopilot = !autopilot;
     autoBtn.classList.toggle('active', autopilot);
     if (autopilot) {
-        log('session', 'Autopilot ON');
-        if (!running && !starting && desired) startMining(0).catch((err) => log('error', userMessage(err)));
+        log('info', 'Autopilot ON');
+        if (!running && !starting && desired) {
+            startMining(0).catch((err) => log('error', userMessage(err)));
+        }
     } else {
-        log('session', 'Autopilot OFF');
+        log('info', 'Autopilot OFF');
     }
 });
 
-forgeCore.addEventListener('click', manualTap);
+claimBtn.addEventListener('click', () => {
+    if (pendingReward <= 0) return;
+    requestReward('manual');
+});
+
+forgeCore.addEventListener('click', (e) => manualTap(e));
 forgeCore.addEventListener('touchstart', (e) => { e.preventDefault(); manualTap(e); }, { passive: false });
 
-startSimBtn.addEventListener('click', handleStartSim);
-connectLiveBtn.addEventListener('click', handleConnectLive);
-nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleStartSim(); });
+connectBtn.addEventListener('click', handleConnect);
+simBtn.addEventListener('click', handleSim);
+nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') walletInput.focus(); });
 
-// Auto-restore session from Android bridge
-try {
-    if (window.AndroidBridge && window.AndroidBridge.getAccount) {
-        const acc = window.AndroidBridge.getAccount();
-        if (acc) {
-            const parsed = JSON.parse(acc);
-            nameInput.value = parsed.name || '';
-            accountInput.value = acc;
+// Network toggle
+document.querySelectorAll('.network-toggle button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.network-toggle button').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        network = btn.dataset.net;
+        log('info', `Network: ${network}`);
+    });
+});
+
+// Persist account in localStorage (browser) / Android bridge (APK)
+function saveAccount() {
+    try {
+        const data = JSON.stringify({ name: accountName, wallet: walletName, address: minerAddress, keys: miningKeys, network, mode });
+        if (window.AndroidBridge && window.AndroidBridge.saveAccount) {
+            window.AndroidBridge.saveAccount(data);
+        } else {
+            localStorage.setItem('nacklforge_account', data);
         }
+    } catch (_) {}
+}
+
+function loadAccount() {
+    try {
+        let raw = null;
+        if (window.AndroidBridge && window.AndroidBridge.loadAccount) {
+            raw = window.AndroidBridge.loadAccount();
+        } else {
+            raw = localStorage.getItem('nacklforge_account');
+        }
+        if (!raw) return null;
+        return JSON.parse(raw);
+    } catch (_) { return null; }
+}
+
+// Auto-restore on launch
+(async () => {
+    const saved = loadAccount();
+    if (saved && saved.name && saved.wallet && saved.keys) {
+        nameInput.value = saved.name;
+        walletInput.value = saved.wallet;
+        keysInput.value = JSON.stringify(saved.keys);
+        if (saved.network) {
+            network = saved.network;
+            document.querySelectorAll('.network-toggle button').forEach((b) => {
+                b.classList.toggle('active', b.dataset.net === network);
+            });
+        }
+        // Auto-reconnect
+        log('info', 'Restoring session…');
+        handleConnect();
     }
-} catch (_) {}
+})();
 
 setStatus('idle');
 updateBalance();
 updateProgress();
-log('session', 'NacklForge ready');
+log('info', 'NacklForge ready. Connect to start mining.');
 </script>
 </body>
 </html>
