@@ -10,11 +10,18 @@ import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 import android.webkit.WebChromeClient;
 import android.view.View;
-import android.view.WindowManager;
 import android.graphics.Color;
 
+/**
+ * NacklForge — Real on-chain Nackl miner.
+ * Single-activity WebView wrapper around the forge UI in assets/index.html.
+ * All mining logic runs in WASM (bee_sdk) inside the WebView.
+ */
 public class MainActivity extends Activity {
     private static final String TAG = "NacklForge";
+    private static final String PREFS_NAME = "nacklforge";
+    private static final String KEY_ACCOUNT = "account";
+
     private WebView webView;
     private SharedPreferences prefs;
 
@@ -22,16 +29,16 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Edge-to-edge dark theme
-        getWindow().setStatusBarColor(Color.parseColor("#0d0b1a"));
-        getWindow().setNavigationBarColor(Color.parseColor("#0d0b1a"));
+        // Dark theme
+        getWindow().setStatusBarColor(Color.parseColor("#0a0a0f"));
+        getWindow().setNavigationBarColor(Color.parseColor("#0a0a0f"));
         getWindow().getDecorView().setSystemUiVisibility(
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         );
 
-        prefs = getSharedPreferences("nacklforge", Context.MODE_PRIVATE);
+        prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         webView = new WebView(this);
         setContentView(webView);
@@ -49,11 +56,9 @@ public class MainActivity extends Activity {
         s.setLoadWithOverviewMode(true);
         s.setUseWideViewPort(true);
         s.setCacheMode(WebSettings.LOAD_DEFAULT);
-        // Critical: allow file:// WASM imports + fetch
+        // Required for WASM imports + fetch from file://
         s.setAllowFileAccessFromFileURLs(true);
         s.setAllowUniversalAccessFromFileURLs(true);
-        // Enable hardware acceleration for WASM
-        s.setMediaPlaybackRequiresUserGesture(false);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -62,10 +67,10 @@ public class MainActivity extends Activity {
             }
         });
         webView.setWebChromeClient(new WebChromeClient());
-        webView.setBackgroundColor(Color.parseColor("#0d0b1a"));
+        webView.setBackgroundColor(Color.parseColor("#0a0a0f"));
 
         // JS bridge for persistence + logging
-        webView.addJavascriptInterface(new ForgeBridge(this, prefs), "AndroidBridge");
+        webView.addJavascriptInterface(new ForgeBridge(prefs), "AndroidBridge");
 
         // Load local asset
         webView.loadUrl("file:///android_asset/index.html");
@@ -102,15 +107,13 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Bridge exposed to JS as window.AndroidBridge.
-     * Methods must be annotated @JavascriptInterface on Android 4.2+.
+     * JS bridge exposed as window.AndroidBridge.
+     * All methods must be @JavascriptInterface annotated (Android 4.2+).
      */
     public static class ForgeBridge {
-        private final Context ctx;
         private final SharedPreferences prefs;
 
-        ForgeBridge(Context ctx, SharedPreferences prefs) {
-            this.ctx = ctx;
+        ForgeBridge(SharedPreferences prefs) {
             this.prefs = prefs;
         }
 
@@ -122,7 +125,7 @@ public class MainActivity extends Activity {
         @android.webkit.JavascriptInterface
         public void saveAccount(String json) {
             try {
-                prefs.edit().putString("account", json).apply();
+                prefs.edit().putString(KEY_ACCOUNT, json).apply();
                 Log.i(TAG, "Account saved");
             } catch (Exception e) {
                 Log.e(TAG, "saveAccount failed: " + e.getMessage());
@@ -132,9 +135,19 @@ public class MainActivity extends Activity {
         @android.webkit.JavascriptInterface
         public String loadAccount() {
             try {
-                return prefs.getString("account", null);
+                return prefs.getString(KEY_ACCOUNT, null);
             } catch (Exception e) {
                 return null;
+            }
+        }
+
+        @android.webkit.JavascriptInterface
+        public void clearAccount() {
+            try {
+                prefs.edit().remove(KEY_ACCOUNT).apply();
+                Log.i(TAG, "Account cleared");
+            } catch (Exception e) {
+                Log.e(TAG, "clearAccount failed: " + e.getMessage());
             }
         }
 
