@@ -5,31 +5,36 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebView;
-import android.webkit.WebSettings;
-import android.webkit.WebViewClient;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
-import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.graphics.Color;
+import android.view.View;
 
 /**
- * NacklForge — Real on-chain Nackl miner.
- * Single-activity WebView wrapper around the forge UI in assets/index.html.
- * All mining logic runs in WASM (bee_sdk) inside the WebView.
+ * NacklForge — minimal WebView host for the on-chain Nackl miner.
+ *
+ * The entire UI + mining logic lives in assets/index.html (loaded as a
+ * file:// URL). This Activity only:
+ *   1. Configures the WebView for WASM + DOM storage + file access.
+ *   2. Exposes a tiny JS bridge for account persistence (SharedPreferences).
+ *
+ * Launch is fast: no layout XML, no fragments, no background work.
  */
 public class MainActivity extends Activity {
     private static final String TAG = "NacklForge";
-    private static final String PREFS_NAME = "nacklforge";
+    private static final String PREFS = "nacklforge";
     private static final String KEY_ACCOUNT = "account";
 
     private WebView webView;
-    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Dark theme
+        // Dark theme — set before WebView creation to avoid white flash
         getWindow().setStatusBarColor(Color.parseColor("#0a0a0f"));
         getWindow().setNavigationBarColor(Color.parseColor("#0a0a0f"));
         getWindow().getDecorView().setSystemUiVisibility(
@@ -38,8 +43,9 @@ public class MainActivity extends Activity {
             | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         );
 
-        prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(PREFS, Context.MODE_PRIVATE);
 
+        // Create and configure WebView in code — no layout XML inflation overhead
         webView = new WebView(this);
         setContentView(webView);
 
@@ -55,34 +61,23 @@ public class MainActivity extends Activity {
         s.setBuiltInZoomControls(false);
         s.setLoadWithOverviewMode(true);
         s.setUseWideViewPort(true);
-        s.setCacheMode(WebSettings.LOAD_DEFAULT);
-        // Required for WASM imports + fetch from file://
-        s.setAllowFileAccessFromFileURLs(true);
-        s.setAllowUniversalAccessFromFileURLs(true);
+        s.setCacheMode(WebSettings.LOAD_NO_CACHE); // faster: skip cache check
+        s.setAllowFileAccessFromFileURLs(true);    // required for WASM import
+        s.setAllowUniversalAccessFromFileURLs(true); // required for fetch from file://
 
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                Log.e(TAG, "WebView error " + errorCode + ": " + description + " (url=" + failingUrl + ")");
-            }
-        });
+        webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
         webView.setBackgroundColor(Color.parseColor("#0a0a0f"));
+        webView.addJavascriptInterface(new Bridge(prefs), "AndroidBridge");
 
-        // JS bridge for persistence + logging
-        webView.addJavascriptInterface(new ForgeBridge(prefs), "AndroidBridge");
-
-        // Load local asset
+        // Load immediately — no post-delay, no splash
         webView.loadUrl("file:///android_asset/index.html");
     }
 
     @Override
     public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            super.onBackPressed();
-        }
+        if (webView != null && webView.canGoBack()) webView.goBack();
+        else super.onBackPressed();
     }
 
     @Override
@@ -106,54 +101,32 @@ public class MainActivity extends Activity {
         super.onDestroy();
     }
 
-    /**
-     * JS bridge exposed as window.AndroidBridge.
-     * All methods must be @JavascriptInterface annotated (Android 4.2+).
-     */
-    public static class ForgeBridge {
+    /** JS bridge: window.AndroidBridge */
+    public static class Bridge {
         private final SharedPreferences prefs;
+        Bridge(SharedPreferences p) { this.prefs = p; }
 
-        ForgeBridge(SharedPreferences prefs) {
-            this.prefs = prefs;
-        }
-
-        @android.webkit.JavascriptInterface
+        @JavascriptInterface
         public void onLog(String type, String msg) {
             Log.i(TAG, "[" + type + "] " + msg);
         }
 
-        @android.webkit.JavascriptInterface
+        @JavascriptInterface
         public void saveAccount(String json) {
-            try {
-                prefs.edit().putString(KEY_ACCOUNT, json).apply();
-                Log.i(TAG, "Account saved");
-            } catch (Exception e) {
-                Log.e(TAG, "saveAccount failed: " + e.getMessage());
-            }
+            prefs.edit().putString(KEY_ACCOUNT, json).apply();
         }
 
-        @android.webkit.JavascriptInterface
+        @JavascriptInterface
         public String loadAccount() {
-            try {
-                return prefs.getString(KEY_ACCOUNT, null);
-            } catch (Exception e) {
-                return null;
-            }
+            return prefs.getString(KEY_ACCOUNT, null);
         }
 
-        @android.webkit.JavascriptInterface
+        @JavascriptInterface
         public void clearAccount() {
-            try {
-                prefs.edit().remove(KEY_ACCOUNT).apply();
-                Log.i(TAG, "Account cleared");
-            } catch (Exception e) {
-                Log.e(TAG, "clearAccount failed: " + e.getMessage());
-            }
+            prefs.edit().remove(KEY_ACCOUNT).apply();
         }
 
-        @android.webkit.JavascriptInterface
-        public String getAppVersion() {
-            return "1.0.0";
-        }
+        @JavascriptInterface
+        public String getAppVersion() { return "1.0.0"; }
     }
 }
