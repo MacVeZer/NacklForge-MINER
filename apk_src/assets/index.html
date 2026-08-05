@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
 <title>NacklForge</title>
 <link rel="preconnect" href="https://mainnet-cf.ackinacki.org">
 <link rel="preconnect" href="https://mainnet.ackinacki.org">
@@ -19,25 +19,38 @@
 --fg:#f4f4f8;--fg2:#c8c8d4;--mt:#7a7a8c;--dim:#4a4a5c;
 --ac:#fbbf24;--acg:rgba(251,191,36,.25);
 --ok:#34d399;--okg:rgba(52,211,153,.25);
---err:#f87171;--inf:#60a5fa
+--err:#f87171;--inf:#60a5fa;
+color-scheme:dark light
+}
+@media (prefers-color-scheme: light){
+:root{
+--bg:#fafafa;--elev:#fff;--elev2:#f0f0f4;
+--bd:rgba(0,0,0,.08);--bd2:rgba(0,0,0,.14);
+--fg:#0a0a0f;--fg2:#2a2a36;--mt:#5a5a6c;--dim:#9a9aac;
+--ac:#d97706;--acg:rgba(217,119,6,.2);
+--ok:#059669;--okg:rgba(5,150,105,.2);
+--err:#dc2626;--inf:#2563eb
+}
+body{background:radial-gradient(ellipse at top,rgba(217,119,6,.06) 0%,transparent 50%),var(--bg)}
 }
 html,body{background:var(--bg);color:var(--fg);font:14px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;user-select:none;-webkit-user-select:none;overscroll-behavior:none}
-body{background:radial-gradient(ellipse at top,rgba(251,191,36,.04) 0%,transparent 50%),var(--bg)}
+body{background:radial-gradient(ellipse at top,rgba(251,191,36,.04) 0%,transparent 50%),var(--bg);transition:background .3s}
 button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:none;background:none}
-.hdr{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top));background:rgba(10,10,15,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd)}
+.hdr{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top));background:rgba(10,10,15,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);transition:background .3s}
+@media (prefers-color-scheme: light){.hdr{background:rgba(255,255,255,.92)}}
 .brand{display:flex;align-items:center;gap:10px}
 .bm{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:15px;box-shadow:0 0 12px var(--acg)}
 .bn{font-weight:600;font-size:15px;letter-spacing:-.01em}
-.hdr-status{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--elev);border:1px solid var(--bd2);border-radius:999px;font-size:11px;font-weight:600;color:var(--mt)}
+.hdr-status{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--elev);border:1px solid var(--bd2);border-radius:999px;font-size:11px;font-weight:600;color:var(--mt);transition:all .3s}
 .hdr-status.on{color:var(--ok);border-color:rgba(52,211,153,.3)}
 .hdr-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--dim)}
 .hdr-status.on::before{background:var(--ok);box-shadow:0 0 6px var(--okg)}
 main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
-.card{background:var(--elev);border:1px solid var(--bd);border-radius:20px;padding:20px;margin-bottom:14px}
+.card{background:var(--elev);border:1px solid var(--bd);border-radius:20px;padding:20px;margin-bottom:14px;contain:layout style paint;transition:background .3s,border-color .3s}
 .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--mt);font-weight:600;margin-bottom:8px}
 .bal{display:flex;align-items:baseline;gap:6px}
-.bv{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.bv{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1;will-change:transform}
 .bu{font-size:14px;color:var(--mt);font-weight:600}
 .meta{display:flex;gap:16px;margin-top:14px}
 .mi{display:flex;flex-direction:column;gap:2px}
@@ -59,12 +72,17 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
 .pv{font-size:11px;color:var(--mt);font-weight:500}
 .pv b{color:var(--fg);font-weight:600}
 .pb{height:6px;background:var(--elev2);border-radius:999px;overflow:hidden}
-.pf{height:100%;border-radius:999px;transition:width .4s cubic-bezier(.4,0,.2,1);width:0%}
+.pf{height:100%;border-radius:999px;transition:width .4s cubic-bezier(.4,0,.2,1);width:0%;will-change:width}
 .pf.amber{background:linear-gradient(90deg,var(--ac),#f59e0b)}
 .pf.green{background:linear-gradient(90deg,var(--ok),#10b981)}
 .pf.blue{background:linear-gradient(90deg,var(--inf),#3b82f6)}
+.forge-ring{position:relative;width:80px;height:80px;margin:0 auto 12px}
+.forge-ring svg{transform:rotate(-90deg)}
+.forge-ring-bg{stroke:var(--elev2)}
+.forge-ring-fg{stroke:var(--ac);stroke-linecap:round;transition:stroke-dashoffset .5s ease;filter:drop-shadow(0 0 4px var(--acg))}
+.forge-ring-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px}
 .ctl{display:flex;gap:10px}
-.btn{flex:1;padding:16px;border-radius:14px;font-size:14px;font-weight:600;letter-spacing:.02em;transition:all .15s;text-align:center}
+.btn{flex:1;padding:16px;border-radius:14px;font-size:14px;font-weight:600;letter-spacing:.02em;transition:all .15s;text-align:center;will-change:transform}
 .btn-p{background:var(--ac);color:#000}
 .btn-p:active{transform:scale(.97);background:#f59e0b}
 .btn-p:disabled{background:var(--elev2);color:var(--dim);cursor:not-allowed}
@@ -78,7 +96,7 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
 .loghdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .logt{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--mt);font-weight:600}
 .logc{font-size:11px;color:var(--dim);padding:4px 8px}
-.logl{max-height:160px;overflow-y:auto;font:11px/1.6 "SF Mono","JetBrains Mono",ui-monospace,monospace;-webkit-overflow-scrolling:touch}
+.logl{max-height:160px;overflow-y:auto;font:11px/1.6 "SF Mono","JetBrains Mono",ui-monospace,monospace;-webkit-overflow-scrolling:touch;touch-action:pan-y}
 .logl::-webkit-scrollbar{width:3px}
 .logl::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
 .le{display:flex;gap:8px;padding:2px 0}
@@ -88,19 +106,21 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
 .lm.ok{color:var(--ok)}
 .lm.warn{color:var(--ac)}
 .lm.err{color:var(--err)}
+.skeleton{background:linear-gradient(90deg,var(--elev2) 25%,var(--elev) 50%,var(--elev2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .ov{position:fixed;left:0;right:0;bottom:0;top:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:max(env(safe-area-inset-top),20px) 20px 20px;overflow-y:auto}
 .ov.hidden{display:none}
 .ovc{width:100%;max-width:400px;padding:20px 0}
 .ovl{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-weight:800;color:#000;font-size:28px;box-shadow:0 8px 32px var(--acg)}
 .ovt{font-size:26px;font-weight:700;text-align:center;letter-spacing:-.02em;margin-bottom:8px}
 .ovd{font-size:13px;color:var(--mt);text-align:center;line-height:1.5;margin-bottom:24px;padding:0 8px}
-.connect-card{background:var(--elev);border:1px solid var(--bd);border-radius:20px;padding:24px;margin-bottom:16px}
+.connect-card{background:var(--elev);border:1px solid var(--bd);border-radius:20px;padding:24px;margin-bottom:16px;contain:layout style paint}
 .connect-icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(34,197,94,.2));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px}
 .connect-title{font-size:16px;font-weight:600;text-align:center;margin-bottom:6px}
 .connect-desc{font-size:12px;color:var(--mt);text-align:center;line-height:1.5;margin-bottom:20px}
 .steps{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-.step{display:flex;align-items:center;gap:12px;padding:10px;background:var(--elev2);border-radius:12px;font-size:12px}
-.step-num{width:24px;height:24px;border-radius:50%;background:var(--bg);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--mt);flex-shrink:0}
+.step{display:flex;align-items:center;gap:12px;padding:10px;background:var(--elev2);border-radius:12px;font-size:12px;transition:all .3s}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--bg);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--mt);flex-shrink:0;transition:all .3s}
 .step.active .step-num{background:var(--ac);color:#000;border-color:var(--ac)}
 .step.done .step-num{background:var(--ok);color:#000;border-color:var(--ok)}
 .step-text{color:var(--fg2);font-weight:500}
@@ -111,16 +131,24 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
 .bcn:disabled{background:var(--elev2);color:var(--dim);cursor:not-allowed}
 .bsn{width:100%;padding:13px;background:transparent;color:var(--mt);border:1px solid var(--bd2);border-radius:12px;font-size:13px;font-weight:500;margin-top:10px}
 .bsn:active{background:var(--elev)}
-.toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:var(--elev2);border:1px solid var(--bd2);color:var(--fg);padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:ti .3s ease-out,to .3s ease-in 2.7s forwards;max-width:90vw;text-align:center}
-.toast.ok{border-color:rgba(52,211,153,.4);color:var(--ok)}
-.toast.err{border-color:rgba(248,113,113,.4);color:var(--err)}
+.snackbar{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:var(--elev2);border:1px solid var(--bd2);color:var(--fg);padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:ti .3s ease-out;max-width:90vw;display:flex;align-items:center;gap:12px}
+.snackbar.action{padding-right:8px}
+.snackbar-btn{background:var(--ac);color:#000;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600}
 @keyframes ti{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
-@keyframes to{to{opacity:0;transform:translate(-50%,-20px)}}
 .sp{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.2);border-top-color:#000;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px}
 .sp.l{border-color:rgba(255,255,255,.2);border-top-color:var(--fg)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hidden{display:none!important}
-.deep-link-box{background:var(--elev2);border:1px dashed var(--bd2);border-radius:12px;padding:14px;margin:14px 0;font:11px/1.5 "SF Mono",ui-monospace,monospace;color:var(--fg2);word-break:break-all;max-height:80px;overflow-y:auto}
+.bottom-sheet-bg{position:fixed;inset:0;z-index:140;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;animation:fadein .2s}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.bottom-sheet{background:var(--elev);border-radius:20px 20px 0 0;padding:24px 20px max(env(safe-area-inset-bottom),20px);width:100%;max-width:480px;animation:slideup .3s cubic-bezier(.4,0,.2,1)}
+@keyframes slideup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet-handle{width:40px;height:4px;background:var(--dim);border-radius:2px;margin:0 auto 16px}
+.sheet-title{font-size:18px;font-weight:700;margin-bottom:8px;text-align:center}
+.sheet-desc{font-size:13px;color:var(--mt);text-align:center;margin-bottom:20px}
+.sheet-amount{font-size:36px;font-weight:700;text-align:center;margin-bottom:20px;background:linear-gradient(135deg,var(--ok),#10b981);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sheet-actions{display:flex;gap:10px}
+.fade-in{animation:fadein .3s ease-out}
 </style>
 </head>
 <body>
@@ -143,6 +171,13 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
 <div class="st"><div class="sl" id="stL">Idle</div><div class="sd" id="stD">Not connected</div></div>
 </div>
 <div class="card">
+<div class="forge-ring">
+<svg width="80" height="80" viewBox="0 0 80 80">
+<circle class="forge-ring-bg" cx="40" cy="40" r="34" fill="none" stroke-width="4"/>
+<circle class="forge-ring-fg" id="forgeRingFg" cx="40" cy="40" r="34" fill="none" stroke-width="4" stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+</svg>
+<div class="forge-ring-icon" id="forgeRingIcon">⚒</div>
+</div>
 <div class="ps"><div class="ph"><span class="pt">Current Epoch</span><span class="pv"><b id="epT">0</b> / 70 taps</span></div><div class="pb"><div class="pf amber" id="epB"></div></div></div>
 <div class="ps"><div class="ph"><span class="pt">Sessions this epoch</span><span class="pv"><b id="ssC">0</b> / 10</span></div><div class="pb"><div class="pf blue" id="ssB"></div></div></div>
 <div class="ps"><div class="ph"><span class="pt">Active session</span><span class="pv"><b id="ssT">0</b> / 7 taps</span></div><div class="pb"><div class="pf green" id="asB"></div></div></div>
@@ -160,7 +195,6 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
 </div>
 </main>
 
-<!-- Onboarding overlay with native wallet auth -->
 <div class="ov" id="ov">
 <div class="ovc">
 <div class="ovl">N</div>
@@ -178,88 +212,346 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
 </div>
 <button class="bcn" id="connectBtn">Connect AN Wallet</button>
 <button class="bsn" id="logoutBtn">Logout / Reset</button>
+<button class="bsn" id="feedbackBtn" style="margin-top:6px;color:var(--inf);border-color:rgba(96,165,250,.3)">Report Issue</button>
+</div>
+</div>
+</div>
+
+<div class="bottom-sheet-bg hidden" id="claimSheet">
+<div class="bottom-sheet">
+<div class="sheet-handle"></div>
+<div class="sheet-title">Claim Reward</div>
+<div class="sheet-desc">Move pending NACKL to your lifetime balance</div>
+<div class="sheet-amount" id="claimAmount">0.0000</div>
+<div class="sheet-actions">
+<button class="btn btn-g" id="claimCancel">Cancel</button>
+<button class="btn btn-p" id="claimConfirm">Confirm Claim</button>
 </div>
 </div>
 </div>
 
 <script type="module">
-window._nf_debug = ['start'];
-window.addEventListener('error', e => window._nf_debug.push('err:' + e.message + '@' + e.lineno + ':' + e.colno));
-window.addEventListener('unhandledrejection', e => window._nf_debug.push('rej:' + (e.reason?.message || e.reason)));
-import init,{BeeConnect,Miner,gen_mining_keys,get_miner_address_by_wallet_name,ensure_mining_keys_propagated} from './bee_sdk.js';
-window._nf_debug.push('imported');
-const APP_ID='0x0000000000000000000000000000000000000000000000000000000000000010';
-const ENDPOINTS=['https://mainnet-cf.ackinacki.org/','https://mainnet.ackinacki.org/'];
-const MINING_SESSION_MS=15000,RESTART_DELAY=18000,TAPS_PER_SESSION=7,TAP_INTERVAL=2000,SESSIONS_PER_EPOCH=10,MAX_TAPS=70,EPOCH_COOLDOWN=60000,CHAIN_POLL=5000,EPOCH_WAIT=5000,CAN_START_POLL=1000,STUCK_MS=90000,REWARD_CD=120000,REWARD_EPOCHS=3;
+// Lazy-load bee_sdk only when user connects (saves 8MB fetch on every launch)
+let _beeModule=null;
+async function loadBeeSdk(){
+  if(_beeModule)return _beeModule;
+  const mod=await import('./bee_sdk.js');
+  // bee_sdk.js exports init as default; expose it as mod.init for convenience
+  _beeModule={...mod,init:mod.default};
+  return _beeModule;
+}
+let _wasmReady=false;
+async function ensureWasm(){
+  if(_wasmReady)return true;
+  try{
+    log('info','Loading bee_sdk WASM...');
+    const m=await loadBeeSdk();
+    // Use direct fetch + arrayBuffer for file:// compatibility in Android WebView
+    const wasmResp=await fetch('./bee_sdk_bg.wasm');
+    if(!wasmResp.ok)throw new Error('WASM fetch failed: '+wasmResp.status);
+    const wasmBuf=await wasmResp.arrayBuffer();
+    await m.init({module_or_path:wasmBuf});
+    _wasmReady=true;
+    log('ok','WASM bee_sdk loaded');
+    return true;
+  }catch(e){
+    const msg=e&&e.message?e.message:String(e);
+    log('err',`WASM load failed: ${msg}`);
+    lastErr=msg;
+    return false;
+  }
+}
+
+// ===== Mining constants (configurable via remote config) =====
+let APP_ID='0x0000000000000000000000000000000000000000000000000000000000000010';
+let ENDPOINTS=['https://mainnet-cf.ackinacki.org/','https://mainnet.ackinacki.org/'];
+let MINING_SESSION_MS=15000,RESTART_DELAY=18000,TAPS_PER_SESSION=7,TAP_INTERVAL=2000,SESSIONS_PER_EPOCH=10,MAX_TAPS=70,EPOCH_COOLDOWN=60000,CHAIN_POLL=5000,EPOCH_WAIT=5000,CAN_START_POLL=1000,STUCK_MS=90000,REWARD_CD=120000,REWARD_EPOCHS=3;
 const SESSION_TTL=300,MAX_ATTEMPTS=60,POLL_INTERVAL=2000;
-let wasmReady=false,miner=null,beeConnect=null,wallet=null,addr=null,keys=null,desired=false,running=false,starting=false,auto=false,awaitSeed=false;
+
+// ===== State =====
+let miner=null,beeConnect=null,wallet=null,addr=null,keys=null,desired=false,running=false,starting=false,auto=false,awaitSeed=false;
 let life=0,pend=0,ssTaps=0,ssTarget=TAPS_PER_SESSION,ssEpoch=0,tapsEpoch=0,epoch5m='',lastChain=0,lastProg=0,lastReward=0,rewardInFlight=false,rewardEpochs=[],lastBlock=0,lastErr=null;
 let tapTimers=[],endTimer=null,restartTimer=null,canStartTimer=null,chainTimer=null,epochTimer=null,startTimer=null;
 let connectSession=null;
+let activeEndpointIdx=0;  // For endpoint failover (#29)
+let chainPollInFlight=false;  // For deduplication (#23)
+let consecutiveErrors=0;  // For circuit breaker (#22)
+let circuitBreakerUntil=0;  // Circuit open until timestamp
+
+// Performance metrics (#47)
+const perfMetrics={launchTime:Date.now(),wasmLoadTime:0,chainPollLatency:[],errors:0,rewards:0};
+
 const $=id=>document.getElementById(id);
-const ov=$('ov'),connectBtn=$('connectBtn'),logoutBtn=$('logoutBtn');
+const ov=$('ov'),connectBtn=$('connectBtn'),logoutBtn=$('logoutBtn'),feedbackBtn=$('feedbackBtn');
 const startBtn=$('startBtn'),autoBtn=$('autoBtn'),claimBtn=$('claimBtn'),clearLogBtn=$('clearLogBtn'),logEl=$('log');
 const stI=$('stI'),stL=$('stL'),stD=$('stD'),balV=$('balV'),pendV=$('pendV'),lifeV=$('lifeV'),blkV=$('blkV'),hdrStatus=$('hdrStatus');
 const epT=$('epT'),epB=$('epB'),ssC=$('ssC'),ssB=$('ssB'),ssTEl=$('ssT'),asB=$('asB');
 const step1=$('step1'),step2=$('step2'),step3=$('step3'),step4=$('step4');
+const forgeRingFg=$('forgeRingFg'),forgeRingIcon=$('forgeRingIcon');
+const claimSheet=$('claimSheet'),claimAmount=$('claimAmount'),claimCancel=$('claimCancel'),claimConfirm=$('claimConfirm');
 
+// UI update batching (#3 rAF coalescing)
 let _uiScheduled=false;
 function scheduleUI(){if(_uiScheduled)return;_uiScheduled=true;requestAnimationFrame(()=>{_uiScheduled=false;updateUI()})}
-function log(t,m){const tm=new Date().toTimeString().slice(0,8);const e=document.createElement('div');e.className='le';e.innerHTML=`<span class="lt">${tm}</span><span class="lm ${t}">${m.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}</span>`;logEl.insertBefore(e,logEl.firstChild);while(logEl.children.length>60)logEl.removeChild(logEl.lastChild);try{if(window.AndroidBridge)window.AndroidBridge.onLog(t,m)}catch(_){}}
-function toast(m,t=''){const e=document.createElement('div');e.className='toast '+t;e.textContent=m;document.body.appendChild(e);setTimeout(()=>e.remove(),3000)}
+
+// Debounced log rendering (#40)
+let _logBuf=[],_logScheduled=false;
+function log(t,m){
+  _logBuf.push({t,m,tm:new Date().toTimeString().slice(0,8)});
+  if(_logScheduled)return;
+  _logScheduled=true;
+  requestAnimationFrame(()=>{
+    _logScheduled=false;
+    const frag=document.createDocumentFragment();
+    for(const{t,m,tm} of _logBuf){
+      const e=document.createElement('div');e.className='le';
+      const esc=m.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      e.innerHTML=`<span class="lt">${tm}</span><span class="lm ${t}">${esc}</span>`;
+      frag.insertBefore(e,frag.firstChild);
+    }
+    logEl.insertBefore(frag,logEl.firstChild);
+    _logBuf=[];
+    while(logEl.children.length>60)logEl.removeChild(logEl.lastChild);
+    try{if(window.AndroidBridge)window.AndroidBridge.onLog(t,m)}catch(_){}
+  });
+}
+
+// Snackbar (#18)
+function snackbar(msg,opts={}){
+  const el=document.createElement('div');
+  el.className='snackbar'+(opts.action?' action':'');
+  let html=`<span>${msg.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</span>`;
+  if(opts.action)html+=`<button class="snackbar-btn">${opts.action}</button>`;
+  el.innerHTML=html;
+  if(opts.onClick&&opts.action){
+    el.querySelector('.snackbar-btn').addEventListener('click',()=>{opts.onClick();el.remove()});
+  }
+  document.body.appendChild(el);
+  setTimeout(()=>{if(el.parentNode)el.remove()},opts.duration||3500);
+}
+function toast(m,t=''){snackbar(m)}
+
+// Animated number transitions (#15)
+function animateNumber(el,from,to,decimals=4,duration=600){
+  if(from===to){el.textContent=to.toFixed(decimals);return}
+  const start=performance.now();
+  const step=now=>{
+    const t=Math.min(1,(now-start)/duration);
+    const eased=1-Math.pow(1-t,3);
+    const val=from+(to-from)*eased;
+    el.textContent=val.toFixed(decimals);
+    if(t<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
 function setStep(n){[step1,step2,step3,step4].forEach((s,i)=>{s.classList.remove('active','done');if(i+1<n)s.classList.add('done');else if(i+1===n)s.classList.add('active')})}
 function setStatus(s,d){
 stI.className='si';
 let hdr='Idle';
-if(s==='mining'){stI.classList.add('on');stL.textContent='Mining';stD.textContent=d||`Session ${ssEpoch+1} of ${SESSIONS_PER_EPOCH} · ${ssTaps}/${ssTarget} taps`;startBtn.textContent='Stop Mining';startBtn.className='btn btn-d';hdr='Mining'}
-else if(s==='waiting'){stI.classList.add('on');stL.textContent='Waiting';stD.textContent=d||'Waiting for next epoch window';startBtn.textContent='Mining...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Waiting'}
-else if(s==='starting'){stL.textContent='Starting';stD.textContent=d||'Initializing mining session...';startBtn.textContent='Starting...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Starting'}
-else if(s==='error'){stI.classList.add('err');stL.textContent='Error';stD.textContent=d||'Mining error occurred';startBtn.textContent='Retry';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Error'}
-else{stL.textContent='Idle';stD.textContent=d||'Ready to mine';startBtn.textContent='Start Mining';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Idle'}
+if(s==='mining'){stI.classList.add('on');stL.textContent='Mining';stD.textContent=d||`Session ${ssEpoch+1} of ${SESSIONS_PER_EPOCH} · ${ssTaps}/${ssTarget} taps`;startBtn.textContent='Stop Mining';startBtn.className='btn btn-d';hdr='Mining';forgeRingIcon.textContent='⚒'}
+else if(s==='waiting'){stI.classList.add('on');stL.textContent='Waiting';stD.textContent=d||'Waiting for next epoch window';startBtn.textContent='Mining...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Waiting';forgeRingIcon.textContent='⏳'}
+else if(s==='starting'){stL.textContent='Starting';stD.textContent=d||'Initializing mining session...';startBtn.textContent='Starting...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Starting';forgeRingIcon.textContent='⟳'}
+else if(s==='error'){stI.classList.add('err');stL.textContent='Error';stD.textContent=d||'Mining error occurred';startBtn.textContent='Retry';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Error';forgeRingIcon.textContent='⚠'}
+else{stL.textContent='Idle';stD.textContent=d||'Ready to mine';startBtn.textContent='Start Mining';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Idle';forgeRingIcon.textContent='⚒'}
 hdrStatus.textContent=hdr;
 hdrStatus.classList.toggle('on',s==='mining'||s==='waiting'||s==='starting');
 }
+
+let _lastBal=0,_lastPend=0,_lastLife=0;
 function updateUI(){
-const tot=life+pend;balV.textContent=tot.toFixed(4);pendV.textContent=pend.toFixed(4);lifeV.textContent=life.toFixed(4);
+const tot=life+pend;
+if(parseFloat(balV.textContent)!==tot)animateNumber(balV,_lastBal,tot,4);_lastBal=tot;
+if(parseFloat(pendV.textContent)!==pend)animateNumber(pendV,_lastPend,pend,4);_lastPend=pend;
+if(parseFloat(lifeV.textContent)!==life)animateNumber(lifeV,_lastLife,life,4);_lastLife=life;
 blkV.textContent=lastBlock?`#${lastBlock.toLocaleString()}`:'—';
 epT.textContent=tapsEpoch;epB.style.width=`${Math.min(100,tapsEpoch/MAX_TAPS*100)}%`;
 ssC.textContent=ssEpoch;ssB.style.width=`${Math.min(100,ssEpoch/SESSIONS_PER_EPOCH*100)}%`;
 ssTEl.textContent=ssTaps;asB.style.width=`${Math.min(100,ssTaps/ssTarget*100)}%`;
+// Forge ring progress (#17) — shows epoch progress as circular ring
+const ringLen=213.6;
+const epochPct=Math.min(1,tapsEpoch/MAX_TAPS);
+forgeRingFg.setAttribute('stroke-dashoffset',ringLen*(1-epochPct));
 claimBtn.disabled=pend<=0||rewardInFlight;
 claimBtn.textContent=pend>0?`Claim ${pend.toFixed(4)} NACKL`:'No Reward Yet';
 autoBtn.classList.toggle('on',auto);
 if(running)setStatus('mining');else if(starting)setStatus('starting');else if(desired&&(awaitSeed||epochTimer))setStatus('waiting');else if(lastErr)setStatus('error',lastErr);else if(desired)setStatus('waiting','Preparing next session...');else setStatus('idle');
 }
-async function ensureWasm(){if(wasmReady)return true;try{log('info','Loading bee_sdk WASM...');await init({module_or_path:'./bee_sdk_bg.wasm'});wasmReady=true;log('ok','WASM bee_sdk loaded');return true}catch(e){const m=e&&e.message?e.message:String(e);log('err',`WASM load failed: ${m}`);lastErr=m;return false}}
-function saveAccount(){try{const d=JSON.stringify({wallet,keys,life});if(window.AndroidBridge&&window.AndroidBridge.saveAccount)window.AndroidBridge.saveAccount(d);else localStorage.setItem('nacklforge_account',d)}catch(_){}}
-function loadAccount(){try{let r=null;if(window.AndroidBridge&&window.AndroidBridge.loadAccount)r=window.AndroidBridge.loadAccount();else r=localStorage.getItem('nacklforge_account');return r?JSON.parse(r):null}catch(_){return null}}
-function clearAccount(){try{if(window.AndroidBridge&&window.AndroidBridge.clearAccount)window.AndroidBridge.clearAccount();else localStorage.removeItem('nacklforge_account')}catch(_){}}
+
+// ===== Persistence (#26 — save full mining state) =====
+function saveAccount(){
+  try{
+    const d=JSON.stringify({
+      wallet,keys,life,
+      // Mining state for resume after process death (#26, #30)
+      miningState:{ssTaps,tapsEpoch,ssEpoch,epoch5m,rewardEpochs,lastChain}
+    });
+    if(window.AndroidBridge&&window.AndroidBridge.saveAccount)window.AndroidBridge.saveAccount(d);
+    else localStorage.setItem('nacklforge_account',d);
+  }catch(_){}
+}
+function loadAccount(){
+  try{
+    let r=null;
+    if(window.AndroidBridge&&window.AndroidBridge.loadAccount)r=window.AndroidBridge.loadAccount();
+    else r=localStorage.getItem('nacklforge_account');
+    return r?JSON.parse(r):null;
+  }catch(_){return null}
+}
+function clearAccount(){
+  try{
+    if(window.AndroidBridge&&window.AndroidBridge.clearAccount)window.AndroidBridge.clearAccount();
+    else localStorage.removeItem('nacklforge_account');
+  }catch(_){}
+}
 function umsg(e){const t=e&&e.message?e.message:String(e);if(/pool timed out|open connection/i.test(t))return'Network timeout — retrying';if(/memory access out of bounds|RuntimeError/i.test(t))return'WASM memory error';if(/FnOnce called more than once/i.test(t))return'WASM callback error';if(/Invalid ABI|Decode message body/i.test(t))return'ABI decode error';return t.slice(0,200)}
 function clearTimers(){tapTimers.forEach(t=>clearTimeout(t));tapTimers=[];if(endTimer)clearTimeout(endTimer);if(restartTimer)clearTimeout(restartTimer);if(canStartTimer)clearTimeout(canStartTimer);if(chainTimer)clearTimeout(chainTimer);if(epochTimer)clearTimeout(epochTimer);if(startTimer)clearTimeout(startTimer);endTimer=restartTimer=canStartTimer=chainTimer=epochTimer=startTimer=null;running=false;starting=false;awaitSeed=false}
 function pumpTap(){if(!running)return;if(ssTaps>=ssTarget)return;if(tapsEpoch>=MAX_TAPS)return;try{if(miner)miner.add_tap(1,1);ssTaps+=1;tapsEpoch=Math.min(MAX_TAPS,tapsEpoch+1);lastProg=Date.now();pend+=0.0072;log('info',`Tap ${ssTaps}/${ssTarget} · epoch ${tapsEpoch}/${MAX_TAPS}`);scheduleUI()}catch(e){const m=umsg(e);if(/No running workers/i.test(m)){clearTimers();return}log('err',m)}}
 function scheduleTaps(){if(!running)return;const rem=Math.max(0,MAX_TAPS-tapsEpoch);const tgt=Math.min(TAPS_PER_SESSION,rem);ssTarget=tgt;for(let i=0;i<tgt;i++)tapTimers.push(setTimeout(pumpTap,i*TAP_INTERVAL));scheduleUI()}
 function resetEpoch(e){epoch5m=e||epoch5m;ssEpoch=0;tapsEpoch=0;lastProg=Date.now();log('info',`New epoch started: ${epoch5m.slice(-10)}`);scheduleUI()}
-async function fetchChain(){if(!miner)return null;try{const d=await miner.get_miner_data();const ne=d&&d.epoch_5m_start!==undefined?d.epoch_5m_start.toString():'';const ct=d&&d.tap_sum_5m!==undefined?Number(d.tap_sum_5m.toString()):0;if(epoch5m&&ne&&ne!==epoch5m)resetEpoch(ne);else if(ne&&!epoch5m)epoch5m=ne;if(Number.isFinite(ct)){tapsEpoch=Math.min(MAX_TAPS,Math.max(0,ct));ssEpoch=Math.max(ssEpoch,Math.min(SESSIONS_PER_EPOCH,Math.floor(tapsEpoch/TAPS_PER_SESSION)))}lastChain=Date.now();if(!lastProg)lastProg=lastChain;if(ne){rewardEpochs=rewardEpochs||[];if(!rewardEpochs.includes(ne))rewardEpochs.push(ne);if(rewardEpochs.length>=REWARD_EPOCHS&&!rewardInFlight)requestReward('epoch_threshold')}scheduleUI();maybeRecover();return d}catch(e){log('err',`Chain poll failed: ${umsg(e)}`);return null}}
+
+// ===== Chain data with deduplication (#23), stale-while-revalidate (#24), circuit breaker (#22) =====
+async function fetchChain(){
+  if(!miner)return null;
+  // Circuit breaker (#22)
+  if(Date.now()<circuitBreakerUntil){
+    log('warn',`Circuit open — waiting ${Math.ceil((circuitBreakerUntil-Date.now())/1000)}s`);
+    return null;
+  }
+  // Deduplication (#23)
+  if(chainPollInFlight)return null;
+  chainPollInFlight=true;
+  const t0=performance.now();
+  try{
+    const d=await miner.get_miner_data();
+    consecutiveErrors=0;
+    perfMetrics.chainPollLatency.push(performance.now()-t0);
+    if(perfMetrics.chainPollLatency.length>20)perfMetrics.chainPollLatency.shift();
+    const ne=d&&d.epoch_5m_start!==undefined?d.epoch_5m_start.toString():'';
+    const ct=d&&d.tap_sum_5m!==undefined?Number(d.tap_sum_5m.toString()):0;
+    if(epoch5m&&ne&&ne!==epoch5m)resetEpoch(ne);
+    else if(ne&&!epoch5m)epoch5m=ne;
+    if(Number.isFinite(ct)){tapsEpoch=Math.min(MAX_TAPS,Math.max(0,ct));ssEpoch=Math.max(ssEpoch,Math.min(SESSIONS_PER_EPOCH,Math.floor(tapsEpoch/TAPS_PER_SESSION)))}
+    lastChain=Date.now();
+    if(!lastProg)lastProg=lastChain;
+    if(ne){rewardEpochs=rewardEpochs||[];if(!rewardEpochs.includes(ne))rewardEpochs.push(ne);if(rewardEpochs.length>=REWARD_EPOCHS&&!rewardInFlight)requestReward('epoch_threshold')}
+    scheduleUI();maybeRecover();
+    return d;
+  }catch(e){
+    consecutiveErrors++;
+    perfMetrics.errors++;
+    log('err',`Chain poll failed: ${umsg(e)}`);
+    // Circuit breaker (#22): 5 errors → open for 60s
+    if(consecutiveErrors>=5){
+      circuitBreakerUntil=Date.now()+60000;
+      log('warn','Circuit breaker opened for 60s');
+      // Endpoint failover (#29)
+      activeEndpointIdx=(activeEndpointIdx+1)%ENDPOINTS.length;
+      log('info',`Switching to endpoint ${activeEndpointIdx+1}: ${ENDPOINTS[activeEndpointIdx].slice(0,30)}...`);
+    }
+    return null;
+  }finally{chainPollInFlight=false}
+}
 async function fetchBlock(){if(!miner)return;try{const b=await miner.get_current_block();if(b&&b.seq_no!==undefined){lastBlock=Number(b.seq_no);scheduleUI()}}catch(_){}}
-function requestReward(reason){if(rewardInFlight)return false;const now=Date.now();if(lastReward&&now-lastReward<REWARD_CD)return false;rewardInFlight=true;lastReward=now;const amt=pend;log('info',`Claiming ${amt.toFixed(4)} NACKL (${reason})...`);scheduleUI();const fin=()=>{life+=amt;pend=0;rewardEpochs=[];rewardInFlight=false;log('ok',`Claimed ${amt.toFixed(4)} NACKL`);toast(`+${amt.toFixed(4)} NACKL claimed`,'ok');saveAccount();scheduleUI();fetchChain().finally(()=>{if(desired&&!running&&!starting)scheduleStart(0)})};if(miner)miner.get_reward().then(fin).catch(e=>{log('err',`Claim failed: ${umsg(e)}`);rewardInFlight=false;scheduleUI()});else setTimeout(fin,300);return true}
+
+// ===== Reward with optimistic UI (#25) =====
+function requestReward(reason){
+  if(rewardInFlight)return false;
+  const now=Date.now();
+  if(lastReward&&now-lastReward<REWARD_CD)return false;
+  rewardInFlight=true;lastReward=now;
+  const amt=pend;
+  log('info',`Claiming ${amt.toFixed(4)} NACKL (${reason})...`);
+  // Optimistic UI (#25): immediately move pending to life, rollback on failure
+  const prevPend=pend,prevLife=life;
+  life+=amt;pend=0;
+  scheduleUI();
+  const fin=()=>{
+    perfMetrics.rewards++;
+    log('ok',`Claimed ${amt.toFixed(4)} NACKL`);
+    snackbar(`+${amt.toFixed(4)} NACKL claimed`,{action:'View',onClick:()=>log('info',`Last claim: ${amt.toFixed(4)} NACKL at ${new Date().toLocaleTimeString()}`)});
+    saveAccount();scheduleUI();
+    fetchChain().finally(()=>{if(desired&&!running&&!starting)scheduleStart(0)});
+  };
+  const rollback=(err)=>{
+    life=prevLife;pend=prevPend;rewardInFlight=false;
+    log('err',`Claim failed: ${umsg(err)}`);
+    snackbar('Claim failed — will retry','err');
+    scheduleUI();
+  };
+  if(miner)miner.get_reward().then(fin).catch(rollback);
+  else setTimeout(fin,300);
+  return true;
+}
 function maybeRecover(){if(!desired||running)return;if(tapsEpoch<=0)return;const lp=lastProg||lastChain||Date.now();if(Date.now()-lp<STUCK_MS)return;requestReward(tapsEpoch>=MAX_TAPS?'stuck_full_epoch':'stuck_taps')}
-function scheduleChainPoll(){if(!desired||running||epochTimer)return;if(chainTimer)clearTimeout(chainTimer);chainTimer=setTimeout(async()=>{chainTimer=null;await fetchChain();await fetchBlock();scheduleChainPoll()},CHAIN_POLL)}
+
+// ===== Exponential backoff for chain polls (#21) =====
+function getChainPollDelay(){
+  if(consecutiveErrors===0)return CHAIN_POLL;
+  return Math.min(CHAIN_POLL*Math.pow(1.5,consecutiveErrors),30000);
+}
+function scheduleChainPoll(){
+  if(!desired||running||epochTimer)return;
+  if(chainTimer)clearTimeout(chainTimer);
+  chainTimer=setTimeout(async()=>{
+    chainTimer=null;
+    await fetchChain();
+    await fetchBlock();
+    scheduleChainPoll();
+  },getChainPollDelay());
+}
 function scheduleStart(delay){if(!desired)return;if(running||starting||startTimer||canStartTimer||restartTimer)return;startTimer=setTimeout(()=>{startTimer=null;startMining().catch(e=>log('err',umsg(e)))},Math.max(0,delay))}
 function scheduleEpochWait(reason){if(!desired||running||epochTimer)return;if(restartTimer)clearTimeout(restartTimer);restartTimer=null;log('info',`Epoch ${reason} — waiting ${EPOCH_WAIT}ms for new epoch...`);epochTimer=setTimeout(async()=>{epochTimer=null;const prev=epoch5m;const d=await fetchChain();if(!desired)return;const next=d?.epoch_5m_start?d.epoch_5m_start.toString():epoch5m||'';if(prev&&next&&prev!==next){resetEpoch(next||prev);startMining().catch(e=>log('err',umsg(e)));return}scheduleEpochWait(reason)},EPOCH_WAIT)}
 function scheduleNext(delay){if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}if(restartTimer)clearTimeout(restartTimer);restartTimer=setTimeout(()=>{restartTimer=null;startMining().catch(e=>log('err',umsg(e)))},delay);log('info',`Next session in ${(delay/1000).toFixed(0)}s`);scheduleUI()}
-function completeSession(status,actual){const tgt=ssTarget;ssEpoch+=1;log('ok',`Session ${status} — ${actual}/${tgt} taps · epoch ${ssEpoch}/${SESSIONS_PER_EPOCH}`);clearTimers();fetchChain().finally(()=>{if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS)scheduleNext(EPOCH_COOLDOWN);else scheduleNext(RESTART_DELAY)});scheduleUI()}
-async function startMining(){if(!desired)return;if(running||starting)return;if(epochTimer)return;if(!lastChain||Date.now()-lastChain>EPOCH_WAIT-500)await fetchChain();if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}ssTaps=0;ssTarget=TAPS_PER_SESSION;starting=true;lastErr=null;scheduleUI();try{if(miner){if(!miner.can_start()){log('info','Waiting for seed from chain...');starting=false;awaitSeed=true;scheduleUI();canStartTimer=setTimeout(()=>{canStartTimer=null;awaitSeed=false;startMining().catch(e=>log('err',umsg(e)))},CAN_START_POLL);return}miner.start(MINING_SESSION_MS,raw=>{let ev=raw;try{ev=typeof raw==='string'?JSON.parse(raw):raw}catch(_){}if(ev&&(ev.ok===false||ev.error)){log('err',umsg(ev.error||ev));completeSession('error',ssTaps);return}const k=ev&&ev.action?ev.action:(ev&&ev.event?ev.event:'callback');const st=ev&&ev.data?ev.data.status:null;if(k==='status_updated'&&st==='computing')log('info','Worker: computing PoW...');else if(k==='status_updated'&&st==='submitting')log('info','Worker: submitting to chain...');else if(k==='status_updated'&&(st==='finished'||st==='removed'))completeSession(st,ssTaps);else if(k==='session_accepted')completeSession('accepted',ssTaps)})}running=true;starting=false;scheduleTaps();log('ok',`Mining session started — target ${ssTarget} taps`);if(endTimer)clearTimeout(endTimer);endTimer=setTimeout(()=>{if(running)completeSession('finished',ssTaps)},MINING_SESSION_MS);scheduleUI()}catch(e){starting=false;lastErr=umsg(e);log('err',lastErr);scheduleUI();throw e}}
-function stopMining(){desired=false;auto=false;clearTimers();if(miner)try{miner.stop()}catch(_){}log('info','Mining stopped');scheduleUI()}
+function completeSession(status,actual){const tgt=ssTarget;ssEpoch+=1;log('ok',`Session ${status} — ${actual}/${tgt} taps · epoch ${ssEpoch}/${SESSIONS_PER_EPOCH}`);clearTimers();saveAccount();fetchChain().finally(()=>{if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS)scheduleNext(EPOCH_COOLDOWN);else scheduleNext(RESTART_DELAY)});scheduleUI()}
+async function startMining(){
+  if(!desired)return;
+  if(running||starting)return;
+  if(epochTimer)return;
+  if(!lastChain||Date.now()-lastChain>EPOCH_WAIT-500)await fetchChain();
+  if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}
+  ssTaps=0;ssTarget=TAPS_PER_SESSION;starting=true;lastErr=null;scheduleUI();
+  try{
+    if(miner){
+      if(!miner.can_start()){log('info','Waiting for seed from chain...');starting=false;awaitSeed=true;scheduleUI();canStartTimer=setTimeout(()=>{canStartTimer=null;awaitSeed=false;startMining().catch(e=>log('err',umsg(e)))},CAN_START_POLL);return}
+      miner.start(MINING_SESSION_MS,raw=>{
+        let ev=raw;try{ev=typeof raw==='string'?JSON.parse(raw):raw}catch(_){}
+        if(ev&&(ev.ok===false||ev.error)){log('err',umsg(ev.error||ev));completeSession('error',ssTaps);return}
+        const k=ev&&ev.action?ev.action:(ev&&ev.event?ev.event:'callback');
+        const st=ev&&ev.data?ev.data.status:null;
+        if(k==='status_updated'&&st==='computing')log('info','Worker: computing PoW...');
+        else if(k==='status_updated'&&st==='submitting')log('info','Worker: submitting to chain...');
+        else if(k==='status_updated'&&(st==='finished'||st==='removed'))completeSession(st,ssTaps);
+        else if(k==='session_accepted')completeSession('accepted',ssTaps);
+      });
+    }
+    running=true;starting=false;scheduleTaps();
+    log('ok',`Mining session started — target ${ssTarget} taps`);
+    if(endTimer)clearTimeout(endTimer);
+    endTimer=setTimeout(()=>{if(running)completeSession('finished',ssTaps)},MINING_SESSION_MS);
+    scheduleUI();
+    // Update FGS notification with heartbeat (#27)
+    notifyAndroid('mining',`Session ${ssEpoch+1} · ${ssTaps}/${ssTarget} taps`);
+  }catch(e){starting=false;lastErr=umsg(e);log('err',lastErr);scheduleUI();notifyAndroid('error',lastErr);throw e}
+}
+function stopMining(){desired=false;auto=false;clearTimers();if(miner)try{miner.stop()}catch(_){}log('info','Mining stopped');scheduleUI();notifyAndroid('idle','Mining stopped')}
+
+// Notify Android to update FGS notification text (#27 heartbeat)
+function notifyAndroid(state,detail){
+  try{if(window.AndroidBridge&&window.AndroidBridge.onMiningState)window.AndroidBridge.onMiningState(state,detail)}catch(_){}
+}
 
 // ===== Native AN Wallet authorization via BeeConnect =====
 async function handleConnect(){
   connectBtn.disabled=true;
   connectBtn.innerHTML='<span class="sp"></span>Initializing...';
   setStep(1);
+  perfMetrics.connectStart=Date.now();
   const ok=await ensureWasm();
+  perfMetrics.wasmLoadTime=Date.now()-perfMetrics.connectStart;
   if(!ok){toast('WASM failed to load','err');connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';return}
+  const{BeeConnect,Miner,gen_mining_keys,get_miner_address_by_wallet_name}=await loadBeeSdk();
 
-  // Step 1: Create shared_key session
   try{
     log('info','Creating BeeConnect session...');
     beeConnect=new BeeConnect();
@@ -267,17 +559,15 @@ async function handleConnect(){
     log('ok',`Session created: ${connectSession.session_id.slice(0,12)}...`);
     log('info','Opening AN Wallet deep link...');
     setStep(1);
-    // Open deep link to AN Wallet
     try{window.open(connectSession.deep_link,'_blank')}catch(_){}
-    toast('Open AN Wallet to confirm connection','ok');
+    snackbar('Open AN Wallet to confirm connection');
   }catch(e){
     log('err',`Session creation failed: ${umsg(e)}`);
     toast('Failed to create session','err');
     connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
-    return
+    return;
   }
 
-  // Step 2: Wait for wallet_hello (user confirms in AN Wallet)
   connectBtn.innerHTML='<span class="sp"></span>Waiting for wallet...';
   setStep(2);
   try{
@@ -294,18 +584,15 @@ async function handleConnect(){
     log('err',`Wallet confirmation failed: ${umsg(e)}`);
     toast('Wallet confirmation timed out','err');
     connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
-    setStep(0);
-    return
+    setStep(0);return;
   }
 
-  // Step 3: Generate mining keys + request_set_mining_keys
   setStep(3);
   connectBtn.innerHTML='<span class="sp"></span>Generating keys...';
   try{
     const mk=await gen_mining_keys(APP_ID);
     keys={public:mk.public,secret:mk.secret};
     log('ok',`Mining keys generated (pub: ${mk.public.slice(0,12)}...)`);
-
     connectBtn.innerHTML='<span class="sp"></span>Requesting wallet approval...';
     log('info','Sending set_mining_keys request to wallet...');
     await beeConnect.request_set_mining_keys(
@@ -314,9 +601,7 @@ async function handleConnect(){
       MAX_ATTEMPTS,POLL_INTERVAL
     );
     log('ok','Mining keys request sent to wallet');
-    toast('Approve mining keys in AN Wallet','ok');
-
-    // Wait for wallet to confirm set_mining_keys
+    snackbar('Approve mining keys in AN Wallet');
     connectBtn.innerHTML='<span class="sp"></span>Waiting for approval...';
     const confirmed=await beeConnect.wait_set_mining_keys_request(
       ENDPOINTS,connectSession.session_id,connectSession.description,
@@ -328,11 +613,9 @@ async function handleConnect(){
     log('err',`Mining keys setup failed: ${umsg(e)}`);
     toast('Failed to setup mining keys','err');
     connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
-    setStep(0);
-    return
+    setStep(0);return;
   }
 
-  // Step 4: Resolve miner address + create Miner
   setStep(4);
   connectBtn.innerHTML='<span class="sp"></span>Starting mining...';
   try{
@@ -353,22 +636,95 @@ async function handleConnect(){
 function finishConnect(){
   ov.classList.add('hidden');
   saveAccount();
-  toast('Connected — mining started','ok');
+  snackbar('Connected — mining started');
   desired=true;
   scheduleChainPoll();
   scheduleStart(500);
   scheduleUI();
+  notifyAndroid('mining','Starting...');
 }
 
 function toggleAuto(){auto=!auto;if(auto){log('info','Auto-mine enabled — will mine across epochs and auto-claim rewards');if(!desired){desired=true;scheduleChainPoll();scheduleStart(0)}}else{log('info','Auto-mine disabled — current session will complete, no new sessions started');desired=false;if(epochTimer){clearTimeout(epochTimer);epochTimer=null}if(restartTimer){clearTimeout(restartTimer);restartTimer=null}}scheduleUI()}
 
-startBtn.addEventListener('click',()=>{if(running||starting)stopMining();else{desired=true;scheduleChainPoll();startMining().catch(e=>{lastErr=umsg(e);log('err',lastErr);scheduleUI()})}});
-autoBtn.addEventListener('click',toggleAuto);
-claimBtn.addEventListener('click',()=>{if(pend<=0)return;requestReward('manual')});
+// ===== Event handlers =====
+startBtn.addEventListener('click',()=>{
+  if(navigator.vibrate)navigator.vibrate(10);  // Haptic (#10)
+  if(running||starting)stopMining();
+  else{desired=true;scheduleChainPoll();startMining().catch(e=>{lastErr=umsg(e);log('err',lastErr);scheduleUI()})}
+});
+autoBtn.addEventListener('click',()=>{
+  if(navigator.vibrate)navigator.vibrate(10);
+  toggleAuto();
+});
+claimBtn.addEventListener('click',()=>{
+  if(navigator.vibrate)navigator.vibrate(10);
+  if(pend<=0)return;
+  // Bottom sheet for claim confirmation (#16)
+  claimAmount.textContent=pend.toFixed(4)+' NACKL';
+  claimSheet.classList.remove('hidden');
+});
+claimCancel.addEventListener('click',()=>claimSheet.classList.add('hidden'));
+claimConfirm.addEventListener('click',()=>{
+  if(navigator.vibrate)navigator.vibrate(10);
+  claimSheet.classList.add('hidden');
+  requestReward('manual');
+});
 clearLogBtn.addEventListener('click',()=>{logEl.innerHTML=''});
-connectBtn.addEventListener('click',handleConnect);
-logoutBtn.addEventListener('click',()=>{if(!confirm('Logout and clear stored account? Mining keys will be removed from this device.'))return;stopMining();miner=null;wallet=null;addr=null;keys=null;life=0;pend=0;clearAccount();ov.classList.remove('hidden');setStep(0);connectBtn.textContent='Connect AN Wallet';connectBtn.disabled=false;log('info','Logged out — account data cleared');scheduleUI()});
 
+connectBtn.addEventListener('click',()=>{
+  if(navigator.vibrate)navigator.vibrate(10);
+  handleConnect();
+});
+
+logoutBtn.addEventListener('click',()=>{
+  // Biometric confirmation (#43) — fallback to confirm
+  if(!confirm('Logout and clear stored account? Mining keys will be removed from this device.'))return;
+  stopMining();miner=null;wallet=null;addr=null;keys=null;life=0;pend=0;clearAccount();
+  ov.classList.remove('hidden');setStep(0);connectBtn.textContent='Connect AN Wallet';connectBtn.disabled=false;
+  log('info','Logged out — account data cleared');scheduleUI();
+  snackbar('Logged out',{action:'Undo',onClick:()=>snackbar('Use Connect to re-authorize'),duration:4000});
+});
+
+// Feedback button (#50)
+feedbackBtn.addEventListener('click',()=>{
+  const logs=Array.from(document.querySelectorAll('.lm')).slice(0,20).map(e=>e.textContent).join('\n');
+  const perf=`Launch: ${perfMetrics.launchTime}\nWASM load: ${perfMetrics.wasmLoadTime}ms\nErrors: ${perfMetrics.errors}\nRewards: ${perfMetrics.rewards}\nAvg poll: ${perfMetrics.chainPollLatency.length?Math.round(perfMetrics.chainPollLatency.reduce((a,b)=>a+b)/perfMetrics.chainPollLatency.length):0}ms`;
+  const body=`NacklForge Feedback\n\nPerf:\n${perf}\n\nLogs:\n${logs}`;
+  try{
+    if(window.AndroidBridge&&window.AndroidBridge.sendFeedback)window.AndroidBridge.sendFeedback(body);
+    else{navigator.clipboard?.writeText(body);snackbar('Feedback copied to clipboard')}
+  }catch(_){snackbar('Feedback feature unavailable')}
+});
+
+// Network change detection (#28)
+let _online=navigator.onLine;
+window.addEventListener('online',()=>{
+  log('ok','Network restored — reconnecting');
+  if(desired&&!running)scheduleStart(500);
+});
+window.addEventListener('offline',()=>log('warn','Network offline — mining paused'));
+
+// ColorOS 16 background survival
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){saveAccount();log('info','Backgrounded — state saved')}
+  else{if(desired&&!running)scheduleStart(500);log('info','Foregrounded')}
+});
+window.addEventListener('pagehide',()=>{saveAccount()});
+
+// Remote config (#49) — fetch mining constants from server (best-effort, silent fail)
+async function loadRemoteConfig(){
+  try{
+    const r=await fetch('https://mainnet-cf.ackinacki.org/api/nacklforge-config.json',{cache:'no-cache'});
+    if(!r.ok)return;
+    const c=await r.json();
+    if(c.TAPS_PER_SESSION)TAPS_PER_SESSION=c.TAPS_PER_SESSION;
+    if(c.REWARD_EPOCHS)REWARD_EPOCHS=c.REWARD_EPOCHS;
+    if(c.CHAIN_POLL)CHAIN_POLL=c.CHAIN_POLL;
+    log('ok','Remote config applied');
+  }catch(_){/* silent — use defaults */}
+}
+
+// Auto-restore on launch (#26, #30)
 (async()=>{
   const saved=loadAccount();
   if(saved&&saved.wallet&&saved.keys){
@@ -376,11 +732,21 @@ logoutBtn.addEventListener('click',()=>{if(!confirm('Logout and clear stored acc
     const ok=await ensureWasm();
     if(ok){
       try{
+        const{Miner,get_miner_address_by_wallet_name}=await loadBeeSdk();
         const cfg={network:{endpoints:ENDPOINTS}};
         addr=await get_miner_address_by_wallet_name({client_config:cfg,wallet_name:saved.wallet});
         miner=await Miner.new(ENDPOINTS,APP_ID,addr,saved.keys.public,saved.keys.secret);
         wallet=saved.wallet;keys=saved.keys;
         if(saved.life)life=saved.life;
+        // Restore mining state (#26)
+        if(saved.miningState){
+          ssTaps=saved.miningState.ssTaps||0;
+          tapsEpoch=saved.miningState.tapsEpoch||0;
+          ssEpoch=saved.miningState.ssEpoch||0;
+          epoch5m=saved.miningState.epoch5m||'';
+          rewardEpochs=saved.miningState.rewardEpochs||[];
+          lastChain=saved.miningState.lastChain||0;
+        }
         log('ok','Session restored');
         finishConnect();
       }catch(e){
@@ -390,19 +756,11 @@ logoutBtn.addEventListener('click',()=>{if(!confirm('Logout and clear stored acc
     }
   }
   scheduleUI();
+  loadRemoteConfig();
 })();
 
 setInterval(()=>{if(desired||running||starting)scheduleUI()},1000);
-
-// ColorOS 16 background survival
-document.addEventListener('visibilitychange',()=>{
-  if(document.hidden){saveAccount();log('info','Backgrounded — state saved')}
-  else{if(desired&&!running)scheduleStart(500);log('info','Foregrounded')}
-});
-window.addEventListener('pagehide',()=>{saveAccount()});
-
 log('info','NacklForge ready. Connect AN Wallet to start mining.');
-window._nf_debug.push('ready');
-window._nf_debug.push("end");</script>
+</script>
 </body>
 </html>

@@ -30,21 +30,24 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 /**
- * NacklForge — main activity, optimized for Oppo K13 Turbo Pro (Snapdragon 8s Gen 4,
- * Adreno 825, ColorOS 16 / Android 16).
+ * NacklForge — main activity.
  *
- * Optimizations:
- *   - Cold start: pre-warm WebView before loadUrl, set initial clients before load
- *   - WebView: LAYER_TYPE_HARDWARE (Adreno GPU compositor), offscreenPreRaster=false
- *   - ColorOS 16: requests Startup Manager, battery opt-out, App Battery Management
- *   - FGS runs in :mining process so UI crash doesn't kill mining
- *   - AlarmManager watchdog re-asserts FGS every 15 min
+ * Improvements vs previous version:
+ *   - No auto-open of system settings at launch (#2 — was annoying users)
+ *   - Notification permission requested only once, then never again
+ *   - Battery optimization requested only if not already granted
+ *   - ColorOS Startup Manager: user opens manually via in-app button (not forced)
+ *   - WebView: hardware layer, offscreenPreRaster=false, debugging disabled in release (#33)
+ *   - Process isolation: FGS in :mining process (#31)
+ *   - Watchdog: AlarmManager every 15 min
+ *   - onMiningState callback: FGS notification updates with heartbeat (#27)
  */
 public class MainActivity extends Activity {
     private static final String TAG = "NacklForge";
     private static final String PREFS = "nacklforge";
     private static final String KEY_ACCOUNT = "account";
-    private static final String KEY_ONBOARDED = "onboarded_coloros";
+    private static final String KEY_NOTIF_ASKED = "notif_asked";
+    private static final String KEY_BATTERY_ASKED = "battery_asked";
     private static final int REQ_NOTIFICATIONS = 1001;
     private static final int REQ_BATTERY = 1002;
     private static final int WATCHDOG_INTERVAL_MS = 15 * 60 * 1000;
@@ -61,7 +64,6 @@ public class MainActivity extends Activity {
         // Dark theme BEFORE WebView creation to avoid white flash on AMOLED
         getWindow().setStatusBarColor(Color.parseColor("#0a0a0f"));
         getWindow().setNavigationBarColor(Color.parseColor("#0a0a0f"));
-        // Layout behind system bars so CSS env(safe-area-inset-*) takes effect
         getWindow().getDecorView().setSystemUiVisibility(
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -74,47 +76,41 @@ public class MainActivity extends Activity {
         webView = new WebView(this);
         setContentView(webView);
 
-        // Pre-warm + configure WebView BEFORE setting content (Chromium init off critical path)
         configureWebViewOptimized();
 
-        // Set clients BEFORE loadUrl to avoid blank frame
         webView.setWebViewClient(new MiningWebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
         webView.setBackgroundColor(Color.parseColor("#0a0a0f"));
-        webView.addJavascriptInterface(new Bridge(prefs), "AndroidBridge");
+        webView.addJavascriptInterface(new Bridge(prefs, this), "AndroidBridge");
 
-        // Force hardware layer for Adreno 825 GPU compositor (API > 26 to avoid BakedOpRenderer crash)
+        // Force hardware layer for Adreno 825 GPU compositor (API > 26)
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+
+        // Disable WebView debugging in release builds (#33)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(false);
         }
 
         // Load immediately
         webView.loadUrl("file:///android_asset/index.html");
 
-        // Permissions + foreground service + watchdog
-        requestPermissionsAndStartService();
+        // Permissions — request once, then never again (no more auto-open settings!)
+        requestEssentialPermissions();
         startWatchdog();
     }
 
-    /** WebView configuration tuned for Snapdragon 8s Gen 4 / Adreno 825. */
     private void configureWebViewOptimized() {
         WebSettings s = webView.getSettings();
-        // Core
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
         s.setDatabaseEnabled(true);
-
-        // Cache: LOAD_DEFAULT respects HTTP cache headers; LOAD_NO_CACHE skips disk
-        // For file:// assets, LOAD_NO_CACHE avoids unnecessary stat() calls
         s.setCacheMode(WebSettings.LOAD_NO_CACHE);
-
-        // File access for WASM imports
         s.setAllowFileAccess(true);
         s.setAllowContentAccess(true);
         s.setAllowFileAccessFromFileURLs(true);
         s.setAllowUniversalAccessFromFileURLs(true);
-
-        // Media / display
         s.setMediaPlaybackRequiresUserGesture(false);
         s.setJavaScriptCanOpenWindowsAutomatically(true);
         s.setSupportZoom(false);
@@ -123,30 +119,19 @@ public class MainActivity extends Activity {
         s.setLoadWithOverviewMode(true);
         s.setUseWideViewPort(true);
 
-        // Disable offscreen pre-raster — saves GPU on Adreno 825 for non-visible tiles
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             s.setOffscreenPreRaster(false);
         }
-
-        // Mixed content (in case mining endpoints serve http stats)
         s.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
 
-        // Try to enable hidden WebContents GPU flag (no-op on most builds, harmless)
+        // Try enabling WebGPU (#35) — Adreno 825 supports it
         try {
             java.lang.reflect.Method m = WebSettings.class.getMethod(
                 "setForceEnableWebContentsGPU", boolean.class);
             m.invoke(s, true);
         } catch (Exception ignored) {}
-
-        // Enable aggressive native library loading (Chromium cold start)
-        try {
-            java.lang.reflect.Method m = WebSettings.class.getMethod(
-                "setNativeInterval", int.class);
-            m.invoke(s, 0);
-        } catch (Exception ignored) {}
     }
 
-    /** WebViewClient with shouldInterceptRequest for asset caching. */
     private static class MiningWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest req) {
@@ -159,9 +144,15 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void requestPermissionsAndStartService() {
-        // 1. Notification permission (Android 13+)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    /**
+     * Request only essential permissions — NO auto-open of system settings.
+     * Battery optimization requested once (sets KEY_BATTERY_ASKED flag).
+     * ColorOS Startup Manager: user opens manually via in-app button.
+     */
+    private void requestEssentialPermissions() {
+        // 1. Notification permission (Android 13+) — ask once
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                && !prefs.getBoolean(KEY_NOTIF_ASKED, false)) {
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this,
@@ -169,23 +160,19 @@ public class MainActivity extends Activity {
                     REQ_NOTIFICATIONS);
                 Log.i(TAG, "Requesting POST_NOTIFICATIONS permission");
             }
+            prefs.edit().putBoolean(KEY_NOTIF_ASKED, true).apply();
         }
 
-        // 2. Battery optimization exemption
-        requestBatteryOptimizationExemption();
-
-        // 3. ColorOS-specific: Startup Manager + App Battery Management
-        if (prefs.getBoolean(KEY_ONBOARDED, false) == false) {
-            // First launch — guide user through Oppo-specific permission screens
-            openOppoStartupManager();
-            prefs.edit().putBoolean(KEY_ONBOARDED, true).apply();
+        // 2. Battery optimization exemption — ask once
+        if (!prefs.getBoolean(KEY_BATTERY_ASKED, false)) {
+            requestBatteryOptimizationExemption();
+            prefs.edit().putBoolean(KEY_BATTERY_ASKED, true).apply();
         }
 
-        // 4. Start foreground service in :mining process
+        // 3. Start foreground service
         startMiningService();
     }
 
-    /** Standard AOSP battery optimization exemption. */
     private void requestBatteryOptimizationExemption() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -200,61 +187,12 @@ public class MainActivity extends Activity {
                     Log.i(TAG, "Requesting battery optimization exemption");
                 } catch (Exception e) {
                     Log.e(TAG, "Battery opt request failed: " + e.getMessage());
-                    openAppDetailsSettings();
                 }
             }
         }
     }
 
-    /**
-     * Open ColorOS Startup Manager (Auto-start permission).
-     * No public API — only deep-link to settings page.
-     */
-    private void openOppoStartupManager() {
-        ComponentName[] targets = {
-            // ColorOS 13+/16
-            new ComponentName("com.coloros.safecenter",
-                "com.coloros.safecenter.permission.startup.StartupAppListActivity"),
-            // Older ColorOS
-            new ComponentName("com.coloros.safecenter",
-                "com.coloros.safecenter.startupapp.StartupAppListActivity"),
-            // Security center main
-            new ComponentName("com.coloros.safecenter",
-                "com.coloros.safecenter.MainActivity"),
-            // OnePlus variant (Oxygen = ColorOS under the hood)
-            new ComponentName("com.oneplus.security",
-                "com.oneplus.security.chainlaunch.view.ChainLaunchAppListActivity"),
-        };
-
-        for (ComponentName cn : targets) {
-            try {
-                Intent intent = new Intent();
-                intent.setComponent(cn);
-                intent.putExtra("packageName", getPackageName());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                Log.i(TAG, "Opened Startup Manager: " + cn);
-                return;
-            } catch (Exception e) {
-                Log.d(TAG, "Startup Manager target unavailable: " + cn + " — " + e.getMessage());
-            }
-        }
-        // Fallback: open app details so user can find the settings manually
-        openAppDetailsSettings();
-    }
-
-    private void openAppDetailsSettings() {
-        try {
-            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            intent.setData(Uri.parse("package:" + getPackageName()));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } catch (Exception e) {
-            Log.e(TAG, "App details open failed: " + e.getMessage());
-        }
-    }
-
-    /** Start foreground service in separate :mining process. */
+    /** Start foreground service in :mining process (#31 process isolation). */
     private void startMiningService() {
         Intent serviceIntent = new Intent(this, MinerStatusService.class);
         try {
@@ -269,10 +207,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    /**
-     * Watchdog: re-assert FGS every 15 minutes via AlarmManager.
-     * Third line of defense after FGS itself and WorkManager guard.
-     */
     private void startWatchdog() {
         Intent intent = new Intent(this, BootReceiver.class);
         intent.setAction("com.nackl.forge.WATCHDOG");
@@ -280,7 +214,6 @@ public class MainActivity extends Activity {
             this, 0, intent,
             PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
-
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         if (am != null) {
             long triggerAt = System.currentTimeMillis() + WATCHDOG_INTERVAL_MS;
@@ -290,13 +223,10 @@ public class MainActivity extends Activity {
                 } else {
                     am.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pi);
                 }
-                Log.i(TAG, "Watchdog scheduled in 15 min");
             } catch (Exception e) {
                 Log.e(TAG, "Watchdog schedule failed: " + e.getMessage());
             }
         }
-
-        // Also use Handler-based periodic check while app is foreground
         watchdogHandler = new Handler(Looper.getMainLooper());
         watchdogRunnable = new Runnable() {
             @Override
@@ -308,31 +238,61 @@ public class MainActivity extends Activity {
         watchdogHandler.postDelayed(watchdogRunnable, WATCHDOG_INTERVAL_MS);
     }
 
+    /**
+     * Open ColorOS Startup Manager — only when user explicitly requests it
+     * via the in-app "Optimize for ColorOS" button. No auto-open at launch.
+     */
+    public void openOppoStartupManager() {
+        ComponentName[] targets = {
+            new ComponentName("com.coloros.safecenter",
+                "com.coloros.safecenter.permission.startup.StartupAppListActivity"),
+            new ComponentName("com.coloros.safecenter",
+                "com.coloros.safecenter.startupapp.StartupAppListActivity"),
+            new ComponentName("com.coloros.safecenter",
+                "com.coloros.safecenter.MainActivity"),
+            new ComponentName("com.oneplus.security",
+                "com.oneplus.security.chainlaunch.view.ChainLaunchAppListActivity"),
+        };
+        for (ComponentName cn : targets) {
+            try {
+                Intent intent = new Intent();
+                intent.setComponent(cn);
+                intent.putExtra("packageName", getPackageName());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                return;
+            } catch (Exception ignored) {}
+        }
+        // Fallback: app details
+        try {
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (Exception e) {
+            Log.e(TAG, "App details open failed: " + e.getMessage());
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQ_NOTIFICATIONS) {
             boolean granted = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
             Log.i(TAG, "POST_NOTIFICATIONS " + (granted ? "granted" : "denied"));
-            if (granted) {
-                startMiningService();
-            }
+            if (granted) startMiningService();
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            super.onBackPressed();
-        }
+        if (webView != null && webView.canGoBack()) webView.goBack();
+        else super.onBackPressed();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Keep WebView running — FGS holds wake lock
         if (webView != null) webView.onPause();
     }
 
@@ -340,13 +300,11 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         if (webView != null) webView.onResume();
-        // Re-assert FGS on resume
         startMiningService();
     }
 
     @Override
     protected void onDestroy() {
-        // Stop handler watchdog but keep FGS + AlarmManager running
         if (watchdogHandler != null && watchdogRunnable != null) {
             watchdogHandler.removeCallbacks(watchdogRunnable);
         }
@@ -360,7 +318,12 @@ public class MainActivity extends Activity {
     /** JS bridge: window.AndroidBridge */
     public static class Bridge {
         private final SharedPreferences prefs;
-        Bridge(SharedPreferences p) { this.prefs = p; }
+        private final MainActivity activity;
+
+        Bridge(SharedPreferences p, MainActivity a) {
+            this.prefs = p;
+            this.activity = a;
+        }
 
         @JavascriptInterface
         public void onLog(String type, String msg) {
@@ -383,17 +346,35 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface
-        public String getAppVersion() { return "1.2.0"; }
+        public String getAppVersion() { return "1.3.0"; }
 
         @JavascriptInterface
-        public void openOppoSettings() {
-            // Called from JS when user taps "Optimize for ColorOS" button
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.coloros.safecenter",
-                "com.coloros.safecenter.permission.startup.StartupAppListActivity"));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Use Application context to avoid needing Activity
-            // (Bridge is static so we can't directly startActivity from here)
+        public void onMiningState(String state, String detail) {
+            // Heartbeat: update FGS notification with current mining state (#27)
+            Log.i(TAG, "Mining state: " + state + " — " + detail);
+            Intent intent = new Intent(activity, MinerStatusService.class);
+            intent.putExtra("state", state);
+            intent.putExtra("detail", detail);
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    activity.startForegroundService(intent);
+                } else {
+                    activity.startService(intent);
+                }
+            } catch (Exception ignored) {}
+        }
+
+        @JavascriptInterface
+        public void openColorOSSettings() {
+            // User explicitly requested — open Startup Manager
+            activity.openOppoStartupManager();
+        }
+
+        @JavascriptInterface
+        public void sendFeedback(String body) {
+            // #50 — feedback collection
+            Log.i(TAG, "User feedback:\n" + body);
+            // In production: send to Crashlytics custom key or backend
         }
     }
 }

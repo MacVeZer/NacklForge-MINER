@@ -16,46 +16,48 @@ import androidx.core.app.ServiceCompat;
 import android.content.pm.ServiceInfo;
 
 /**
- * Foreground service that keeps mining alive in background.
- *
- * ColorOS 16 optimizations:
- *   - Runs in :mining process (declared in manifest) — UI crash doesn't kill FGS
- *   - Persistent low-importance notification (avoids "abnormal app" heuristic)
- *   - PARTIAL_WAKE_LOCK keeps CPU running during Doze
- *   - START_STICKY for system-initiated restart
- *   - Notification uses FOREGROUND_SERVICE_IMMEDIATE behavior
- *   - Detects frozen state and re-asserts notification
+ * Foreground service with heartbeat notification updates.
  */
 public class MinerStatusService extends Service {
     private static final String TAG = "NacklForge";
     private static final String CHANNEL_ID = "mining_status";
     private static final int NOTIFICATION_ID = 1;
-    private static final String CHANNEL_NAME = "Mining Status";
 
     private PowerManager.WakeLock wakeLock;
+    private String currentState = "idle";
+    private String currentDetail = "Mining active";
 
     @Override
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
         acquireWakeLock();
-        Log.i(TAG, "MinerStatusService created in process: " + getApplicationInfo().processName);
+        Log.i(TAG, "MinerStatusService created");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Build notification with FOREGROUND_SERVICE_IMMEDIATE (avoids 5s delay on Android 14+)
-        Notification notification = buildNotification("Mining active");
+        // Update state from intent (heartbeat from JS)
+        if (intent != null) {
+            String state = intent.getStringExtra("state");
+            String detail = intent.getStringExtra("detail");
+            if (state != null) currentState = state;
+            if (detail != null) currentDetail = detail;
+        }
+
+        Notification notification = buildNotification(currentDetail);
         int type = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             type = ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
         }
-        ServiceCompat.startForeground(this, NOTIFICATION_ID, notification, type);
-        Log.i(TAG, "Foreground service started — mining protected from ColorOS battery killer");
+        try {
+            ServiceCompat.startForeground(this, NOTIFICATION_ID, notification, type);
+        } catch (Exception e) {
+            Log.e(TAG, "startForeground failed: " + e.getMessage());
+        }
 
-        // Check if we're in frozen state (ColorOS background freeze)
         if (isProcessFrozen()) {
-            Log.w(TAG, "Process detected as frozen — re-asserting notification");
+            Log.w(TAG, "Process frozen — re-asserting notification");
             NotificationManager nm = getSystemService(NotificationManager.class);
             if (nm != null) nm.notify(NOTIFICATION_ID, notification);
         }
@@ -64,13 +66,10 @@ public class MinerStatusService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
+    public IBinder onBind(Intent intent) { return null; }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        // User swiped app from recents — restart service immediately
         Log.i(TAG, "Task removed — restarting service");
         Intent restartIntent = new Intent(this, MinerStatusService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -84,31 +83,25 @@ public class MinerStatusService extends Service {
     @Override
     public void onDestroy() {
         releaseWakeLock();
-        Log.i(TAG, "Foreground service destroyed");
         super.onDestroy();
     }
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
-                CHANNEL_ID,
-                CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_LOW  // Low importance avoids "abnormal app" trigger
-            );
-            channel.setDescription("Persistent notification to keep mining alive in background");
+                CHANNEL_ID, "Mining Status", NotificationManager.IMPORTANCE_LOW);
+            channel.setDescription("Persistent notification to keep mining alive");
             channel.setShowBadge(false);
             channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             channel.enableVibration(false);
             channel.enableLights(false);
             NotificationManager nm = getSystemService(NotificationManager.class);
-            if (nm != null) {
-                nm.createNotificationChannel(channel);
-            }
+            if (nm != null) nm.createNotificationChannel(channel);
         }
     }
 
     private Notification buildNotification(String text) {
-        NotificationCompat.Builder b = new NotificationCompat.Builder(this, CHANNEL_ID)
+        return new NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("NacklForge")
             .setContentText(text)
             .setSmallIcon(android.R.drawable.stat_sys_download_done)
@@ -118,8 +111,8 @@ public class MinerStatusService extends Service {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-            .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE);
-        return b.build();
+            .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
+            .build();
     }
 
     private void acquireWakeLock() {
@@ -129,10 +122,9 @@ public class MinerStatusService extends Service {
                 wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "NacklForge::MiningWakeLock");
                 wakeLock.setReferenceCounted(false);
                 wakeLock.acquire();
-                Log.i(TAG, "Wake lock acquired");
             }
         } catch (Exception e) {
-            Log.e(TAG, "Wake lock acquire failed: " + e.getMessage());
+            Log.e(TAG, "Wake lock failed: " + e.getMessage());
         }
     }
 
@@ -140,14 +132,9 @@ public class MinerStatusService extends Service {
         if (wakeLock != null && wakeLock.isHeld()) {
             wakeLock.release();
             wakeLock = null;
-            Log.i(TAG, "Wake lock released");
         }
     }
 
-    /**
-     * Detect if our process is frozen by ColorOS Background Freeze feature.
-     * Uses reflection on ActivityManager.RunningAppProcessInfo.flags (hidden API).
-     */
     @SuppressWarnings("deprecation")
     private boolean isProcessFrozen() {
         try {
@@ -158,21 +145,17 @@ public class MinerStatusService extends Service {
             String myProc = getApplicationInfo().processName;
             for (ActivityManager.RunningAppProcessInfo info : procs) {
                 if (info.processName.equals(myProc)) {
-                    // Reflection: check FLAG_FROZEN (0x00000040) on flags field
                     try {
                         java.lang.reflect.Field f = ActivityManager.RunningAppProcessInfo.class
                             .getDeclaredField("flags");
                         int flags = f.getInt(info);
                         return (flags & 0x00000040) != 0;
                     } catch (Exception ignored) {
-                        // Fallback: cached importance
                         return info.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED;
                     }
                 }
             }
-        } catch (Exception e) {
-            Log.d(TAG, "Frozen state check failed: " + e.getMessage());
-        }
+        } catch (Exception ignored) {}
         return false;
     }
 }
