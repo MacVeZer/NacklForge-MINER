@@ -183,7 +183,11 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
 </div>
 
 <script type="module">
+window._nf_debug = ['start'];
+window.addEventListener('error', e => window._nf_debug.push('err:' + e.message + '@' + e.lineno + ':' + e.colno));
+window.addEventListener('unhandledrejection', e => window._nf_debug.push('rej:' + (e.reason?.message || e.reason)));
 import init,{BeeConnect,Miner,gen_mining_keys,get_miner_address_by_wallet_name,ensure_mining_keys_propagated} from './bee_sdk.js';
+window._nf_debug.push('imported');
 const APP_ID='0x0000000000000000000000000000000000000000000000000000000000000010';
 const ENDPOINTS=['https://mainnet-cf.ackinacki.org/','https://mainnet.ackinacki.org/'];
 const MINING_SESSION_MS=15000,RESTART_DELAY=18000,TAPS_PER_SESSION=7,TAP_INTERVAL=2000,SESSIONS_PER_EPOCH=10,MAX_TAPS=70,EPOCH_COOLDOWN=60000,CHAIN_POLL=5000,EPOCH_WAIT=5000,CAN_START_POLL=1000,STUCK_MS=90000,REWARD_CD=120000,REWARD_EPOCHS=3;
@@ -398,6 +402,7 @@ document.addEventListener('visibilitychange',()=>{
 window.addEventListener('pagehide',()=>{saveAccount()});
 
 log('info','NacklForge ready. Connect AN Wallet to start mining.');
-</script>
+window._nf_debug.push('ready');
+window._nf_debug.push("end");</script>
 </body>
 </html>
