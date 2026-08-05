@@ -331,3 +331,52 @@ Stage Summary:
 - ColorOS 16 background survival via 3-layer defense: FGS in :mining process + AlarmManager watchdog + BootReceiver
 - Cold start <200ms via WebView pre-warming + preconnect + rAF batching
 - All 11 permissions including EXACT_ALARM for watchdog
+
+---
+Task ID: 8
+Agent: Main agent (Super Z)
+Task: Replace manual mining keys input with native AN Wallet authorization via BeeConnect.
+
+Work Log:
+- Re-downloaded @teamgosh/bee-sdk to /tmp/beesdk and studied BeeConnect API in bee_sdk.d.ts:
+  * `new BeeConnect()` — creates client
+  * `create_shared_key_session(app_id, ttl_secs, nonce)` → returns ResultOfCreateSharedKeySession with session_id, deep_link, client_dh_secret, description
+  * `wait_wallet_hello(endpoints, session_id, description, client_dh_secret)` → waits for wallet to send hello, returns wallet_name, wallet_address, session_state_json
+  * `gen_mining_keys(app_id)` → returns mining public/secret keys + deep_link
+  * `request_set_mining_keys(endpoints, session_id, description, session_state_json, app_id, owner_public)` → sends request to wallet
+  * `wait_set_mining_keys_request(endpoints, session_id, description)` → waits for wallet to confirm
+  * `get_miner_address_by_wallet_name({client_config, wallet_name})` → resolves miner contract address
+  * `Miner.new(endpoints, app_id, address, public_key, secret_key)` → creates miner instance
+- Verified BeeConnect works in browser: `new BeeConnect()` + `create_shared_key_session()` returns valid session with deep_link (https://links.gosh.sh/deeplinks/wallet/v1/connect?payload=ey...)
+- Rewrote index.html onboarding:
+  * Removed wallet name input + mining keys textarea + Generate New Keys button + Paste from Clipboard button
+  * Added single "Connect AN Wallet" button with 4-step visual progress indicator
+  * Steps: (1) Open AN Wallet via deep link → (2) Confirm connection → (3) Approve mining keys → (4) Mining starts
+  * Each step has visual state (active/done) updated as flow progresses
+- Implemented handleConnect() with full BeeConnect flow:
+  1. ensureWasm()
+  2. new BeeConnect()
+  3. create_shared_key_session(APP_ID, 300, null) → session + deep_link
+  4. window.open(deep_link) — opens AN Wallet app
+  5. wait_wallet_hello() with 60 attempts × 2s polling
+  6. gen_mining_keys(APP_ID) → mining keys
+  7. request_set_mining_keys() — sends keys to wallet
+  8. wait_set_mining_keys_request() — waits for wallet approval
+  9. get_miner_address_by_wallet_name({wallet_name})
+  10. Miner.new() — creates miner
+  11. finishConnect() — saves account, starts mining
+- Updated auto-restore: on app launch, if saved account exists, restores Miner.new directly (no re-auth needed — keys already saved)
+- Updated logout: clears all state, shows onboarding again
+
+Tested:
+- Test 1 ✅ Onboarding renders: "Connect AN Wallet" button, 4-step indicator, no manual input fields
+- Test 2 ✅ BeeConnect API works: session created with deep_link, session_id, dh_secret (verified via direct SDK call)
+- Test 3 ✅ Connect flow: click button → WASM loads → session created → deep link opened → step 1 done, step 2 active → "Waiting for wallet..." spinner
+- Test 4 ✅ Polling continues correctly (60 attempts × 2s = 2 min timeout) — proper behavior for native auth
+
+Stage Summary:
+- Final deliverable: /home/z/my-project/download/NacklForge.apk (3.84 MB, v1.2.0)
+- Native AN Wallet authorization via BeeConnect — no manual key entry
+- 4-step visual onboarding: open AN Wallet → confirm connection → approve keys → mining starts
+- Auto-restore: saved session resumes without re-auth
+- Full BeeConnect flow: create_shared_key_session → wait_wallet_hello → gen_mining_keys → request_set_mining_keys → wait_set_mining_keys_request → Miner.new
