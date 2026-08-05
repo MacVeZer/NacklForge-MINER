@@ -20,14 +20,16 @@ html,body{background:var(--bg);color:var(--fg);font:14px/1.4 -apple-system,Blink
 body{background:radial-gradient(ellipse at top,rgba(251,191,36,.04) 0%,transparent 50%),var(--bg)}
 button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:none;background:none}
-.hdr{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:max(env(safe-area-inset-top),12px) 16px 12px;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd)}
+.hdr{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top));background:rgba(10,10,15,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd)}
 .brand{display:flex;align-items:center;gap:10px}
-.bm{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:14px}
+.bm{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:15px;box-shadow:0 0 12px var(--acg)}
 .bn{font-weight:600;font-size:15px;letter-spacing:-.01em}
-.netpill{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--elev);border:1px solid var(--bd2);border-radius:999px;font-size:11px;font-weight:600;color:var(--ac)}
-.netpill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ac);box-shadow:0 0 6px var(--acg)}
-main{max-width:480px;margin:0 auto;padding:20px 16px 120px}
-.card{background:var(--elev);border:1px solid var(--bd);border-radius:20px;padding:20px;margin-bottom:16px}
+.hdr-status{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--elev);border:1px solid var(--bd2);border-radius:999px;font-size:11px;font-weight:600;color:var(--mt)}
+.hdr-status.on{color:var(--ok);border-color:rgba(52,211,153,.3)}
+.hdr-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--dim)}
+.hdr-status.on::before{background:var(--ok);box-shadow:0 0 6px var(--okg)}
+main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
+.card{background:var(--elev);border:1px solid var(--bd);border-radius:20px;padding:20px;margin-bottom:14px}
 .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--mt);font-weight:600;margin-bottom:8px}
 .bal{display:flex;align-items:baseline;gap:6px}
 .bv{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
@@ -67,11 +69,11 @@ main{max-width:480px;margin:0 auto;padding:20px 16px 120px}
 .btn-g:active{transform:scale(.97);background:var(--elev2)}
 .btn-g.on{background:rgba(96,165,250,.15);color:var(--inf);border-color:rgba(96,165,250,.3)}
 .btn-g:disabled{opacity:.5;cursor:not-allowed}
-.log{margin-top:16px}
+.log{margin-top:14px}
 .loghdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .logt{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--mt);font-weight:600}
 .logc{font-size:11px;color:var(--dim);padding:4px 8px}
-.logl{max-height:180px;overflow-y:auto;font:11px/1.6 "SF Mono","JetBrains Mono",ui-monospace,monospace;-webkit-overflow-scrolling:touch}
+.logl{max-height:160px;overflow-y:auto;font:11px/1.6 "SF Mono","JetBrains Mono",ui-monospace,monospace;-webkit-overflow-scrolling:touch}
 .logl::-webkit-scrollbar{width:3px}
 .logl::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
 .le{display:flex;gap:8px;padding:2px 0}
@@ -81,7 +83,7 @@ main{max-width:480px;margin:0 auto;padding:20px 16px 120px}
 .lm.ok{color:var(--ok)}
 .lm.warn{color:var(--ac)}
 .lm.err{color:var(--err)}
-.ov{position:fixed;left:0;right:0;bottom:0;top:56px;z-index:100;background:var(--bg);display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.ov{position:fixed;left:0;right:0;bottom:0;top:0;z-index:100;background:var(--bg);display:flex;align-items:flex-start;justify-content:center;padding:max(env(safe-area-inset-top),20px) 20px 20px;overflow-y:auto}
 .ov.hidden{display:none}
 .ovc{width:100%;max-width:400px;padding:20px 0}
 .ovl{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-weight:800;color:#000;font-size:24px;box-shadow:0 8px 32px var(--acg)}
@@ -125,7 +127,7 @@ textarea.fi{min-height:80px;resize:none;font:11px/1.5 "SF Mono",ui-monospace,mon
 <body>
 <div class="hdr">
 <div class="brand"><div class="bm">N</div><div class="bn">NacklForge</div></div>
-<div class="netpill" id="netPill">Mainnet</div>
+<div class="hdr-status" id="hdrStatus">Idle</div>
 </div>
 <main>
 <div class="card">
@@ -162,7 +164,7 @@ textarea.fi{min-height:80px;resize:none;font:11px/1.5 "SF Mono",ui-monospace,mon
 <div class="ovc">
 <div class="ovl">N</div>
 <div class="ovt">NacklForge</div>
-<div class="ovd">Real on-chain Nackl mining on mainnet. Connect your Acki Nacki wallet to start earning rewards.</div>
+<div class="ovd">Real on-chain Nackl mining. Connect your Acki Nacki wallet to start earning rewards.</div>
 <div class="f">
 <label class="fl">Wallet Name</label>
 <input type="text" class="fi" id="walletIn" placeholder="your-wallet-name" autocomplete="off">
@@ -171,7 +173,7 @@ textarea.fi{min-height:80px;resize:none;font:11px/1.5 "SF Mono",ui-monospace,mon
 <div class="f">
 <label class="fl">Mining Keys</label>
 <textarea class="fi" id="keysIn" placeholder='{"public":"0x...","secret":"0x..."}' autocomplete="off"></textarea>
-<div class="fh">Generate fresh keys below, or paste existing ones from MinerGo.</div>
+<div class="fh">Generate fresh keys below, or paste existing ones.</div>
 <div class="ka">
 <button id="genKeysBtn">Generate New Keys</button>
 <button id="pasteKeysBtn">Paste from Clipboard</button>
@@ -203,18 +205,21 @@ let tapTimers=[],endTimer=null,restartTimer=null,canStartTimer=null,chainTimer=n
 const $=id=>document.getElementById(id);
 const ov=$('ov'),walletIn=$('walletIn'),keysIn=$('keysIn'),connectBtn=$('connectBtn'),genKeysBtn=$('genKeysBtn'),pasteKeysBtn=$('pasteKeysBtn'),logoutBtn=$('logoutBtn');
 const startBtn=$('startBtn'),autoBtn=$('autoBtn'),claimBtn=$('claimBtn'),clearLogBtn=$('clearLogBtn'),logEl=$('log');
-const stI=$('stI'),stL=$('stL'),stD=$('stD'),balV=$('balV'),pendV=$('pendV'),lifeV=$('lifeV'),blkV=$('blkV');
+const stI=$('stI'),stL=$('stL'),stD=$('stD'),balV=$('balV'),pendV=$('pendV'),lifeV=$('lifeV'),blkV=$('blkV'),hdrStatus=$('hdrStatus');
 const epT=$('epT'),epB=$('epB'),ssC=$('ssC'),ssB=$('ssB'),ssTEl=$('ssT'),asB=$('asB');
 const dlModal=$('dlModal'),dlUrl=$('dlUrl'),dlSkip=$('dlSkip'),dlOpen=$('dlOpen');
 function log(t,m){const tm=new Date().toTimeString().slice(0,8);const e=document.createElement('div');e.className='le';e.innerHTML=`<span class="lt">${tm}</span><span class="lm ${t}">${m.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}</span>`;logEl.insertBefore(e,logEl.firstChild);while(logEl.children.length>80)logEl.removeChild(logEl.lastChild);try{if(window.AndroidBridge)window.AndroidBridge.onLog(t,m)}catch(_){}}
 function toast(m,t=''){const e=document.createElement('div');e.className='toast '+t;e.textContent=m;document.body.appendChild(e);setTimeout(()=>e.remove(),3000)}
 function setStatus(s,d){
 stI.className='si';
-if(s==='mining'){stI.classList.add('on');stL.textContent='Mining';stD.textContent=d||`Session ${ssEpoch+1} of ${SESSIONS_PER_EPOCH} · ${ssTaps}/${ssTarget} taps`;startBtn.textContent='Stop Mining';startBtn.className='btn btn-d'}
-else if(s==='waiting'){stI.classList.add('on');stL.textContent='Waiting';stD.textContent=d||'Waiting for next epoch window';startBtn.textContent='Mining...';startBtn.className='btn btn-g';startBtn.disabled=true}
-else if(s==='starting'){stL.textContent='Starting';stD.textContent=d||'Initializing mining session...';startBtn.textContent='Starting...';startBtn.className='btn btn-g';startBtn.disabled=true}
-else if(s==='error'){stI.classList.add('err');stL.textContent='Error';stD.textContent=d||'Mining error occurred';startBtn.textContent='Retry';startBtn.className='btn btn-p';startBtn.disabled=false}
-else{stL.textContent='Idle';stD.textContent=d||'Ready to mine';startBtn.textContent='Start Mining';startBtn.className='btn btn-p';startBtn.disabled=false}
+let hdr='Idle';
+if(s==='mining'){stI.classList.add('on');stL.textContent='Mining';stD.textContent=d||`Session ${ssEpoch+1} of ${SESSIONS_PER_EPOCH} · ${ssTaps}/${ssTarget} taps`;startBtn.textContent='Stop Mining';startBtn.className='btn btn-d';hdr='Mining'}
+else if(s==='waiting'){stI.classList.add('on');stL.textContent='Waiting';stD.textContent=d||'Waiting for next epoch window';startBtn.textContent='Mining...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Waiting'}
+else if(s==='starting'){stL.textContent='Starting';stD.textContent=d||'Initializing mining session...';startBtn.textContent='Starting...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Starting'}
+else if(s==='error'){stI.classList.add('err');stL.textContent='Error';stD.textContent=d||'Mining error occurred';startBtn.textContent='Retry';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Error'}
+else{stL.textContent='Idle';stD.textContent=d||'Ready to mine';startBtn.textContent='Start Mining';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Idle'}
+hdrStatus.textContent=hdr;
+hdrStatus.classList.toggle('on',s==='mining'||s==='waiting'||s==='starting');
 }
 function updateUI(){
 const tot=life+pend;balV.textContent=tot.toFixed(4);pendV.textContent=pend.toFixed(4);lifeV.textContent=life.toFixed(4);
@@ -258,17 +263,19 @@ const ok=await ensureWasm();
 if(!ok){toast('WASM failed to load','err');connectBtn.disabled=false;connectBtn.textContent='Connect & Mine';return}
 connectBtn.innerHTML='<span class="sp"></span>Resolving miner address...';
 try{const cfg={network:{endpoints:ENDPOINTS}};addr=await get_miner_address_by_wallet_name({client_config:cfg,wallet_name:w});log('ok',`Miner address resolved: ${addr.slice(0,12)}...${addr.slice(-6)}`)}
-catch(e){toast('Wallet not found on mainnet','err');log('err',`Address resolve failed: ${umsg(e)}`);connectBtn.disabled=false;connectBtn.textContent='Connect & Mine';return}
+catch(e){toast('Wallet not found','err');log('err',`Address resolve failed: ${umsg(e)}`);connectBtn.disabled=false;connectBtn.textContent='Connect & Mine';return}
 connectBtn.innerHTML='<span class="sp"></span>Creating miner instance...';
-try{miner=await Miner.new(ENDPOINTS,APP_ID,addr,k.public,k.secret);wallet=w;keys=k;log('ok','Miner connected on mainnet');
+try{
+miner=await Miner.new(ENDPOINTS,APP_ID,addr,k.public,k.secret);
+wallet=w;keys=k;log('ok','Miner connected');
 connectBtn.innerHTML='<span class="sp"></span>Verifying keys on-chain...';
 try{await ensure_mining_keys_propagated({client_config:{network:{endpoints:ENDPOINTS}},miner_address:addr,app_id:APP_ID,expected_owner_public:k.public,max_attempts:5,interval_ms:1000});log('ok','Mining keys verified on-chain');finishConnect()}
-catch(e){log('warn','Keys not propagated yet — showing deep link for activation');showDeepLink(k.deep_link||`https://links.gosh.sh/deeplinks/wallet/v2/set-mining-key?pubkey=${k.public}&app_id=${APP_ID}`);connectBtn.disabled=false;connectBtn.textContent='Connect & Mine'}}
-catch(e){toast('Miner init failed','err');log('err',`Miner.new failed: ${umsg(e)}`);connectBtn.disabled=false;connectBtn.textContent='Connect & Mine'}
+catch(e){log('warn','Keys not propagated yet — showing deep link for activation');showDeepLink(k.deep_link||`https://links.gosh.sh/deeplinks/wallet/v2/set-mining-key?pubkey=${k.public}&app_id=${APP_ID}`);connectBtn.disabled=false;connectBtn.textContent='Connect & Mine'}
+}catch(e){toast('Miner init failed','err');log('err',`Miner.new failed: ${umsg(e)}`);connectBtn.disabled=false;connectBtn.textContent='Connect & Mine'}
 }
 function showDeepLink(link){dlUrl.textContent=link;dlModal.classList.remove('hidden');dlOpen.onclick=()=>{try{window.open(link,'_blank')}catch(_){}};dlSkip.onclick=()=>{dlModal.classList.add('hidden');finishConnect()}}
-function finishConnect(){ov.classList.add('hidden');dlModal.classList.add('hidden');saveAccount();toast('Connected on mainnet','ok');desired=true;scheduleChainPoll();scheduleStart(500);updateUI()}
-async function handleGenKeys(){genKeysBtn.disabled=true;genKeysBtn.innerHTML='<span class="sp l"></span>Generating...';const ok=await ensureWasm();if(!ok){toast('WASM failed','err');genKeysBtn.disabled=false;genKeysBtn.textContent='Generate New Keys';return}try{const k=await gen_mining_keys(APP_ID);keysIn.value=JSON.stringify({public:k.public,secret:k.secret,deep_link:k.deep_link},null,2);log('ok',`Generated new mining keys (pub: ${k.public.slice(0,12)}...)`);toast('Keys generated — paste your wallet name above','ok')}catch(e){toast(`Key generation failed: ${umsg(e)}`,'err');log('err',`gen_mining_keys: ${umsg(e)}`)}genKeysBtn.disabled=false;genKeysBtn.textContent='Generate New Keys'}
+function finishConnect(){ov.classList.add('hidden');dlModal.classList.add('hidden');saveAccount();toast('Connected','ok');desired=true;scheduleChainPoll();scheduleStart(500);updateUI()}
+async function handleGenKeys(){genKeysBtn.disabled=true;genKeysBtn.innerHTML='<span class="sp l"></span>Generating...';const ok=await ensureWasm();if(!ok){toast('WASM failed','err');genKeysBtn.disabled=false;genKeysBtn.textContent='Generate New Keys';return}try{const k=await gen_mining_keys(APP_ID);keysIn.value=JSON.stringify({public:k.public,secret:k.secret,deep_link:k.deep_link},null,2);log('ok',`Generated new mining keys (pub: ${k.public.slice(0,12)}...)`);toast('Keys generated — enter wallet name above','ok')}catch(e){toast(`Key generation failed: ${umsg(e)}`,'err');log('err',`gen_mining_keys: ${umsg(e)}`)}genKeysBtn.disabled=false;genKeysBtn.textContent='Generate New Keys'}
 async function handlePasteKeys(){try{const t=await navigator.clipboard.readText();if(t){keysIn.value=t.trim();toast('Pasted from clipboard','ok')}else toast('Clipboard is empty','err')}catch(e){toast('Clipboard access denied','err')}}
 function toggleAuto(){auto=!auto;if(auto){log('info','Auto-mine enabled — will mine across epochs and auto-claim rewards');if(!desired){desired=true;scheduleChainPoll();scheduleStart(0)}}else{log('info','Auto-mine disabled — current session will complete, no new sessions started');desired=false;if(epochTimer){clearTimeout(epochTimer);epochTimer=null}if(restartTimer){clearTimeout(restartTimer);restartTimer=null}}updateUI()}
 startBtn.addEventListener('click',()=>{if(running||starting)stopMining();else{desired=true;scheduleChainPoll();startMining().catch(e=>{lastErr=umsg(e);log('err',lastErr);updateUI()})}});

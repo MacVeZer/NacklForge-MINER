@@ -216,3 +216,48 @@ Stage Summary:
 - Instant launch: FCP 48ms (was 196ms)
 - Real on-chain mining verified: gen_mining_keys + get_miner_address_by_wallet_name both work against mainnet
 - All 25 tests passed
+
+---
+Task ID: 6
+Agent: Main agent (Super Z)
+Task: Take launch patterns from original MinerGo (foreground service, notification permission, battery optimization), fix cut-off header, hide mainnet pill from users.
+
+Work Log:
+- Decoded original MinerGo.apk AndroidManifest via aapt2 — extracted all permissions, service config, receiver pattern.
+- Identified key patterns to replicate:
+  * Permissions: INTERNET, ACCESS_NETWORK_STATE, ACCESS_WIFI_STATE, FOREGROUND_SERVICE, FOREGROUND_SERVICE_SPECIAL_USE, POST_NOTIFICATIONS, REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, RECEIVE_BOOT_COMPLETED
+  * Service: MinerStatusService with foregroundServiceType=specialUse, property PROPERTY_SPECIAL_USE_FGS_SUBTYPE=user_visible_local_mining
+  * Receiver: BootReceiver for BOOT_COMPLETED and MY_PACKAGE_REPLACED
+- Updated AndroidManifest.xml with all 9 permissions + service (with specialUse type + property) + boot receiver.
+- Created MinerStatusService.java: foreground service with persistent low-importance notification, PARTIAL_WAKE_LOCK to keep CPU running, START_STICKY for restart-after-kill.
+- Created BootReceiver.java: auto-starts service on device boot or app update (only if user has saved account).
+- Rewrote MainActivity.java:
+  * On launch: requests POST_NOTIFICATIONS permission (Android 13+)
+  * Requests battery optimization exemption (critical on Color OS 16, MIUI, EMUI)
+  * Starts MinerStatusService as foreground service
+  * Handles permission result — restarts service after notification permission granted
+- Downloaded androidx.core-1.13.1.aar from maven.google.com — extracted classes.jar for ActivityCompat/ContextCompat/NotificationCompat.
+- Updated build script: compiles MainActivity + MinerStatusService + BootReceiver with androidx.core on classpath, dexes them together.
+- Fixed cut-off header: 
+  * styles.xml: added windowDrawsSystemBarBackgrounds=true, windowLayoutInDisplayCutoutMode=shortEdges
+  * MainActivity: layout behind system bars (LAYOUT_FULLSCREEN | LAYOUT_HIDE_NAVIGATION) so CSS env(safe-area-inset-*) takes effect
+  * CSS: .hdr padding-top uses max(8px, env(safe-area-inset-top)) so header content respects status bar height
+- Removed "Mainnet" pill from header (replaced with status pill showing Idle/Mining/Waiting/Error state — more useful to users).
+- Built APK: 3.84 MB (was 3.40 — +440KB from androidx.core dex classes).
+
+Tested:
+- APK signed v2+v3 ✅
+- Manifest verified — all 9 permissions + service with foregroundServiceType=specialUse + boot receiver present ✅
+- Header renders correctly: top=0, brand mark visible, no horizontal cutoff ✅
+- No mainnet pill — replaced with status pill that turns green when mining ✅
+- Generate keys works: 454-char JSON, WASM loads ✅
+- Auto-mine works: 2 sessions completed in 40s (14 taps, 0.1008 NACKL pending) ✅
+- Claim works: 0.1368 NACKL moved to lifetime balance ✅
+
+Stage Summary:
+- Final deliverable: /home/z/my-project/download/NacklForge.apk (3.84 MB, versionCode 2, versionName 1.1.0)
+- On launch: requests notification permission + battery optimization exemption + starts foreground service
+- Persistent notification keeps mining alive in background (critical for Color OS 16)
+- Boot receiver auto-restarts mining after device reboot
+- Header fixed — uses safe-area-inset-top so it's never cut off by status bar
+- Mainnet pill hidden — users see clean status indicator instead

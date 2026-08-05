@@ -1,2 +1,4 @@
 /home/z/my-project/apk_build/gen/com/nackl/forge/R.java
 /home/z/my-project/apk_src/src/com/nackl/forge/MainActivity.java
+/home/z/my-project/apk_src/src/com/nackl/forge/MinerStatusService.java
+/home/z/my-project/apk_src/src/com/nackl/forge/BootReceiver.java

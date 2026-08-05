@@ -32,25 +32,31 @@ $BUILD_TOOLS/aapt2 link \
     --manifest "$SRC/AndroidManifest.xml" \
     -I "$PLATFORM_JAR" \
     --java "$BUILD/gen" \
-    --min-sdk-version 24 \
+    --min-sdk-version 26 \
     --target-sdk-version 34 \
     -A "$SRC/assets" \
     "$BUILD/resources.zip"
 
-echo "==> [4/8] Compile Java sources"
+echo "==> [4/8] Compile Java sources (with androidx.core)"
 find "$BUILD/gen" -name "*.java" > "$BUILD/sources.txt"
 echo "$SRC/src/com/nackl/forge/MainActivity.java" >> "$BUILD/sources.txt"
+echo "$SRC/src/com/nackl/forge/MinerStatusService.java" >> "$BUILD/sources.txt"
+echo "$SRC/src/com/nackl/forge/BootReceiver.java" >> "$BUILD/sources.txt"
 javac -source 17 -target 17 \
-    -classpath "$PLATFORM_JAR" \
+    -classpath "$PLATFORM_JAR:$SRC/libs/androidx.core.jar" \
     -d "$BUILD/obj" \
     @"$BUILD/sources.txt" 2>&1 | tail -20
 
-echo "==> [5/8] Dex compiled classes with d8"
+echo "==> [5/8] Dex compiled classes with d8 (include androidx.core.jar)"
+# Package our classes + androidx.core together for dexing
+cd "$BUILD/obj"
+jar uf "$SRC/libs/androidx.core.jar" $(find . -name "*.class" | sed 's|^\./||')
+cd - > /dev/null
 $BUILD_TOOLS/d8 \
-    --min-api 24 \
+    --min-api 26 \
     --lib "$PLATFORM_JAR" \
     --output "$BUILD" \
-    $(find "$BUILD/obj" -name "*.class")
+    "$SRC/libs/androidx.core.jar"
 
 echo "==> [6/8] Assemble unsigned APK"
 cp "$BUILD/resources-compiled.apk" "$APK_UNSIGNED"
@@ -84,4 +90,4 @@ echo ""
 echo "==> Done!"
 ls -la "$APK_FINAL"
 echo ""
-$BUILD_TOOLS/aapt dump badging "$APK_FINAL" | head -10
+$BUILD_TOOLS/aapt2 dump badging "$APK_FINAL" | head -10
