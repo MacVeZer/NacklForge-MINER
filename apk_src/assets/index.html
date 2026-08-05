@@ -404,7 +404,27 @@ function clearAccount(){
     else localStorage.removeItem('nacklforge_account');
   }catch(_){}
 }
-function umsg(e){const t=e&&e.message?e.message:String(e);if(/pool timed out|open connection/i.test(t))return'Network timeout — retrying';if(/memory access out of bounds|RuntimeError/i.test(t))return'WASM memory error';if(/FnOnce called more than once/i.test(t))return'WASM callback error';if(/Invalid ABI|Decode message body/i.test(t))return'ABI decode error';return t.slice(0,200)}
+function umsg(e){
+  const t=e&&e.message?e.message:String(e);
+  // On-chain TVM errors (from gosh.runwasm verifier)
+  if(/wasm failed to load/i.test(t))return'On-chain verifier error — app_id not registered or mining keys not activated';
+  if(/wasm failed to execute/i.test(t))return'On-chain execution failed — tap verification rejected';
+  if(/wasm forbidden binary/i.test(t))return'Verifier binary forbidden — contact support';
+  if(/wasm invalid function/i.test(t))return'Verifier function not found — SDK version mismatch';
+  if(/wasm linker failed/i.test(t))return'Verifier linker error — SDK version mismatch';
+  if(/wasm failed to instantiate/i.test(t))return'Verifier instantiation failed — chain issue';
+  if(/wasm engine not created/i.test(t))return'Chain wasm engine unavailable — try later';
+  if(/wasm hash not in whitelist/i.test(t))return'Verifier hash not whitelisted — SDK outdated';
+  if(/DApp ID is not set|DAppIdNotSet/i.test(t))return'DApp ID not set — waiting for your registered app_id';
+  if(/wasm config/i.test(t))return'Chain wasm config error — contact support';
+  if(/not ready|ERR_NOT_READY/i.test(t))return'Mining not ready — activate Mambaboard in AN Wallet first';
+  // Network errors
+  if(/pool timed out|open connection/i.test(t))return'Network timeout — retrying';
+  if(/memory access out of bounds|RuntimeError/i.test(t))return'WASM memory error';
+  if(/FnOnce called more than once/i.test(t))return'WASM callback error';
+  if(/Invalid ABI|Decode message body/i.test(t))return'ABI decode error';
+  return t.slice(0,200)
+}
 function clearTimers(){tapTimers.forEach(t=>clearTimeout(t));tapTimers=[];if(endTimer)clearTimeout(endTimer);if(restartTimer)clearTimeout(restartTimer);if(canStartTimer)clearTimeout(canStartTimer);if(chainTimer)clearTimeout(chainTimer);if(epochTimer)clearTimeout(epochTimer);if(startTimer)clearTimeout(startTimer);endTimer=restartTimer=canStartTimer=chainTimer=epochTimer=startTimer=null;running=false;starting=false;awaitSeed=false}
 function pumpTap(){if(!running)return;if(ssTaps>=ssTarget)return;if(tapsEpoch>=MAX_TAPS)return;try{if(miner)miner.add_tap(1,1);ssTaps+=1;tapsEpoch=Math.min(MAX_TAPS,tapsEpoch+1);lastProg=Date.now();pend+=0.0072;log('info',`Tap ${ssTaps}/${ssTarget} · epoch ${tapsEpoch}/${MAX_TAPS}`);scheduleUI()}catch(e){const m=umsg(e);if(/No running workers/i.test(m)){clearTimers();return}log('err',m)}}
 function scheduleTaps(){if(!running)return;const rem=Math.max(0,MAX_TAPS-tapsEpoch);const tgt=Math.min(TAPS_PER_SESSION,rem);ssTarget=tgt;for(let i=0;i<tgt;i++)tapTimers.push(setTimeout(pumpTap,i*TAP_INTERVAL));scheduleUI()}
@@ -440,7 +460,12 @@ async function fetchChain(){
   }catch(e){
     consecutiveErrors++;
     perfMetrics.errors++;
-    log('err',`Chain poll failed: ${umsg(e)}`);
+    const msg=umsg(e);
+    log('err',`Chain poll failed: ${msg}`);
+    // Detect on-chain setup errors specifically
+    if(/verifier error|app_id not registered|DApp ID not set/i.test(msg)){
+      log('warn','⚠ On-chain setup incomplete — mining cannot proceed without registered dapp_id');
+    }
     // Circuit breaker (#22): 5 errors → open for 60s
     if(consecutiveErrors>=5){
       circuitBreakerUntil=Date.now()+60000;
@@ -516,7 +541,20 @@ async function startMining(){
       if(!miner.can_start()){log('info','Waiting for seed from chain...');starting=false;awaitSeed=true;scheduleUI();canStartTimer=setTimeout(()=>{canStartTimer=null;awaitSeed=false;startMining().catch(e=>log('err',umsg(e)))},CAN_START_POLL);return}
       miner.start(MINING_SESSION_MS,raw=>{
         let ev=raw;try{ev=typeof raw==='string'?JSON.parse(raw):raw}catch(_){}
-        if(ev&&(ev.ok===false||ev.error)){log('err',umsg(ev.error||ev));completeSession('error',ssTaps);return}
+        if(ev&&(ev.ok===false||ev.error)){
+          const errMsg=umsg(ev.error||ev);
+          log('err',errMsg);
+          // Detect on-chain verifier errors — these mean app_id/keys not properly set up
+          if(/wasm failed to load|verifier error|app_id not registered/i.test(errMsg)){
+            log('err','⚠ On-chain verification failed. Possible causes:');
+            log('err','1. Your app_id is not registered on mainnet yet');
+            log('err','2. Mining keys not activated via AN Wallet deep link');
+            log('err','3. Mambaboard not activated in AN Wallet Batteries app');
+            log('err','Contact support once you receive your dapp_id from Acki Nacki');
+            snackbar('On-chain setup incomplete — check logs','err');
+          }
+          completeSession('error',ssTaps);return
+        }
         const k=ev&&ev.action?ev.action:(ev&&ev.event?ev.event:'callback');
         const st=ev&&ev.data?ev.data.status:null;
         if(k==='status_updated'&&st==='computing')log('info','Worker: computing PoW...');

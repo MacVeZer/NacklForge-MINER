@@ -486,3 +486,33 @@ Stage Summary:
 - CRITICAL: Auto-open settings removed — permissions requested via standard AOSP intents only
 - 35+ improvements implemented across UI, performance, reliability, security, monitoring
 - All 28 tests passed
+
+---
+Task ID: 10
+Agent: Main agent (Super Z)
+Task: User reports "Wasm field to load" error still appearing.
+
+Work Log:
+- Investigated: searched bee_sdk.js source for "Wasm field to load" — NOT FOUND in JS source.
+- Searched bee_sdk_bg.wasm binary strings — FOUND: "wasm failed to load" is an ON-CHAIN TVM error, part of the Acki Nacki blockchain's WasmLoadFail error enum. Other related errors found: WasmExecFail, WasmForbiddenBinary, WasmInvalidFunction, WasmLinkerFail, WasmInstantiateFail, WasmEngineInitFail, WasmWhitelistInvalidHash, DAppIdNotSet, WasmConfigError.
+- Diagnosis: "Wasm field to load" (actually "wasm failed to load") is NOT a browser WASM loading error. It is raised by the on-chain smart contract when gosh.runwasm() verifier fails during tap verification or reward minting.
+- Root cause: app uses APP_ID = 0x...0010 which belongs to MinerGo. Without user's own registered dapp_id, the on-chain verifier cannot match the mining keys to a valid app namespace, causing WasmLoadFail.
+- User confirmed earlier: "для приложения нужен dapp id, я запросил, ждём" — dapp_id pending from Acki Nacki team.
+
+Fix applied:
+- Enhanced umsg() function to recognize 10+ on-chain TVM error patterns and return human-readable messages:
+  * "wasm failed to load" → "On-chain verifier error — app_id not registered or mining keys not activated"
+  * "wasm failed to execute" → "On-chain execution failed — tap verification rejected"
+  * "DApp ID is not set" → "DApp ID not set — waiting for your registered app_id"
+  * "not ready" / ERR_NOT_READY → "Mining not ready — activate Mambaboard in AN Wallet first"
+  * + 7 more specific TVM error mappings
+- Added on-chain error detection in miner.start() callback: when WasmLoadFail detected, logs detailed explanation of 3 possible causes (app_id not registered, keys not activated, Mambaboard not activated) + shows snackbar "On-chain setup incomplete — check logs"
+- Added same detection in fetchChain() error handler
+- This doesn't fix the underlying issue (needs registered dapp_id) but gives user clear understanding of what's wrong instead of cryptic "wasm failed to load"
+
+Stage Summary:
+- "Wasm field to load" is NOT a browser error — it's an on-chain TVM error from the Acki Nacki blockchain verifier
+- Root cause: using MinerGo's app_id (0x...0010) without own registered dapp_id
+- Fix: enhanced error messages to explain the real problem to users
+- Permanent fix: user needs to wait for their dapp_id from Acki Nacki team, then update APP_ID constant in index.html
+- Final deliverable: /home/z/my-project/download/NacklForge.apk (3.84 MB, v1.3.0)
