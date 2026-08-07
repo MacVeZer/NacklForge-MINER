@@ -13,792 +13,368 @@
 <link rel="dns-prefetch" href="https://links.gosh.sh">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{
---bg:#0a0a0f;--elev:#12121a;--elev2:#1a1a26;
---bd:rgba(255,255,255,.06);--bd2:rgba(255,255,255,.12);
---fg:#f4f4f8;--fg2:#c8c8d4;--mt:#7a7a8c;--dim:#4a4a5c;
---ac:#fbbf24;--acg:rgba(251,191,36,.25);
---ok:#34d399;--okg:rgba(52,211,153,.25);
---err:#f87171;--inf:#60a5fa;
-color-scheme:dark light
-}
-@media (prefers-color-scheme: light){
-:root{
---bg:#fafafa;--elev:#fff;--elev2:#f0f0f4;
---bd:rgba(0,0,0,.08);--bd2:rgba(0,0,0,.14);
---fg:#0a0a0f;--fg2:#2a2a36;--mt:#5a5a6c;--dim:#9a9aac;
---ac:#d97706;--acg:rgba(217,119,6,.2);
---ok:#059669;--okg:rgba(5,150,105,.2);
---err:#dc2626;--inf:#2563eb
-}
-body{background:radial-gradient(ellipse at top,rgba(217,119,6,.06) 0%,transparent 50%),var(--bg)}
-}
-html,body{background:var(--bg);color:var(--fg);font:14px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;user-select:none;-webkit-user-select:none;overscroll-behavior:none}
+:root{--bg:#0a0a0f;--elev:#12121a;--elev2:#1a1a26;--bd:rgba(255,255,255,.06);--bd2:rgba(255,255,255,.12);--fg:#f4f4f8;--fg2:#c8c8d4;--mt:#7a7a8c;--dim:#4a4a5c;--ac:#fbbf24;--acg:rgba(251,191,36,.25);--ok:#34d399;--okg:rgba(52,211,153,.25);--err:#f87171;--inf:#60a5fa;color-scheme:dark light}
+@media(prefers-color-scheme:light){:root{--bg:#fafafa;--elev:#fff;--elev2:#f0f0f4;--bd:rgba(0,0,0,.08);--bd2:rgba(0,0,0,.14);--fg:#0a0a0f;--fg2:#2a2a36;--mt:#5a5a6c;--dim:#9a9aac;--ac:#d97706;--acg:rgba(217,119,6,.2);--ok:#059669;--err:#dc2626;--inf:#2563eb}body{background:radial-gradient(ellipse at top,rgba(217,119,6,.06) 0%,transparent 50%),var(--bg)}}
+:root[data-theme="light"]{--bg:#fafafa;--elev:#fff;--elev2:#f0f0f4;--bd:rgba(0,0,0,.08);--bd2:rgba(0,0,0,.14);--fg:#0a0a0f;--fg2:#2a2a36;--mt:#5a5a6c;--dim:#9a9aac;--ac:#d97706;--acg:rgba(217,119,6,.2);--ok:#059669;--err:#dc2626;--inf:#2563eb}
+:root[data-theme="light"] body{background:radial-gradient(ellipse at top,rgba(217,119,6,.06) 0%,transparent 50%),var(--bg)}
+:root[data-theme="dark"]{--bg:#0a0a0f;--elev:#12121a;--elev2:#1a1a26;--bd:rgba(255,255,255,.06);--bd2:rgba(255,255,255,.12);--fg:#f4f4f8;--fg2:#c8c8d4;--mt:#7a7a8c;--dim:#4a4a5c;--ac:#fbbf24;--acg:rgba(251,191,36,.25);--ok:#34d399;--err:#f87171;--inf:#60a5fa}
+:root[data-theme="dark"] body{background:radial-gradient(ellipse at top,rgba(251,191,36,.04) 0%,transparent 50%),var(--bg)}
+html,body{background:var(--bg);color:var(--fg);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;user-select:none;-webkit-user-select:none;overscroll-behavior:none}
 body{background:radial-gradient(ellipse at top,rgba(251,191,36,.04) 0%,transparent 50%),var(--bg);transition:background .3s}
-button,input,textarea{font:inherit;color:inherit}
-button{cursor:pointer;border:none;background:none}
-.hdr{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top));background:rgba(10,10,15,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);transition:background .3s}
-@media (prefers-color-scheme: light){.hdr{background:rgba(255,255,255,.92)}}
-.brand{display:flex;align-items:center;gap:10px}
-.bm{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:15px;box-shadow:0 0 12px var(--acg)}
-.bn{font-weight:600;font-size:15px;letter-spacing:-.01em}
-.hdr-status{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--elev);border:1px solid var(--bd2);border-radius:999px;font-size:11px;font-weight:600;color:var(--mt);transition:all .3s}
+button,input,textarea{font:inherit;color:inherit}button{cursor:pointer;border:none;background:none;touch-action:manipulation}
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh;padding:max(env(safe-area-inset-top),8px) 14px max(env(safe-area-inset-bottom),8px)}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:4px 0 8px;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:8px}
+.bm{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:13px;box-shadow:0 0 10px var(--acg)}
+.bn{font-weight:600;font-size:14px}
+.hdr-right{display:flex;align-items:center;gap:6px}
+.demo-badge{display:inline-flex;align-items:center;padding:1px 6px;background:rgba(52,211,153,.15);color:var(--ok);border:1px solid rgba(52,211,153,.4);border-radius:5px;font-size:8px;font-weight:700;cursor:pointer}
+.demo-badge.hidden{display:none}.demo-badge:active{transform:scale(.95)}
+.wallet-name{display:inline-flex;align-items:center;padding:1px 6px;background:rgba(96,165,250,.1);color:var(--inf);border:1px solid rgba(96,165,250,.25);border-radius:5px;font-size:9px;font-weight:600;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wallet-name.hidden{display:none}
+.theme-toggle{width:32px;height:32px;border-radius:50%;background:var(--elev);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:background .4s;padding:0}
+.theme-toggle:active{transform:scale(.93)}
+.theme-toggle-inner{position:relative;width:20px;height:20px}
+.theme-icon-sun,.theme-icon-moon{position:absolute;top:0;left:50%;transform:translateX(-50%);transition:transform .5s cubic-bezier(.4,0,.2,1),opacity .4s;color:var(--ac)}
+.theme-icon-sun{opacity:1;transform:translate(-50%,0) rotate(0)}
+.theme-icon-moon{opacity:0;transform:translate(-50%,100%) rotate(-90deg)}
+:root[data-theme="dark"] .theme-icon-sun{opacity:0;transform:translate(-50%,-100%) rotate(90deg)}
+:root[data-theme="dark"] .theme-icon-moon{opacity:1;transform:translate(-50%,0) rotate(0)}
+@media(prefers-color-scheme:dark){:root:not([data-theme]) .theme-icon-sun{opacity:0;transform:translate(-50%,-100%) rotate(90deg)}:root:not([data-theme]) .theme-icon-moon{opacity:1;transform:translate(-50%,0) rotate(0)}}
+.lang-btn{width:28px;height:28px;border-radius:7px;background:var(--elev);border:1px solid var(--bd2);color:var(--fg2);font-size:13px;display:flex;align-items:center;justify-content:center}
+.lang-btn:active{transform:scale(.95)}
+.lang-dropdown{position:fixed;top:50px;right:14px;z-index:200;background:var(--elev2);border:1px solid var(--bd2);border-radius:12px;padding:4px;box-shadow:0 8px 32px rgba(0,0,0,.5);min-width:160px}
+.lang-option{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;color:var(--fg2);font-size:12px;font-weight:500;width:100%;text-align:left}
+.lang-option:active{background:var(--elev)}.lang-option.active{background:rgba(251,191,36,.1);color:var(--ac)}
+.lang-flag{font-size:16px}.lang-name{flex:1}.lang-check{color:var(--ac);font-weight:700}
+.hdr-status{display:flex;align-items:center;gap:5px;padding:4px 9px;background:var(--elev);border:1px solid var(--bd2);border-radius:999px;font-size:10px;font-weight:600;color:var(--mt);transition:all .3s}
 .hdr-status.on{color:var(--ok);border-color:rgba(52,211,153,.3)}
-.hdr-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--dim)}
+.hdr-status.err{color:var(--err);border-color:rgba(248,113,113,.3)}
+.hdr-status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--dim)}
 .hdr-status.on::before{background:var(--ok);box-shadow:0 0 6px var(--okg)}
-main{max-width:480px;margin:0 auto;padding:16px 16px 120px}
-.card{background:var(--elev);border:1px solid var(--bd);border-radius:20px;padding:20px;margin-bottom:14px;contain:layout style paint;transition:background .3s,border-color .3s}
+.hdr-status.err::before{background:var(--err)}
+main{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+.card{background:var(--elev);border:1px solid var(--bd);border-radius:14px;padding:12px 14px}
 .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--mt);font-weight:600;margin-bottom:8px}
-.bal{display:flex;align-items:baseline;gap:6px}
-.bv{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1;will-change:transform}
-.bu{font-size:14px;color:var(--mt);font-weight:600}
-.meta{display:flex;gap:16px;margin-top:14px}
-.mi{display:flex;flex-direction:column;gap:2px}
-.ml{color:var(--dim);font-size:9px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
-.mv{color:var(--fg2);font-weight:600;font-size:12px}
-.sc{display:flex;align-items:center;gap:16px}
-.si{width:12px;height:12px;border-radius:50%;background:var(--dim);flex-shrink:0;position:relative}
-.si.on{background:var(--ok);box-shadow:0 0 12px var(--okg)}
-.si.on::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--ok);opacity:.4;animation:pulse 1.6s ease-out infinite}
+.bal-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.bal-main{display:flex;align-items:baseline;gap:4px}
+.bal-val{font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.bal-unit{font-size:11px;color:var(--mt);font-weight:600}
+.bal-secondary{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.bal-sec-val{font-size:13px;font-weight:600;color:var(--ok)}
+.bal-sec-label{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.bal-meta{display:flex;gap:12px;margin-top:8px;padding-top:8px;border-top:1px solid var(--bd)}
+.bal-meta-item{display:flex;flex-direction:column;gap:1px;flex:1}
+.bal-meta-label{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.bal-meta-val{font-size:11px;color:var(--fg2);font-weight:600}
+.status-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--elev);border:1px solid var(--bd);border-radius:12px}
+.si{width:8px;height:8px;border-radius:50%;background:var(--dim);flex-shrink:0;position:relative}
+.si.on{background:var(--ok);box-shadow:0 0 8px var(--okg)}
+.si.on::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1.5px solid var(--ok);opacity:.4;animation:pulse 1.6s ease-out infinite}
 .si.err{background:var(--err)}
 @keyframes pulse{0%{transform:scale(.8);opacity:.6}100%{transform:scale(1.8);opacity:0}}
-.st{flex:1}
-.sl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--mt);font-weight:600}
-.sd{font-size:14px;font-weight:600;margin-top:2px}
-.ps{margin-bottom:16px}
-.ps:last-child{margin-bottom:0}
-.ph{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.pt{font-size:11px;font-weight:600;color:var(--fg2);text-transform:uppercase;letter-spacing:.06em}
-.pv{font-size:11px;color:var(--mt);font-weight:500}
-.pv b{color:var(--fg);font-weight:600}
-.pb{height:6px;background:var(--elev2);border-radius:999px;overflow:hidden}
-.pf{height:100%;border-radius:999px;transition:width .4s cubic-bezier(.4,0,.2,1);width:0%;will-change:width}
-.pf.amber{background:linear-gradient(90deg,var(--ac),#f59e0b)}
-.pf.green{background:linear-gradient(90deg,var(--ok),#10b981)}
-.pf.blue{background:linear-gradient(90deg,var(--inf),#3b82f6)}
-.forge-ring{position:relative;width:80px;height:80px;margin:0 auto 12px}
-.forge-ring svg{transform:rotate(-90deg)}
-.forge-ring-bg{stroke:var(--elev2)}
-.forge-ring-fg{stroke:var(--ac);stroke-linecap:round;transition:stroke-dashoffset .5s ease;filter:drop-shadow(0 0 4px var(--acg))}
-.forge-ring-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px}
-.ctl{display:flex;gap:10px}
-.btn{flex:1;padding:16px;border-radius:14px;font-size:14px;font-weight:600;letter-spacing:.02em;transition:all .15s;text-align:center;will-change:transform}
-.btn-p{background:var(--ac);color:#000}
-.btn-p:active{transform:scale(.97);background:#f59e0b}
-.btn-p:disabled{background:var(--elev2);color:var(--dim);cursor:not-allowed}
-.btn-d{background:rgba(248,113,113,.15);color:var(--err);border:1px solid rgba(248,113,113,.3)}
-.btn-d:active{transform:scale(.97)}
+.st-text{flex:1;font-size:12px;font-weight:500;color:var(--fg2)}
+.st-text b{color:var(--fg);font-weight:600}
+.epoch-card{background:var(--elev);border:1px solid var(--bd);border-radius:14px;padding:14px;display:flex;align-items:center;gap:14px}
+.epoch-ring{position:relative;width:80px;height:80px;flex-shrink:0}
+.epoch-ring svg{transform:rotate(-90deg)}
+.epoch-ring-bg{stroke:var(--elev2)}
+.epoch-ring-fg{stroke:var(--ac);stroke-linecap:round;transition:stroke-dashoffset .5s ease;filter:drop-shadow(0 0 4px var(--acg))}
+.epoch-ring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+.epoch-info{flex:1;min-width:0}
+.epoch-title{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--mt);font-weight:600;margin-bottom:4px}
+.epoch-detail{font-size:13px;font-weight:600;margin-bottom:6px}
+.epoch-timer{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mt)}
+.epoch-timer-val{color:var(--ac);font-weight:600}
+.epoch-progress-bar{height:4px;background:var(--elev2);border-radius:999px;overflow:hidden;margin-top:6px}
+.epoch-progress-fill{height:100%;background:linear-gradient(90deg,var(--ac),#f59e0b);border-radius:999px;transition:width .4s}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.stat-cell{background:var(--elev);border:1px solid var(--bd);border-radius:10px;padding:8px 6px;text-align:center}
+.stat-label{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:2px}
+.stat-value{font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.stat-value.ac{color:var(--ac)}.stat-value.ok{color:var(--ok)}.stat-value.inf{color:var(--inf)}
+.mini-log{background:var(--elev);border:1px solid var(--bd);border-radius:10px;padding:6px 10px;max-height:44px;overflow:hidden;flex-shrink:0}
+.mini-log-line{font:10px/1.4 "SF Mono",ui-monospace,monospace;color:var(--mt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-log-line:last-child{color:var(--fg2)}
+.mini-log-line .lt{color:var(--dim);margin-right:4px}
+.mini-log-line.ok{color:var(--ok)}.mini-log-line.err{color:var(--err)}.mini-log-line.info{color:var(--inf)}
+.controls{display:flex;gap:8px;flex-shrink:0}
+.btn{flex:1;padding:13px;border-radius:12px;font-size:13px;font-weight:600;transition:transform .15s;text-align:center}
+.btn-auto{background:linear-gradient(135deg,rgba(96,165,250,.15),rgba(167,139,250,.15));color:var(--inf);border:1px solid rgba(96,165,250,.3)}
+.btn-auto:active{transform:scale(.97)}
+.btn-auto.on{background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(96,165,250,.15));color:var(--ok);border-color:rgba(52,211,153,.4)}
 .btn-g{background:var(--elev);color:var(--fg2);border:1px solid var(--bd2)}
 .btn-g:active{transform:scale(.97);background:var(--elev2)}
-.btn-g.on{background:rgba(96,165,250,.15);color:var(--inf);border-color:rgba(96,165,250,.3)}
-.btn-g:disabled{opacity:.5;cursor:not-allowed}
-.log{margin-top:14px}
-.loghdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.logt{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--mt);font-weight:600}
-.logc{font-size:11px;color:var(--dim);padding:4px 8px}
-.logl{max-height:160px;overflow-y:auto;font:11px/1.6 "SF Mono","JetBrains Mono",ui-monospace,monospace;-webkit-overflow-scrolling:touch;touch-action:pan-y}
-.logl::-webkit-scrollbar{width:3px}
-.logl::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
-.le{display:flex;gap:8px;padding:2px 0}
-.lt{color:var(--dim);flex-shrink:0}
-.lm{color:var(--fg2);word-break:break-word}
-.lm.info{color:var(--inf)}
-.lm.ok{color:var(--ok)}
-.lm.warn{color:var(--ac)}
-.lm.err{color:var(--err)}
-.skeleton{background:linear-gradient(90deg,var(--elev2) 25%,var(--elev) 50%,var(--elev2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.ov{position:fixed;left:0;right:0;bottom:0;top:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:max(env(safe-area-inset-top),20px) 20px 20px;overflow-y:auto}
-.ov.hidden{display:none}
-.ovc{width:100%;max-width:400px;padding:20px 0}
-.ovl{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-weight:800;color:#000;font-size:28px;box-shadow:0 8px 32px var(--acg)}
-.ovt{font-size:26px;font-weight:700;text-align:center;letter-spacing:-.02em;margin-bottom:8px}
-.ovd{font-size:13px;color:var(--mt);text-align:center;line-height:1.5;margin-bottom:24px;padding:0 8px}
-.connect-card{background:var(--elev);border:1px solid var(--bd);border-radius:20px;padding:24px;margin-bottom:16px;contain:layout style paint}
-.connect-icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(34,197,94,.2));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px}
-.connect-title{font-size:16px;font-weight:600;text-align:center;margin-bottom:6px}
-.connect-desc{font-size:12px;color:var(--mt);text-align:center;line-height:1.5;margin-bottom:20px}
-.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-.step{display:flex;align-items:center;gap:12px;padding:10px;background:var(--elev2);border-radius:12px;font-size:12px;transition:all .3s}
-.step-num{width:24px;height:24px;border-radius:50%;background:var(--bg);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--mt);flex-shrink:0;transition:all .3s}
+.donate-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:10px;color:var(--err);font-size:11px;font-weight:600;flex-shrink:0;margin-top:4px}
+.donate-btn:active{transform:scale(.98)}
+.donate-icon{font-size:13px}
+.sheet-scrim{position:fixed;inset:0;z-index:250;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;animation:fadein .3s}
+.sheet-scrim.hidden{display:none}
+.sheet{background:var(--elev);border-radius:20px 20px 0 0;padding:max(env(safe-area-inset-top),16px) 20px max(env(safe-area-inset-bottom),20px);width:100%;max-width:440px;max-height:90vh;overflow-y:auto;animation:slideup .35s cubic-bezier(.32,.72,0,1)}
+@keyframes slideup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.sheet-handle{width:40px;height:4px;background:var(--dim);border-radius:2px;margin:0 auto 14px}
+.sheet-header{text-align:center;margin-bottom:16px}
+.sheet-icon-big{font-size:32px;margin-bottom:8px}
+.sheet-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.sheet-desc{font-size:12px;color:var(--mt);line-height:1.4}
+.settings-field{margin-bottom:12px}
+.settings-label{display:block;font-size:11px;color:var(--mt);font-weight:600;margin-bottom:4px;text-transform:uppercase}
+.sheet-input{flex:1;width:100%;background:var(--elev2);border:1px solid var(--bd2);border-radius:10px;padding:12px;color:var(--fg);font-size:14px}
+.sheet-input:focus{outline:none;border-color:var(--ac)}
+.sheet-btn{width:100%;padding:14px;border-radius:12px;font-size:14px;font-weight:600;margin-bottom:8px}
+.sheet-btn.primary{background:var(--ac);color:#000}
+.sheet-btn.danger{background:var(--err);color:#fff}
+.sheet-btn.ghost{background:transparent;color:var(--mt);border:1px solid var(--bd2)}
+.donate-recipient{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 12px;background:var(--elev2);border-radius:10px;margin-bottom:14px;font-size:12px}
+.donate-recipient-addr{color:var(--ac);font-weight:600;font-family:monospace}
+.donate-amount-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.donate-amount-unit{font-size:12px;color:var(--mt);font-weight:600}
+.donate-quick{display:flex;gap:6px;margin-bottom:14px}
+.donate-quick-btn{flex:1;padding:8px;background:var(--elev2);border:1px solid var(--bd);border-radius:8px;color:var(--fg2);font-size:12px;font-weight:600}
+.donate-quick-btn:active{transform:scale(.95)}
+.donate-leaderboard-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mt);margin-bottom:10px;text-align:center}
+.donate-leaderboard{max-height:240px;overflow-y:auto;margin-bottom:14px;overscroll-behavior:contain;padding:0 4px}
+.donate-leaderboard::-webkit-scrollbar{width:3px}
+.donate-leaderboard::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+.donate-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;margin-bottom:4px;font-size:12px}
+.donate-row.rank-1{background:linear-gradient(90deg,rgba(251,191,36,.08),transparent);border:1px solid rgba(251,191,36,.15)}
+.donate-row.rank-2{background:linear-gradient(90deg,rgba(192,192,192,.08),transparent)}
+.donate-row.rank-3{background:linear-gradient(90deg,rgba(205,127,50,.08),transparent)}
+.donate-rank{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--elev2);color:var(--mt)}
+.donate-row.rank-1 .donate-rank{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000}
+.donate-row.rank-2 .donate-rank{background:linear-gradient(135deg,#e5e7eb,#9ca3af);color:#000}
+.donate-row.rank-3 .donate-rank{background:linear-gradient(135deg,#d97706,#92400e);color:#fff}
+.donate-name{flex:1;color:var(--fg2);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.donate-row.rank-1 .donate-name{color:#fbbf24;font-weight:600}
+.donate-amount-text{color:var(--ok);font-weight:600}
+.login-scrim{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;animation:fadein .3s}
+@media(min-width:600px){.login-scrim{align-items:center;padding:20px}}
+.login-scrim.hidden{display:none}
+.login-card{background:rgba(18,18,26,.92);backdrop-filter:blur(20px);border:1px solid var(--bd2);border-radius:20px 20px 0 0;padding:max(env(safe-area-inset-top),20px) 20px max(env(safe-area-inset-bottom),20px);width:100%;max-width:440px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 -8px 32px rgba(0,0,0,.4);animation:slideup .35s cubic-bezier(.32,.72,0,1)}
+@media(min-width:600px){.login-card{border-radius:20px}}
+.login-logo{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;color:#000;font-size:24px;box-shadow:0 8px 32px var(--acg)}
+.login-title{font-size:24px;font-weight:700;text-align:center;margin-bottom:6px}
+.login-desc{font-size:13px;color:var(--mt);text-align:center;line-height:1.5;margin-bottom:20px;padding:0 8px}
+.steps{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.step{display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,255,255,.04);border-radius:10px;font-size:11px}
+.step-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--mt);flex-shrink:0}
 .step.active .step-num{background:var(--ac);color:#000;border-color:var(--ac)}
 .step.done .step-num{background:var(--ok);color:#000;border-color:var(--ok)}
 .step-text{color:var(--fg2);font-weight:500}
 .step.active .step-text{color:var(--ac)}
 .step.done .step-text{color:var(--ok)}
-.bcn{width:100%;padding:16px;background:var(--ac);color:#000;border-radius:14px;font-size:15px;font-weight:600;margin-top:8px}
-.bcn:active{transform:scale(.98)}
-.bcn:disabled{background:var(--elev2);color:var(--dim);cursor:not-allowed}
-.bsn{width:100%;padding:13px;background:transparent;color:var(--mt);border:1px solid var(--bd2);border-radius:12px;font-size:13px;font-weight:500;margin-top:10px}
-.bsn:active{background:var(--elev)}
-.snackbar{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:var(--elev2);border:1px solid var(--bd2);color:var(--fg);padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:ti .3s ease-out;max-width:90vw;display:flex;align-items:center;gap:12px}
-.snackbar.action{padding-right:8px}
-.snackbar-btn{background:var(--ac);color:#000;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600}
+.login-btn{width:100%;padding:14px;background:var(--ac);color:#000;border-radius:12px;font-size:14px;font-weight:600;margin-top:4px}
+.login-btn:active{transform:scale(.98)}
+.login-btn:disabled{background:rgba(255,255,255,.06);color:var(--dim)}
+.login-secondary{width:100%;padding:12px;background:transparent;color:var(--mt);border:1px solid var(--bd2);border-radius:12px;font-size:12px;font-weight:500;margin-top:8px}
+.login-secondary:active{background:var(--elev)}
+.login-demo{background:rgba(52,211,153,.1);color:var(--ok);border-color:rgba(52,211,153,.3)}
+.snackbar{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--elev2);border:1px solid var(--bd2);color:var(--fg);padding:10px 16px;border-radius:10px;font-size:12px;font-weight:500;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:ti .3s ease-out,to .3s ease-in 2.7s forwards;max-width:90vw;text-align:center}
 @keyframes ti{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
-.sp{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.2);border-top-color:#000;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px}
-.sp.l{border-color:rgba(255,255,255,.2);border-top-color:var(--fg)}
+@keyframes to{to{opacity:0;transform:translate(-50%,-20px)}}
+.sp{display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.2);border-top-color:#000;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:4px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hidden{display:none!important}
-.bottom-sheet-bg{position:fixed;inset:0;z-index:140;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;animation:fadein .2s}
-@keyframes fadein{from{opacity:0}to{opacity:1}}
-.bottom-sheet{background:var(--elev);border-radius:20px 20px 0 0;padding:24px 20px max(env(safe-area-inset-bottom),20px);width:100%;max-width:480px;animation:slideup .3s cubic-bezier(.4,0,.2,1)}
-@keyframes slideup{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.sheet-handle{width:40px;height:4px;background:var(--dim);border-radius:2px;margin:0 auto 16px}
-.sheet-title{font-size:18px;font-weight:700;margin-bottom:8px;text-align:center}
-.sheet-desc{font-size:13px;color:var(--mt);text-align:center;margin-bottom:20px}
-.sheet-amount{font-size:36px;font-weight:700;text-align:center;margin-bottom:20px;background:linear-gradient(135deg,var(--ok),#10b981);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sheet-actions{display:flex;gap:10px}
-.fade-in{animation:fadein .3s ease-out}
+@media(max-height:600px){.bal-val{font-size:22px}.epoch-card{padding:10px;gap:10px}.epoch-ring{width:60px;height:60px}.stats-grid{gap:4px}.stat-cell{padding:6px 4px}.mini-log{max-height:32px}.btn{padding:11px}}
+@media(max-width:360px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
+<div id="app">
 <div class="hdr">
-<div class="brand"><div class="bm">N</div><div class="bn">NacklForge</div></div>
-<div class="hdr-status" id="hdrStatus">Idle</div>
+<div class="brand">
+<div class="bm">N</div><div class="bn">NacklForge</div>
+<span class="demo-badge hidden" id="demoBadge" data-i18n="demo_badge">DEMO</span>
+<span class="wallet-name hidden" id="walletName"></span>
+</div>
+<div class="hdr-right">
+<button class="theme-toggle" id="themeBtn" aria-label="Theme"><div class="theme-toggle-inner"><svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></g></svg><svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/></svg></div></button>
+<button class="lang-btn" id="langBtn" aria-label="Language">🌐</button>
+<div class="hdr-status" id="hdrStatus" data-i18n="status_idle">Idle</div>
+</div>
 </div>
 <main>
 <div class="card">
-<div class="lbl">Total Mined</div>
-<div class="bal"><span class="bv" id="balV">0.0000</span><span class="bu">NACKL</span></div>
-<div class="meta">
-<div class="mi"><span class="ml">Pending</span><span class="mv" id="pendV">0.0000</span></div>
-<div class="mi"><span class="ml">Lifetime</span><span class="mv" id="lifeV">0.0000</span></div>
-<div class="mi"><span class="ml">Block</span><span class="mv" id="blkV">—</span></div>
+<div class="lbl" data-i18n="total_mined">Total Mined</div>
+<div class="bal-row">
+<div class="bal-main"><span class="bal-val" id="balV">0.0000</span><span class="bal-unit">NACKL</span></div>
+<div class="bal-secondary"><span class="bal-sec-val" id="lastEpochReward">+0.0000</span><span class="bal-sec-label" data-i18n="last_epoch">Last Epoch</span></div>
+</div>
+<div class="bal-meta">
+<div class="bal-meta-item"><span class="bal-meta-label" data-i18n="pending">Pending</span><span class="bal-meta-val" id="pendV">0.0000</span></div>
+<div class="bal-meta-item"><span class="bal-meta-label" data-i18n="lifetime">Lifetime</span><span class="bal-meta-val" id="lifeV">0.0000</span></div>
+<div class="bal-meta-item"><span class="bal-meta-label" data-i18n="rate">Rate/min</span><span class="bal-meta-val" id="rateV">0.0000</span></div>
 </div>
 </div>
-<div class="card sc">
+<div class="status-bar">
 <div class="si" id="stI"></div>
-<div class="st"><div class="sl" id="stL">Idle</div><div class="sd" id="stD">Not connected</div></div>
+<div class="st-text" id="stText" data-i18n="not_connected">Not connected</div>
 </div>
-<div class="card">
-<div class="forge-ring">
-<svg width="80" height="80" viewBox="0 0 80 80">
-<circle class="forge-ring-bg" cx="40" cy="40" r="34" fill="none" stroke-width="4"/>
-<circle class="forge-ring-fg" id="forgeRingFg" cx="40" cy="40" r="34" fill="none" stroke-width="4" stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
-</svg>
-<div class="forge-ring-icon" id="forgeRingIcon">⚒</div>
+<div class="epoch-card">
+<div class="epoch-ring">
+<svg width="80" height="80" viewBox="0 0 80 80"><circle class="epoch-ring-bg" cx="40" cy="40" r="34" fill="none" stroke-width="4"/><circle class="epoch-ring-fg" id="epochRing" cx="40" cy="40" r="34" fill="none" stroke-width="4" stroke-dasharray="213.6" stroke-dashoffset="213.6"/></svg>
+<div class="epoch-ring-pct" id="epochPct">0%</div>
 </div>
-<div class="ps"><div class="ph"><span class="pt">Current Epoch</span><span class="pv"><b id="epT">0</b> / 70 taps</span></div><div class="pb"><div class="pf amber" id="epB"></div></div></div>
-<div class="ps"><div class="ph"><span class="pt">Sessions this epoch</span><span class="pv"><b id="ssC">0</b> / 10</span></div><div class="pb"><div class="pf blue" id="ssB"></div></div></div>
-<div class="ps"><div class="ph"><span class="pt">Active session</span><span class="pv"><b id="ssT">0</b> / 7 taps</span></div><div class="pb"><div class="pf green" id="asB"></div></div></div>
+<div class="epoch-info">
+<div class="epoch-title" data-i18n="current_epoch">Current Epoch</div>
+<div class="epoch-detail"><b id="epTaps">0</b> / 70 <span data-i18n="taps">taps</span> · <b id="ssCount">0</b>/10 <span data-i18n="sessions">sessions</span></div>
+<div class="epoch-progress-bar"><div class="epoch-progress-fill" id="epochBar" style="width:0%"></div></div>
+<div class="epoch-timer"><span data-i18n="epoch_ends">Epoch ends:</span> <span class="epoch-timer-val" id="epochTimer">—</span></div>
 </div>
-<div class="ctl">
-<button class="btn btn-p" id="startBtn">Start Mining</button>
-<button class="btn btn-g" id="autoBtn">Auto Mine</button>
 </div>
-<div class="ctl" style="margin-top:10px">
-<button class="btn btn-g" id="claimBtn" disabled>Claim Reward</button>
+<div class="stats-grid">
+<div class="stat-cell"><div class="stat-label" data-i18n="block">Block</div><div class="stat-value inf" id="statBlock">—</div></div>
+<div class="stat-cell"><div class="stat-label" data-i18n="session_taps">Session</div><div class="stat-value ac" id="statSession">0/7</div></div>
+<div class="stat-cell"><div class="stat-label" data-i18n="next_session">Next</div><div class="stat-value ok" id="statNext">—</div></div>
+<div class="stat-cell"><div class="stat-label" data-i18n="next_claim">Next claim</div><div class="stat-value" id="statNextClaim">—</div></div>
 </div>
-<div class="card log">
-<div class="loghdr"><span class="logt">Activity Log</span><button class="logc" id="clearLogBtn">Clear</button></div>
-<div class="logl" id="log"></div>
+<div class="mini-log" id="miniLog"></div>
+<div class="controls">
+<button class="btn btn-auto" id="autoBtn"><span data-i18n="auto_mine">Auto Mine</span></button>
+<button class="btn btn-g" id="settingsBtn" data-i18n="settings">Settings</button>
 </div>
+<button class="donate-btn" id="donateBtn"><span class="donate-icon">❤</span><span data-i18n="donate_title">Thank the Developer</span></button>
 </main>
-
-<div class="ov" id="ov">
-<div class="ovc">
-<div class="ovl">N</div>
-<div class="ovt">NacklForge</div>
-<div class="ovd">Mine Nackl on-chain. Connect your Acki Nacki wallet to start earning rewards.</div>
-<div class="connect-card">
-<div class="connect-icon">🔐</div>
-<div class="connect-title">Connect AN Wallet</div>
-<div class="connect-desc">Authorize NacklForge to mine on your behalf. Your keys stay on your device.</div>
-<div class="steps">
-<div class="step" id="step1"><div class="step-num">1</div><div class="step-text">Open AN Wallet via deep link</div></div>
-<div class="step" id="step2"><div class="step-num">2</div><div class="step-text">Confirm connection in AN Wallet</div></div>
-<div class="step" id="step3"><div class="step-num">3</div><div class="step-text">Approve mining keys registration</div></div>
-<div class="step" id="step4"><div class="step-num">4</div><div class="step-text">Mining starts automatically</div></div>
 </div>
-<button class="bcn" id="connectBtn">Connect AN Wallet</button>
-<button class="bsn" id="logoutBtn">Logout / Reset</button>
-<button class="bsn" id="feedbackBtn" style="margin-top:6px;color:var(--inf);border-color:rgba(96,165,250,.3)">Report Issue</button>
-</div>
-</div>
-</div>
-
-<div class="bottom-sheet-bg hidden" id="claimSheet">
-<div class="bottom-sheet">
-<div class="sheet-handle"></div>
-<div class="sheet-title">Claim Reward</div>
-<div class="sheet-desc">Move pending NACKL to your lifetime balance</div>
-<div class="sheet-amount" id="claimAmount">0.0000</div>
-<div class="sheet-actions">
-<button class="btn btn-g" id="claimCancel">Cancel</button>
-<button class="btn btn-p" id="claimConfirm">Confirm Claim</button>
-</div>
-</div>
-</div>
-
+<!-- Settings -->
+<div class="sheet-scrim hidden" id="settingsScrim"><div class="sheet"><div class="sheet-handle"></div><div class="sheet-header"><div class="sheet-icon-big" style="color:var(--ac)">⚙</div><div class="sheet-title" data-i18n="mining_settings">Mining Settings</div><div class="sheet-desc" data-i18n="settings_desc">Configure mining parameters.</div></div><div class="settings-field"><label class="settings-label" data-i18n="setting_taps">Taps per session (1-7)</label><input type="number" class="sheet-input" id="setTaps" min="1" max="7" value="7"></div><div class="settings-field"><label class="settings-label" data-i18n="setting_sessions">Sessions per epoch (1-10)</label><input type="number" class="sheet-input" id="setSessions" min="1" max="10" value="10"></div><div class="settings-field"><label class="settings-label" data-i18n="setting_cooldown">Session cooldown (sec)</label><input type="number" class="sheet-input" id="setCooldown" min="5" max="60" value="18"></div><div class="settings-field"><label class="settings-label" data-i18n="setting_throttle">Performance mode</label><select class="sheet-input" id="setThrottle"><option value="1" selected data-i18n="throttle_eco">Eco (recommended)</option><option value="0" data-i18n="throttle_off">High Performance</option></select></div><button class="sheet-btn primary" id="settingsSave" data-i18n="settings_save">Save</button><button class="sheet-btn ghost" id="settingsReset" style="color:var(--err)" data-i18n="settings_reset">Reset to Defaults</button></div></div>
+<!-- Donate -->
+<div class="sheet-scrim hidden" id="donateScrim"><div class="sheet"><div class="sheet-handle"></div><div class="sheet-header"><div class="sheet-icon-big" style="color:var(--err)">❤</div><div class="sheet-title" data-i18n="donate_title">Thank the Developer</div><div class="sheet-desc" data-i18n="donate_desc">Send NACKL to support development</div></div><div class="donate-recipient"><span data-i18n="donate_recipient">Recipient:</span> <span class="donate-recipient-addr">macvenzer</span></div><div class="donate-amount-row"><input type="number" class="sheet-input" id="donateAmount" placeholder="0.00" min="0" step="0.01" value="1"><span class="donate-amount-unit">NACKL</span></div><div class="donate-quick"><button class="donate-quick-btn" data-amount="1">1</button><button class="donate-quick-btn" data-amount="5">5</button><button class="donate-quick-btn" data-amount="10">10</button><button class="donate-quick-btn" data-amount="50">50</button><button class="donate-quick-btn" data-amount="100">100</button></div><button class="sheet-btn danger" id="donateSend" data-i18n="donate_send">Send NACKL</button><div class="donate-leaderboard-title" data-i18n="donate_top">Top Donators</div><div class="donate-leaderboard" id="donateLeaderboard"></div><button class="sheet-btn ghost" id="donateClose" data-i18n="cancel">Cancel</button></div></div>
+<!-- Login -->
+<div class="login-scrim" id="loginScrim"><div class="login-card"><div class="login-logo">N</div><div class="login-title" data-i18n="onboarding_title">NacklForge</div><div class="login-desc" data-i18n="onboarding_desc">Mine Nackl on-chain. Connect your Acki Nacki wallet to start earning rewards.</div><div class="steps"><div class="step" id="step1"><div class="step-num">1</div><div class="step-text" data-i18n="step1">Open AN Wallet via deep link</div></div><div class="step" id="step2"><div class="step-num">2</div><div class="step-text" data-i18n="step2">Confirm connection in AN Wallet</div></div><div class="step" id="step3"><div class="step-num">3</div><div class="step-text" data-i18n="step3">Approve mining keys registration</div></div><div class="step" id="step4"><div class="step-num">4</div><div class="step-text" data-i18n="step4">Mining starts automatically</div></div></div><button class="login-btn" id="connectBtn" data-i18n="connect_wallet">Connect AN Wallet</button><button class="login-secondary login-demo" id="demoBtn" data-i18n="try_demo">Try Demo Mode</button><button class="login-secondary" id="logoutBtn" data-i18n="logout_reset" style="display:none">Logout / Reset</button></div></div>
 <script type="module">
-// Lazy-load bee_sdk only when user connects (saves 8MB fetch on every launch)
-let _beeModule=null;
-async function loadBeeSdk(){
-  if(_beeModule)return _beeModule;
-  const mod=await import('./bee_sdk.js');
-  // bee_sdk.js exports init as default; expose it as mod.init for convenience
-  _beeModule={...mod,init:mod.default};
-  return _beeModule;
-}
-let _wasmReady=false;
-async function ensureWasm(){
-  if(_wasmReady)return true;
-  try{
-    log('info','Loading bee_sdk WASM...');
-    const m=await loadBeeSdk();
-    // Use direct fetch + arrayBuffer for file:// compatibility in Android WebView
-    const wasmResp=await fetch('./bee_sdk_bg.wasm');
-    if(!wasmResp.ok)throw new Error('WASM fetch failed: '+wasmResp.status);
-    const wasmBuf=await wasmResp.arrayBuffer();
-    await m.init({module_or_path:wasmBuf});
-    _wasmReady=true;
-    log('ok','WASM bee_sdk loaded');
-    return true;
-  }catch(e){
-    const msg=e&&e.message?e.message:String(e);
-    log('err',`WASM load failed: ${msg}`);
-    lastErr=msg;
-    return false;
-  }
-}
-
-// ===== Mining constants (configurable via remote config) =====
-let APP_ID='0x0000000000000000000000000000000000000000000000000000000000000010';
-let ENDPOINTS=['https://mainnet-cf.ackinacki.org/','https://mainnet.ackinacki.org/'];
-let MINING_SESSION_MS=15000,RESTART_DELAY=18000,TAPS_PER_SESSION=7,TAP_INTERVAL=2000,SESSIONS_PER_EPOCH=10,MAX_TAPS=70,EPOCH_COOLDOWN=60000,CHAIN_POLL=5000,EPOCH_WAIT=5000,CAN_START_POLL=1000,STUCK_MS=90000,REWARD_CD=120000,REWARD_EPOCHS=3;
-const SESSION_TTL=300,MAX_ATTEMPTS=60,POLL_INTERVAL=2000;
-
-// ===== State =====
+import {LANGUAGES,translations,detectLanguage,getLang,setLang,t,getLangDir} from './i18n.js';
+// === LIBS ===
+function createStore(s){let st=s;const l=new Set();return{getState:()=>st,setState:p=>{st={...st,...(typeof p==='function'?p(st):p)};l.forEach(f=>f(st))}}}
+const store=createStore({life:0,pend:0,running:false,desired:false,auto:false});
+function animateNumber(el,from,to,d=4,dur=500){if(from===to||!el){if(el)el.textContent=to.toFixed(d);return}const s=performance.now();const step=n=>{const t=Math.min(1,(n-s)/dur);const e=1-Math.pow(1-t,3);el.textContent=(from+(to-from)*e).toFixed(d);if(t<1)requestAnimationFrame(step);else el.textContent=to.toFixed(d)};requestAnimationFrame(step)}
+function pulseEl(el){if(!el)return;el.style.transition='transform .15s';el.style.transform='scale(1.05)';setTimeout(()=>{el.style.transform='';setTimeout(()=>el.style.transition='',150)},150)}
+const httpClient={async fetch(url,o={}){const{retry:rt=3,timeout:tm=10000,...init}=o;for(let a=0;a<=rt;a++){try{const c=new AbortController();const ti=setTimeout(()=>c.abort(),tm);const r=await fetch(url,{...init,signal:c.signal});clearTimeout(ti);if(!r.ok&&a<rt&&r.status>=500){await new Promise(r=>setTimeout(r,1e3*(a+1)));continue}return r}catch(e){if(a>=rt)throw e;await new Promise(r=>setTimeout(r,1e3*(a+1)))}}},async post(url,b,o={}){return(await this.fetch(url,{method:'POST',headers:{'Content-Type':'application/json',...o.headers},body:JSON.stringify(b),...o})).json()}};
+let _es=null;function connectRealtime(){try{_es=new EventSource('https://mainnet-cf.ackinacki.org/graphql/stream');_es.onopen=()=>log('info','Real-time connected');_es.onerror=()=>{if(_es){_es.close();_es=null}log('warn','Real-time disconnected')};_es.addEventListener('block',e=>{try{const d=JSON.parse(e.data);if(d.seq_no){lastBlock=Number(d.seq_no);scheduleUI()}}catch(_){}})}catch(e){}}
+function disconnectRealtime(){if(_es){_es.close();_es=null}}
+const userTimezone=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';const userLocale=navigator.language||'en-US';
+function formatTime(ts,fmt='time'){const d=new Date(ts);if(fmt==='time')return d.toLocaleTimeString(userLocale,{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:userTimezone});if(fmt==='relative'){const diff=Date.now()-ts;if(diff<6e4)return'just now';if(diff<36e5)return Math.floor(diff/6e4)+'m ago';return Math.floor(diff/36e5)+'h ago'}return d.toLocaleString(userLocale,{timeZone:userTimezone})}
+const R={orderBy:(a,f,d='asc')=>[...a].sort((x,y)=>{const xv=x[f],yv=y[f];return d==='asc'?xv<yv?-1:xv>yv?1:0:xv>yv?-1:xv<yv?1:0}),debounce:(fn,ms)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}};
+let _fs=false;function toggleFullscreen(){const el=document.documentElement;if(!_fs){(el.requestFullscreen||el.webkitRequestFullscreen)?.call(el);_fs=true}else{(document.exitFullscreen||document.webkitExitFullscreen)?.call(document);_fs=false}}
+let _wl=null;async function acquireWakeLock(){try{if('wakeLock'in navigator)_wl=await navigator.wakeLock.request('screen')}catch(e){}}function releaseWakeLock(){if(_wl){_wl.release().catch(()=>{});_wl=null}}
+function applyAdaptiveLayout(){const w=window.innerWidth;const g=document.querySelector('.stats-grid');if(g)g.style.gridTemplateColumns=w<360?'repeat(2,1fr)':'repeat(4,1fr)';const b=document.getElementById('balV');if(b)b.style.fontSize=w<340?'22px':w<380?'26px':'28px'}
+function setupResizeObserver(){applyAdaptiveLayout();window.addEventListener('resize',R.debounce(applyAdaptiveLayout,150));window.addEventListener('orientationchange',()=>setTimeout(applyAdaptiveLayout,100))}
+function setupSwipeDown(scr,sh,onClose,thr){if(!scr||!sh)return;let sy=0,cy=0,dr=false;const cl=thr||80;scr.addEventListener('click',e=>{if(e.target===scr&&onClose)onClose()});sh.addEventListener('touchstart',e=>{const tag=e.target.tagName;if(['BUTTON','INPUT','SELECT','TEXTAREA','A'].includes(tag))return;if(sh.scrollTop>0)return;sy=e.touches[0].clientY;dr=true;sh.style.transition='none'},{passive:true});sh.addEventListener('touchmove',e=>{if(!dr)return;cy=e.touches[0].clientY-sy;if(cy>0&&sh.scrollTop<=0){e.preventDefault&&e.preventDefault();sh.style.transform='translateY('+cy+'px)';scr.style.opacity=String(Math.max(0.3,1-cy/400))}else if(cy<=0){dr=false;sh.style.transform='';scr.style.opacity=''}},{passive:false});sh.addEventListener('touchend',()=>{if(!dr)return;dr=false;sh.style.transition='transform .3s ease,opacity .3s ease';if(cy>cl&&sh.scrollTop<=0){if(onClose)onClose();sh.style.transform='';scr.style.opacity=''}else{sh.style.transform='';scr.style.opacity=''}cy=0},{passive:true})}
+// === i18n ===
+function applyTranslations(){const lang=getLang();const dir=getLangDir();document.documentElement.lang=lang;document.documentElement.dir=dir;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');const tr=t(k);if(tr)el.textContent=tr})}
+let langDropdown=null;function showLangPicker(){if(langDropdown){langDropdown.remove();langDropdown=null;return}const c=getLang();langDropdown=document.createElement('div');langDropdown.className='lang-dropdown';LANGUAGES.forEach(l=>{const o=document.createElement('button');o.className='lang-option'+(l.code===c?' active':'');o.innerHTML='<span class="lang-flag">'+l.flag+'</span><span class="lang-name">'+l.native+'</span>'+(l.code===c?'<span class="lang-check">\u2713</span>':'');o.onclick=()=>{setLang(l.code);langDropdown.remove();langDropdown=null;applyTranslations();if(navigator.vibrate)navigator.vibrate(10)};langDropdown.appendChild(o)});document.body.appendChild(langDropdown)}
+function getCurrentTheme(){const s=localStorage.getItem('nacklforge_theme');if(s)return s;return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}
+function toggleTheme(){const c=getCurrentTheme();const n=c==='dark'?'light':'dark';localStorage.setItem('nacklforge_theme',n);document.documentElement.setAttribute('data-theme',n);if(navigator.vibrate)navigator.vibrate(15)}
+const _savedTheme=localStorage.getItem('nacklforge_theme');if(_savedTheme)document.documentElement.setAttribute('data-theme',_savedTheme);
+applyTranslations();
+// === CONSTANTS ===
+const DEFAULT_APP_ID='0x0000000000000000000000000000000000000000000000000000000000000010';const APP_ID=localStorage.getItem('nacklforge_dapp_id')||DEFAULT_APP_ID;const HAS_CUSTOM_DAPP_ID=APP_ID!==DEFAULT_APP_ID;
+const ENDPOINTS=['https://mainnet-cf.ackinacki.org/','https://mainnet.ackinacki.org/'];
+let TAPS_PER_SESSION=7,SESSIONS_PER_EPOCH=10,SESSION_RESTART_DELAY_MS=18000,CHAIN_POLL_MS=5000,REWARD_CD=30000;
+const MINING_SESSION_MS=15000,TAP_INTERVAL_MS=2000,MAX_TAPS=70,EPOCH_COOLDOWN_MS=60000,EPOCH_WAIT_MS=5000,CAN_START_POLL_MS=1000,STUCK_MS=90000;
+const SESSION_TTL=300,MAX_ATTEMPTS=60,POLL_INTERVAL=2000,EPOCH_DURATION_MS=300000;
+// === STATE ===
 let miner=null,beeConnect=null,wallet=null,addr=null,keys=null,desired=false,running=false,starting=false,auto=false,awaitSeed=false;
 let life=0,pend=0,ssTaps=0,ssTarget=TAPS_PER_SESSION,ssEpoch=0,tapsEpoch=0,epoch5m='',lastChain=0,lastProg=0,lastReward=0,rewardInFlight=false,rewardEpochs=[],lastBlock=0,lastErr=null;
-let tapTimers=[],endTimer=null,restartTimer=null,canStartTimer=null,chainTimer=null,epochTimer=null,startTimer=null;
-let connectSession=null;
-let activeEndpointIdx=0;  // For endpoint failover (#29)
-let chainPollInFlight=false;  // For deduplication (#23)
-let consecutiveErrors=0;  // For circuit breaker (#22)
-let circuitBreakerUntil=0;  // Circuit open until timestamp
-
-// Performance metrics (#47)
-const perfMetrics={launchTime:Date.now(),wasmLoadTime:0,chainPollLatency:[],errors:0,rewards:0};
-
+let tapTimers=[],endTimer=null,restartTimer=null,canStartTimer=null,chainTimer=null,epochWaitTimer=null,startTimer=null;
+let connectSession=null,demoMode=false,_bgThrottle=1,_isBackground=false,_networkOnline=navigator.onLine;
+let lastEpochRewardAmount=0,epochStartTime=0,nextSessionAt=0,miningRate=0,tapsLastMinute=[];
+// === DOM ===
 const $=id=>document.getElementById(id);
-const ov=$('ov'),connectBtn=$('connectBtn'),logoutBtn=$('logoutBtn'),feedbackBtn=$('feedbackBtn');
-const startBtn=$('startBtn'),autoBtn=$('autoBtn'),claimBtn=$('claimBtn'),clearLogBtn=$('clearLogBtn'),logEl=$('log');
-const stI=$('stI'),stL=$('stL'),stD=$('stD'),balV=$('balV'),pendV=$('pendV'),lifeV=$('lifeV'),blkV=$('blkV'),hdrStatus=$('hdrStatus');
-const epT=$('epT'),epB=$('epB'),ssC=$('ssC'),ssB=$('ssB'),ssTEl=$('ssT'),asB=$('asB');
-const step1=$('step1'),step2=$('step2'),step3=$('step3'),step4=$('step4');
-const forgeRingFg=$('forgeRingFg'),forgeRingIcon=$('forgeRingIcon');
-const claimSheet=$('claimSheet'),claimAmount=$('claimAmount'),claimCancel=$('claimCancel'),claimConfirm=$('claimConfirm');
-
-// UI update batching (#3 rAF coalescing)
-let _uiScheduled=false;
-function scheduleUI(){if(_uiScheduled)return;_uiScheduled=true;requestAnimationFrame(()=>{_uiScheduled=false;updateUI()})}
-
-// Debounced log rendering (#40)
-let _logBuf=[],_logScheduled=false;
-function log(t,m){
-  _logBuf.push({t,m,tm:new Date().toTimeString().slice(0,8)});
-  if(_logScheduled)return;
-  _logScheduled=true;
-  requestAnimationFrame(()=>{
-    _logScheduled=false;
-    const frag=document.createDocumentFragment();
-    for(const{t,m,tm} of _logBuf){
-      const e=document.createElement('div');e.className='le';
-      const esc=m.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-      e.innerHTML=`<span class="lt">${tm}</span><span class="lm ${t}">${esc}</span>`;
-      frag.insertBefore(e,frag.firstChild);
-    }
-    logEl.insertBefore(frag,logEl.firstChild);
-    _logBuf=[];
-    while(logEl.children.length>60)logEl.removeChild(logEl.lastChild);
-    try{if(window.AndroidBridge)window.AndroidBridge.onLog(t,m)}catch(_){}
-  });
-}
-
-// Snackbar (#18)
-function snackbar(msg,opts={}){
-  const el=document.createElement('div');
-  el.className='snackbar'+(opts.action?' action':'');
-  let html=`<span>${msg.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</span>`;
-  if(opts.action)html+=`<button class="snackbar-btn">${opts.action}</button>`;
-  el.innerHTML=html;
-  if(opts.onClick&&opts.action){
-    el.querySelector('.snackbar-btn').addEventListener('click',()=>{opts.onClick();el.remove()});
-  }
-  document.body.appendChild(el);
-  setTimeout(()=>{if(el.parentNode)el.remove()},opts.duration||3500);
-}
-function toast(m,t=''){snackbar(m)}
-
-// Animated number transitions (#15)
-function animateNumber(el,from,to,decimals=4,duration=600){
-  if(from===to){el.textContent=to.toFixed(decimals);return}
-  const start=performance.now();
-  const step=now=>{
-    const t=Math.min(1,(now-start)/duration);
-    const eased=1-Math.pow(1-t,3);
-    const val=from+(to-from)*eased;
-    el.textContent=val.toFixed(decimals);
-    if(t<1)requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
-}
-
+const loginScrim=$('loginScrim'),connectBtn=$('connectBtn'),logoutBtn=$('logoutBtn'),demoBtn=$('demoBtn');
+const autoBtn=$('autoBtn'),settingsBtn=$('settingsBtn');
+const walletNameEl=$('walletName'),demoBadge=$('demoBadge');
+const stI=$('stI'),stText=$('stText'),hdrStatus=$('hdrStatus');
+const balV=$('balV'),pendV=$('pendV'),lifeV=$('lifeV'),lastEpochRewardEl=$('lastEpochReward'),rateV=$('rateV');
+const epTaps=$('epTaps'),ssCount=$('ssCount'),epochBar=$('epochBar'),epochRing=$('epochRing'),epochPct=$('epochPct'),epochTimer=$('epochTimer');
+const statBlock=$('statBlock'),statSession=$('statSession'),statNext=$('statNext'),statNextClaim=$('statNextClaim');
+const miniLog=$('miniLog');const step1=$('step1'),step2=$('step2'),step3=$('step3'),step4=$('step4');
+const langBtn=$('langBtn'),themeBtn=$('themeBtn');
+// === UI ===
+let _uiScheduled=false;function scheduleUI(){if(_uiScheduled)return;_uiScheduled=true;requestAnimationFrame(()=>{_uiScheduled=false;updateUI()})}
+let _logBuf=[];function log(type,msg){const tm=formatTime(Date.now(),'time');_logBuf.push({type,msg,tm});if(_logBuf.length>20)_logBuf.shift();const last2=_logBuf.slice(-2);miniLog.innerHTML=last2.map(l=>'<div class="mini-log-line '+l.type+'"><span class="lt">'+l.tm+'</span>'+l.msg.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</div>').join('');try{if(window.AndroidBridge)window.AndroidBridge.onLog(type,msg)}catch(_){}}
+function snackbar(msg){const el=document.createElement('div');el.className='snackbar';el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),3000)}
 function setStep(n){[step1,step2,step3,step4].forEach((s,i)=>{s.classList.remove('active','done');if(i+1<n)s.classList.add('done');else if(i+1===n)s.classList.add('active')})}
-function setStatus(s,d){
-stI.className='si';
-let hdr='Idle';
-if(s==='mining'){stI.classList.add('on');stL.textContent='Mining';stD.textContent=d||`Session ${ssEpoch+1} of ${SESSIONS_PER_EPOCH} · ${ssTaps}/${ssTarget} taps`;startBtn.textContent='Stop Mining';startBtn.className='btn btn-d';hdr='Mining';forgeRingIcon.textContent='⚒'}
-else if(s==='waiting'){stI.classList.add('on');stL.textContent='Waiting';stD.textContent=d||'Waiting for next epoch window';startBtn.textContent='Mining...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Waiting';forgeRingIcon.textContent='⏳'}
-else if(s==='starting'){stL.textContent='Starting';stD.textContent=d||'Initializing mining session...';startBtn.textContent='Starting...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Starting';forgeRingIcon.textContent='⟳'}
-else if(s==='error'){stI.classList.add('err');stL.textContent='Error';stD.textContent=d||'Mining error occurred';startBtn.textContent='Retry';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Error';forgeRingIcon.textContent='⚠'}
-else{stL.textContent='Idle';stD.textContent=d||'Ready to mine';startBtn.textContent='Start Mining';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Idle';forgeRingIcon.textContent='⚒'}
-hdrStatus.textContent=hdr;
-hdrStatus.classList.toggle('on',s==='mining'||s==='waiting'||s==='starting');
-}
-
-let _lastBal=0,_lastPend=0,_lastLife=0;
-function updateUI(){
-const tot=life+pend;
-if(parseFloat(balV.textContent)!==tot)animateNumber(balV,_lastBal,tot,4);_lastBal=tot;
-if(parseFloat(pendV.textContent)!==pend)animateNumber(pendV,_lastPend,pend,4);_lastPend=pend;
-if(parseFloat(lifeV.textContent)!==life)animateNumber(lifeV,_lastLife,life,4);_lastLife=life;
-blkV.textContent=lastBlock?`#${lastBlock.toLocaleString()}`:'—';
-epT.textContent=tapsEpoch;epB.style.width=`${Math.min(100,tapsEpoch/MAX_TAPS*100)}%`;
-ssC.textContent=ssEpoch;ssB.style.width=`${Math.min(100,ssEpoch/SESSIONS_PER_EPOCH*100)}%`;
-ssTEl.textContent=ssTaps;asB.style.width=`${Math.min(100,ssTaps/ssTarget*100)}%`;
-// Forge ring progress (#17) — shows epoch progress as circular ring
-const ringLen=213.6;
-const epochPct=Math.min(1,tapsEpoch/MAX_TAPS);
-forgeRingFg.setAttribute('stroke-dashoffset',ringLen*(1-epochPct));
-claimBtn.disabled=pend<=0||rewardInFlight;
-claimBtn.textContent=pend>0?`Claim ${pend.toFixed(4)} NACKL`:'No Reward Yet';
-autoBtn.classList.toggle('on',auto);
-if(running)setStatus('mining');else if(starting)setStatus('starting');else if(desired&&(awaitSeed||epochTimer))setStatus('waiting');else if(lastErr)setStatus('error',lastErr);else if(desired)setStatus('waiting','Preparing next session...');else setStatus('idle');
-}
-
-// ===== Persistence (#26 — save full mining state) =====
-function saveAccount(){
-  try{
-    const d=JSON.stringify({
-      wallet,keys,life,
-      // Mining state for resume after process death (#26, #30)
-      miningState:{ssTaps,tapsEpoch,ssEpoch,epoch5m,rewardEpochs,lastChain}
-    });
-    if(window.AndroidBridge&&window.AndroidBridge.saveAccount)window.AndroidBridge.saveAccount(d);
-    else localStorage.setItem('nacklforge_account',d);
-  }catch(_){}
-}
-function loadAccount(){
-  try{
-    let r=null;
-    if(window.AndroidBridge&&window.AndroidBridge.loadAccount)r=window.AndroidBridge.loadAccount();
-    else r=localStorage.getItem('nacklforge_account');
-    return r?JSON.parse(r):null;
-  }catch(_){return null}
-}
-function clearAccount(){
-  try{
-    if(window.AndroidBridge&&window.AndroidBridge.clearAccount)window.AndroidBridge.clearAccount();
-    else localStorage.removeItem('nacklforge_account');
-  }catch(_){}
-}
-function umsg(e){
-  const t=e&&e.message?e.message:String(e);
-  // On-chain TVM errors (from gosh.runwasm verifier)
-  if(/wasm failed to load/i.test(t))return'On-chain verifier error — app_id not registered or mining keys not activated';
-  if(/wasm failed to execute/i.test(t))return'On-chain execution failed — tap verification rejected';
-  if(/wasm forbidden binary/i.test(t))return'Verifier binary forbidden — contact support';
-  if(/wasm invalid function/i.test(t))return'Verifier function not found — SDK version mismatch';
-  if(/wasm linker failed/i.test(t))return'Verifier linker error — SDK version mismatch';
-  if(/wasm failed to instantiate/i.test(t))return'Verifier instantiation failed — chain issue';
-  if(/wasm engine not created/i.test(t))return'Chain wasm engine unavailable — try later';
-  if(/wasm hash not in whitelist/i.test(t))return'Verifier hash not whitelisted — SDK outdated';
-  if(/DApp ID is not set|DAppIdNotSet/i.test(t))return'DApp ID not set — waiting for your registered app_id';
-  if(/wasm config/i.test(t))return'Chain wasm config error — contact support';
-  if(/not ready|ERR_NOT_READY/i.test(t))return'Mining not ready — activate Mambaboard in AN Wallet first';
-  // Network errors
-  if(/pool timed out|open connection/i.test(t))return'Network timeout — retrying';
-  if(/memory access out of bounds|RuntimeError/i.test(t))return'WASM memory error';
-  if(/FnOnce called more than once/i.test(t))return'WASM callback error';
-  if(/Invalid ABI|Decode message body/i.test(t))return'ABI decode error';
-  return t.slice(0,200)
-}
-function clearTimers(){tapTimers.forEach(t=>clearTimeout(t));tapTimers=[];if(endTimer)clearTimeout(endTimer);if(restartTimer)clearTimeout(restartTimer);if(canStartTimer)clearTimeout(canStartTimer);if(chainTimer)clearTimeout(chainTimer);if(epochTimer)clearTimeout(epochTimer);if(startTimer)clearTimeout(startTimer);endTimer=restartTimer=canStartTimer=chainTimer=epochTimer=startTimer=null;running=false;starting=false;awaitSeed=false}
-function pumpTap(){if(!running)return;if(ssTaps>=ssTarget)return;if(tapsEpoch>=MAX_TAPS)return;try{if(miner)miner.add_tap(1,1);ssTaps+=1;tapsEpoch=Math.min(MAX_TAPS,tapsEpoch+1);lastProg=Date.now();pend+=0.0072;log('info',`Tap ${ssTaps}/${ssTarget} · epoch ${tapsEpoch}/${MAX_TAPS}`);scheduleUI()}catch(e){const m=umsg(e);if(/No running workers/i.test(m)){clearTimers();return}log('err',m)}}
-function scheduleTaps(){if(!running)return;const rem=Math.max(0,MAX_TAPS-tapsEpoch);const tgt=Math.min(TAPS_PER_SESSION,rem);ssTarget=tgt;for(let i=0;i<tgt;i++)tapTimers.push(setTimeout(pumpTap,i*TAP_INTERVAL));scheduleUI()}
-function resetEpoch(e){epoch5m=e||epoch5m;ssEpoch=0;tapsEpoch=0;lastProg=Date.now();log('info',`New epoch started: ${epoch5m.slice(-10)}`);scheduleUI()}
-
-// ===== Chain data with deduplication (#23), stale-while-revalidate (#24), circuit breaker (#22) =====
-async function fetchChain(){
-  if(!miner)return null;
-  // Circuit breaker (#22)
-  if(Date.now()<circuitBreakerUntil){
-    log('warn',`Circuit open — waiting ${Math.ceil((circuitBreakerUntil-Date.now())/1000)}s`);
-    return null;
-  }
-  // Deduplication (#23)
-  if(chainPollInFlight)return null;
-  chainPollInFlight=true;
-  const t0=performance.now();
-  try{
-    const d=await miner.get_miner_data();
-    consecutiveErrors=0;
-    perfMetrics.chainPollLatency.push(performance.now()-t0);
-    if(perfMetrics.chainPollLatency.length>20)perfMetrics.chainPollLatency.shift();
-    const ne=d&&d.epoch_5m_start!==undefined?d.epoch_5m_start.toString():'';
-    const ct=d&&d.tap_sum_5m!==undefined?Number(d.tap_sum_5m.toString()):0;
-    if(epoch5m&&ne&&ne!==epoch5m)resetEpoch(ne);
-    else if(ne&&!epoch5m)epoch5m=ne;
-    if(Number.isFinite(ct)){tapsEpoch=Math.min(MAX_TAPS,Math.max(0,ct));ssEpoch=Math.max(ssEpoch,Math.min(SESSIONS_PER_EPOCH,Math.floor(tapsEpoch/TAPS_PER_SESSION)))}
-    lastChain=Date.now();
-    if(!lastProg)lastProg=lastChain;
-    if(ne){rewardEpochs=rewardEpochs||[];if(!rewardEpochs.includes(ne))rewardEpochs.push(ne);if(rewardEpochs.length>=REWARD_EPOCHS&&!rewardInFlight)requestReward('epoch_threshold')}
-    scheduleUI();maybeRecover();
-    return d;
-  }catch(e){
-    consecutiveErrors++;
-    perfMetrics.errors++;
-    const msg=umsg(e);
-    log('err',`Chain poll failed: ${msg}`);
-    // Detect on-chain setup errors specifically
-    if(/verifier error|app_id not registered|DApp ID not set/i.test(msg)){
-      log('warn','⚠ On-chain setup incomplete — mining cannot proceed without registered dapp_id');
-    }
-    // Circuit breaker (#22): 5 errors → open for 60s
-    if(consecutiveErrors>=5){
-      circuitBreakerUntil=Date.now()+60000;
-      log('warn','Circuit breaker opened for 60s');
-      // Endpoint failover (#29)
-      activeEndpointIdx=(activeEndpointIdx+1)%ENDPOINTS.length;
-      log('info',`Switching to endpoint ${activeEndpointIdx+1}: ${ENDPOINTS[activeEndpointIdx].slice(0,30)}...`);
-    }
-    return null;
-  }finally{chainPollInFlight=false}
-}
-async function fetchBlock(){if(!miner)return;try{const b=await miner.get_current_block();if(b&&b.seq_no!==undefined){lastBlock=Number(b.seq_no);scheduleUI()}}catch(_){}}
-
-// ===== Reward with optimistic UI (#25) =====
-function requestReward(reason){
-  if(rewardInFlight)return false;
-  const now=Date.now();
-  if(lastReward&&now-lastReward<REWARD_CD)return false;
-  rewardInFlight=true;lastReward=now;
-  const amt=pend;
-  log('info',`Claiming ${amt.toFixed(4)} NACKL (${reason})...`);
-  // Optimistic UI (#25): immediately move pending to life, rollback on failure
-  const prevPend=pend,prevLife=life;
-  life+=amt;pend=0;
-  scheduleUI();
-  const fin=()=>{
-    perfMetrics.rewards++;
-    log('ok',`Claimed ${amt.toFixed(4)} NACKL`);
-    snackbar(`+${amt.toFixed(4)} NACKL claimed`,{action:'View',onClick:()=>log('info',`Last claim: ${amt.toFixed(4)} NACKL at ${new Date().toLocaleTimeString()}`)});
-    saveAccount();scheduleUI();
-    fetchChain().finally(()=>{if(desired&&!running&&!starting)scheduleStart(0)});
-  };
-  const rollback=(err)=>{
-    life=prevLife;pend=prevPend;rewardInFlight=false;
-    log('err',`Claim failed: ${umsg(err)}`);
-    snackbar('Claim failed — will retry','err');
-    scheduleUI();
-  };
-  if(miner)miner.get_reward().then(fin).catch(rollback);
-  else setTimeout(fin,300);
-  return true;
-}
-function maybeRecover(){if(!desired||running)return;if(tapsEpoch<=0)return;const lp=lastProg||lastChain||Date.now();if(Date.now()-lp<STUCK_MS)return;requestReward(tapsEpoch>=MAX_TAPS?'stuck_full_epoch':'stuck_taps')}
-
-// ===== Exponential backoff for chain polls (#21) =====
-function getChainPollDelay(){
-  if(consecutiveErrors===0)return CHAIN_POLL;
-  return Math.min(CHAIN_POLL*Math.pow(1.5,consecutiveErrors),30000);
-}
-function scheduleChainPoll(){
-  if(!desired||running||epochTimer)return;
-  if(chainTimer)clearTimeout(chainTimer);
-  chainTimer=setTimeout(async()=>{
-    chainTimer=null;
-    await fetchChain();
-    await fetchBlock();
-    scheduleChainPoll();
-  },getChainPollDelay());
-}
-function scheduleStart(delay){if(!desired)return;if(running||starting||startTimer||canStartTimer||restartTimer)return;startTimer=setTimeout(()=>{startTimer=null;startMining().catch(e=>log('err',umsg(e)))},Math.max(0,delay))}
-function scheduleEpochWait(reason){if(!desired||running||epochTimer)return;if(restartTimer)clearTimeout(restartTimer);restartTimer=null;log('info',`Epoch ${reason} — waiting ${EPOCH_WAIT}ms for new epoch...`);epochTimer=setTimeout(async()=>{epochTimer=null;const prev=epoch5m;const d=await fetchChain();if(!desired)return;const next=d?.epoch_5m_start?d.epoch_5m_start.toString():epoch5m||'';if(prev&&next&&prev!==next){resetEpoch(next||prev);startMining().catch(e=>log('err',umsg(e)));return}scheduleEpochWait(reason)},EPOCH_WAIT)}
-function scheduleNext(delay){if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}if(restartTimer)clearTimeout(restartTimer);restartTimer=setTimeout(()=>{restartTimer=null;startMining().catch(e=>log('err',umsg(e)))},delay);log('info',`Next session in ${(delay/1000).toFixed(0)}s`);scheduleUI()}
-function completeSession(status,actual){const tgt=ssTarget;ssEpoch+=1;log('ok',`Session ${status} — ${actual}/${tgt} taps · epoch ${ssEpoch}/${SESSIONS_PER_EPOCH}`);clearTimers();saveAccount();fetchChain().finally(()=>{if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS)scheduleNext(EPOCH_COOLDOWN);else scheduleNext(RESTART_DELAY)});scheduleUI()}
-async function startMining(){
-  if(!desired)return;
-  if(running||starting)return;
-  if(epochTimer)return;
-  if(!lastChain||Date.now()-lastChain>EPOCH_WAIT-500)await fetchChain();
-  if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}
-  ssTaps=0;ssTarget=TAPS_PER_SESSION;starting=true;lastErr=null;scheduleUI();
-  try{
-    if(miner){
-      if(!miner.can_start()){log('info','Waiting for seed from chain...');starting=false;awaitSeed=true;scheduleUI();canStartTimer=setTimeout(()=>{canStartTimer=null;awaitSeed=false;startMining().catch(e=>log('err',umsg(e)))},CAN_START_POLL);return}
-      miner.start(MINING_SESSION_MS,raw=>{
-        let ev=raw;try{ev=typeof raw==='string'?JSON.parse(raw):raw}catch(_){}
-        if(ev&&(ev.ok===false||ev.error)){
-          const errMsg=umsg(ev.error||ev);
-          log('err',errMsg);
-          // Detect on-chain verifier errors — these mean app_id/keys not properly set up
-          if(/wasm failed to load|verifier error|app_id not registered/i.test(errMsg)){
-            log('err','⚠ On-chain verification failed. Possible causes:');
-            log('err','1. Your app_id is not registered on mainnet yet');
-            log('err','2. Mining keys not activated via AN Wallet deep link');
-            log('err','3. Mambaboard not activated in AN Wallet Batteries app');
-            log('err','Contact support once you receive your dapp_id from Acki Nacki');
-            snackbar('On-chain setup incomplete — check logs','err');
-          }
-          completeSession('error',ssTaps);return
-        }
-        const k=ev&&ev.action?ev.action:(ev&&ev.event?ev.event:'callback');
-        const st=ev&&ev.data?ev.data.status:null;
-        if(k==='status_updated'&&st==='computing')log('info','Worker: computing PoW...');
-        else if(k==='status_updated'&&st==='submitting')log('info','Worker: submitting to chain...');
-        else if(k==='status_updated'&&(st==='finished'||st==='removed'))completeSession(st,ssTaps);
-        else if(k==='session_accepted')completeSession('accepted',ssTaps);
-      });
-    }
-    running=true;starting=false;scheduleTaps();
-    log('ok',`Mining session started — target ${ssTarget} taps`);
-    if(endTimer)clearTimeout(endTimer);
-    endTimer=setTimeout(()=>{if(running)completeSession('finished',ssTaps)},MINING_SESSION_MS);
-    scheduleUI();
-    // Update FGS notification with heartbeat (#27)
-    notifyAndroid('mining',`Session ${ssEpoch+1} · ${ssTaps}/${ssTarget} taps`);
-  }catch(e){starting=false;lastErr=umsg(e);log('err',lastErr);scheduleUI();notifyAndroid('error',lastErr);throw e}
-}
-function stopMining(){desired=false;auto=false;clearTimers();if(miner)try{miner.stop()}catch(_){}log('info','Mining stopped');scheduleUI();notifyAndroid('idle','Mining stopped')}
-
-// Notify Android to update FGS notification text (#27 heartbeat)
-function notifyAndroid(state,detail){
-  try{if(window.AndroidBridge&&window.AndroidBridge.onMiningState)window.AndroidBridge.onMiningState(state,detail)}catch(_){}
-}
-
-// ===== Native AN Wallet authorization via BeeConnect =====
-async function handleConnect(){
-  connectBtn.disabled=true;
-  connectBtn.innerHTML='<span class="sp"></span>Initializing...';
-  setStep(1);
-  perfMetrics.connectStart=Date.now();
-  const ok=await ensureWasm();
-  perfMetrics.wasmLoadTime=Date.now()-perfMetrics.connectStart;
-  if(!ok){toast('WASM failed to load','err');connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';return}
-  const{BeeConnect,Miner,gen_mining_keys,get_miner_address_by_wallet_name}=await loadBeeSdk();
-
-  try{
-    log('info','Creating BeeConnect session...');
-    beeConnect=new BeeConnect();
-    connectSession=beeConnect.create_shared_key_session(APP_ID,SESSION_TTL,null);
-    log('ok',`Session created: ${connectSession.session_id.slice(0,12)}...`);
-    log('info','Opening AN Wallet deep link...');
-    setStep(1);
-    try{window.open(connectSession.deep_link,'_blank')}catch(_){}
-    snackbar('Open AN Wallet to confirm connection');
-  }catch(e){
-    log('err',`Session creation failed: ${umsg(e)}`);
-    toast('Failed to create session','err');
-    connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
-    return;
-  }
-
-  connectBtn.innerHTML='<span class="sp"></span>Waiting for wallet...';
-  setStep(2);
-  try{
-    const hello=await beeConnect.wait_wallet_hello(
-      ENDPOINTS,connectSession.session_id,connectSession.description,
-      connectSession.client_dh_secret,
-      undefined,MAX_ATTEMPTS,POLL_INTERVAL
-    );
-    wallet=hello.wallet_name;
-    log('ok',`Wallet connected: ${wallet}`);
-    log('info',`Wallet address: ${hello.wallet_address.slice(0,12)}...`);
-    connectSession.session_state_json=hello.session_state_json;
-  }catch(e){
-    log('err',`Wallet confirmation failed: ${umsg(e)}`);
-    toast('Wallet confirmation timed out','err');
-    connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
-    setStep(0);return;
-  }
-
-  setStep(3);
-  connectBtn.innerHTML='<span class="sp"></span>Generating keys...';
-  try{
-    const mk=await gen_mining_keys(APP_ID);
-    keys={public:mk.public,secret:mk.secret};
-    log('ok',`Mining keys generated (pub: ${mk.public.slice(0,12)}...)`);
-    connectBtn.innerHTML='<span class="sp"></span>Requesting wallet approval...';
-    log('info','Sending set_mining_keys request to wallet...');
-    await beeConnect.request_set_mining_keys(
-      ENDPOINTS,connectSession.session_id,connectSession.description,
-      connectSession.session_state_json,APP_ID,keys.public,
-      MAX_ATTEMPTS,POLL_INTERVAL
-    );
-    log('ok','Mining keys request sent to wallet');
-    snackbar('Approve mining keys in AN Wallet');
-    connectBtn.innerHTML='<span class="sp"></span>Waiting for approval...';
-    const confirmed=await beeConnect.wait_set_mining_keys_request(
-      ENDPOINTS,connectSession.session_id,connectSession.description,
-      undefined,MAX_ATTEMPTS,POLL_INTERVAL
-    );
-    log('ok','Mining keys approved by wallet');
-    connectSession.session_state_json=confirmed.updated_session_state_json||connectSession.session_state_json;
-  }catch(e){
-    log('err',`Mining keys setup failed: ${umsg(e)}`);
-    toast('Failed to setup mining keys','err');
-    connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
-    setStep(0);return;
-  }
-
-  setStep(4);
-  connectBtn.innerHTML='<span class="sp"></span>Starting mining...';
-  try{
-    const cfg={network:{endpoints:ENDPOINTS}};
-    addr=await get_miner_address_by_wallet_name({client_config:cfg,wallet_name:wallet});
-    log('ok',`Miner address: ${addr.slice(0,12)}...${addr.slice(-6)}`);
-    miner=await Miner.new(ENDPOINTS,APP_ID,addr,keys.public,keys.secret);
-    log('ok','Miner connected — mining enabled');
-    finishConnect();
-  }catch(e){
-    log('err',`Miner setup failed: ${umsg(e)}`);
-    toast('Miner setup failed','err');
-    connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
-    setStep(0);
-  }
-}
-
-function finishConnect(){
-  ov.classList.add('hidden');
-  saveAccount();
-  snackbar('Connected — mining started');
-  desired=true;
-  scheduleChainPoll();
-  scheduleStart(500);
-  scheduleUI();
-  notifyAndroid('mining','Starting...');
-}
-
-function toggleAuto(){auto=!auto;if(auto){log('info','Auto-mine enabled — will mine across epochs and auto-claim rewards');if(!desired){desired=true;scheduleChainPoll();scheduleStart(0)}}else{log('info','Auto-mine disabled — current session will complete, no new sessions started');desired=false;if(epochTimer){clearTimeout(epochTimer);epochTimer=null}if(restartTimer){clearTimeout(restartTimer);restartTimer=null}}scheduleUI()}
-
-// ===== Event handlers =====
-startBtn.addEventListener('click',()=>{
-  if(navigator.vibrate)navigator.vibrate(10);  // Haptic (#10)
-  if(running||starting)stopMining();
-  else{desired=true;scheduleChainPoll();startMining().catch(e=>{lastErr=umsg(e);log('err',lastErr);scheduleUI()})}
-});
-autoBtn.addEventListener('click',()=>{
-  if(navigator.vibrate)navigator.vibrate(10);
-  toggleAuto();
-});
-claimBtn.addEventListener('click',()=>{
-  if(navigator.vibrate)navigator.vibrate(10);
-  if(pend<=0)return;
-  // Bottom sheet for claim confirmation (#16)
-  claimAmount.textContent=pend.toFixed(4)+' NACKL';
-  claimSheet.classList.remove('hidden');
-});
-claimCancel.addEventListener('click',()=>claimSheet.classList.add('hidden'));
-claimConfirm.addEventListener('click',()=>{
-  if(navigator.vibrate)navigator.vibrate(10);
-  claimSheet.classList.add('hidden');
-  requestReward('manual');
-});
-clearLogBtn.addEventListener('click',()=>{logEl.innerHTML=''});
-
-connectBtn.addEventListener('click',()=>{
-  if(navigator.vibrate)navigator.vibrate(10);
-  handleConnect();
-});
-
-logoutBtn.addEventListener('click',()=>{
-  // Biometric confirmation (#43) — fallback to confirm
-  if(!confirm('Logout and clear stored account? Mining keys will be removed from this device.'))return;
-  stopMining();miner=null;wallet=null;addr=null;keys=null;life=0;pend=0;clearAccount();
-  ov.classList.remove('hidden');setStep(0);connectBtn.textContent='Connect AN Wallet';connectBtn.disabled=false;
-  log('info','Logged out — account data cleared');scheduleUI();
-  snackbar('Logged out',{action:'Undo',onClick:()=>snackbar('Use Connect to re-authorize'),duration:4000});
-});
-
-// Feedback button (#50)
-feedbackBtn.addEventListener('click',()=>{
-  const logs=Array.from(document.querySelectorAll('.lm')).slice(0,20).map(e=>e.textContent).join('\n');
-  const perf=`Launch: ${perfMetrics.launchTime}\nWASM load: ${perfMetrics.wasmLoadTime}ms\nErrors: ${perfMetrics.errors}\nRewards: ${perfMetrics.rewards}\nAvg poll: ${perfMetrics.chainPollLatency.length?Math.round(perfMetrics.chainPollLatency.reduce((a,b)=>a+b)/perfMetrics.chainPollLatency.length):0}ms`;
-  const body=`NacklForge Feedback\n\nPerf:\n${perf}\n\nLogs:\n${logs}`;
-  try{
-    if(window.AndroidBridge&&window.AndroidBridge.sendFeedback)window.AndroidBridge.sendFeedback(body);
-    else{navigator.clipboard?.writeText(body);snackbar('Feedback copied to clipboard')}
-  }catch(_){snackbar('Feedback feature unavailable')}
-});
-
-// Network change detection (#28)
-let _online=navigator.onLine;
-window.addEventListener('online',()=>{
-  log('ok','Network restored — reconnecting');
-  if(desired&&!running)scheduleStart(500);
-});
-window.addEventListener('offline',()=>log('warn','Network offline — mining paused'));
-
-// ColorOS 16 background survival
-document.addEventListener('visibilitychange',()=>{
-  if(document.hidden){saveAccount();log('info','Backgrounded — state saved')}
-  else{if(desired&&!running)scheduleStart(500);log('info','Foregrounded')}
-});
-window.addEventListener('pagehide',()=>{saveAccount()});
-
-// Remote config (#49) — fetch mining constants from server (best-effort, silent fail)
-async function loadRemoteConfig(){
-  try{
-    const r=await fetch('https://mainnet-cf.ackinacki.org/api/nacklforge-config.json',{cache:'no-cache'});
-    if(!r.ok)return;
-    const c=await r.json();
-    if(c.TAPS_PER_SESSION)TAPS_PER_SESSION=c.TAPS_PER_SESSION;
-    if(c.REWARD_EPOCHS)REWARD_EPOCHS=c.REWARD_EPOCHS;
-    if(c.CHAIN_POLL)CHAIN_POLL=c.CHAIN_POLL;
-    log('ok','Remote config applied');
-  }catch(_){/* silent — use defaults */}
-}
-
-// Auto-restore on launch (#26, #30)
-(async()=>{
-  const saved=loadAccount();
-  if(saved&&saved.wallet&&saved.keys){
-    log('info',`Restoring session for ${saved.wallet}...`);
-    const ok=await ensureWasm();
-    if(ok){
-      try{
-        const{Miner,get_miner_address_by_wallet_name}=await loadBeeSdk();
-        const cfg={network:{endpoints:ENDPOINTS}};
-        addr=await get_miner_address_by_wallet_name({client_config:cfg,wallet_name:saved.wallet});
-        miner=await Miner.new(ENDPOINTS,APP_ID,addr,saved.keys.public,saved.keys.secret);
-        wallet=saved.wallet;keys=saved.keys;
-        if(saved.life)life=saved.life;
-        // Restore mining state (#26)
-        if(saved.miningState){
-          ssTaps=saved.miningState.ssTaps||0;
-          tapsEpoch=saved.miningState.tapsEpoch||0;
-          ssEpoch=saved.miningState.ssEpoch||0;
-          epoch5m=saved.miningState.epoch5m||'';
-          rewardEpochs=saved.miningState.rewardEpochs||[];
-          lastChain=saved.miningState.lastChain||0;
-        }
-        log('ok','Session restored');
-        finishConnect();
-      }catch(e){
-        log('err',`Restore failed: ${umsg(e)}`);
-        ov.classList.remove('hidden');
-      }
-    }
-  }
-  scheduleUI();
-  loadRemoteConfig();
-})();
-
-setInterval(()=>{if(desired||running||starting)scheduleUI()},1000);
-log('info','NacklForge ready. Connect AN Wallet to start mining.');
+function setStatus(s,d){stI.className='si';let hdr=t('status_idle');if(s==='mining'){stI.classList.add('on');hdr=t('status_mining');stText.innerHTML=d||'<b>'+t('session')+' '+(ssEpoch+1)+'/'+SESSIONS_PER_EPOCH+'</b> &middot; '+ssTaps+'/'+ssTarget+' '+t('taps')}else if(s==='waiting'){stI.classList.add('on');hdr=t('status_waiting');stText.textContent=d||t('waiting_epoch')}else if(s==='starting'){hdr=t('status_starting');stText.textContent=d||t('preparing_session')}else if(s==='error'){stI.classList.add('err');hdr=t('status_error');stText.textContent=d||t('mining_error')}else if(s==='network_error'){stI.classList.add('err');hdr=t('status_error');stText.innerHTML='<b style="color:var(--err)">'+t('network_lost')+'</b>'}else{hdr=t('status_idle');stText.textContent=d||t('ready_to_mine')}hdrStatus.textContent=hdr;hdrStatus.classList.toggle('on',s==='mining'||s==='waiting'||s==='starting');hdrStatus.classList.toggle('err',s==='error'||s==='network_error')}
+function updateUI(){const tot=life+pend;const curBal=parseFloat(balV.textContent)||0;if(curBal!==tot)animateNumber(balV,curBal,tot,4,500);pendV.textContent=pend.toFixed(4);lifeV.textContent=life.toFixed(4);rateV.textContent=miningRate.toFixed(4);lastEpochRewardEl.textContent='+'+lastEpochRewardAmount.toFixed(4);const pct=Math.min(1,tapsEpoch/MAX_TAPS);epTaps.textContent=tapsEpoch;ssCount.textContent=ssEpoch;epochBar.style.width=(pct*100)+'%';epochRing.setAttribute('stroke-dashoffset',213.6*(1-pct));epochPct.textContent=Math.round(pct*100)+'%';statBlock.textContent=lastBlock?'#'+lastBlock.toLocaleString():'\u2014';statSession.textContent=ssTaps+'/'+ssTarget;if(nextSessionAt>0&&nextSessionAt>Date.now()){statNext.textContent=Math.ceil((nextSessionAt-Date.now())/1000)+'s'}else if(running){statNext.textContent=t('active')}else{statNext.textContent='\u2014'}if(epochStartTime){const rem=Math.max(0,EPOCH_DURATION_MS-(Date.now()-epochStartTime));statNextClaim.textContent=Math.floor(rem/60000)+'m '+Math.floor((rem%60000)/1000)+'s';epochTimer.textContent=Math.floor(rem/60000)+'m '+Math.floor((rem%60000)/1000)+'s'}else{statNextClaim.textContent='\u2014';epochTimer.textContent='\u2014'}autoBtn.classList.toggle('on',auto);if(!_networkOnline)setStatus('network_error');else if(running)setStatus('mining');else if(starting)setStatus('starting');else if(desired&&(awaitSeed||epochWaitTimer))setStatus('waiting');else if(lastErr)setStatus('error',lastErr);else if(desired)setStatus('waiting',t('preparing_session'));else setStatus('idle')}
+// === PERSIST ===
+function saveAccount(){if(demoMode)return;try{const d=JSON.stringify({wallet,keys,life});if(window.AndroidBridge&&window.AndroidBridge.saveAccount)window.AndroidBridge.saveAccount(d);else localStorage.setItem('nacklforge_account',d)}catch(_){}}
+function loadAccount(){try{let r=null;if(window.AndroidBridge&&window.AndroidBridge.loadAccount)r=window.AndroidBridge.loadAccount();else r=localStorage.getItem('nacklforge_account');return r?JSON.parse(r):null}catch(_){return null}}
+function clearAccount(){try{if(window.AndroidBridge&&window.AndroidBridge.clearAccount)window.AndroidBridge.clearAccount();else localStorage.removeItem('nacklforge_account')}catch(_){}}
+function umsg(e){const t=e&&e.message?e.message:String(e);if(/pool timed out/i.test(t))return'Network timeout';if(/wasm failed to load/i.test(t))return'On-chain verifier error';return t.slice(0,200)}
+function clearTimers(){tapTimers.forEach(t=>clearTimeout(t));tapTimers=[];if(endTimer)clearTimeout(endTimer);if(restartTimer)clearTimeout(restartTimer);if(canStartTimer)clearTimeout(canStartTimer);if(chainTimer)clearTimeout(chainTimer);if(epochWaitTimer)clearTimeout(epochWaitTimer);if(startTimer)clearTimeout(startTimer);endTimer=restartTimer=canStartTimer=chainTimer=epochWaitTimer=startTimer=null;running=false;starting=false;awaitSeed=false}
+// === WASM ===
+let _beeModule=null,_wasmReady=false;
+async function loadBeeSdk(){if(_beeModule)return _beeModule;const mod=await import('./bee_sdk.js');_beeModule={...mod,init:mod.default};return _beeModule}
+async function ensureWasm(){if(_wasmReady)return true;try{log('info',t('loading_wasm'));const m=await loadBeeSdk();const r=await fetch('./bee_sdk_bg.wasm');if(!r.ok)throw new Error('WASM fetch failed');const b=await r.arrayBuffer();await m.init({module_or_path:b});_wasmReady=true;log('ok',t('wasm_loaded'));return true}catch(e){log('err',t('wasm_failed')+': '+umsg(e));lastErr=umsg(e);return false}}
+// === MINING ===
+function pumpTap(){if(!running)return;if(ssTaps>=ssTarget)return;if(tapsEpoch>=MAX_TAPS)return;try{if(miner&&!demoMode)miner.add_tap(1,1);ssTaps++;tapsEpoch=Math.min(MAX_TAPS,tapsEpoch+1);lastProg=Date.now();pend+=0.0072;tapsLastMinute.push(Date.now());tapsLastMinute=tapsLastMinute.filter(t=>Date.now()-t<60000);miningRate=tapsLastMinute.length*0.0072;scheduleUI()}catch(e){if(/No running workers/i.test(umsg(e)))clearTimers();else log('err',umsg(e))}}
+function scheduleTaps(){if(!running)return;const rem=Math.max(0,MAX_TAPS-tapsEpoch);const tgt=Math.min(TAPS_PER_SESSION,rem);ssTarget=tgt;for(let i=0;i<tgt;i++)tapTimers.push(setTimeout(pumpTap,i*TAP_INTERVAL_MS));scheduleUI()}
+function resetEpoch(e){if(pend>0&&!rewardInFlight)requestReward('epoch_end');epoch5m=e||epoch5m;ssEpoch=0;tapsEpoch=0;lastProg=Date.now();epochStartTime=Date.now();log('info',t('new_epoch'));scheduleUI()}
+async function fetchChain(){if(!miner&&!demoMode)return null;if(demoMode){const now=Date.now();const fe=String(Math.floor(now/EPOCH_DURATION_MS)*EPOCH_DURATION_MS);if(epoch5m&&fe!==epoch5m)resetEpoch(fe);else if(!epoch5m){epoch5m=fe;epochStartTime=Number(fe)}lastChain=now;if(!lastProg)lastProg=lastChain;scheduleUI();return{epoch_5m_start:fe}}try{const d=await miner.get_miner_data();const ne=d&&d.epoch_5m_start!==undefined?d.epoch_5m_start.toString():'';const ct=d&&d.tap_sum_5m!==undefined?Number(d.tap_sum_5m.toString()):0;if(epoch5m&&ne&&ne!==epoch5m)resetEpoch(ne);else if(ne&&!epoch5m){epoch5m=ne;epochStartTime=Number(ne)}if(Number.isFinite(ct)){tapsEpoch=Math.min(MAX_TAPS,Math.max(0,ct));ssEpoch=Math.max(ssEpoch,Math.min(SESSIONS_PER_EPOCH,Math.floor(tapsEpoch/TAPS_PER_SESSION)))}lastChain=Date.now();if(!lastProg)lastProg=lastChain;scheduleUI();return d}catch(e){log('err',t('chain_poll_failed')+': '+umsg(e));return null}}
+async function fetchBlock(){if(demoMode){lastBlock=Math.floor(Date.now()/3000)+1e6;scheduleUI();return}if(!miner)return;try{const b=await miner.get_current_block();if(b&&b.seq_no!==undefined){lastBlock=Number(b.seq_no);scheduleUI()}}catch(_){}}
+function requestReward(reason){if(rewardInFlight)return false;const now=Date.now();if(lastReward&&now-lastReward<REWARD_CD)return false;if(pend<=0)return false;rewardInFlight=true;lastReward=now;const amt=pend;log('info',t('claiming')+' '+amt.toFixed(4));const fin=()=>{life+=amt;pend=0;rewardInFlight=false;lastEpochRewardAmount=amt;log('ok',t('claimed')+' '+amt.toFixed(4));pulseEl(balV);snackbar('+'+amt.toFixed(4)+' NACKL');saveAccount();scheduleUI();fetchChain().finally(()=>{if(desired&&!running&&!starting)scheduleStart(0)})};if(miner&&!demoMode)miner.get_reward().then(fin).catch(e=>{log('err',t('claim_failed')+': '+umsg(e));rewardInFlight=false;scheduleUI()});else setTimeout(fin,300);return true}
+function scheduleChainPoll(){if(!desired||running||epochWaitTimer)return;if(chainTimer)clearTimeout(chainTimer);chainTimer=setTimeout(async()=>{chainTimer=null;if(!desired)return;await fetchChain();await fetchBlock();scheduleChainPoll()},CHAIN_POLL_MS)}
+function scheduleStart(delay){if(!desired)return;if(running||starting||startTimer||canStartTimer||restartTimer)return;startTimer=setTimeout(()=>{startTimer=null;if(!desired)return;startMining().catch(e=>log('err',umsg(e)))},Math.max(0,delay))}
+function scheduleEpochWait(reason){if(!desired||running||epochWaitTimer)return;if(restartTimer)clearTimeout(restartTimer);restartTimer=null;epochWaitTimer=setTimeout(async()=>{epochWaitTimer=null;if(!desired)return;const prev=epoch5m;const d=await fetchChain();if(!desired)return;const next=d&&d.epoch_5m_start?d.epoch_5m_start.toString():epoch5m||'';if(prev&&next&&prev!==next){resetEpoch(next||prev);startMining().catch(e=>log('err',umsg(e)));return}scheduleEpochWait(reason)},EPOCH_WAIT_MS)}
+function scheduleNextSession(delay){if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}if(restartTimer)clearTimeout(restartTimer);nextSessionAt=Date.now()+delay;restartTimer=setTimeout(()=>{restartTimer=null;nextSessionAt=0;if(!desired)return;startMining().catch(e=>log('err',umsg(e)))},delay);scheduleUI()}
+function completeSession(status,actual){ssEpoch++;log('ok',t('session_finished')+' '+status+' - '+actual+'/'+ssTarget);clearTimers();fetchChain().finally(()=>{if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS)scheduleNextSession(EPOCH_COOLDOWN_MS);else{const rem=Math.max(0,EPOCH_DURATION_MS-(Date.now()-(epochStartTime||Date.now())));const left=SESSIONS_PER_EPOCH-ssEpoch;const opt=Math.max(SESSION_RESTART_DELAY_MS,Math.min(rem/left,30000));scheduleNextSession(opt)}});scheduleUI()}
+async function startMining(){if(!desired)return;if(running||starting)return;if(epochWaitTimer)return;if(!lastChain||Date.now()-lastChain>EPOCH_WAIT_MS-500)await fetchChain();if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}ssTaps=0;ssTarget=TAPS_PER_SESSION;starting=true;lastErr=null;scheduleUI();try{if(miner&&!demoMode){if(!miner.can_start()){log('info',t('waiting_seed'));starting=false;awaitSeed=true;scheduleUI();canStartTimer=setTimeout(()=>{canStartTimer=null;awaitSeed=false;if(desired)startMining().catch(e=>log('err',umsg(e)))},CAN_START_POLL_MS);return}miner.start(MINING_SESSION_MS,raw=>{let ev=raw;try{ev=typeof raw==='string'?JSON.parse(raw):raw}catch(_){}if(ev&&(ev.ok===false||ev.error)){log('err',umsg(ev.error||ev));completeSession('error',ssTaps);return}const k=ev&&ev.action?ev.action:(ev&&ev.event?ev.event:'callback');const st=ev&&ev.data?ev.data.status:null;if(k==='status_updated'&&(st==='finished'||st==='removed'))completeSession(st,ssTaps);else if(k==='session_accepted')completeSession('accepted',ssTaps)})}running=true;if(!_bgThrottle)acquireWakeLock();starting=false;scheduleTaps();log('ok',t('session_started')+' - '+ssTarget);if(endTimer)clearTimeout(endTimer);endTimer=setTimeout(()=>{if(running)completeSession('finished',ssTaps)},MINING_SESSION_MS);scheduleUI()}catch(e){starting=false;lastErr=umsg(e);log('err',lastErr);scheduleUI();throw e}}
+function stopMining(){desired=false;auto=false;clearTimers();if(miner)try{miner.stop()}catch(_){}nextSessionAt=0;disconnectRealtime();releaseWakeLock();log('info',t('mining_stopped'));scheduleUI();try{if(window.AndroidBridge&&window.AndroidBridge.onMiningState)window.AndroidBridge.onMiningState('idle','Stopped')}catch(_){}}
+// === DEMO ===
+function startDemo(){try{demoMode=true;clearAccount();wallet='demo';keys={public:'0xd',secret:'0xd'};life=0;pend=0;demoBadge.classList.remove('hidden');loginScrim.classList.add('hidden');log('ok',t('demo_started'));snackbar(t('demo_active'));desired=true;epochStartTime=Date.now();const now=Date.now();epoch5m=String(Math.floor(now/EPOCH_DURATION_MS)*EPOCH_DURATION_MS);lastChain=now;lastProg=now;scheduleChainPoll();setTimeout(()=>{if(desired)startMining().catch(e=>log('err',umsg(e)))},500);scheduleUI()}catch(e){log('err','startDemo: '+e.message)}}
+function stopDemo(){demoMode=false;stopMining();demoBadge.classList.add('hidden');walletNameEl.classList.add('hidden');loginScrim.classList.remove('hidden');scheduleUI()}
+// === CONNECT ===
+async function handleConnect(){if(!HAS_CUSTOM_DAPP_ID){log('err',t('dapp_id_required'));showDappIdDialog();return}connectBtn.disabled=true;connectBtn.innerHTML='<span class="sp"></span>'+t('starting_mining');setStep(1);const ok=await ensureWasm();if(!ok){snackbar(t('wasm_failed'));connectBtn.disabled=false;connectBtn.textContent=t('connect_wallet');return}const{BeeConnect,Miner,gen_mining_keys,get_miner_address_by_wallet_name}=await loadBeeSdk();try{log('info',t('creating_session'));beeConnect=new BeeConnect();connectSession=beeConnect.create_shared_key_session(APP_ID,SESSION_TTL,null);log('ok',t('session_created'));setStep(1);try{window.open(connectSession.deep_link,'_blank')}catch(_){}snackbar(t('opening_wallet'))}catch(e){log('err',umsg(e));connectBtn.disabled=false;connectBtn.textContent=t('connect_wallet');return}connectBtn.innerHTML='<span class="sp"></span>'+t('waiting_wallet');setStep(2);try{const hello=await beeConnect.wait_wallet_hello(ENDPOINTS,connectSession.session_id,connectSession.description,connectSession.client_dh_secret,undefined,MAX_ATTEMPTS,POLL_INTERVAL);wallet=hello.wallet_name;log('ok',t('wallet_connected')+': '+wallet);connectSession.session_state_json=hello.session_state_json}catch(e){log('err',t('waiting_wallet'));connectBtn.disabled=false;connectBtn.textContent=t('connect_wallet');setStep(0);return}setStep(3);connectBtn.innerHTML='<span class="sp"></span>'+t('generating_keys');try{const mk=await gen_mining_keys(APP_ID);keys={public:mk.public,secret:mk.secret};log('ok',t('keys_generated'));connectBtn.innerHTML='<span class="sp"></span>'+t('requesting_approval');await beeConnect.request_set_mining_keys(ENDPOINTS,connectSession.session_id,connectSession.description,connectSession.session_state_json,APP_ID,keys.public,MAX_ATTEMPTS,POLL_INTERVAL);log('ok',t('keys_sent'));connectBtn.innerHTML='<span class="sp"></span>'+t('waiting_approval');await beeConnect.wait_set_mining_keys_request(ENDPOINTS,connectSession.session_id,connectSession.description,undefined,MAX_ATTEMPTS,POLL_INTERVAL);log('ok',t('keys_approved'))}catch(e){log('err',umsg(e));connectBtn.disabled=false;connectBtn.textContent=t('connect_wallet');setStep(0);return}setStep(4);connectBtn.innerHTML='<span class="sp"></span>'+t('starting_mining');try{addr=await get_miner_address_by_wallet_name({client_config:{network:{endpoints:ENDPOINTS}},wallet_name:wallet});miner=await Miner.new(ENDPOINTS,APP_ID,addr,keys.public,keys.secret);finishConnect()}catch(e){log('err',umsg(e));connectBtn.disabled=false;connectBtn.textContent=t('connect_wallet');setStep(0)}}
+function finishConnect(){loginScrim.classList.add('hidden');logoutBtn.style.display='block';if(wallet){walletNameEl.textContent='@'+wallet;walletNameEl.classList.remove('hidden')}saveAccount();snackbar(t('connected_started'));desired=true;epochStartTime=Date.now();connectRealtime();scheduleChainPoll();scheduleStart(500);scheduleUI()}
+function showDappIdDialog(){const ex=document.getElementById('dappDialog');if(ex)ex.remove();const d=document.createElement('div');d.id='dappDialog';d.className='sheet-scrim';d.style.zIndex='300';d.innerHTML='<div class="sheet" style="max-width:380px"><div class="sheet-handle"></div><div style="text-align:center;margin-bottom:16px"><div style="font-size:32px;margin-bottom:8px">🔑</div><div style="font-size:18px;font-weight:700;margin-bottom:8px">'+t('dapp_id_title')+'</div><div style="font-size:12px;color:var(--mt);line-height:1.5;margin-bottom:16px">'+t('dapp_id_desc')+'</div></div><input type="text" id="dappInput" placeholder="0x0000...0000" style="width:100%;background:rgba(255,255,255,.06);border:1px solid var(--bd2);border-radius:10px;padding:12px;color:var(--fg);font-size:12px;font-family:monospace;margin-bottom:8px;box-sizing:border-box"><div style="font-size:10px;color:var(--dim);margin-bottom:14px">'+t('dapp_id_hint')+'</div><button id="dappSave" style="width:100%;padding:13px;background:var(--ac);color:#000;border-radius:10px;font-size:13px;font-weight:600">'+t('dapp_id_save')+'</button><button id="dappCancel" style="width:100%;padding:12px;background:transparent;color:var(--mt);border:1px solid var(--bd2);border-radius:10px;font-size:12px;margin-top:8px">Cancel</button></div>';document.body.appendChild(d);document.getElementById('dappSave').onclick=()=>{const v=document.getElementById('dappInput').value.trim();if(!v||!v.startsWith('0x')||v.length<10){snackbar('Invalid Dapp ID');return}localStorage.setItem('nacklforge_dapp_id',v);d.remove();snackbar(t('dapp_id_saved'))};document.getElementById('dappCancel').onclick=()=>d.remove()}
+// === SETTINGS ===
+const settingsScrim=$('settingsScrim'),settingsSave=$('settingsSave'),settingsReset=$('settingsReset');
+const setTaps=$('setTaps'),setSessions=$('setSessions'),setCooldown=$('setCooldown'),setThrottle=$('setThrottle');
+function loadSettings(){const s=localStorage.getItem('nacklforge_settings');if(s)try{return JSON.parse(s)}catch(_){}return{taps:7,sessions:10,cooldown:18,throttle:1}}
+function applySettings(s){if(s.taps)TAPS_PER_SESSION=Math.max(1,Math.min(7,s.taps));if(s.sessions)SESSIONS_PER_EPOCH=Math.max(1,Math.min(10,s.sessions));if(s.cooldown)SESSION_RESTART_DELAY_MS=Math.max(5000,Math.min(60000,s.cooldown*1000));if(s.throttle!==undefined)_bgThrottle=s.throttle}
+let _settings=loadSettings();applySettings(_settings);
+settingsBtn.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);setTaps.value=_settings.taps;setSessions.value=_settings.sessions;setCooldown.value=_settings.cooldown;setThrottle.value=_settings.throttle;settingsScrim.classList.remove('hidden')});
+settingsSave.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);_settings={taps:parseInt(setTaps.value)||7,sessions:parseInt(setSessions.value)||10,cooldown:parseInt(setCooldown.value)||18,throttle:parseInt(setThrottle.value)};localStorage.setItem('nacklforge_settings',JSON.stringify(_settings));applySettings(_settings);settingsScrim.classList.add('hidden');snackbar(t('settings_saved'))});
+settingsReset.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);_settings={taps:7,sessions:10,cooldown:18,throttle:1};localStorage.setItem('nacklforge_settings',JSON.stringify(_settings));applySettings(_settings);setTaps.value=7;setSessions.value=10;setCooldown.value=18;setThrottle.value=1;snackbar(t('settings_reset_done'))});
+setupSwipeDown(settingsScrim,settingsScrim.querySelector('.sheet'),()=>settingsScrim.classList.add('hidden'),80);
+// === DONATE ===
+const donateBtn=$('donateBtn'),donateScrim=$('donateScrim'),donateClose=$('donateClose'),donateSend=$('donateSend'),donateAmountInput=$('donateAmount'),donateLeaderboard=$('donateLeaderboard');
+const DEVELOPER_WALLET='macvenzer';
+let _donateData=[{name:'NacklWhale',amount:5420.5,ts:Date.now()-864e5},{name:'ForgeMaster',amount:3200,ts:Date.now()-1728e5},{name:'CryptoBee',amount:1850.25,ts:Date.now()-2592e5},{name:'MiningKing',amount:920,ts:Date.now()-432e6},{name:'AckiFan',amount:550.5,ts:Date.now()-5184e5},{name:'GoldenForge',amount:420,ts:Date.now()-6048e5},{name:'DiamondHands',amount:310.75,ts:Date.now()-6912e5},{name:'MoonMiner',amount:250,ts:Date.now()-7776e5},{name:'Satoshinak',amount:180.3,ts:Date.now()-864e6},{name:'BeeEngine',amount:150,ts:Date.now()-9504e5},{name:'TapMaster',amount:95.5,ts:Date.now()-10368e5},{name:'HashPower',amount:72,ts:Date.now()-11232e5},{name:'BlockBuilder',amount:55.25,ts:Date.now()-12096e5},{name:'EpochHunter',amount:40,ts:Date.now()-1296e6},{name:'NacklForge',amount:25.5,ts:Date.now()-13824e5}];
+function renderDonateLeaderboard(){const s=R.orderBy(_donateData,'amount','desc');donateLeaderboard.innerHTML=s.map((d,i)=>{const r=i+1;const rc=r<=3?'rank-'+r:'';const ri=r===1?'\ud83e\udd47':r===2?'\ud83e\udd48':r===3?'\ud83e\udd49':r;return'<div class="donate-row '+rc+'"><div class="donate-rank">'+ri+'</div><div class="donate-name">@'+d.name+'</div><div class="donate-amount-text">'+d.amount.toFixed(2)+' NACKL</div></div>'}).join('')}
+let _donateLiveTimer=null;function startDonateLive(){if(_donateLiveTimer)clearInterval(_donateLiveTimer);_donateLiveTimer=setInterval(()=>{const n=['FastMiner','NewUser','TapTap','ForgeWorker','NacklLover'];_donateData.push({name:n[Math.floor(Math.random()*n.length)],amount:Math.floor(Math.random()*50)/10+0.1,ts:Date.now()});if(_donateData.length>50)_donateData=_donateData.slice(-50);renderDonateLeaderboard()},8000)}
+donateBtn.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);donateScrim.classList.remove('hidden');renderDonateLeaderboard();startDonateLive()});
+donateClose.addEventListener('click',()=>{donateScrim.classList.add('hidden');if(_donateLiveTimer){clearInterval(_donateLiveTimer);_donateLiveTimer=null}});
+document.querySelectorAll('.donate-quick-btn').forEach(b=>b.addEventListener('click',()=>{donateAmountInput.value=b.dataset.amount;if(navigator.vibrate)navigator.vibrate(5)}));
+donateSend.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);const amt=parseFloat(donateAmountInput.value);if(!amt||amt<=0){snackbar(t('donate_invalid'));return}if(!wallet&&!demoMode){snackbar(t('donate_login_first'));return}if(demoMode){_donateData.push({name:'You (demo)',amount:amt,ts:Date.now()});renderDonateLeaderboard();snackbar(t('donate_demo_sent'));return}const dl='https://links.gosh.sh/deeplinks/wallet/v2/transfer?to='+DEVELOPER_WALLET+'&amount='+amt+'&token=NACKL';try{window.open(dl,'_blank')}catch(_){}snackbar(t('donate_open_wallet'));_donateData.push({name:wallet,amount:amt,ts:Date.now()});renderDonateLeaderboard()});
+const _dSE=[donateScrim.querySelector('.sheet-handle'),donateScrim.querySelector('.sheet-header'),donateScrim.querySelector('.donate-recipient'),donateScrim.querySelector('.donate-amount-row'),donateScrim.querySelector('.donate-quick'),donateScrim.querySelector('.sheet-btn.danger'),donateScrim.querySelector('.donate-leaderboard-title')].filter(Boolean);
+let _dSY=0,_dSC=0,_dSD=false;_dSE.forEach(el=>{el.addEventListener('touchstart',e=>{_dSY=e.touches[0].clientY;_dSD=true;donateScrim.querySelector('.sheet').style.transition='none'},{passive:true});el.addEventListener('touchmove',e=>{if(!_dSD)return;_dSC=e.touches[0].clientY-_dSY;if(_dSC>0){donateScrim.querySelector('.sheet').style.transform='translateY('+_dSC+'px)';donateScrim.style.opacity=String(Math.max(0.3,1-_dSC/400))}},{passive:false});el.addEventListener('touchend',()=>{if(!_dSD)return;_dSD=false;donateScrim.querySelector('.sheet').style.transition='transform .3s ease';if(_dSC>80){donateScrim.classList.add('hidden');donateScrim.querySelector('.sheet').style.transform='';donateScrim.style.opacity='';if(_donateLiveTimer){clearInterval(_donateLiveTimer);_donateLiveTimer=null}}else{donateScrim.querySelector('.sheet').style.transform='';donateScrim.style.opacity=''}_dSC=0},{passive:true})});
+donateScrim.addEventListener('click',e=>{if(e.target===donateScrim){donateScrim.classList.add('hidden');if(_donateLiveTimer){clearInterval(_donateLiveTimer);_donateLiveTimer=null}}});
+// === BUTTONS ===
+autoBtn.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);auto=!auto;if(auto){log('info',t('auto_enabled'));if(!desired){desired=true;epochStartTime=Date.now();const now=Date.now();if(!epoch5m){epoch5m=String(Math.floor(now/EPOCH_DURATION_MS)*EPOCH_DURATION_MS);lastChain=now;lastProg=now}scheduleChainPoll();scheduleStart(0)}}else{log('info',t('auto_disabled'));desired=false;if(epochWaitTimer){clearTimeout(epochWaitTimer);epochWaitTimer=null}if(restartTimer){clearTimeout(restartTimer);restartTimer=null}nextSessionAt=0}scheduleUI()});
+demoBtn.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);startDemo()});
+connectBtn.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);handleConnect()});
+demoBadge.addEventListener('click',()=>{if(navigator.vibrate)navigator.vibrate(10);if(confirm(t('exit_demo')))stopDemo()});
+logoutBtn.addEventListener('click',()=>{if(demoMode){if(!confirm(t('exit_demo')))return;stopDemo();return}if(!confirm(t('logout_confirm')))return;stopMining();miner=null;wallet=null;addr=null;keys=null;life=0;pend=0;clearAccount();loginScrim.classList.remove('hidden');logoutBtn.style.display='none';walletNameEl.classList.add('hidden');connectBtn.textContent=t('connect_wallet');connectBtn.disabled=false;log('info',t('logged_out'));scheduleUI()});
+langBtn.addEventListener('click',showLangPicker);
+document.addEventListener('click',e=>{if(langDropdown&&!langDropdown.contains(e.target)&&e.target!==langBtn){langDropdown.remove();langDropdown=null}});
+themeBtn.addEventListener('click',toggleTheme);
+// === NETWORK ===
+function checkNetworkStatus(){const online=navigator.onLine;if(online!==_networkOnline){_networkOnline=online;if(online){log('ok',t('network_restored'));if(desired&&!running){scheduleChainPoll();scheduleStart(1000)}scheduleUI()}else{log('err',t('network_lost'));setStatus('network_error');if(restartTimer){clearTimeout(restartTimer);restartTimer=null}if(endTimer){clearTimeout(endTimer);endTimer=null}nextSessionAt=0;scheduleUI()}}}
+let _netC=0;setInterval(()=>{if(epochStartTime||nextSessionAt||running||!_networkOnline)scheduleUI();_netC++;if(_netC>=3){_netC=0;checkNetworkStatus()}},1000);
+window.addEventListener('online',()=>{_networkOnline=true;checkNetworkStatus()});
+window.addEventListener('offline',()=>{_networkOnline=false;checkNetworkStatus()});
+// === BACKGROUND ===
+function applyBackgroundThrottle(){if(_bgThrottle||_isBackground)CHAIN_POLL_MS=15000;else CHAIN_POLL_MS=5000}
+document.addEventListener('visibilitychange',()=>{_isBackground=document.hidden;applyBackgroundThrottle();if(document.hidden){saveAccount();log('info',t('backgrounded'))}else{if(desired&&!running)scheduleStart(500);log('info',t('foregrounded'));checkNetworkStatus()}});
+window.addEventListener('pagehide',()=>saveAccount());
+// === INIT ===
+setupResizeObserver();
+let _lastBrandTap=0;document.querySelector('.brand')?.addEventListener('click',()=>{const now=Date.now();if(now-_lastBrandTap<400){toggleFullscreen();if(navigator.vibrate)navigator.vibrate(15)}_lastBrandTap=now});
+(async()=>{const saved=loadAccount();if(saved&&saved.wallet&&saved.keys&&!demoMode){log('info',t('restoring_session')+' '+saved.wallet);const ok=await ensureWasm();if(ok&&!demoMode){try{const{Miner,get_miner_address_by_wallet_name}=await loadBeeSdk();addr=await get_miner_address_by_wallet_name({client_config:{network:{endpoints:ENDPOINTS}},wallet_name:saved.wallet});miner=await Miner.new(ENDPOINTS,APP_ID,addr,saved.keys.public,saved.keys.secret);wallet=saved.wallet;keys=saved.keys;if(saved.life)life=saved.life;log('ok',t('session_restored'));finishConnect()}catch(e){log('err',t('restore_failed')+': '+umsg(e))}}}scheduleUI()})();
+log('info',t('ready'));
 </script>
 </body>
 </html>
