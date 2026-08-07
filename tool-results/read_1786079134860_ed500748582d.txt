@@ -1,0 +1,512 @@
+   295→function scheduleUI(){if(_uiScheduled)return;_uiScheduled=true;requestAnimationFrame(()=>{_uiScheduled=false;updateUI()})}
+   296→
+   297→// Debounced log rendering (#40)
+   298→let _logBuf=[],_logScheduled=false;
+   299→function log(t,m){
+   300→  _logBuf.push({t,m,tm:new Date().toTimeString().slice(0,8)});
+   301→  if(_logScheduled)return;
+   302→  _logScheduled=true;
+   303→  requestAnimationFrame(()=>{
+   304→    _logScheduled=false;
+   305→    const frag=document.createDocumentFragment();
+   306→    for(const{t,m,tm} of _logBuf){
+   307→      const e=document.createElement('div');e.className='le';
+   308→      const esc=m.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+   309→      e.innerHTML=`<span class="lt">${tm}</span><span class="lm ${t}">${esc}</span>`;
+   310→      frag.insertBefore(e,frag.firstChild);
+   311→    }
+   312→    logEl.insertBefore(frag,logEl.firstChild);
+   313→    _logBuf=[];
+   314→    while(logEl.children.length>60)logEl.removeChild(logEl.lastChild);
+   315→    try{if(window.AndroidBridge)window.AndroidBridge.onLog(t,m)}catch(_){}
+   316→  });
+   317→}
+   318→
+   319→// Snackbar (#18)
+   320→function snackbar(msg,opts={}){
+   321→  const el=document.createElement('div');
+   322→  el.className='snackbar'+(opts.action?' action':'');
+   323→  let html=`<span>${msg.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</span>`;
+   324→  if(opts.action)html+=`<button class="snackbar-btn">${opts.action}</button>`;
+   325→  el.innerHTML=html;
+   326→  if(opts.onClick&&opts.action){
+   327→    el.querySelector('.snackbar-btn').addEventListener('click',()=>{opts.onClick();el.remove()});
+   328→  }
+   329→  document.body.appendChild(el);
+   330→  setTimeout(()=>{if(el.parentNode)el.remove()},opts.duration||3500);
+   331→}
+   332→function toast(m,t=''){snackbar(m)}
+   333→
+   334→// Animated number transitions (#15)
+   335→function animateNumber(el,from,to,decimals=4,duration=600){
+   336→  if(from===to){el.textContent=to.toFixed(decimals);return}
+   337→  const start=performance.now();
+   338→  const step=now=>{
+   339→    const t=Math.min(1,(now-start)/duration);
+   340→    const eased=1-Math.pow(1-t,3);
+   341→    const val=from+(to-from)*eased;
+   342→    el.textContent=val.toFixed(decimals);
+   343→    if(t<1)requestAnimationFrame(step);
+   344→  };
+   345→  requestAnimationFrame(step);
+   346→}
+   347→
+   348→function setStep(n){[step1,step2,step3,step4].forEach((s,i)=>{s.classList.remove('active','done');if(i+1<n)s.classList.add('done');else if(i+1===n)s.classList.add('active')})}
+   349→function setStatus(s,d){
+   350→stI.className='si';
+   351→let hdr='Idle';
+   352→if(s==='mining'){stI.classList.add('on');stL.textContent='Mining';stD.textContent=d||`Session ${ssEpoch+1} of ${SESSIONS_PER_EPOCH} · ${ssTaps}/${ssTarget} taps`;startBtn.textContent='Stop Mining';startBtn.className='btn btn-d';hdr='Mining';forgeRingIcon.textContent='⚒'}
+   353→else if(s==='waiting'){stI.classList.add('on');stL.textContent='Waiting';stD.textContent=d||'Waiting for next epoch window';startBtn.textContent='Mining...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Waiting';forgeRingIcon.textContent='⏳'}
+   354→else if(s==='starting'){stL.textContent='Starting';stD.textContent=d||'Initializing mining session...';startBtn.textContent='Starting...';startBtn.className='btn btn-g';startBtn.disabled=true;hdr='Starting';forgeRingIcon.textContent='⟳'}
+   355→else if(s==='error'){stI.classList.add('err');stL.textContent='Error';stD.textContent=d||'Mining error occurred';startBtn.textContent='Retry';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Error';forgeRingIcon.textContent='⚠'}
+   356→else{stL.textContent='Idle';stD.textContent=d||'Ready to mine';startBtn.textContent='Start Mining';startBtn.className='btn btn-p';startBtn.disabled=false;hdr='Idle';forgeRingIcon.textContent='⚒'}
+   357→hdrStatus.textContent=hdr;
+   358→hdrStatus.classList.toggle('on',s==='mining'||s==='waiting'||s==='starting');
+   359→}
+   360→
+   361→let _lastBal=0,_lastPend=0,_lastLife=0;
+   362→function updateUI(){
+   363→const tot=life+pend;
+   364→if(parseFloat(balV.textContent)!==tot)animateNumber(balV,_lastBal,tot,4);_lastBal=tot;
+   365→if(parseFloat(pendV.textContent)!==pend)animateNumber(pendV,_lastPend,pend,4);_lastPend=pend;
+   366→if(parseFloat(lifeV.textContent)!==life)animateNumber(lifeV,_lastLife,life,4);_lastLife=life;
+   367→blkV.textContent=lastBlock?`#${lastBlock.toLocaleString()}`:'—';
+   368→epT.textContent=tapsEpoch;epB.style.width=`${Math.min(100,tapsEpoch/MAX_TAPS*100)}%`;
+   369→ssC.textContent=ssEpoch;ssB.style.width=`${Math.min(100,ssEpoch/SESSIONS_PER_EPOCH*100)}%`;
+   370→ssTEl.textContent=ssTaps;asB.style.width=`${Math.min(100,ssTaps/ssTarget*100)}%`;
+   371→// Forge ring progress (#17) — shows epoch progress as circular ring
+   372→const ringLen=213.6;
+   373→const epochPct=Math.min(1,tapsEpoch/MAX_TAPS);
+   374→forgeRingFg.setAttribute('stroke-dashoffset',ringLen*(1-epochPct));
+   375→claimBtn.disabled=pend<=0||rewardInFlight;
+   376→claimBtn.textContent=pend>0?`Claim ${pend.toFixed(4)} NACKL`:'No Reward Yet';
+   377→autoBtn.classList.toggle('on',auto);
+   378→if(running)setStatus('mining');else if(starting)setStatus('starting');else if(desired&&(awaitSeed||epochTimer))setStatus('waiting');else if(lastErr)setStatus('error',lastErr);else if(desired)setStatus('waiting','Preparing next session...');else setStatus('idle');
+   379→}
+   380→
+   381→// ===== Persistence (#26 — save full mining state) =====
+   382→function saveAccount(){
+   383→  try{
+   384→    const d=JSON.stringify({
+   385→      wallet,keys,life,
+   386→      // Mining state for resume after process death (#26, #30)
+   387→      miningState:{ssTaps,tapsEpoch,ssEpoch,epoch5m,rewardEpochs,lastChain}
+   388→    });
+   389→    if(window.AndroidBridge&&window.AndroidBridge.saveAccount)window.AndroidBridge.saveAccount(d);
+   390→    else localStorage.setItem('nacklforge_account',d);
+   391→  }catch(_){}
+   392→}
+   393→function loadAccount(){
+   394→  try{
+   395→    let r=null;
+   396→    if(window.AndroidBridge&&window.AndroidBridge.loadAccount)r=window.AndroidBridge.loadAccount();
+   397→    else r=localStorage.getItem('nacklforge_account');
+   398→    return r?JSON.parse(r):null;
+   399→  }catch(_){return null}
+   400→}
+   401→function clearAccount(){
+   402→  try{
+   403→    if(window.AndroidBridge&&window.AndroidBridge.clearAccount)window.AndroidBridge.clearAccount();
+   404→    else localStorage.removeItem('nacklforge_account');
+   405→  }catch(_){}
+   406→}
+   407→function umsg(e){
+   408→  const t=e&&e.message?e.message:String(e);
+   409→  // On-chain TVM errors (from gosh.runwasm verifier)
+   410→  if(/wasm failed to load/i.test(t))return'On-chain verifier error — app_id not registered or mining keys not activated';
+   411→  if(/wasm failed to execute/i.test(t))return'On-chain execution failed — tap verification rejected';
+   412→  if(/wasm forbidden binary/i.test(t))return'Verifier binary forbidden — contact support';
+   413→  if(/wasm invalid function/i.test(t))return'Verifier function not found — SDK version mismatch';
+   414→  if(/wasm linker failed/i.test(t))return'Verifier linker error — SDK version mismatch';
+   415→  if(/wasm failed to instantiate/i.test(t))return'Verifier instantiation failed — chain issue';
+   416→  if(/wasm engine not created/i.test(t))return'Chain wasm engine unavailable — try later';
+   417→  if(/wasm hash not in whitelist/i.test(t))return'Verifier hash not whitelisted — SDK outdated';
+   418→  if(/DApp ID is not set|DAppIdNotSet/i.test(t))return'DApp ID not set — waiting for your registered app_id';
+   419→  if(/wasm config/i.test(t))return'Chain wasm config error — contact support';
+   420→  if(/not ready|ERR_NOT_READY/i.test(t))return'Mining not ready — activate Mambaboard in AN Wallet first';
+   421→  // Network errors
+   422→  if(/pool timed out|open connection/i.test(t))return'Network timeout — retrying';
+   423→  if(/memory access out of bounds|RuntimeError/i.test(t))return'WASM memory error';
+   424→  if(/FnOnce called more than once/i.test(t))return'WASM callback error';
+   425→  if(/Invalid ABI|Decode message body/i.test(t))return'ABI decode error';
+   426→  return t.slice(0,200)
+   427→}
+   428→function clearTimers(){tapTimers.forEach(t=>clearTimeout(t));tapTimers=[];if(endTimer)clearTimeout(endTimer);if(restartTimer)clearTimeout(restartTimer);if(canStartTimer)clearTimeout(canStartTimer);if(chainTimer)clearTimeout(chainTimer);if(epochTimer)clearTimeout(epochTimer);if(startTimer)clearTimeout(startTimer);endTimer=restartTimer=canStartTimer=chainTimer=epochTimer=startTimer=null;running=false;starting=false;awaitSeed=false}
+   429→function pumpTap(){if(!running)return;if(ssTaps>=ssTarget)return;if(tapsEpoch>=MAX_TAPS)return;try{if(miner)miner.add_tap(1,1);ssTaps+=1;tapsEpoch=Math.min(MAX_TAPS,tapsEpoch+1);lastProg=Date.now();pend+=0.0072;log('info',`Tap ${ssTaps}/${ssTarget} · epoch ${tapsEpoch}/${MAX_TAPS}`);scheduleUI()}catch(e){const m=umsg(e);if(/No running workers/i.test(m)){clearTimers();return}log('err',m)}}
+   430→function scheduleTaps(){if(!running)return;const rem=Math.max(0,MAX_TAPS-tapsEpoch);const tgt=Math.min(TAPS_PER_SESSION,rem);ssTarget=tgt;for(let i=0;i<tgt;i++)tapTimers.push(setTimeout(pumpTap,i*TAP_INTERVAL));scheduleUI()}
+   431→function resetEpoch(e){epoch5m=e||epoch5m;ssEpoch=0;tapsEpoch=0;lastProg=Date.now();log('info',`New epoch started: ${epoch5m.slice(-10)}`);scheduleUI()}
+   432→
+   433→// ===== Chain data with deduplication (#23), stale-while-revalidate (#24), circuit breaker (#22) =====
+   434→async function fetchChain(){
+   435→  if(!miner)return null;
+   436→  // Circuit breaker (#22)
+   437→  if(Date.now()<circuitBreakerUntil){
+   438→    log('warn',`Circuit open — waiting ${Math.ceil((circuitBreakerUntil-Date.now())/1000)}s`);
+   439→    return null;
+   440→  }
+   441→  // Deduplication (#23)
+   442→  if(chainPollInFlight)return null;
+   443→  chainPollInFlight=true;
+   444→  const t0=performance.now();
+   445→  try{
+   446→    const d=await miner.get_miner_data();
+   447→    consecutiveErrors=0;
+   448→    perfMetrics.chainPollLatency.push(performance.now()-t0);
+   449→    if(perfMetrics.chainPollLatency.length>20)perfMetrics.chainPollLatency.shift();
+   450→    const ne=d&&d.epoch_5m_start!==undefined?d.epoch_5m_start.toString():'';
+   451→    const ct=d&&d.tap_sum_5m!==undefined?Number(d.tap_sum_5m.toString()):0;
+   452→    if(epoch5m&&ne&&ne!==epoch5m)resetEpoch(ne);
+   453→    else if(ne&&!epoch5m)epoch5m=ne;
+   454→    if(Number.isFinite(ct)){tapsEpoch=Math.min(MAX_TAPS,Math.max(0,ct));ssEpoch=Math.max(ssEpoch,Math.min(SESSIONS_PER_EPOCH,Math.floor(tapsEpoch/TAPS_PER_SESSION)))}
+   455→    lastChain=Date.now();
+   456→    if(!lastProg)lastProg=lastChain;
+   457→    if(ne){rewardEpochs=rewardEpochs||[];if(!rewardEpochs.includes(ne))rewardEpochs.push(ne);if(rewardEpochs.length>=REWARD_EPOCHS&&!rewardInFlight)requestReward('epoch_threshold')}
+   458→    scheduleUI();maybeRecover();
+   459→    return d;
+   460→  }catch(e){
+   461→    consecutiveErrors++;
+   462→    perfMetrics.errors++;
+   463→    const msg=umsg(e);
+   464→    log('err',`Chain poll failed: ${msg}`);
+   465→    // Detect on-chain setup errors specifically
+   466→    if(/verifier error|app_id not registered|DApp ID not set/i.test(msg)){
+   467→      log('warn','⚠ On-chain setup incomplete — mining cannot proceed without registered dapp_id');
+   468→    }
+   469→    // Circuit breaker (#22): 5 errors → open for 60s
+   470→    if(consecutiveErrors>=5){
+   471→      circuitBreakerUntil=Date.now()+60000;
+   472→      log('warn','Circuit breaker opened for 60s');
+   473→      // Endpoint failover (#29)
+   474→      activeEndpointIdx=(activeEndpointIdx+1)%ENDPOINTS.length;
+   475→      log('info',`Switching to endpoint ${activeEndpointIdx+1}: ${ENDPOINTS[activeEndpointIdx].slice(0,30)}...`);
+   476→    }
+   477→    return null;
+   478→  }finally{chainPollInFlight=false}
+   479→}
+   480→async function fetchBlock(){if(!miner)return;try{const b=await miner.get_current_block();if(b&&b.seq_no!==undefined){lastBlock=Number(b.seq_no);scheduleUI()}}catch(_){}}
+   481→
+   482→// ===== Reward with optimistic UI (#25) =====
+   483→function requestReward(reason){
+   484→  if(rewardInFlight)return false;
+   485→  const now=Date.now();
+   486→  if(lastReward&&now-lastReward<REWARD_CD)return false;
+   487→  rewardInFlight=true;lastReward=now;
+   488→  const amt=pend;
+   489→  log('info',`Claiming ${amt.toFixed(4)} NACKL (${reason})...`);
+   490→  // Optimistic UI (#25): immediately move pending to life, rollback on failure
+   491→  const prevPend=pend,prevLife=life;
+   492→  life+=amt;pend=0;
+   493→  scheduleUI();
+   494→  const fin=()=>{
+   495→    perfMetrics.rewards++;
+   496→    log('ok',`Claimed ${amt.toFixed(4)} NACKL`);
+   497→    snackbar(`+${amt.toFixed(4)} NACKL claimed`,{action:'View',onClick:()=>log('info',`Last claim: ${amt.toFixed(4)} NACKL at ${new Date().toLocaleTimeString()}`)});
+   498→    saveAccount();scheduleUI();
+   499→    fetchChain().finally(()=>{if(desired&&!running&&!starting)scheduleStart(0)});
+   500→  };
+   501→  const rollback=(err)=>{
+   502→    life=prevLife;pend=prevPend;rewardInFlight=false;
+   503→    log('err',`Claim failed: ${umsg(err)}`);
+   504→    snackbar('Claim failed — will retry','err');
+   505→    scheduleUI();
+   506→  };
+   507→  if(miner)miner.get_reward().then(fin).catch(rollback);
+   508→  else setTimeout(fin,300);
+   509→  return true;
+   510→}
+   511→function maybeRecover(){if(!desired||running)return;if(tapsEpoch<=0)return;const lp=lastProg||lastChain||Date.now();if(Date.now()-lp<STUCK_MS)return;requestReward(tapsEpoch>=MAX_TAPS?'stuck_full_epoch':'stuck_taps')}
+   512→
+   513→// ===== Exponential backoff for chain polls (#21) =====
+   514→function getChainPollDelay(){
+   515→  if(consecutiveErrors===0)return CHAIN_POLL;
+   516→  return Math.min(CHAIN_POLL*Math.pow(1.5,consecutiveErrors),30000);
+   517→}
+   518→function scheduleChainPoll(){
+   519→  if(!desired||running||epochTimer)return;
+   520→  if(chainTimer)clearTimeout(chainTimer);
+   521→  chainTimer=setTimeout(async()=>{
+   522→    chainTimer=null;
+   523→    await fetchChain();
+   524→    await fetchBlock();
+   525→    scheduleChainPoll();
+   526→  },getChainPollDelay());
+   527→}
+   528→function scheduleStart(delay){if(!desired)return;if(running||starting||startTimer||canStartTimer||restartTimer)return;startTimer=setTimeout(()=>{startTimer=null;startMining().catch(e=>log('err',umsg(e)))},Math.max(0,delay))}
+   529→function scheduleEpochWait(reason){if(!desired||running||epochTimer)return;if(restartTimer)clearTimeout(restartTimer);restartTimer=null;log('info',`Epoch ${reason} — waiting ${EPOCH_WAIT}ms for new epoch...`);epochTimer=setTimeout(async()=>{epochTimer=null;const prev=epoch5m;const d=await fetchChain();if(!desired)return;const next=d?.epoch_5m_start?d.epoch_5m_start.toString():epoch5m||'';if(prev&&next&&prev!==next){resetEpoch(next||prev);startMining().catch(e=>log('err',umsg(e)));return}scheduleEpochWait(reason)},EPOCH_WAIT)}
+   530→function scheduleNext(delay){if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}if(restartTimer)clearTimeout(restartTimer);restartTimer=setTimeout(()=>{restartTimer=null;startMining().catch(e=>log('err',umsg(e)))},delay);log('info',`Next session in ${(delay/1000).toFixed(0)}s`);scheduleUI()}
+   531→function completeSession(status,actual){const tgt=ssTarget;ssEpoch+=1;log('ok',`Session ${status} — ${actual}/${tgt} taps · epoch ${ssEpoch}/${SESSIONS_PER_EPOCH}`);clearTimers();saveAccount();fetchChain().finally(()=>{if(!desired)return;if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS)scheduleNext(EPOCH_COOLDOWN);else scheduleNext(RESTART_DELAY)});scheduleUI()}
+   532→async function startMining(){
+   533→  if(!desired)return;
+   534→  if(running||starting)return;
+   535→  if(epochTimer)return;
+   536→  if(!lastChain||Date.now()-lastChain>EPOCH_WAIT-500)await fetchChain();
+   537→  if(ssEpoch>=SESSIONS_PER_EPOCH||tapsEpoch>=MAX_TAPS){scheduleEpochWait('full');return}
+   538→  ssTaps=0;ssTarget=TAPS_PER_SESSION;starting=true;lastErr=null;scheduleUI();
+   539→  try{
+   540→    if(miner){
+   541→      if(!miner.can_start()){log('info','Waiting for seed from chain...');starting=false;awaitSeed=true;scheduleUI();canStartTimer=setTimeout(()=>{canStartTimer=null;awaitSeed=false;startMining().catch(e=>log('err',umsg(e)))},CAN_START_POLL);return}
+   542→      miner.start(MINING_SESSION_MS,raw=>{
+   543→        let ev=raw;try{ev=typeof raw==='string'?JSON.parse(raw):raw}catch(_){}
+   544→        if(ev&&(ev.ok===false||ev.error)){
+   545→          const errMsg=umsg(ev.error||ev);
+   546→          log('err',errMsg);
+   547→          // Detect on-chain verifier errors — these mean app_id/keys not properly set up
+   548→          if(/wasm failed to load|verifier error|app_id not registered/i.test(errMsg)){
+   549→            log('err','⚠ On-chain verification failed. Possible causes:');
+   550→            log('err','1. Your app_id is not registered on mainnet yet');
+   551→            log('err','2. Mining keys not activated via AN Wallet deep link');
+   552→            log('err','3. Mambaboard not activated in AN Wallet Batteries app');
+   553→            log('err','Contact support once you receive your dapp_id from Acki Nacki');
+   554→            snackbar('On-chain setup incomplete — check logs','err');
+   555→          }
+   556→          completeSession('error',ssTaps);return
+   557→        }
+   558→        const k=ev&&ev.action?ev.action:(ev&&ev.event?ev.event:'callback');
+   559→        const st=ev&&ev.data?ev.data.status:null;
+   560→        if(k==='status_updated'&&st==='computing')log('info','Worker: computing PoW...');
+   561→        else if(k==='status_updated'&&st==='submitting')log('info','Worker: submitting to chain...');
+   562→        else if(k==='status_updated'&&(st==='finished'||st==='removed'))completeSession(st,ssTaps);
+   563→        else if(k==='session_accepted')completeSession('accepted',ssTaps);
+   564→      });
+   565→    }
+   566→    running=true;starting=false;scheduleTaps();
+   567→    log('ok',`Mining session started — target ${ssTarget} taps`);
+   568→    if(endTimer)clearTimeout(endTimer);
+   569→    endTimer=setTimeout(()=>{if(running)completeSession('finished',ssTaps)},MINING_SESSION_MS);
+   570→    scheduleUI();
+   571→    // Update FGS notification with heartbeat (#27)
+   572→    notifyAndroid('mining',`Session ${ssEpoch+1} · ${ssTaps}/${ssTarget} taps`);
+   573→  }catch(e){starting=false;lastErr=umsg(e);log('err',lastErr);scheduleUI();notifyAndroid('error',lastErr);throw e}
+   574→}
+   575→function stopMining(){desired=false;auto=false;clearTimers();if(miner)try{miner.stop()}catch(_){}log('info','Mining stopped');scheduleUI();notifyAndroid('idle','Mining stopped')}
+   576→
+   577→// Notify Android to update FGS notification text (#27 heartbeat)
+   578→function notifyAndroid(state,detail){
+   579→  try{if(window.AndroidBridge&&window.AndroidBridge.onMiningState)window.AndroidBridge.onMiningState(state,detail)}catch(_){}
+   580→}
+   581→
+   582→// ===== Native AN Wallet authorization via BeeConnect =====
+   583→async function handleConnect(){
+   584→  connectBtn.disabled=true;
+   585→  connectBtn.innerHTML='<span class="sp"></span>Initializing...';
+   586→  setStep(1);
+   587→  perfMetrics.connectStart=Date.now();
+   588→  const ok=await ensureWasm();
+   589→  perfMetrics.wasmLoadTime=Date.now()-perfMetrics.connectStart;
+   590→  if(!ok){toast('WASM failed to load','err');connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';return}
+   591→  const{BeeConnect,Miner,gen_mining_keys,get_miner_address_by_wallet_name}=await loadBeeSdk();
+   592→
+   593→  try{
+   594→    log('info','Creating BeeConnect session...');
+   595→    beeConnect=new BeeConnect();
+   596→    connectSession=beeConnect.create_shared_key_session(APP_ID,SESSION_TTL,null);
+   597→    log('ok',`Session created: ${connectSession.session_id.slice(0,12)}...`);
+   598→    log('info','Opening AN Wallet deep link...');
+   599→    setStep(1);
+   600→    try{window.open(connectSession.deep_link,'_blank')}catch(_){}
+   601→    snackbar('Open AN Wallet to confirm connection');
+   602→  }catch(e){
+   603→    log('err',`Session creation failed: ${umsg(e)}`);
+   604→    toast('Failed to create session','err');
+   605→    connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
+   606→    return;
+   607→  }
+   608→
+   609→  connectBtn.innerHTML='<span class="sp"></span>Waiting for wallet...';
+   610→  setStep(2);
+   611→  try{
+   612→    const hello=await beeConnect.wait_wallet_hello(
+   613→      ENDPOINTS,connectSession.session_id,connectSession.description,
+   614→      connectSession.client_dh_secret,
+   615→      undefined,MAX_ATTEMPTS,POLL_INTERVAL
+   616→    );
+   617→    wallet=hello.wallet_name;
+   618→    log('ok',`Wallet connected: ${wallet}`);
+   619→    log('info',`Wallet address: ${hello.wallet_address.slice(0,12)}...`);
+   620→    connectSession.session_state_json=hello.session_state_json;
+   621→  }catch(e){
+   622→    log('err',`Wallet confirmation failed: ${umsg(e)}`);
+   623→    toast('Wallet confirmation timed out','err');
+   624→    connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
+   625→    setStep(0);return;
+   626→  }
+   627→
+   628→  setStep(3);
+   629→  connectBtn.innerHTML='<span class="sp"></span>Generating keys...';
+   630→  try{
+   631→    const mk=await gen_mining_keys(APP_ID);
+   632→    keys={public:mk.public,secret:mk.secret};
+   633→    log('ok',`Mining keys generated (pub: ${mk.public.slice(0,12)}...)`);
+   634→    connectBtn.innerHTML='<span class="sp"></span>Requesting wallet approval...';
+   635→    log('info','Sending set_mining_keys request to wallet...');
+   636→    await beeConnect.request_set_mining_keys(
+   637→      ENDPOINTS,connectSession.session_id,connectSession.description,
+   638→      connectSession.session_state_json,APP_ID,keys.public,
+   639→      MAX_ATTEMPTS,POLL_INTERVAL
+   640→    );
+   641→    log('ok','Mining keys request sent to wallet');
+   642→    snackbar('Approve mining keys in AN Wallet');
+   643→    connectBtn.innerHTML='<span class="sp"></span>Waiting for approval...';
+   644→    const confirmed=await beeConnect.wait_set_mining_keys_request(
+   645→      ENDPOINTS,connectSession.session_id,connectSession.description,
+   646→      undefined,MAX_ATTEMPTS,POLL_INTERVAL
+   647→    );
+   648→    log('ok','Mining keys approved by wallet');
+   649→    connectSession.session_state_json=confirmed.updated_session_state_json||connectSession.session_state_json;
+   650→  }catch(e){
+   651→    log('err',`Mining keys setup failed: ${umsg(e)}`);
+   652→    toast('Failed to setup mining keys','err');
+   653→    connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
+   654→    setStep(0);return;
+   655→  }
+   656→
+   657→  setStep(4);
+   658→  connectBtn.innerHTML='<span class="sp"></span>Starting mining...';
+   659→  try{
+   660→    const cfg={network:{endpoints:ENDPOINTS}};
+   661→    addr=await get_miner_address_by_wallet_name({client_config:cfg,wallet_name:wallet});
+   662→    log('ok',`Miner address: ${addr.slice(0,12)}...${addr.slice(-6)}`);
+   663→    miner=await Miner.new(ENDPOINTS,APP_ID,addr,keys.public,keys.secret);
+   664→    log('ok','Miner connected — mining enabled');
+   665→    finishConnect();
+   666→  }catch(e){
+   667→    log('err',`Miner setup failed: ${umsg(e)}`);
+   668→    toast('Miner setup failed','err');
+   669→    connectBtn.disabled=false;connectBtn.textContent='Connect AN Wallet';
+   670→    setStep(0);
+   671→  }
+   672→}
+   673→
+   674→function finishConnect(){
+   675→  ov.classList.add('hidden');
+   676→  saveAccount();
+   677→  snackbar('Connected — mining started');
+   678→  desired=true;
+   679→  scheduleChainPoll();
+   680→  scheduleStart(500);
+   681→  scheduleUI();
+   682→  notifyAndroid('mining','Starting...');
+   683→}
+   684→
+   685→function toggleAuto(){auto=!auto;if(auto){log('info','Auto-mine enabled — will mine across epochs and auto-claim rewards');if(!desired){desired=true;scheduleChainPoll();scheduleStart(0)}}else{log('info','Auto-mine disabled — current session will complete, no new sessions started');desired=false;if(epochTimer){clearTimeout(epochTimer);epochTimer=null}if(restartTimer){clearTimeout(restartTimer);restartTimer=null}}scheduleUI()}
+   686→
+   687→// ===== Event handlers =====
+   688→startBtn.addEventListener('click',()=>{
+   689→  if(navigator.vibrate)navigator.vibrate(10);  // Haptic (#10)
+   690→  if(running||starting)stopMining();
+   691→  else{desired=true;scheduleChainPoll();startMining().catch(e=>{lastErr=umsg(e);log('err',lastErr);scheduleUI()})}
+   692→});
+   693→autoBtn.addEventListener('click',()=>{
+   694→  if(navigator.vibrate)navigator.vibrate(10);
+   695→  toggleAuto();
+   696→});
+   697→claimBtn.addEventListener('click',()=>{
+   698→  if(navigator.vibrate)navigator.vibrate(10);
+   699→  if(pend<=0)return;
+   700→  // Bottom sheet for claim confirmation (#16)
+   701→  claimAmount.textContent=pend.toFixed(4)+' NACKL';
+   702→  claimSheet.classList.remove('hidden');
+   703→});
+   704→claimCancel.addEventListener('click',()=>claimSheet.classList.add('hidden'));
+   705→claimConfirm.addEventListener('click',()=>{
+   706→  if(navigator.vibrate)navigator.vibrate(10);
+   707→  claimSheet.classList.add('hidden');
+   708→  requestReward('manual');
+   709→});
+   710→clearLogBtn.addEventListener('click',()=>{logEl.innerHTML=''});
+   711→
+   712→connectBtn.addEventListener('click',()=>{
+   713→  if(navigator.vibrate)navigator.vibrate(10);
+   714→  handleConnect();
+   715→});
+   716→
+   717→logoutBtn.addEventListener('click',()=>{
+   718→  // Biometric confirmation (#43) — fallback to confirm
+   719→  if(!confirm('Logout and clear stored account? Mining keys will be removed from this device.'))return;
+   720→  stopMining();miner=null;wallet=null;addr=null;keys=null;life=0;pend=0;clearAccount();
+   721→  ov.classList.remove('hidden');setStep(0);connectBtn.textContent='Connect AN Wallet';connectBtn.disabled=false;
+   722→  log('info','Logged out — account data cleared');scheduleUI();
+   723→  snackbar('Logged out',{action:'Undo',onClick:()=>snackbar('Use Connect to re-authorize'),duration:4000});
+   724→});
+   725→
+   726→// Feedback button (#50)
+   727→feedbackBtn.addEventListener('click',()=>{
+   728→  const logs=Array.from(document.querySelectorAll('.lm')).slice(0,20).map(e=>e.textContent).join('\n');
+   729→  const perf=`Launch: ${perfMetrics.launchTime}\nWASM load: ${perfMetrics.wasmLoadTime}ms\nErrors: ${perfMetrics.errors}\nRewards: ${perfMetrics.rewards}\nAvg poll: ${perfMetrics.chainPollLatency.length?Math.round(perfMetrics.chainPollLatency.reduce((a,b)=>a+b)/perfMetrics.chainPollLatency.length):0}ms`;
+   730→  const body=`NacklForge Feedback\n\nPerf:\n${perf}\n\nLogs:\n${logs}`;
+   731→  try{
+   732→    if(window.AndroidBridge&&window.AndroidBridge.sendFeedback)window.AndroidBridge.sendFeedback(body);
+   733→    else{navigator.clipboard?.writeText(body);snackbar('Feedback copied to clipboard')}
+   734→  }catch(_){snackbar('Feedback feature unavailable')}
+   735→});
+   736→
+   737→// Network change detection (#28)
+   738→let _online=navigator.onLine;
+   739→window.addEventListener('online',()=>{
+   740→  log('ok','Network restored — reconnecting');
+   741→  if(desired&&!running)scheduleStart(500);
+   742→});
+   743→window.addEventListener('offline',()=>log('warn','Network offline — mining paused'));
+   744→
+   745→// ColorOS 16 background survival
+   746→document.addEventListener('visibilitychange',()=>{
+   747→  if(document.hidden){saveAccount();log('info','Backgrounded — state saved')}
+   748→  else{if(desired&&!running)scheduleStart(500);log('info','Foregrounded')}
+   749→});
+   750→window.addEventListener('pagehide',()=>{saveAccount()});
+   751→
+   752→// Remote config (#49) — fetch mining constants from server (best-effort, silent fail)
+   753→async function loadRemoteConfig(){
+   754→  try{
+   755→    const r=await fetch('https://mainnet-cf.ackinacki.org/api/nacklforge-config.json',{cache:'no-cache'});
+   756→    if(!r.ok)return;
+   757→    const c=await r.json();
+   758→    if(c.TAPS_PER_SESSION)TAPS_PER_SESSION=c.TAPS_PER_SESSION;
+   759→    if(c.REWARD_EPOCHS)REWARD_EPOCHS=c.REWARD_EPOCHS;
+   760→    if(c.CHAIN_POLL)CHAIN_POLL=c.CHAIN_POLL;
+   761→    log('ok','Remote config applied');
+   762→  }catch(_){/* silent — use defaults */}
+   763→}
+   764→
+   765→// Auto-restore on launch (#26, #30)
+   766→(async()=>{
+   767→  const saved=loadAccount();
+   768→  if(saved&&saved.wallet&&saved.keys){
+   769→    log('info',`Restoring session for ${saved.wallet}...`);
+   770→    const ok=await ensureWasm();
+   771→    if(ok){
+   772→      try{
+   773→        const{Miner,get_miner_address_by_wallet_name}=await loadBeeSdk();
+   774→        const cfg={network:{endpoints:ENDPOINTS}};
+   775→        addr=await get_miner_address_by_wallet_name({client_config:cfg,wallet_name:saved.wallet});
+   776→        miner=await Miner.new(ENDPOINTS,APP_ID,addr,saved.keys.public,saved.keys.secret);
+   777→        wallet=saved.wallet;keys=saved.keys;
+   778→        if(saved.life)life=saved.life;
+   779→        // Restore mining state (#26)
+   780→        if(saved.miningState){
+   781→          ssTaps=saved.miningState.ssTaps||0;
+   782→          tapsEpoch=saved.miningState.tapsEpoch||0;
+   783→          ssEpoch=saved.miningState.ssEpoch||0;
+   784→          epoch5m=saved.miningState.epoch5m||'';
+   785→          rewardEpochs=saved.miningState.rewardEpochs||[];
+   786→          lastChain=saved.miningState.lastChain||0;
+   787→        }
+   788→        log('ok','Session restored');
+   789→        finishConnect();
+   790→      }catch(e){
+   791→        log('err',`Restore failed: ${umsg(e)}`);
+   792→        ov.classList.remove('hidden');
+   793→      }
+   794→    }
+   795→  }
+   796→  scheduleUI();
+   797→  loadRemoteConfig();
+   798→})();
+   799→
+   800→setInterval(()=>{if(desired||running||starting)scheduleUI()},1000);
+   801→log('info','NacklForge ready. Connect AN Wallet to start mining.');
+   802→</script>
+   803→</body>
+   804→</html>
+
+[showing lines 295-804 of 805; use offset=805 with limit to continue reading]
